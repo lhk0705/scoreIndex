@@ -1,13 +1,15 @@
 <template>
   <div class="scoreIndex">
     <div class="head">
-      <label class="banbenhao"/>
+      <label class="banbenhao">{{ticeshijian}}{{state}}</label>版本信息
     </div>
 
-    <div class="bbdf"><strong>
-      版本总得分:
-      <input type="text" class="banbendefen" />
-      分</strong>
+    <div class="bbdf">
+      <strong>
+        版本总得分:
+        <input type="text" class="banbendefen" />
+        分
+      </strong>
     </div>
     <br />
     <!-- 版本信息-->
@@ -23,7 +25,7 @@
                 <label>
                   <span>*</span>组别：
                 </label>
-                <el-select v-model="groupName" placeholder="请选择" size="mini" @change="groupchange">
+                <el-select v-model="groupName" placeholder="请选择" size="mini">
                   <el-option
                     class="groupName"
                     v-for="item in options"
@@ -32,9 +34,9 @@
                     :value="item.value"
                   ></el-option>
                 </el-select>
-              <div></div>
+                <div></div>
               </div>
-            </el-row> 
+            </el-row>
             <el-row>
               <div class="fuzeren">
                 <label for>
@@ -81,7 +83,13 @@
                 <label for>
                   <span>*</span>提测时间：
                 </label>
-                <el-date-picker size="mini" v-model="ticeshijian" type="date" placeholder="请选择日期"></el-date-picker>
+                <el-date-picker
+                  value-format="yyyy-MM-dd"
+                  size="mini"
+                  v-model="ticeshijian"
+                  type="date"
+                  placeholder="请选择日期"
+                ></el-date-picker>
               </div>
             </el-row>
             <el-row>
@@ -121,7 +129,7 @@
         <div class="jfw_fst">
           <strong>
             交付物得分：
-            <input type="text" class="jiaofuwudefen" />分
+            <input type="text" class="jiaofuwudefen" v-model="jiaofuwudefen"/>分
           </strong>
         </div>
         <br />
@@ -131,8 +139,21 @@
             <el-header class="xq_head" height="40px">
               <strong>
                 需求文档：
-                <input type="text" class="xuqiudefen" />分
+                <input type="text" class="xuqiudefen" v-model="xuqiudefen"/>分
               </strong>
+              <el-popover
+                placement="right-start"
+                width="500"
+                trigger="hover"
+                content="
+                    1、常规版本：建议在需求文档确认完毕之后提交给质控组，在版本提测前2个工作日仍未提交需求文档，视为未及时提交扣3分；
+                    2、常规版本：在版本提测时未提交需求文档，视为未提交，扣5分；
+                    3、紧急版本：在版本提测时向质控组提交需求文档，若提测时未提交需求文档，视为未提交，扣5分；
+                    4、需求文档必须是word或excel格式，若为其他格式视为未提交，扣5分。">
+                <el-button slot="reference" size="mini">
+                  <i class="icon iconfont icon-wenhao"></i>
+                </el-button>
+              </el-popover>
             </el-header>
             <el-main class="xq_main">
               <el-col span="10">
@@ -141,8 +162,8 @@
                     <label>
                       <span>*</span>是否提交：
                     </label>
-                    <el-radio v-model="xq_tijiao" label="是">是</el-radio>
-                    <el-radio v-model="xq_tijiao" label="否">否</el-radio>
+                    <el-radio v-model="xq_tijiao" label="是" >是</el-radio>
+                    <el-radio v-model="xq_tijiao" label="否" >否</el-radio>
                   </div>
                 </el-row>
                 <el-row>
@@ -193,6 +214,7 @@
                     </label>
                     <el-radio v-model="xq_geshi" label="word">word</el-radio>
                     <el-radio v-model="xq_geshi" label="excel">excel</el-radio>
+                    <el-radio v-model="xq_geshi" label="其他">其他</el-radio>
                   </div>
                 </el-row>
                 <el-row>
@@ -237,8 +259,22 @@
             <el-header class="yl_head" height="40px">
               <strong>
                 测试用例：
-                <input type="text" class="csyldf" />分
+                <input type="text" class="csyldf" v-model="csyldf"/>分
               </strong>
+              <el-popover
+                placement="right-start"
+                width="500"
+                trigger="hover"
+                content="
+                            1、常规版本：在版本提测时未提交测试用例的，扣25分；
+                            2、紧急版本：版本上线后一个自然月内项目组需补充提交自测试用例，超时视为未提交，扣25分。
+                      3、测试用例格式可参考质控组提供的用例模板，但必须包含用例标题、前置条件、操作步骤、预期结果、执行人、执行结果，每缺1项扣5分，扣完25分为止；
+                          4、测试用例内容缺失或错误，必须包含用例标题、前置条件、操作步骤、预期结果、执行人、执行结果未填写或填写错误，每一处扣1分，扣完25分为止。"
+              >
+                <el-button slot="reference" size="mini">
+                  <i class="icon iconfont icon-wenhao"></i>
+                </el-button>
+              </el-popover>
             </el-header>
             <el-main class="yl_main">
               <el-col span="10">
@@ -329,6 +365,7 @@
                     </label>
                     <el-radio v-model="yl_geshi" label="word">word</el-radio>
                     <el-radio v-model="yl_geshi" label="excel">excel</el-radio>
+                    <el-radio v-model="yl_geshi" label="其他">其他</el-radio>
                   </div>
                 </el-row>
                 <el-row>
@@ -409,8 +446,21 @@
             <el-header class="bg_head" height="40px">
               <strong>
                 测试报告：
-                <input type="text" class="csyldf" />分
+                <input type="text" class="csbgdf" v-model="csbgdf"/>分
               </strong>
+              <el-popover
+                placement="right-start"
+                width="500"
+                trigger="hover"
+                content="
+                    1、常规版本：在版本提测时未提交测试报告的，扣20分；
+                    2、紧急版本：版本上线后一个自然月内项目组需补充提交自测试报告，超时视为未提交，扣20分。
+                    3、测试报告可参考质控组提供的报告模板，但必须包含测试范围、测试环境、测试执行情况、缺陷统计分析、测试结论，每缺1项扣5分，扣完20分为止；
+                    4、测试报告内容缺失或错误，必须包含测试范围、测试环境、测试执行情况、缺陷统计分析、测试结论，每一处扣1分，扣完20分为止；">
+                <el-button slot="reference" size="mini">
+                  <i class="icon iconfont icon-wenhao"></i>
+                </el-button>
+              </el-popover>
             </el-header>
             <el-main class="bg_main">
               <el-col span="10">
@@ -500,6 +550,7 @@
                     </label>
                     <el-radio v-model="bg_geshi" label="word">word</el-radio>
                     <el-radio v-model="bg_geshi" label="excel">excel</el-radio>
+                    <el-radio v-model="bg_geshi" label="其他">其他</el-radio>
                   </div>
                 </el-row>
                 <el-row>
@@ -565,8 +616,18 @@
         <div class="cc_fst">
           <strong>
             抽测得分：
-            <input type="text" class="ccdf" />分
+            <input type="text" class="ccdf" v-model="ccdf"/>分
           </strong>
+          <el-popover
+                placement="right-start"
+                width="500"
+                trigger="hover"
+                content="
+                    抽测通过率达到90%，不扣分；低于90%的，每降低1个百分点，扣0.5分。">
+                <el-button slot="reference" size="mini">
+                  <i class="icon iconfont icon-wenhao"></i>
+                </el-button>
+              </el-popover>
         </div>
         <br />
         <div class="cc_main">
@@ -670,16 +731,26 @@
         <div class="ys_fst">
           <strong>
             质控验收测试得分：
-            <input type="text" class="jiaofuwudefen" />分
+            <input type="text" class="yanshoudefen" v-model="yanshoudefen"/>分
           </strong>
+          <el-popover
+                placement="right-start"
+                width="500"
+                trigger="hover"
+                content="
+                    一次通过率达到85%以上的，不扣分；低于85%的，每低于1个百分点，扣1分，扣完30分为止；二次通过率达到95%以上的，不扣分；低于95%的，每低于1个百分点，扣1分，扣完30分为止；三次通过率达到100%，不扣分；低于100%的，每低于1个百分点，扣1分，扣完30分为止；验收测试超过三次，扣30分。">
+                <el-button slot="reference" size="mini">
+                  <i class="icon iconfont icon-wenhao"></i>
+                </el-button>
+              </el-popover>
         </div>
         <br />
         <!-- 一轮验收-->
         <el-container>
           <el-header class="a_head" height="30px">
             <strong>一轮验收</strong>
-            <el-button size="mini" type="primary" class="new" round>新增</el-button>
-            <el-button size="mini" class="a_delete" round>删除</el-button>
+            <el-button size="mini" type="primary" class="a_new" round @click="anew">新增</el-button>
+            <el-button size="mini" class="a_delete" round @click="adel">删除</el-button>
           </el-header>
           <el-main class="a_main">
             <el-col span="10">
@@ -776,13 +847,13 @@
             </el-col>
           </el-main>
         </el-container>
-        <br>
+        <br />
         <!-- 二轮验收-->
-        <el-container v-show="false">
+        <el-container v-show="b_show">
           <el-header class="b_head" height="30px">
             <strong>二轮验收</strong>
-            <el-button size="mini" type="primary" class="new" round>新增</el-button>
-            <el-button size="mini" class="b_delete" round>删除</el-button>
+            <el-button size="mini" type="primary" class="b_new" round @click="bnew">新增</el-button>
+            <el-button size="mini" class="b_delete" round @click="bdel">删除</el-button>
           </el-header>
           <el-main class="b_main">
             <el-col span="10">
@@ -879,13 +950,13 @@
             </el-col>
           </el-main>
         </el-container>
-        <br>
+        <br />
         <!-- 三轮验收-->
-        <el-container v-show="false">
+        <el-container v-show="c_show">
           <el-header class="c_head" height="30px">
             <strong>三轮验收</strong>
-            <el-button size="mini" type="primary" class="new" round>新增</el-button>
-            <el-button size="mini" class="c_delete" round>删除</el-button>
+
+            <el-button size="mini" class="c_delete" round @click="cdel">删除</el-button>
           </el-header>
           <el-main class="c_main">
             <el-col span="10">
@@ -984,7 +1055,11 @@
         </el-container>
       </el-tab-pane>
     </el-tabs>
-    <br><br><br><br><br>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <div class="foot">
       <el-button class="save" type="primary" plain>保存</el-button>
       <el-button class="submit" type="primary" plain>提交</el-button>
@@ -998,6 +1073,9 @@ export default {
   name: "scoreIndex",
   data() {
     return {
+      visible: false,
+      b_show: false,
+      c_show: false,
       
       //项目组别
       options: [
@@ -1030,7 +1108,7 @@ export default {
           label: "平台支撑组",
         },
       ],
-      groupName:'',
+      groupName: "",
       //系统名和负责人输入框
       restaurants: [],
       person: [],
@@ -1066,9 +1144,8 @@ export default {
       //版本规模
       input: 0,
       //标签页
-      activeName: 'first',
-      xq_change: 0,
       activeName: "first",
+      xq_change: 0,
       xq_tijiao: "是",
       xq_yanchi: "是",
       xq_geshi: "word",
@@ -1137,18 +1214,110 @@ export default {
   },
 
   methods: {
-    groupchange(){
-        groupName=$(this).val();
-        $(".banbenhao").val(groupName);
+    
+    adel() {
+      let a = confirm("确定删除？");
+      if (a) {
+        (this.a_begin = ""),
+          (this.a_end = ""),
+          (this.a_jieguo = "通过"),
+          (this.a_tgs = ""),
+          (this.a_btgs = ""),
+          (this.a_ylzxgs = ""),
+          (this.a_zss = ""),
+          (this.a_tgl = ""),
+          (this.a_qxs = ""),
+          (this.a_csr = ""),
+          (this.state_a_csr = "");
+      } else {
+      }
+    },
+    bdel() {
+      let b = confirm("确定删除？");
+      if (b) {
+        (this.b_begin = ""),
+          (this.b_end = ""),
+          (this.b_jieguo = "通过"),
+          (this.b_tgs = ""),
+          (this.b_btgs = ""),
+          (this.b_ylzxgs = ""),
+          (this.b_zss = ""),
+          (this.b_tgl = ""),
+          (this.b_qxs = ""),
+          (this.b_csr = ""),
+          (this.state_b_csr = ""),
+          (this.b_show = false);
+      } else {
+      }
+    },
+    cdel() {
+      let a = confirm("确定删除？");
+      if (a) {
+        (this.c_begin = ""),
+          (this.c_end = ""),
+          (this.c_jieguo = "通过"),
+          (this.c_tgs = ""),
+          (this.c_btgs = ""),
+          (this.c_ylzxgs = ""),
+          (this.c_zss = ""),
+          (this.c_tgl = ""),
+          (this.c_qxs = ""),
+          (this.c_csr = ""),
+          (this.state_c_csr = ""),
+          (this.c_show = false);
+      } else {
+      }
+    },
+    anew() {
+      this.b_show = true;
+    },
+    bnew() {
+      this.c_show = true;
     },
     loadAllsys() {
       return [{ value: "MOA" }, { value: "OA" }, { value: "云OA" }];
     },
     loadAllperson() {
-      return [{ value: "刘玥浩" }, { value: "陈雨萌" }, { value: "严亚波" }];
+      return [
+        { value: "刘玥浩" },
+        { value: "刘艳松" },
+        { value: "吴妮婷" },
+        { value: "蒙菲" },
+        { value: "陈雨萌" },
+        { value: "陈国栋" },
+        { value: "张淼" },
+        { value: "马越龙" },
+        { value: "王烜" },
+        { value: "匡燕" },
+        { value: "李凤仪" },
+        { value: "张帅" },
+        { value: "徐丽娟" },
+        { value: "何亚飞" },
+        { value: "石岳" },
+        { value: "李扬" },
+        { value: "李现京" },
+        { value: "魏晓丽" },
+        { value: "战强" },
+        { value: "康楠" },
+        { value: "董晨阳" },
+        { value: "李晓汇" },
+        { value: "殷洵" },
+      ];
     },
     loadAlltest_person() {
-      return [{ value: "王文" }, { value: "覃优" }, { value: "崔雪梅" }];
+      return [
+        {
+          value: "王文",
+        },
+        { value: "覃优" },
+        { value: "崔雪梅" },
+        { value: "林舒楠" },
+        { value: "蒋罗锦" },
+        { value: "刘蕾" },
+        { value: "卞英松" },
+        { value: "郭玉凤" },
+        { value: "唐海清" },
+      ];
     },
     querySearchAsync(queryString, cb) {
       var restaurants = this.restaurants;
@@ -1366,6 +1535,21 @@ export default {
     this.b_csr = this.loadAlltest_person();
     this.c_csr = this.loadAlltest_person();
   },
+
+  computed:{
+      csyldf:function(){
+        return 25-this.yl_bt-this.yl_qz-this.yl_yq-this.yl_bz-this.yl_jg-this.yl_zxr;
+      },
+      csbgdf:function(){
+        return 20-this.bg_qx-this.bg_hj-this.bg_fw-this.bg_qk-this.bg_jl;
+      },
+      xuqiudefen:function () {
+        return 5-(this.xq_tijiao=="是"?0:5)-(this.xq_geshi=="其他"?5:0)-(this.xq_yanchi=="是"?2:0)
+      },
+      jiaofuwudefen:function () {
+        return  this.csyldf+this.csbgdf+this.xuqiudefen;
+      },
+  }
 };
 </script>
 

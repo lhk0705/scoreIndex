@@ -108,7 +108,7 @@ span {
 
 .xq21 {
   position: relative;
-  left: 20px;
+  left: 65px;
 }
 
 .xq22 {
@@ -164,7 +164,7 @@ span {
 }
 .yl21{
     position: relative;
-    left: 20px; 
+    left: 60px; 
 }
 .yl22{
     position: relative;
@@ -231,7 +231,7 @@ span {
 }
 .bg21{
     position: relative;
-    left: 20px; 
+    left: 60px; 
 }
 .bg22{
     position: relative;
@@ -376,7 +376,7 @@ span {
     
     bottom:10px;
 }
-.new{
+.a_new,.b_new,.c_new{
     position: relative;
     left: 75%;
     bottom:20%;
