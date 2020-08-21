@@ -1,0 +1,430 @@
+.scoreIndex {}
+
+span {
+  color: red;
+}
+
+.head {
+  height: 50px;
+  width: 100%;
+  background-color: rgb(231, 230, 230);
+  text-align: left;
+  padding-top: 25px;
+}
+
+.bbdf {
+  text-align: left;
+  margin-top: 10px;
+}
+
+.bbxx1 {
+
+  text-align: left;
+  border: 1px solid black;
+  padding-top: 5px;
+  font-size: 14px;
+}
+
+.el-container {
+  border: 1px solid black;
+}
+
+.bbxx2 div {
+  font-size: 14px;
+  margin: 4px;
+}
+
+.banbenguimo {
+  width: 180px;
+}
+
+.zubie {
+  position: relative;
+  left: 39px;
+  top: 3px;
+}
+
+.fuzeren {
+  position: relative;
+  left: 10px;
+}
+
+.leixing {
+  position: relative;
+  left: 20px;
+  top: 5px;
+}
+
+.guimo {
+  position: relative;
+  left: 20px;
+  top: 10px;
+}
+
+.mingcheng {
+  position: relative;
+  left: 45px;
+}
+
+.shijian {
+  position: relative;
+  left: 65px;
+}
+
+.jihua {
+  position: relative;
+  top: 5px;
+}
+
+.jfw_fst {
+  text-align: left;
+}
+
+.xq_head {
+  text-align: left;
+  border: 1px solid black;
+  padding-top: 5px;
+  font-size: 12px;
+}
+
+.xq_main div {
+  font-size: 14px;
+  margin: 4px;
+}
+
+.xq_error {
+  width: 200px;
+}
+
+.xq12 {
+  position: relative;
+  left: 45px;
+}
+
+.xq14 {
+  position: relative;
+  right: 20px;
+}
+
+.xq21 {
+  position: relative;
+  left: 20px;
+}
+
+.xq22 {
+  position: relative;
+  left: 62px;
+}
+
+.xq23 {
+  position: relative;
+  right: 25px;
+}
+
+.xq24 {
+  position: relative;
+  left: 50px;
+}
+.yl_head {
+    text-align: left;
+    border: 1px solid black;
+    padding-top: 5px;
+    font-size: 12px;
+  }
+.yl_main div {
+    font-size: 14px;
+    margin: 4px;
+  }
+.yl_error {
+    width: 200px;
+  }
+.yl12{
+    position: relative;
+    left: 20px; 
+    top:5px;
+}
+.yl13{
+    position: relative;
+    top:10px;
+}
+.yl14{
+    position: relative;
+    right: 35px; 
+    top:15px;
+}
+.yl15{
+    position: relative;
+    right: 35px; 
+    top:15px;
+}
+.yl16{
+    position: relative;
+    right: 35px;
+    top:15px;
+}
+.yl21{
+    position: relative;
+    left: 20px; 
+}
+.yl22{
+    position: relative;
+    left: 60px;
+    top:5px; 
+}
+.yl23{
+    position: relative;
+    right: 35px; 
+    top:5px; 
+}
+.yl24{
+    position: relative;
+    right: 28px;
+}
+.yl25{
+    position: relative;
+    right: 35px; 
+}
+.yl26{
+    position: relative;
+    left: 50px; 
+}
+.yl12{
+    position: relative;
+    left: 40px; 
+}
+.bg_head {
+    text-align: left;
+    border: 1px solid black;
+    padding-top: 5px;
+    font-size: 12px;
+  }
+  .bg_main div {
+    font-size: 14px;
+    margin: 4px;
+  }
+.bg_error {
+    width: 200px;
+  }
+.bg12{
+    position: relative;
+    left: 45px; 
+    top:5px;
+}
+.bg13{
+    position: relative;
+    top:10px;
+}
+.bg14{
+    position: relative;
+    right: 35px; 
+    top:15px;
+}
+.bg15{
+    position: relative;
+    right: 50px; 
+    top:15px;
+}
+.bg16{
+    position: relative;
+    left: 50px;
+    top:15px;
+}
+.bg21{
+    position: relative;
+    left: 20px; 
+}
+.bg22{
+    position: relative;
+    left: 60px;
+    top:5px; 
+}
+.bg23{
+    position: relative;
+    right: 40px; 
+    top:5px; 
+}
+.bg24{
+    position: relative;
+    right: 25px;
+   
+}
+.bg25{
+    position: relative;
+    right: 25px; 
+}
+.yl_head {
+    text-align: left;
+    border: 1px solid black;
+    padding-top: 5px;
+    font-size: 12px;
+  }
+.cc_fst {
+    text-align: left;
+  }
+.cc_main div {
+    font-size: 14px;
+    margin: 4px;
+    
+  }
+.cc_main{border: 1px solid black;}
+.ccyls,.cctgl,.btgs,.tgs,.ylzs,.zss,.ccbl{
+    width: 200px;
+}
+.cc11{
+    position: relative;
+    left: 20px; 
+}
+.cc12{
+    position: relative;
+    left: 20px; 
+}
+.cc13{
+    position: relative;
+    left: 18px; 
+}
+.cc14{
+    position: relative;
+    left: 5px; 
+}
+.cc15{
+    position: relative;
+    left: 20px; 
+}
+.cc21{
+    position: relative;
+    left: 20px; 
+}
+.cc22{
+    position: relative;
+    left: 24px; 
+}
+.cc23{
+    position: relative;
+    left: 30px; 
+}
+.cc24{
+    position: relative;
+    left: 30px; 
+}
+.cc25{
+    position: relative;
+    left: 25px; 
+}
+.ys_fst{
+    text-align: left;
+}
+.a_head{
+    text-align: left;
+    border: 1px solid black;
+    padding-top: 5px;
+    font-size: 12px; 
+}
+.a_main div{
+    font-size: 14px;
+    margin: 4px;
+}
+.a_tgs,.a_btgs,.a_ylzxgs,.a_zss,.a_tgl,.a_qxs{
+    width: 200px;
+}
+.a11{
+    position: relative;
+    left: 20px; 
+}
+.a12{
+    position: relative;
+    left: 20px; 
+}
+.a13{
+    position: relative;
+    left: 33px; 
+}
+.a14{
+    position: relative;
+    left: 35px; 
+}
+.a15{
+     
+}
+.a21{
+    position: relative;
+    left: 30px; 
+}
+.a22{
+    position: relative;
+    left: 20px; 
+}
+.a23{
+    position: relative;
+    left: 35px; 
+}
+.a24{
+    position: relative;
+    left: 43px; 
+}
+.a25{
+    position: relative;
+    right: 10px; 
+    top: 5px;
+}
+.foot{
+    text-align: right;
+    background-color: rgb(216, 209, 209);
+    height:50px;
+    width: 99%;
+    padding-top: 10px;
+    position: fixed;
+    
+    bottom:10px;
+}
+.new{
+    position: relative;
+    left: 75%;
+    bottom:20%;
+}
+.a_delete{
+    position: relative;
+    left: 77%;
+    bottom:20%;
+}
+.b_head{
+    text-align: left;
+    border: 1px solid black;
+    padding-top: 5px;
+    font-size: 12px; 
+}
+.b_main div{
+    font-size: 14px;
+    margin: 4px;
+}
+.b_delete{
+    position: relative;
+    left: 77%;
+    bottom:20%;
+}
+.b_tgs,.b_btgs,.b_ylzxgs,.b_zss,.b_tgl,.b_qxs{
+    width: 200px;
+}
+.c_head{
+    text-align: left;
+    border: 1px solid black;
+    padding-top: 5px;
+    font-size: 12px; 
+}
+.c_main div{
+    font-size: 14px;
+    margin: 4px;
+}
+.c_delete{
+    position: relative;
+    left: 77%;
+    bottom:20%;
+}
+.c_tgs,.c_btgs,.c_ylzxgs,.c_zss,.c_tgl,.c_qxs{
+    width: 200px;
+}
+
+input{
+    border:none;
+    text-align: right;
+    border-bottom:1px solid black ;
+}
