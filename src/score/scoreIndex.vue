@@ -7,7 +7,7 @@
     <div class="bbdf">
       <strong>
         版本总得分:
-        <input type="text" class="banbendefen" />
+        <input type="text" v-model="banbendefen" />
         分
       </strong>
     </div>
@@ -1075,8 +1075,7 @@ export default {
     return {
       visible: false,
       b_show: false,
-      c_show: false,
-      
+      c_show: false,      
       //项目组别
       options: [
         {
@@ -1177,20 +1176,15 @@ export default {
       cc_begin: "",
       cc_end: "",
       ccyls: "",
-      btgs: "",
-      cctgl: "",
+      btgs: "",      
       ylzs: "",
-      tgs: "",
-      ccbl: "",
-      zss: "",
+      tgs: "",            
       a_begin: "",
       a_end: "",
       a_jieguo: "通过",
       a_tgs: "",
       a_btgs: "",
       a_ylzxgs: "",
-      a_zss: "",
-      a_tgl: "",
       a_qxs: "",
       b_begin: "",
       b_end: "",
@@ -1198,8 +1192,6 @@ export default {
       b_tgs: "",
       b_btgs: "",
       b_ylzxgs: "",
-      b_zss: "",
-      b_tgl: "",
       b_qxs: "",
       c_begin: "",
       c_end: "",
@@ -1207,8 +1199,6 @@ export default {
       c_tgs: "",
       c_btgs: "",
       c_ylzxgs: "",
-      c_zss: "",
-      c_tgl: "",
       c_qxs: "",
     };
   },
@@ -1538,17 +1528,135 @@ export default {
 
   computed:{
       csyldf:function(){
+        
         return 25-this.yl_bt-this.yl_qz-this.yl_yq-this.yl_bz-this.yl_jg-this.yl_zxr;
+               
       },
       csbgdf:function(){
-        return 20-this.bg_qx-this.bg_hj-this.bg_fw-this.bg_qk-this.bg_jl;
+        
+          return 20-this.bg_qx-this.bg_hj-this.bg_fw-this.bg_qk-this.bg_jl;        
+        
       },
       xuqiudefen:function () {
-        return 5-(this.xq_tijiao=="是"?0:5)-(this.xq_geshi=="其他"?5:0)-(this.xq_yanchi=="是"?2:0)
+        let a=5-(this.xq_tijiao=="是"?0:5)-(this.xq_geshi=="其他"?5:0)-(this.xq_yanchi=="是"?2:0);
+        if(a>0)
+        {return a}
+        else{return 0}
+        
       },
       jiaofuwudefen:function () {
         return  this.csyldf+this.csbgdf+this.xuqiudefen;
       },
+      ccdf:function () {
+        if(this.cctgl==''){return ''}
+        else{
+          if(this.cctgl<0.9){
+            if (this.cctgl>0.5) {
+            return 20-(0.9-this.cctgl).toFixed(2)*50;
+            } else {
+            return 0;
+           }
+        }
+        else{
+          return 20;
+        }
+        }
+      },
+      cctgl:function () {
+        if(this.tgs!=0&&this.ccyls!=0){
+        return (this.tgs/this.ccyls).toFixed(2);}
+        else{return ''}
+      },
+      zss:function () {
+        if(this.tgs!=0&&this.ccyls!=0&this.btgs!=0){
+        return this.ccyls-this.tgs-this.btgs;}
+        else{return ''}
+      },
+      ccbl:function () {
+        if(this.ylzs!=0&&this.ccyls!=0){
+        return (this.ccyls/this.ylzs).toFixed(2)}
+        else{return ''}
+      },
+      a_zss:function () {
+        if(this.a_ylzxgs!=0&&this.a_tgs!=0&&this.a_btgs!=0){
+          return this.a_ylzxgs-this.a_tgs-this.a_btgs;
+        }
+        else{return ''}
+      },
+      a_tgl:function () {
+        if (this.a_tgs!=0&&this.a_ylzxgs!=0) {
+          return (this.a_tgs/this.a_ylzxgs).toFixed(2);
+        } else {
+          return ''
+        }
+      },
+      b_zss:function () {
+        if(this.b_ylzxgs!=0&&this.b_tgs!=0&&this.b_btgs!=0){
+          return this.b_ylzxgs-this.b_tgs-this.b_btgs;
+        }
+        else{return ''}
+      },
+      b_tgl:function () {
+        if (this.b_tgs!=0&&this.b_ylzxgs!=0) {
+          return (this.b_tgs/this.b_ylzxgs).toFixed(2);
+        } else {
+          return ''
+        }
+      },
+      c_zss:function () {
+        if(this.c_ylzxgs!=0&&this.c_tgs!=0&&this.c_btgs!=0){
+          return this.c_ylzxgs-this.c_tgs-this.c_btgs;
+        }
+        else{return ''}
+      },
+      c_tgl:function () {
+        if (this.c_tgs!=0&&this.c_ylzxgs!=0) {
+          return (this.c_tgs/this.c_ylzxgs).toFixed(2);
+        } else {
+          return ''
+        }
+      },
+      banbendefen:function () {
+        if (
+        this.ccdf!=0&&
+        this.jiaofuwudefen!=0) {
+          return this.ccdf+this.jiaofuwudefen
+        } else {
+          return '';
+        }
+      },
+      yanshoudefen:function () {
+        let a=this.a_tgl;
+        let b=this.b_tgl;
+        let c=this.c_tgl;
+        //只有一轮数据
+        if(a!=0&&b==0){
+            if(a<0.85)
+            {if(a>0.55){
+              return 30-(0.85-a).toFixed(2)*100;}
+              else{return 0}
+              }
+            else{return 30}
+        }
+        
+        else{
+          //有两轮数据
+          if (c=0) {
+            let d=30-(0.85-a).toFixed(2)*100-(0.95-b).toFixed(2)*100;
+            if (d<0) {
+              return 0;
+            } else {
+              return d
+            }
+          } else {
+            
+          }
+          //有三轮数据
+          return 
+        }
+        
+      },
+
   }
 };
 </script>
