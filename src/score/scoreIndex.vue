@@ -1578,7 +1578,7 @@ export default {
             this.csbgdf=data.csbgdf;
             this.cc_begin=data.ccBegin;
             this.cc_end=data.ccEnd;
-            this.cc_r=data.ccR;
+            this.state_cc_r=data.ccR;
             this.ylzs=data.ylzs;
             this.ccyls=data.ccyls;
             this.tgs=data.tgs;
@@ -1640,6 +1640,34 @@ export default {
       else{}
     },    
     submit(){
+      if(this.groupName==''||
+        this.stateperson==''||
+        this.ticeshijian==''||
+        this.xitongming==''||
+        this.state_xq_tijiaoren==''||
+        this.xq_change==''||
+        this.xq_time==''||
+        this.xq_error==''||
+        this.state_yl_tijiaoren==''||
+        this.yl_time==''||
+        this.yl_error==''||
+        this.state_bg_tijiaoren==''||
+        this.bg_time==''||
+        this.bg_error==''||
+        this.cc_begin==''||
+        this.cc_end==''||
+        this.state_cc_r==''||
+        this.ylzs==''||
+        this.tgs==''||
+        this.cc_btgs==''||
+        this.ccyls==''
+      ){
+        this.$message({
+          message: '请填写必填项',
+          type: 'warning'
+        });
+      }
+      else{
       if(this.b_ylzxgs==0){
         let data={
               "banbenguimo":this.banbenguimo,
@@ -1687,7 +1715,7 @@ export default {
               "csbgdf":this.csbgdf,
               "cc_begin":this.cc_begin,
               "cc_end":this.cc_end,
-              "cc_r":this.cc_r,
+              "cc_r":this.state_cc_r,
               "ylzs":this.ylzs,
               "ccyls":this.ccyls,
               "tgs":this.tgs,
@@ -1798,6 +1826,7 @@ export default {
             alert("提交成功！")
             }
           }
+      }
       },
     cancel(){
           let a=confirm("确定取消？");
