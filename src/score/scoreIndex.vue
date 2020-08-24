@@ -1,7 +1,7 @@
 <template>
   <div class="scoreIndex">
     <div class="head">
-      <label class="banbenhao">{{ticeshijian}}{{state}}</label>版本信息
+      <label class="banbenhao" @change="bbh_change">{{ticeshijian}}{{state}}</label>版本信息
     </div>
 
     <div class="bbdf">
@@ -46,7 +46,7 @@
                   class="person"
                   v-model="stateperson"
                   :fetch-suggestions="querySearchPerson"
-                  placeholder="请输入内容"
+                  placeholder="可索引"
                   @select="handleSelectperson"
                   size="mini"
                 ></el-autocomplete>
@@ -69,7 +69,7 @@
                 <el-input-number
                   size="mini"
                   class="banbenguimo"
-                  v-model="input"
+                  v-model="banbenguimo"
                   controls-position="right"
                   @change="handleChange"
                   :min="1"
@@ -99,9 +99,9 @@
                 </label>
                 <el-autocomplete
                   class="xitongming"
-                  v-model="state"
+                  v-model="xitongming"
                   :fetch-suggestions="querySearchAsync"
-                  placeholder="请输入内容"
+                  placeholder="可索引"
                   @select="handleSelect"
                   size="mini"
                 ></el-autocomplete>
@@ -129,7 +129,7 @@
         <div class="jfw_fst">
           <strong>
             交付物得分：
-            <input type="text" class="jiaofuwudefen" v-model="jiaofuwudefen"/>分
+            <input type="text" class="jiaofuwudefen" v-model="jiaofuwudefen" />分
           </strong>
         </div>
         <br />
@@ -139,7 +139,7 @@
             <el-header class="xq_head" height="40px">
               <strong>
                 需求文档：
-                <input type="text" class="xuqiudefen" v-model="xuqiudefen"/>分
+                <input type="text" class="xuqiudefen" v-model="xuqiudefen" />分
               </strong>
               <el-popover
                 placement="right-start"
@@ -149,7 +149,8 @@
                     1、常规版本：建议在需求文档确认完毕之后提交给质控组，在版本提测前2个工作日仍未提交需求文档，视为未及时提交扣3分；
                     2、常规版本：在版本提测时未提交需求文档，视为未提交，扣5分；
                     3、紧急版本：在版本提测时向质控组提交需求文档，若提测时未提交需求文档，视为未提交，扣5分；
-                    4、需求文档必须是word或excel格式，若为其他格式视为未提交，扣5分。">
+                    4、需求文档必须是word或excel格式，若为其他格式视为未提交，扣5分。"
+              >
                 <el-button slot="reference" size="mini">
                   <i class="icon iconfont icon-wenhao"></i>
                 </el-button>
@@ -162,8 +163,8 @@
                     <label>
                       <span>*</span>是否提交：
                     </label>
-                    <el-radio v-model="xq_tijiao" label="是" >是</el-radio>
-                    <el-radio v-model="xq_tijiao" label="否" >否</el-radio>
+                    <el-radio v-model="xq_tijiao" label="是">是</el-radio>
+                    <el-radio v-model="xq_tijiao" label="否">否</el-radio>
                   </div>
                 </el-row>
                 <el-row>
@@ -175,7 +176,7 @@
                       class="xq_tijiaoren"
                       v-model="state_xq_tijiaoren"
                       :fetch-suggestions="querySearchxqtjr"
-                      placeholder="请输入内容"
+                      placeholder="可索引"
                       @select="handleSelectxqtjr"
                       size="mini"
                     ></el-autocomplete>
@@ -222,7 +223,7 @@
                     <label for>
                       <span>*</span>提交时间：
                     </label>
-                    <el-date-picker size="mini" v-model="xq_time" type="date" placeholder="请选择日期"></el-date-picker>
+                    <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="xq_time" type="date" placeholder="请选择日期"></el-date-picker>
                   </div>
                 </el-row>
                 <el-row>
@@ -259,7 +260,7 @@
             <el-header class="yl_head" height="40px">
               <strong>
                 测试用例：
-                <input type="text" class="csyldf" v-model="csyldf"/>分
+                <input type="text" class="csyldf" v-model="csyldf" />分
               </strong>
               <el-popover
                 placement="right-start"
@@ -296,7 +297,7 @@
                       class="yl_tijiaoren"
                       v-model="state_yl_tijiaoren"
                       :fetch-suggestions="querySearchyltjr"
-                      placeholder="请输入内容"
+                      placeholder="可索引"
                       @select="handleSelectyltjr"
                       size="mini"
                     ></el-autocomplete>
@@ -373,7 +374,7 @@
                     <label for>
                       <span>*</span>提交时间：
                     </label>
-                    <el-date-picker size="mini" v-model="yl_time" type="date" placeholder="请选择日期"></el-date-picker>
+                    <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="yl_time" type="date" placeholder="请选择日期"></el-date-picker>
                   </div>
                 </el-row>
                 <el-row>
@@ -446,7 +447,7 @@
             <el-header class="bg_head" height="40px">
               <strong>
                 测试报告：
-                <input type="text" class="csbgdf" v-model="csbgdf"/>分
+                <input type="text" class="csbgdf" v-model="csbgdf" />分
               </strong>
               <el-popover
                 placement="right-start"
@@ -456,7 +457,8 @@
                     1、常规版本：在版本提测时未提交测试报告的，扣20分；
                     2、紧急版本：版本上线后一个自然月内项目组需补充提交自测试报告，超时视为未提交，扣20分。
                     3、测试报告可参考质控组提供的报告模板，但必须包含测试范围、测试环境、测试执行情况、缺陷统计分析、测试结论，每缺1项扣5分，扣完20分为止；
-                    4、测试报告内容缺失或错误，必须包含测试范围、测试环境、测试执行情况、缺陷统计分析、测试结论，每一处扣1分，扣完20分为止；">
+                    4、测试报告内容缺失或错误，必须包含测试范围、测试环境、测试执行情况、缺陷统计分析、测试结论，每一处扣1分，扣完20分为止；"
+              >
                 <el-button slot="reference" size="mini">
                   <i class="icon iconfont icon-wenhao"></i>
                 </el-button>
@@ -482,7 +484,7 @@
                       class="bg_tijiaoren"
                       v-model="state_bg_tijiaoren"
                       :fetch-suggestions="querySearchbgtjr"
-                      placeholder="请输入内容"
+                      placeholder="可索引"
                       @select="handleSelectbgtjr"
                       size="mini"
                     ></el-autocomplete>
@@ -558,7 +560,7 @@
                     <label for>
                       <span>*</span>提交时间：
                     </label>
-                    <el-date-picker size="mini" v-model="bg_time" type="date" placeholder="请选择日期"></el-date-picker>
+                    <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="bg_time" type="date" placeholder="请选择日期"></el-date-picker>
                   </div>
                 </el-row>
                 <el-row>
@@ -616,18 +618,19 @@
         <div class="cc_fst">
           <strong>
             抽测得分：
-            <input type="text" class="ccdf" v-model="ccdf"/>分
+            <input type="text" class="ccdf" v-model="ccdf" />分
           </strong>
           <el-popover
-                placement="right-start"
-                width="500"
-                trigger="hover"
-                content="
-                    抽测通过率达到90%，不扣分；低于90%的，每降低1个百分点，扣0.5分。">
-                <el-button slot="reference" size="mini">
-                  <i class="icon iconfont icon-wenhao"></i>
-                </el-button>
-              </el-popover>
+            placement="right-start"
+            width="500"
+            trigger="hover"
+            content="
+                    抽测通过率达到90%，不扣分；低于90%的，每降低1个百分点，扣0.5分。"
+          >
+            <el-button slot="reference" size="mini">
+              <i class="icon iconfont icon-wenhao"></i>
+            </el-button>
+          </el-popover>
         </div>
         <br />
         <div class="cc_main">
@@ -637,7 +640,7 @@
                 <label for>
                   <span>*</span>测试开始时间：
                 </label>
-                <el-date-picker size="mini" v-model="cc_begin" type="date" placeholder="请选择日期"></el-date-picker>
+                <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="cc_begin" type="date" placeholder="请选择日期"></el-date-picker>
               </div>
             </el-row>
             <el-row>
@@ -649,7 +652,7 @@
                   class="cc_r"
                   v-model="state_cc_r"
                   :fetch-suggestions="querySearchccr"
-                  placeholder="请输入内容"
+                  placeholder="可索引"
                   @select="handleSelectccr"
                   size="mini"
                 ></el-autocomplete>
@@ -660,7 +663,7 @@
                 <label>
                   <span>*</span>抽测用例数：
                 </label>
-                <el-input size="mini" class="ccyls" v-model="ccyls" placeholder="请输入内容"></el-input>
+                <el-input size="mini" class="ccyls" v-model="ccyls" placeholder></el-input>
               </div>
             </el-row>
             <el-row>
@@ -669,7 +672,7 @@
                   <label>
                     <span>*</span>不通过数：
                   </label>
-                  <el-input size="mini" class="btgs" v-model="btgs" placeholder="请输入内容"></el-input>
+                  <el-input size="mini" class="btgs" v-model="cc_btgs" placeholder></el-input>
                 </div>
               </div>
             </el-row>
@@ -678,7 +681,7 @@
                 <label>
                   <span>*</span>抽测通过率：
                 </label>
-                <el-input size="mini" class="cctgl" v-model="cctgl" placeholder="请输入内容"></el-input>
+                <el-input size="mini" class="cctgl" v-model="cctgl" placeholder></el-input>
               </div>
             </el-row>
           </el-col>
@@ -688,7 +691,7 @@
                 <label for>
                   <span>*</span>测试结束时间：
                 </label>
-                <el-date-picker size="mini" v-model="cc_end" type="date" placeholder="请选择日期"></el-date-picker>
+                <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="cc_end" type="date" placeholder="请选择日期"></el-date-picker>
               </div>
             </el-row>
             <el-row>
@@ -696,7 +699,7 @@
                 <label>
                   <span>*</span>用例总数：
                 </label>
-                <el-input size="mini" class="ylzs" v-model="ylzs" placeholder="请输入内容"></el-input>
+                <el-input size="mini" class="ylzs" v-model="ylzs" placeholder></el-input>
               </div>
             </el-row>
             <el-row>
@@ -704,7 +707,7 @@
                 <label>
                   <span>*</span>通过数：
                 </label>
-                <el-input size="mini" class="tgs" v-model="tgs" placeholder="请输入内容"></el-input>
+                <el-input size="mini" class="tgs" v-model="tgs" placeholder></el-input>
               </div>
             </el-row>
             <el-row>
@@ -712,7 +715,7 @@
                 <label>
                   <span>*</span>阻塞数：
                 </label>
-                <el-input size="mini" class="zss" v-model="zss" placeholder="请输入内容"></el-input>
+                <el-input size="mini" class="zss" v-model="zss" placeholder></el-input>
               </div>
             </el-row>
             <el-row>
@@ -720,7 +723,7 @@
                 <label>
                   <span>*</span>抽测比例：
                 </label>
-                <el-input size="mini" class="ccbl" v-model="ccbl" placeholder="请输入内容"></el-input>
+                <el-input size="mini" class="ccbl" v-model="ccbl" placeholder></el-input>
               </div>
             </el-row>
           </el-col>
@@ -731,18 +734,19 @@
         <div class="ys_fst">
           <strong>
             质控验收测试得分：
-            <input type="text" class="yanshoudefen" v-model="yanshoudefen"/>分
+            <input type="text" class="yanshoudefen" v-model="yanshoudefen" />分
           </strong>
           <el-popover
-                placement="right-start"
-                width="500"
-                trigger="hover"
-                content="
-                    一次通过率达到85%以上的，不扣分；低于85%的，每低于1个百分点，扣1分，扣完30分为止；二次通过率达到95%以上的，不扣分；低于95%的，每低于1个百分点，扣1分，扣完30分为止；三次通过率达到100%，不扣分；低于100%的，每低于1个百分点，扣1分，扣完30分为止；验收测试超过三次，扣30分。">
-                <el-button slot="reference" size="mini">
-                  <i class="icon iconfont icon-wenhao"></i>
-                </el-button>
-              </el-popover>
+            placement="right-start"
+            width="500"
+            trigger="hover"
+            content="
+                    一次通过率达到85%以上的，不扣分；低于85%的，每低于1个百分点，扣1分，扣完30分为止；二次通过率达到95%以上的，不扣分；低于95%的，每低于1个百分点，扣1分，扣完30分为止；三次通过率达到100%，不扣分；低于100%的，每低于1个百分点，扣1分，扣完30分为止；验收测试超过三次，扣30分。"
+          >
+            <el-button slot="reference" size="mini">
+              <i class="icon iconfont icon-wenhao"></i>
+            </el-button>
+          </el-popover>
         </div>
         <br />
         <!-- 一轮验收-->
@@ -759,7 +763,7 @@
                   <label for>
                     <span>*</span>测试开始时间：
                   </label>
-                  <el-date-picker size="mini" v-model="a_begin" type="date" placeholder="请选择日期"></el-date-picker>
+                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="a_begin" type="date" placeholder="请选择日期"></el-date-picker>
                 </div>
               </el-row>
               <el-row>
@@ -771,7 +775,7 @@
                     class="a_csr"
                     v-model="state_a_csr"
                     :fetch-suggestions="querySearcha_csr"
-                    placeholder="请输入内容"
+                    placeholder="可索引"
                     @select="handleSelecta_csr"
                     size="mini"
                   ></el-autocomplete>
@@ -808,7 +812,7 @@
                   <label for>
                     <span>*</span>测试结束时间：
                   </label>
-                  <el-date-picker size="mini" v-model="a_end" type="date" placeholder="请选择日期"></el-date-picker>
+                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="a_end" type="date" placeholder="请选择日期"></el-date-picker>
                 </div>
               </el-row>
               <el-row>
@@ -862,7 +866,7 @@
                   <label for>
                     <span>*</span>测试开始时间：
                   </label>
-                  <el-date-picker size="mini" v-model="b_begin" type="date" placeholder="请选择日期"></el-date-picker>
+                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="b_begin" type="date" placeholder="请选择日期"></el-date-picker>
                 </div>
               </el-row>
               <el-row>
@@ -874,7 +878,7 @@
                     class="b_csr"
                     v-model="state_b_csr"
                     :fetch-suggestions="querySearchb_csr"
-                    placeholder="请输入内容"
+                    placeholder="可索引"
                     @select="handleSelectb_csr"
                     size="mini"
                   ></el-autocomplete>
@@ -911,7 +915,7 @@
                   <label for>
                     <span>*</span>测试结束时间：
                   </label>
-                  <el-date-picker size="mini" v-model="b_end" type="date" placeholder="请选择日期"></el-date-picker>
+                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="b_end" type="date" placeholder="请选择日期"></el-date-picker>
                 </div>
               </el-row>
               <el-row>
@@ -965,7 +969,7 @@
                   <label for>
                     <span>*</span>测试开始时间：
                   </label>
-                  <el-date-picker size="mini" v-model="c_begin" type="date" placeholder="请选择日期"></el-date-picker>
+                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="c_begin" type="date" placeholder="请选择日期"></el-date-picker>
                 </div>
               </el-row>
               <el-row>
@@ -977,7 +981,7 @@
                     class="c_csr"
                     v-model="state_c_csr"
                     :fetch-suggestions="querySearchc_csr"
-                    placeholder="请输入内容"
+                    placeholder="可索引"
                     @select="handleSelectc_csr"
                     size="mini"
                   ></el-autocomplete>
@@ -1014,7 +1018,7 @@
                   <label for>
                     <span>*</span>测试结束时间：
                   </label>
-                  <el-date-picker size="mini" v-model="c_end" type="date" placeholder="请选择日期"></el-date-picker>
+                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="c_end" type="date" placeholder="请选择日期"></el-date-picker>
                 </div>
               </el-row>
               <el-row>
@@ -1061,13 +1065,13 @@
     <br />
     <br />
     <div class="foot">
-      <el-button class="save" type="primary" plain>保存</el-button>
-      <el-button class="submit" type="primary" plain>提交</el-button>
-      <el-button class="cancel" plain>取消</el-button>
+      <el-button @click="submit" type="primary" plain>提交</el-button>
+      <el-button @click="cancel" plain>取消</el-button>
     </div>
   </div>
 </template>
-
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+</script>
 <script>
 export default {
   name: "scoreIndex",
@@ -1075,7 +1079,7 @@ export default {
     return {
       visible: false,
       b_show: false,
-      c_show: false,      
+      c_show: false,
       //项目组别
       options: [
         {
@@ -1111,7 +1115,7 @@ export default {
       //系统名和负责人输入框
       restaurants: [],
       person: [],
-      state: "",
+      xitongming: "",
       timeout: null,
       stateperson: "",
       timeoutperson: null,
@@ -1141,18 +1145,18 @@ export default {
       //是否计划内
       plan: "是",
       //版本规模
-      input: 0,
+      banbenguimo: 0,
       //标签页
       activeName: "first",
       xq_change: 0,
       xq_tijiao: "是",
-      xq_yanchi: "是",
+      xq_yanchi: "否",
       xq_geshi: "word",
       xq_time: "",
       xq_laiyuan: "是",
       xq_error: "",
       yl_tijiao: "是",
-      yl_yanchi: "是",
+      yl_yanchi: "否",
       yl_geshi: "word",
       yl_time: "",
       yl_bt: 0,
@@ -1163,7 +1167,7 @@ export default {
       yl_jg: 0,
       yl_error: "",
       bg_tijiao: "是",
-      bg_yanchi: "是",
+      bg_yanchi: "否",
       bg_geshi: "word",
       bg_time: "",
       bg_error: "",
@@ -1176,9 +1180,9 @@ export default {
       cc_begin: "",
       cc_end: "",
       ccyls: "",
-      btgs: "",      
+      cc_btgs: "",
       ylzs: "",
-      tgs: "",            
+      tgs: "",
       a_begin: "",
       a_end: "",
       a_jieguo: "通过",
@@ -1204,7 +1208,6 @@ export default {
   },
 
   methods: {
-    
     adel() {
       let a = confirm("确定删除？");
       if (a) {
@@ -1321,9 +1324,9 @@ export default {
       }, 3000 * Math.random());
     },
     createStateFilter(queryString) {
-      return (state) => {
+      return (xitongming) => {
         return (
-          state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+          xitongming.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
         );
       };
     },
@@ -1512,6 +1515,380 @@ export default {
     handleSelectc_csr(item) {
       console.log(item);
     },
+    bbh_change(){
+      if(this.ticeshijian!=''&&this.xitongming!=''){
+        let bbh={"banbenhao":$(this).text()};
+        $.ajax({
+        type:"post",
+        url:"/selectSorce",
+        data:JSON.stringify(bbh),
+        contentType:"application/json",
+        dataType:"json",
+        success: function(data){
+            this.type= data.type;
+            this.plan= data.plan;
+            this.groupName=data.groupname;
+            this.stateperson=data.person;
+            this.banbenguimo=data.banbenguimo;
+            this.jiaofuwudefen=data.jiaofuwudefen;
+            this.xq_tijiao=data.xqTijiao;
+            this.xq_geshi=data.xqGeshi;
+            this.state_xq_tijiaoren=data.xqTijiaoren;
+            this.xq_time=data.xqTime;
+            this.xq_yanchi=data.xqYanchi;
+            this.xq_laiyuan=data.xqLaiyuan;
+            this.xq_change=data.xqChange;
+            this.xuqiudefen=data.xuqiudefen;
+            this.xq_error=data.xqError;
+            this.yl_tijiao=data.ylTijiao;
+            this.yl_geshi=data.ylGeshi;
+            this.state_yl_tijiaoren=data.ylTijiaoren;
+            this.yl_time=data.ylTime;
+            this.yl_yanchi=data.ylYanchi;
+            this.yl_error=data.ylError;
+            this.yl_qz=data.ylQz;
+            this.yl_bt=data.ylBt;
+            this.yl_zxr=data.ylZxr;
+            this.yl_yq=data.ylYq;
+            this.yl_bz=data.ylBz;
+            this.yl_jg=data.ylJg;
+            this.csyldf=data.csyldf;
+            this.bg_tijiao=data.bgTijiao;
+            this.bg_geshi=data.bgGeshi;
+            this.state_bg_tijiaoren=data.bgTijiaoren;
+            this.bg_time=data.bgTime;
+            this.bg_yanchi=data.bgYanchi;
+            this.bg_error=data.bgError;
+            this.bg_qk=data.bgQk;
+            this.bg_hj=data.bgHj;
+            this.bg_fw=data.bgFw;
+            this.bg_qx=data.bgQx;
+            this.bg_jl=data.bgJl;
+            this.csbgdf=data.csbgdf;
+            this.cc_begin=data.ccBegin;
+            this.cc_end=data.ccEnd;
+            this.cc_r=data.ccR;
+            this.ylzs=data.ylzs;
+            this.ccyls=data.ccyls;
+            this.tgs=data.tgs;
+            this.cc_btgs=data.ccBtgs;
+            this.zss=data.zss;
+            this.cctgl=data.cctgl;
+            this.ccdf=data.ccdf;
+            this.ccbl=data.ccbl;
+            this.a_begin=data.abegin;
+            this.a_end=data.aend;
+            this.a_csr=data.acsr;
+            this.a_ylzxgs=data.aylzxgs;
+            this.a_tgs=data.atgs;
+            this.a_btgs=data.abtgs;
+            this.a_zss=data.azss;
+            this.a_qxs=data.aqxs;
+            this.a_tgl=data.atgl;
+            this.a_jieguo=data.ajieguo;
+            this.yanshoudefen=data.yanshoudefen;
+            this.banbendefen=data.zongfen;
+            
+            // if(b_tongguolv==-999){
+            if(data.btgl!=-999){
+                this.b_begin=data.bbegin;
+                this.b_end=data.bend;
+                this.b_csr=data.bcsr;
+                this.b_ylzxgs=data.bylzxgs;
+                this.b_tgs=data.btgs;
+                this.b_btgs=data.bbtgs;
+                this.b_zss=data.bzss;
+                this.b_qxs=data.bqxs;
+                this.b_tgl=data.btgl;
+                this.b_jieguo=data.bjieguo;                
+                this.yanshoudefen=data.yanshoudefen;
+                this.banbendefen=data.zongfen;
+                if(data.ctgl!=-999){
+                    this.c_begin=data.cbegin;
+                    this.c_end=data.cend;
+                    this.c_csr=data.ccsr;
+                    this.c_ylzxgs=data.cylzxgs;
+                    this.c_tgs=data.ctgs;
+                    this.c_btgs=data.cbtgs;
+                    this.c_zss=data.czss;
+                    this.c_qxs=data.cqxs;
+                    this.c_tgl=data.ctgl;
+                    this.c_jieguo=data.cjieguo;
+                    this.yanshoudefen=data.yanshoudefen;
+                    this.banbendefen=data.zongfen;
+                    
+                }
+            }
+            
+                
+            
+            
+        }
+          });
+      }
+      else{}
+    },    
+    submit(){
+      if(this.b_tgl==0){
+        let data={
+              "banbenguimo":this.banbenguimo,
+              "groupName":this.groupName,
+              "person":this.stateperson,
+              "ticeshijian":this.ticeshijian,
+              "xitongming":this.xitongming,
+              "type":this.type,
+              "plan":this.plan,
+              "banbenhao":$(".banbenhao").text(),
+              "jiaofuwudefen":this.jiaofuwudefen,
+              "xq_tijiao":this.xq_tijiao,
+              "xq_geshi":this.xq_geshi,
+              "xq_tijiaoren":this.state_xq_tijiaoren,
+              "xq_time":this.xq_time,
+              "xq_yanchi":this.xq_yanchi,
+              "xq_laiyuan":this.xq_laiyuan,
+              "xq_change":this.xq_change,
+              "xq_error":this.xq_error,
+              "xuqiudefen":this.xuqiudefen,
+              "yl_tijiao":this.yl_tijiao,
+              "yl_geshi":this.yl_geshi,
+              "yl_tijiaoren":this.state_yl_tijiaoren,
+              "yl_time":this.yl_time,
+              "yl_yanchi":this.yl_yanchi,
+              "yl_error":this.yl_error,
+              "yl_qz":this.yl_qz,
+              "yl_bt":this.yl_bt,
+              "yl_zxr":this.yl_zxr,
+              "yl_yq":this.yl_yq,
+              "yl_bz":this.yl_bz,
+              "yl_jg":this.yl_jg,
+              "csyldf":this.csyldf,
+              "bg_tijiao":this.bg_tijiao,
+              "bg_geshi":this.bg_geshi,
+              "bg_tijiaoren":this.state_bg_tijiaoren,
+              "bg_time":this.bg_time,
+              "bg_yanchi":this.bg_yanchi,
+              "bg_error":this.bg_error,
+              "bg_qk":this.bg_qk,
+              "bg_hj":this.bg_hj,
+              "bg_fw":this.bg_fw,
+              "bg_qx":this.bg_qx,
+              "bg_jl":this.bg_jl,
+              "csbgdf":this.csbgdf,
+              "cc_begin":this.cc_begin,
+              "cc_end":this.cc_end,
+              "cc_r":this.cc_r,
+              "ylzs":this.ylzs,
+              "ccyls":this.ccyls,
+              "tgs":this.tgs,
+              "btgs":this.cc_btgs,
+              "zss":this.zss,
+              "cctgl":this.cctgl,
+              "ccbl":this.ccbl,
+              "ccdf":this.ccdf,
+              "a_begin":this.a_begin,
+              "a_end":this.a_end,
+              "a_csr":this.a_csr,
+              "a_ylzxgs":this.a_ylzxgs,
+              "a_tgs":this.a_tgs,
+              "a_btgs":this.a_btgs,
+              "a_zss":this.a_zss,
+              "a_qxs":this.a_qxs,
+              "a_tgl":this.a_tgl,
+              "a_jieguo":this.a_jieguo,
+              "b_begin":this.b_begin,
+              "b_end":this.b_end,
+              "b_csr":this.b_csr,
+              "b_ylzxgs":this.b_ylzxgs,
+              "b_tgs":this.b_tgs,
+              "b_btgs":this.b_btgs,
+              "b_zss":this.b_zss,
+              "b_qxs":this.b_qxs,
+              "b_tgl":this.b_tgl,
+              "b_jieguo":this.b_jieguo,
+              "c_begin":this.c_begin,
+              "c_end":this.c_end,
+              "c_csr":this.c_csr,
+              "c_ylzxgs":this.c_ylzxgs,
+              "c_tgs":this.c_tgs,
+              "c_btgs":this.c_btgs,
+              "c_zss":this.c_zss,
+              "c_qxs":this.c_qxs,
+              "c_tgl":this.c_tgl,
+              "c_jieguo":this.c_jieguo,
+              "yanshoudefen":this.yanshoudefen,
+              "zongfen":this.banbendefen
+          }
+            $.ajax({
+            type:"post",
+            url:"/addSorce",
+            data:JSON.stringify(data),
+            contentType:"application/json",
+            dataType:"json",
+            success: function(data){
+            console.log("传输成功");
+                    }   
+                });
+          alert("提交成功！")
+      }
+      else{
+            if (this.c_tgl==0) {
+              let data={
+              "b_begin":this.b_begin,
+              "b_end":this.b_end,
+              "b_csr":this.b_csr,
+              "b_ylzxgs":this.b_ylzxgs,
+              "b_tgs":this.b_tgs,
+              "b_btgs":this.b_btgs,
+              "b_zss":this.b_zss,
+              "b_qxs":this.b_qxs,
+              "b_tgl":this.b_tgl,
+              "b_jieguo":this.b_jieguo,
+              "yanshoudefen":this.yanshoudefen,
+              "zongfen":this.banbendefen
+              }
+              $.ajax({
+                type:"post",
+                url:"/updateSorce",
+                data:JSON.stringify(data),
+                contentType:"application/json",
+                dataType:"json",
+                success: function(data){
+                console.log("传输成功");
+              } 
+          });alert("提交成功！");  
+            } 
+            else {
+              let data={
+                "c_begin":this.c_begin,
+                "c_end":this.c_end,
+                "c_csr":this.c_csr,
+                "c_ylzxgs":this.c_ylzxgs,
+                "c_tgs":this.c_tgs,
+                "c_btgs":this.c_btgs,
+                "c_zss":this.c_zss,
+                "c_qxs":this.c_qxs,
+                "c_tgl":this.c_tgl,
+                "c_jieguo":this.c_jieguo,
+                "yanshoudefen":this.yanshoudefen,
+                "zongfen":this.banbendefen
+                  }
+              $.ajax({
+                type:"post",
+                url:"/updateCSorce",
+                data:JSON.stringify(data),
+                contentType:"application/json",
+                dataType:"json",
+                success: function(data){
+                console.log("传输成功");
+                }   
+              });        
+            alert("提交成功！")
+            }
+          }
+      },
+    cancel(){
+          let a=confirm("确定取消？");
+          if(a){
+            this.visible=false,
+              this.b_show=false,
+              this.c_show=false,
+              //项目组别
+              this.groupName="",
+              //系统名和负责人输入框
+              this.restaurants=[],
+              this.person =[],
+              this.xitongming= "",
+              this.timeout= null,
+              this.stateperson= "",
+              this.timeoutperson=null,
+              this.xq_tijiaoren= [],
+              this.state_xq_tijiaoren="",
+              this.yl_tijiaoren=[],
+              this.state_yl_tijiaoren="",
+              this.bg_tijiaoren=[],
+              this.state_bg_tijiaoren= "",
+              this.cc_r= [],
+              this.state_cc_r= "",
+              this.a_csr=[],
+              this.state_a_csr= "",
+              this.b_csr= [],
+              this.state_b_csr= "",
+              this.c_csr=[],
+              this.state_c_csr= "",
+              //提测时间
+              this.pickerOptions= {
+                disabledDate(time) {
+                  return time.getTime() > Date.now();
+                },
+              },
+              this.ticeshijian= "",
+              //版本类型
+              this.type="常规版本",
+              //是否计划内
+              this.plan= "是",
+              //版本规模
+              this.banbenguimo= 0,
+              //标签页
+              this.activeName= "first",
+              this.xq_change= 0,
+              this.xq_tijiao= "是",
+              this.xq_yanchi= "否",
+              this.xq_geshi= "word",
+              this.xq_time= "",
+              this.xq_laiyuan= "是",
+              this.xq_error= "",
+              this.yl_tijiao= "是",
+              this.yl_yanchi= "否",
+              this.yl_geshi="word",
+              this.yl_time= "",
+              this.yl_bt= 0,
+              this.yl_qz=0,
+              this.yl_zxr= 0,
+              this.yl_yq= 0,
+              this.yl_bz= 0,
+              this.yl_jg= 0,
+              this.yl_error= "",
+              this.bg_tijiao= "是",
+              this.bg_yanchi= "否",
+              this.bg_geshi= "word",
+              this.bg_time="",
+              this.bg_error= "",
+              this.bg_qx= 0,
+              this.bg_hj= 0,
+              this.bg_jl= 0,
+              this.bg_fw= 0,
+              this.bg_qk=0,
+              this.bg_error="",
+              this.cc_begin= "",
+              this.cc_end="",
+              this.ccyls="",
+              this.cc_btgs= "",
+              this.ylzs= "",
+              this.tgs= "",
+              this.a_begin="",
+              this.a_end= "",
+              this.a_jieguo="通过",
+              this.a_tgs= "",
+              this.a_btgs= "",
+              this.a_ylzxgs= "",
+              this.a_qxs= "",
+              this.b_begin= "",
+              this.b_end= "",
+              this.b_jieguo= "通过",
+              this.b_tgs= "",
+              this.b_btgs="",
+              this.b_ylzxgs= "",
+              this.b_qxs="",
+              this.c_begin= "",
+              this.c_end="",
+              this.c_jieguo= "通过",
+              this.c_tgs= "",
+              this.c_btgs= "",
+              this.c_ylzxgs= "",
+              this.c_qxs=""
+          }
+          else{}
+      },
   },
 
   mounted() {
@@ -1526,138 +1903,204 @@ export default {
     this.c_csr = this.loadAlltest_person();
   },
 
-  computed:{
-      csyldf:function(){
-        
-        return 25-this.yl_bt-this.yl_qz-this.yl_yq-this.yl_bz-this.yl_jg-this.yl_zxr;
-               
-      },
-      csbgdf:function(){
-        
-          return 20-this.bg_qx-this.bg_hj-this.bg_fw-this.bg_qk-this.bg_jl;        
-        
-      },
-      xuqiudefen:function () {
-        let a=5-(this.xq_tijiao=="是"?0:5)-(this.xq_geshi=="其他"?5:0)-(this.xq_yanchi=="是"?2:0);
-        if(a>0)
-        {return a}
-        else{return 0}
-        
-      },
-      jiaofuwudefen:function () {
-        return  this.csyldf+this.csbgdf+this.xuqiudefen;
-      },
-      ccdf:function () {
-        if(this.cctgl==''){return ''}
-        else{
-          if(this.cctgl<0.9){
-            if (this.cctgl>0.5) {
-            return 20-(0.9-this.cctgl).toFixed(2)*50;
-            } else {
+  computed: {
+    csyldf: function () {
+      let a =
+        25 -
+        this.yl_bt -
+        this.yl_qz -
+        this.yl_yq -
+        this.yl_bz -
+        this.yl_jg -
+        this.yl_zxr;
+      if (a > 0) {
+        return a;
+      } else {
+        return 0;
+      }
+    },
+    csbgdf: function () {
+      let a =
+        20 - this.bg_qx - this.bg_hj - this.bg_fw - this.bg_qk - this.bg_jl;
+      if (a > 0) {
+        return a;
+      } else {
+        return 0;
+      }
+    },
+    xuqiudefen: function () {
+      let a =
+        5 -
+        (this.xq_tijiao == "是" ? 0 : 5) -
+        (this.xq_geshi == "其他" ? 5 : 0) -
+        (this.xq_yanchi == "是" ? 2 : 0);
+      if (a > 0) {
+        return a;
+      } else {
+        return 0;
+      }
+    },
+    jiaofuwudefen: function () {
+      return this.csyldf + this.csbgdf + this.xuqiudefen;
+    },
+    ccdf: function () {
+      if (this.cctgl == "") {
+        return "";
+      } else {
+        if (this.cctgl < 0.9) {
+          if (this.cctgl > 0.5) {
+            return 20 - (0.9 - this.cctgl).toFixed(2) * 50;
+          } else {
             return 0;
-           }
-        }
-        else{
+          }
+        } else {
           return 20;
         }
-        }
-      },
-      cctgl:function () {
-        if(this.tgs!=0&&this.ccyls!=0){
-        return (this.tgs/this.ccyls).toFixed(2);}
-        else{return ''}
-      },
-      zss:function () {
-        if(this.tgs!=0&&this.ccyls!=0&this.btgs!=0){
-        return this.ccyls-this.tgs-this.btgs;}
-        else{return ''}
-      },
-      ccbl:function () {
-        if(this.ylzs!=0&&this.ccyls!=0){
-        return (this.ccyls/this.ylzs).toFixed(2)}
-        else{return ''}
-      },
-      a_zss:function () {
-        if(this.a_ylzxgs!=0&&this.a_tgs!=0&&this.a_btgs!=0){
-          return this.a_ylzxgs-this.a_tgs-this.a_btgs;
-        }
-        else{return ''}
-      },
-      a_tgl:function () {
-        if (this.a_tgs!=0&&this.a_ylzxgs!=0) {
-          return (this.a_tgs/this.a_ylzxgs).toFixed(2);
+      }
+    },
+    cctgl: function () {
+      if (this.tgs != 0 && this.ccyls != 0) {
+        return (this.tgs / this.ccyls).toFixed(2);
+      } else {
+        return "";
+      }
+    },
+    zss: function () {
+      if (this.tgs != 0 && (this.ccyls != 0) & (this.cc_btgs != 0)) {
+        return this.ccyls - this.tgs - this.cc_btgs;
+      } else {
+        return "";
+      }
+    },
+    ccbl: function () {
+      if (this.ylzs != 0 && this.ccyls != 0) {
+        return (this.ccyls / this.ylzs).toFixed(2);
+      } else {
+        return "";
+      }
+    },
+    a_zss: function () {
+      if (this.a_ylzxgs != 0 && this.a_tgs != 0 && this.a_btgs != 0) {
+        return this.a_ylzxgs - this.a_tgs - this.a_btgs;
+      } else {
+        return "";
+      }
+    },
+    a_tgl: function () {
+      if (this.a_tgs != 0 && this.a_ylzxgs != 0) {
+        return (this.a_tgs / this.a_ylzxgs).toFixed(2);
+      } else {
+        return "";
+      }
+    },
+    b_zss: function () {
+      if (this.b_ylzxgs != 0 && this.b_tgs != 0 && this.b_btgs != 0) {
+        return this.b_ylzxgs - this.b_tgs - this.b_btgs;
+      } else {
+        return "";
+      }
+    },
+    b_tgl: function () {
+      if (this.b_tgs != 0 && this.b_ylzxgs != 0) {
+        return (this.b_tgs / this.b_ylzxgs).toFixed(2);
+      } else {
+        return "";
+      }
+    },
+    c_zss: function () {
+      if (this.c_ylzxgs != 0 && this.c_tgs != 0 && this.c_btgs != 0) {
+        return this.c_ylzxgs - this.c_tgs - this.c_btgs;
+      } else {
+        return "";
+      }
+    },
+    c_tgl: function () {
+      if (this.c_tgs != 0 && this.c_ylzxgs != 0) {
+        return (this.c_tgs / this.c_ylzxgs).toFixed(2);
+      } else {
+        return "";
+      }
+    },
+    banbendefen: function () {
+      if (this.ccdf != 0 && this.jiaofuwudefen != 0 && this.yanshoudefen != 0) {
+        return this.ccdf + this.jiaofuwudefen + this.yanshoudefen;
+      } else {
+        if (this.ccdf != 0 && this.jiaofuwudefen != 0) {
+          return this.ccdf + this.jiaofuwudefen;
         } else {
-          return ''
+          return "";
         }
-      },
-      b_zss:function () {
-        if(this.b_ylzxgs!=0&&this.b_tgs!=0&&this.b_btgs!=0){
-          return this.b_ylzxgs-this.b_tgs-this.b_btgs;
-        }
-        else{return ''}
-      },
-      b_tgl:function () {
-        if (this.b_tgs!=0&&this.b_ylzxgs!=0) {
-          return (this.b_tgs/this.b_ylzxgs).toFixed(2);
+      }
+    },
+    yanshoudefen: function () {
+      let a = this.a_tgl;
+      let b = this.b_tgl;
+      let c = this.c_tgl;
+      let d = 30 - (0.85 - a).toFixed(2) * 100;
+      let e = d - (0.95 - b).toFixed(2) * 100;
+      let f = 30 - (0.95 - b).toFixed(2) * 100;
+      //未填数据
+      if (a == 0) {
+        return "";
+      } else {
+        //一轮扣完30分
+        if (a < 0.55) {
+          return 0;
         } else {
-          return ''
-        }
-      },
-      c_zss:function () {
-        if(this.c_ylzxgs!=0&&this.c_tgs!=0&&this.c_btgs!=0){
-          return this.c_ylzxgs-this.c_tgs-this.c_btgs;
-        }
-        else{return ''}
-      },
-      c_tgl:function () {
-        if (this.c_tgs!=0&&this.c_ylzxgs!=0) {
-          return (this.c_tgs/this.c_ylzxgs).toFixed(2);
-        } else {
-          return ''
-        }
-      },
-      banbendefen:function () {
-        if (
-        this.ccdf!=0&&
-        this.jiaofuwudefen!=0) {
-          return this.ccdf+this.jiaofuwudefen
-        } else {
-          return '';
-        }
-      },
-      yanshoudefen:function () {
-        let a=this.a_tgl;
-        let b=this.b_tgl;
-        let c=this.c_tgl;
-        //只有一轮数据
-        if(a!=0&&b==0){
-            if(a<0.85)
-            {if(a>0.55){
-              return 30-(0.85-a).toFixed(2)*100;}
-              else{return 0}
+          //一轮不扣分
+          if (a > 0.85) {
+            //二轮不扣分
+            if (b == 0 || b > 0.95) {
+              //三轮通过或无数据
+              if (c == 0 || c == 1) {
+                return 30;
+              } else {
+                return 0;
               }
-            else{return 30}
-        }
-        
-        else{
-          //有两轮数据
-          if (c=0) {
-            let d=30-(0.85-a).toFixed(2)*100-(0.95-b).toFixed(2)*100;
-            if (d<0) {
-              return 0;
-            } else {
-              return d
             }
-          } else {
-            
+            //二轮扣分
+            else {
+              if (f > 0) {
+                //三轮通过或无数据
+                if (c == 0 || c == 1) {
+                  return f;
+                } else {
+                  return 0;
+                }
+              } else {
+                return 0;
+              }
+            }
           }
-          //有三轮数据
-          return 
+          //一轮扣分小于30
+          else {
+            //二轮不扣分
+            if (b == 0 || b > 0.95) {
+              //三轮通过或无数据
+              if (c == 0 || c == 1) {
+                return d;
+              } else {
+                return 0;
+              }
+            }
+            //二轮扣分
+            else {
+              if (e > 0) {
+                //三轮通过或无数据
+                if (c == 0 || c == 1) {
+                  return e;
+                } else {
+                  return 0;
+                }
+              } else {
+                return 0;
+              }
+            }
+          }
         }
-        
-      },
-
-  }
+      }
+    },
+  },
 };
 </script>
 
