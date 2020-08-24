@@ -1629,7 +1629,7 @@ export default {
       else{}
     },    
     submit(){
-      if(this.b_tgl==0){
+      if(this.b_ylzxgs==0){
         let data={
               "banbenguimo":this.banbenguimo,
               "groupName":this.groupName,
@@ -1695,26 +1695,26 @@ export default {
               "a_qxs":this.a_qxs,
               "a_tgl":this.a_tgl,
               "a_jieguo":this.a_jieguo,
-              "b_begin":this.b_begin,
-              "b_end":this.b_end,
-              "b_csr":this.b_csr,
-              "b_ylzxgs":this.b_ylzxgs,
-              "b_tgs":this.b_tgs,
-              "b_btgs":this.b_btgs,
-              "b_zss":this.b_zss,
-              "b_qxs":this.b_qxs,
-              "b_tgl":this.b_tgl,
-              "b_jieguo":this.b_jieguo,
-              "c_begin":this.c_begin,
-              "c_end":this.c_end,
-              "c_csr":this.c_csr,
-              "c_ylzxgs":this.c_ylzxgs,
-              "c_tgs":this.c_tgs,
-              "c_btgs":this.c_btgs,
-              "c_zss":this.c_zss,
-              "c_qxs":this.c_qxs,
-              "c_tgl":this.c_tgl,
-              "c_jieguo":this.c_jieguo,
+              "b_begin":-999,
+              "b_end":-999,
+              "b_csr":-999,
+              "b_ylzxgs":-999,
+              "b_tgs":-999,
+              "b_btgs":-999,
+              "b_zss":-999,
+              "b_qxs":-999,
+              "b_tgl":-999,
+              "b_jieguo":-999,
+              "c_begin":-999,
+              "c_end":-999,
+              "c_csr":-999,
+              "c_ylzxgs":-999,
+              "c_tgs":-999,
+              "c_btgs":-999,
+              "c_zss":-999,
+              "c_qxs":-999,
+              "c_tgl":-999,
+              "c_jieguo":-999,
               "yanshoudefen":this.yanshoudefen,
               "zongfen":this.banbendefen
           }
@@ -1731,7 +1731,8 @@ export default {
           alert("提交成功！")
       }
       else{
-            if (this.c_tgl==0) {
+        //提交第二轮数据
+            if (this.c_ylzxgs==0) {
               let data={
               "b_begin":this.b_begin,
               "b_end":this.b_end,
@@ -1756,7 +1757,8 @@ export default {
                 console.log("传输成功");
               } 
           });alert("提交成功！");  
-            } 
+            }
+            //提交第三轮数据 
             else {
               let data={
                 "c_begin":this.c_begin,
