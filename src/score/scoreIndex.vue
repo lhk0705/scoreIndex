@@ -74,6 +74,17 @@
                   @change="handleChange"
                   :min="1"
                 ></el-input-number>
+                <el-popover
+                  placement="right-start"
+                  width="200"
+                  trigger="hover"
+                  content="
+                      此版本的需求个数"
+                  >
+                <el-button slot="reference" size="mini">
+                  <i class="icon iconfont icon-wenhao"></i>
+                </el-button>
+              </el-popover>
               </div>
             </el-row>
           </el-col>
