@@ -2114,14 +2114,14 @@ export default {
     },
     cctgl: function () {
       let a=(this.tgs*100 / this.ccyls).toFixed(0);
-      if (this.tgs != 0 && this.ccyls != 0) {
+      if (this.tgs != '' && this.ccyls != '') {
         return a+'%';
       } else {
         return "";
       }
     },
     zss: function () {
-      if (this.tgs != 0 && (this.ccyls != 0) & (this.cc_btgs != 0)) {
+      if (this.tgs != '' && (this.ccyls != '') & (this.cc_btgs != '')) {
         return this.ccyls - this.tgs - this.cc_btgs;
       } else {
         return "";
@@ -2129,59 +2129,59 @@ export default {
     },
     ccbl: function () {
       let a=(this.ccyls*100 / this.ylzs).toFixed(0)
-      if (this.ylzs != 0 && this.ccyls != 0) {
+      if (this.ylzs != '' && this.ccyls != '') {
         return a+'%';
       } else {
         return "";
       }
     },
     a_zss: function () {
-      if (this.a_ylzxgs != 0 && this.a_tgs != 0 && this.a_btgs != 0) {
+      if (this.a_ylzxgs != '' && this.a_tgs != '' && this.a_btgs != '') {
         return this.a_ylzxgs - this.a_tgs - this.a_btgs;
       } else {
         return "";
       }
     },
     a_tgl: function () {
-      if (this.a_tgs != 0 && this.a_ylzxgs != 0) {
+      if (this.a_tgs != '' && this.a_ylzxgs != '') {
         return (this.a_tgs / this.a_ylzxgs).toFixed(2);
       } else {
         return "";
       }
     },
     b_zss: function () {
-      if (this.b_ylzxgs != 0 && this.b_tgs != 0 && this.b_btgs != 0) {
+      if (this.b_ylzxgs != '' && this.b_tgs != '' && this.b_btgs != '') {
         return this.b_ylzxgs - this.b_tgs - this.b_btgs;
       } else {
         return "";
       }
     },
     b_tgl: function () {
-      if (this.b_tgs != 0 && this.b_ylzxgs != 0) {
+      if (this.b_tgs != '' && this.b_ylzxgs != '') {
         return (this.b_tgs / this.b_ylzxgs).toFixed(2);
       } else {
         return "";
       }
     },
     c_zss: function () {
-      if (this.c_ylzxgs != 0 && this.c_tgs != 0 && this.c_btgs != 0) {
+      if (this.c_ylzxgs != '' && this.c_tgs != '' && this.c_btgs != '') {
         return this.c_ylzxgs - this.c_tgs - this.c_btgs;
       } else {
         return "";
       }
     },
     c_tgl: function () {
-      if (this.c_tgs != 0 && this.c_ylzxgs != 0) {
+      if (this.c_tgs != '' && this.c_ylzxgs != '') {
         return (this.c_tgs / this.c_ylzxgs).toFixed(2);
       } else {
         return "";
       }
     },
     banbendefen: function () {
-      if (this.ccdf != 0 && this.jiaofuwudefen != 0 && this.yanshoudefen != 0) {
+      if (this.ccdf != '' && this.jiaofuwudefen != '' && this.yanshoudefen != '') {
         return this.ccdf + this.jiaofuwudefen + this.yanshoudefen;
       } else {
-        if (this.ccdf != 0 && this.jiaofuwudefen != 0) {
+        if (this.ccdf != '' && this.jiaofuwudefen != '') {
           return this.ccdf + this.jiaofuwudefen;
         } else {
           return "";
