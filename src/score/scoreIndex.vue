@@ -1646,7 +1646,6 @@ export default {
         this.ticeshijian==''||
         this.xitongming==''||
         this.state_xq_tijiaoren==''||
-        this.xq_change==''||
         this.xq_time==''||
         this.xq_error==''||
         this.state_yl_tijiaoren==''||
