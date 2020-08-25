@@ -1640,6 +1640,7 @@ export default {
       else{}
     },    
     submit(){
+      //判空
       if(this.groupName==''||
         this.stateperson==''||
         this.ticeshijian==''||
@@ -1661,173 +1662,283 @@ export default {
         this.tgs==''||
         this.cc_btgs==''||
         this.ccyls==''
-      ){
+        ){
         this.$message({
           message: '请填写必填项',
           type: 'warning'
         });
-      }
+        }
       else{
-      if(this.b_ylzxgs==0){
-        let data={
-              "banbenguimo":this.banbenguimo,
-              "groupName":this.groupName,
-              "person":this.stateperson,
-              "ticeshijian":this.ticeshijian,
-              "xitongming":this.xitongming,
-              "type":this.type,
-              "plan":this.plan,
-              "banbenhao":$(".banbenhao").text(),
-              "jiaofuwudefen":this.jiaofuwudefen,
-              "xq_tijiao":this.xq_tijiao,
-              "xq_geshi":this.xq_geshi,
-              "xq_tijiaoren":this.state_xq_tijiaoren,
-              "xq_time":this.xq_time,
-              "xq_yanchi":this.xq_yanchi,
-              "xq_laiyuan":this.xq_laiyuan,
-              "xq_change":this.xq_change,
-              "xq_error":this.xq_error,
-              "xuqiudefen":this.xuqiudefen,
-              "yl_tijiao":this.yl_tijiao,
-              "yl_geshi":this.yl_geshi,
-              "yl_tijiaoren":this.state_yl_tijiaoren,
-              "yl_time":this.yl_time,
-              "yl_yanchi":this.yl_yanchi,
-              "yl_error":this.yl_error,
-              "yl_qz":this.yl_qz,
-              "yl_bt":this.yl_bt,
-              "yl_zxr":this.yl_zxr,
-              "yl_yq":this.yl_yq,
-              "yl_bz":this.yl_bz,
-              "yl_jg":this.yl_jg,
-              "csyldf":this.csyldf,
-              "bg_tijiao":this.bg_tijiao,
-              "bg_geshi":this.bg_geshi,
-              "bg_tijiaoren":this.state_bg_tijiaoren,
-              "bg_time":this.bg_time,
-              "bg_yanchi":this.bg_yanchi,
-              "bg_error":this.bg_error,
-              "bg_qk":this.bg_qk,
-              "bg_hj":this.bg_hj,
-              "bg_fw":this.bg_fw,
-              "bg_qx":this.bg_qx,
-              "bg_jl":this.bg_jl,
-              "csbgdf":this.csbgdf,
-              "cc_begin":this.cc_begin,
-              "cc_end":this.cc_end,
-              "cc_r":this.state_cc_r,
-              "ylzs":this.ylzs,
-              "ccyls":this.ccyls,
-              "tgs":this.tgs,
-              "btgs":this.cc_btgs,
-              "zss":this.zss,
-              "cctgl":this.cctgl,
-              "ccbl":this.ccbl,
-              "ccdf":this.ccdf,
-              "a_begin":this.a_begin,
-              "a_end":this.a_end,
-              "a_csr":this.a_csr,
-              "a_ylzxgs":this.a_ylzxgs,
-              "a_tgs":this.a_tgs,
-              "a_btgs":this.a_btgs,
-              "a_zss":this.a_zss,
-              "a_qxs":this.a_qxs,
-              "a_tgl":this.a_tgl,
-              "a_jieguo":this.a_jieguo,
-              "b_begin":-999,
-              "b_end":-999,
-              "b_csr":-999,
-              "b_ylzxgs":-999,
-              "b_tgs":-999,
-              "b_btgs":-999,
-              "b_zss":-999,
-              "b_qxs":-999,
-              "b_tgl":-999,
-              "b_jieguo":-999,
-              "c_begin":-999,
-              "c_end":-999,
-              "c_csr":-999,
-              "c_ylzxgs":-999,
-              "c_tgs":-999,
-              "c_btgs":-999,
-              "c_zss":-999,
-              "c_qxs":-999,
-              "c_tgl":-999,
-              "c_jieguo":-999,
-              "yanshoudefen":this.yanshoudefen,
-              "zongfen":this.banbendefen
-          }
-            $.ajax({
-            type:"post",
-            url:"/addSorce",
-            data:JSON.stringify(data),
-            contentType:"application/json",
-            dataType:"json",
-            success: function(data){
-            console.log("传输成功");
-                    }   
-                });
-          alert("提交成功！")
-      }
-      else{
-        //提交第二轮数据
-            if (this.c_ylzxgs==0) {
-              let data={
-              "b_begin":this.b_begin,
-              "b_end":this.b_end,
-              "b_csr":this.b_csr,
-              "b_ylzxgs":this.b_ylzxgs,
-              "b_tgs":this.b_tgs,
-              "b_btgs":this.b_btgs,
-              "b_zss":this.b_zss,
-              "b_qxs":this.b_qxs,
-              "b_tgl":this.b_tgl,
-              "b_jieguo":this.b_jieguo,
-              "yanshoudefen":this.yanshoudefen,
-              "zongfen":this.banbendefen
-              }
-              $.ajax({
-                type:"post",
-                url:"/updateSorce",
-                data:JSON.stringify(data),
-                contentType:"application/json",
-                dataType:"json",
-                success: function(data){
-                console.log("传输成功");
-              } 
-          });alert("提交成功！");  
-            }
-            //提交第三轮数据 
-            else {
-              let data={
-                "c_begin":this.c_begin,
-                "c_end":this.c_end,
-                "c_csr":this.c_csr,
-                "c_ylzxgs":this.c_ylzxgs,
-                "c_tgs":this.c_tgs,
-                "c_btgs":this.c_btgs,
-                "c_zss":this.c_zss,
-                "c_qxs":this.c_qxs,
-                "c_tgl":this.c_tgl,
-                "c_jieguo":this.c_jieguo,
-                "yanshoudefen":this.yanshoudefen,
+          //紧急版本 
+          if(this.a_ylzxgs==0){       
+            let data={
+                "banbenguimo":this.banbenguimo,
+                "groupName":this.groupName,
+                "person":this.stateperson,
+                "ticeshijian":this.ticeshijian,
+                "xitongming":this.xitongming,
+                "type":this.type,
+                "plan":this.plan,
+                "banbenhao":$(".banbenhao").text(),
+                "jiaofuwudefen":this.jiaofuwudefen,
+                "xq_tijiao":this.xq_tijiao,
+                "xq_geshi":this.xq_geshi,
+                "xq_tijiaoren":this.state_xq_tijiaoren,
+                "xq_time":this.xq_time,
+                "xq_yanchi":this.xq_yanchi,
+                "xq_laiyuan":this.xq_laiyuan,
+                "xq_change":this.xq_change,
+                "xq_error":this.xq_error,
+                "xuqiudefen":this.xuqiudefen,
+                "yl_tijiao":this.yl_tijiao,
+                "yl_geshi":this.yl_geshi,
+                "yl_tijiaoren":this.state_yl_tijiaoren,
+                "yl_time":this.yl_time,
+                "yl_yanchi":this.yl_yanchi,
+                "yl_error":this.yl_error,
+                "yl_qz":this.yl_qz,
+                "yl_bt":this.yl_bt,
+                "yl_zxr":this.yl_zxr,
+                "yl_yq":this.yl_yq,
+                "yl_bz":this.yl_bz,
+                "yl_jg":this.yl_jg,
+                "csyldf":this.csyldf,
+                "bg_tijiao":this.bg_tijiao,
+                "bg_geshi":this.bg_geshi,
+                "bg_tijiaoren":this.state_bg_tijiaoren,
+                "bg_time":this.bg_time,
+                "bg_yanchi":this.bg_yanchi,
+                "bg_error":this.bg_error,
+                "bg_qk":this.bg_qk,
+                "bg_hj":this.bg_hj,
+                "bg_fw":this.bg_fw,
+                "bg_qx":this.bg_qx,
+                "bg_jl":this.bg_jl,
+                "csbgdf":this.csbgdf,
+                "cc_begin":this.cc_begin,
+                "cc_end":this.cc_end,
+                "cc_r":this.state_cc_r,
+                "ylzs":this.ylzs,
+                "ccyls":this.ccyls,
+                "tgs":this.tgs,
+                "btgs":this.cc_btgs,
+                "zss":this.zss,
+                "cctgl":this.cctgl,
+                "ccbl":this.ccbl,
+                "ccdf":this.ccdf,
+                "a_begin":-999,
+                "a_end":-999,
+                "a_csr":-999,
+                "a_ylzxgs":-999,
+                "a_tgs":-999,
+                "a_btgs":-999,
+                "a_zss":-999,
+                "a_qxs":-999,
+                "a_tgl":-999,
+                "a_jieguo":-999,
+                "b_begin":-999,
+                "b_end":-999,
+                "b_csr":-999,
+                "b_ylzxgs":-999,
+                "b_tgs":-999,
+                "b_btgs":-999,
+                "b_zss":-999,
+                "b_qxs":-999,
+                "b_tgl":-999,
+                "b_jieguo":-999,
+                "c_begin":-999,
+                "c_end":-999,
+                "c_csr":-999,
+                "c_ylzxgs":-999,
+                "c_tgs":-999,
+                "c_btgs":-999,
+                "c_zss":-999,
+                "c_qxs":-999,
+                "c_tgl":-999,
+                "c_jieguo":-999,
+                "yanshoudefen":-999,
                 "zongfen":this.banbendefen
-                  }
-              $.ajax({
+                }                   
+            $.ajax({
                 type:"post",
-                url:"/updateCSorce",
+                url:"/addSorce",
                 data:JSON.stringify(data),
                 contentType:"application/json",
                 dataType:"json",
                 success: function(data){
                 console.log("传输成功");
-                }   
-              });        
-            alert("提交成功！")
+                        }   
+                });
+                alert("提交成功！")
+          }               
+          else{
+            //先传第一轮数据
+            if(this.b_ylzxgs==0) {
+              let data={
+                  "banbenguimo":this.banbenguimo,
+                  "groupName":this.groupName,
+                  "person":this.stateperson,
+                  "ticeshijian":this.ticeshijian,
+                  "xitongming":this.xitongming,
+                  "type":this.type,
+                  "plan":this.plan,
+                  "banbenhao":$(".banbenhao").text(),
+                  "jiaofuwudefen":this.jiaofuwudefen,
+                  "xq_tijiao":this.xq_tijiao,
+                  "xq_geshi":this.xq_geshi,
+                  "xq_tijiaoren":this.state_xq_tijiaoren,
+                  "xq_time":this.xq_time,
+                  "xq_yanchi":this.xq_yanchi,
+                  "xq_laiyuan":this.xq_laiyuan,
+                  "xq_change":this.xq_change,
+                  "xq_error":this.xq_error,
+                  "xuqiudefen":this.xuqiudefen,
+                  "yl_tijiao":this.yl_tijiao,
+                  "yl_geshi":this.yl_geshi,
+                  "yl_tijiaoren":this.state_yl_tijiaoren,
+                  "yl_time":this.yl_time,
+                  "yl_yanchi":this.yl_yanchi,
+                  "yl_error":this.yl_error,
+                  "yl_qz":this.yl_qz,
+                  "yl_bt":this.yl_bt,
+                  "yl_zxr":this.yl_zxr,
+                  "yl_yq":this.yl_yq,
+                  "yl_bz":this.yl_bz,
+                  "yl_jg":this.yl_jg,
+                  "csyldf":this.csyldf,
+                  "bg_tijiao":this.bg_tijiao,
+                  "bg_geshi":this.bg_geshi,
+                  "bg_tijiaoren":this.state_bg_tijiaoren,
+                  "bg_time":this.bg_time,
+                  "bg_yanchi":this.bg_yanchi,
+                  "bg_error":this.bg_error,
+                  "bg_qk":this.bg_qk,
+                  "bg_hj":this.bg_hj,
+                  "bg_fw":this.bg_fw,
+                  "bg_qx":this.bg_qx,
+                  "bg_jl":this.bg_jl,
+                  "csbgdf":this.csbgdf,
+                  "cc_begin":this.cc_begin,
+                  "cc_end":this.cc_end,
+                  "cc_r":this.state_cc_r,
+                  "ylzs":this.ylzs,
+                  "ccyls":this.ccyls,
+                  "tgs":this.tgs,
+                  "btgs":this.cc_btgs,
+                  "zss":this.zss,
+                  "cctgl":this.cctgl,
+                  "ccbl":this.ccbl,
+                  "ccdf":this.ccdf,
+                  "a_begin":this.a_begin,
+                  "a_end":this.a_end,
+                  "a_csr":this.a_csr,
+                  "a_ylzxgs":this.a_ylzxgs,
+                  "a_tgs":this.a_tgs,
+                  "a_btgs":this.a_btgs,
+                  "a_zss":this.a_zss,
+                  "a_qxs":this.a_qxs,
+                  "a_tgl":this.a_tgl,
+                  "a_jieguo":this.a_jieguo,
+                  "b_begin":-999,
+                  "b_end":-999,
+                  "b_csr":-999,
+                  "b_ylzxgs":-999,
+                  "b_tgs":-999,
+                  "b_btgs":-999,
+                  "b_zss":-999,
+                  "b_qxs":-999,
+                  "b_tgl":-999,
+                  "b_jieguo":-999,
+                  "c_begin":-999,
+                  "c_end":-999,
+                  "c_csr":-999,
+                  "c_ylzxgs":-999,
+                  "c_tgs":-999,
+                  "c_btgs":-999,
+                  "c_zss":-999,
+                  "c_qxs":-999,
+                  "c_tgl":-999,
+                  "c_jieguo":-999,
+                  "yanshoudefen":this.yanshoudefen,
+                  "zongfen":this.banbendefen
+                }
+              $.ajax({
+                type:"post",
+                url:"/addSorce",
+                data:JSON.stringify(data),
+                contentType:"application/json",
+                dataType:"json",
+                success: function(data){
+                console.log("传输成功");
+                        }   
+                });
+                alert("提交成功！")
+          
+          
             }
+            else{
+            //二轮数据提交
+                if (this.c_ylzxgs==0) {
+                  let data={
+                    "b_begin":this.b_begin,
+                    "b_end":this.b_end,
+                    "b_csr":this.b_csr,
+                    "b_ylzxgs":this.b_ylzxgs,
+                    "b_tgs":this.b_tgs,
+                    "b_btgs":this.b_btgs,
+                    "b_zss":this.b_zss,
+                    "b_qxs":this.b_qxs,
+                    "b_tgl":this.b_tgl,
+                    "b_jieguo":this.b_jieguo,
+                    "yanshoudefen":this.yanshoudefen,
+                    "zongfen":this.banbendefen
+                    }
+                  $.ajax({
+                    type:"post",
+                    url:"/updateSorce",
+                    data:JSON.stringify(data),
+                    contentType:"application/json",
+                    dataType:"json",
+                    success: function(data){
+                    console.log("传输成功");
+                    } 
+                    });
+                    alert("提交成功！");  
+                
+                  
+                }
+                //三轮数据提交
+                else{
+                    let data={
+                      "c_begin":this.c_begin,
+                      "c_end":this.c_end,
+                      "c_csr":this.c_csr,
+                      "c_ylzxgs":this.c_ylzxgs,
+                      "c_tgs":this.c_tgs,
+                      "c_btgs":this.c_btgs,
+                      "c_zss":this.c_zss,
+                      "c_qxs":this.c_qxs,
+                      "c_tgl":this.c_tgl,
+                      "c_jieguo":this.c_jieguo,
+                      "yanshoudefen":this.yanshoudefen,
+                      "zongfen":this.banbendefen
+                        }
+                    $.ajax({
+                      type:"post",
+                      url:"/updateCSorce",
+                      data:JSON.stringify(data),
+                      contentType:"application/json",
+                      dataType:"json",
+                      success: function(data){
+                      console.log("传输成功");
+                      }   
+                      });        
+                  alert("提交成功！")
+                  }
+                 
+              }             
           }
-      }
-      },
+      }},
     cancel(){
           let a=confirm("确定取消？");
           if(a){
@@ -1989,9 +2100,10 @@ export default {
       if (this.cctgl == "") {
         return "";
       } else {
-        if (this.cctgl < 0.9) {
-          if (this.cctgl > 0.5) {
-            return 20 - (0.9 - this.cctgl).toFixed(2) * 50;
+        let a=(this.tgs / this.ccyls).toFixed(2);
+        if (a < 0.9) {
+          if (a > 0.5) {
+            return 20 - (0.9 - a).toFixed(2) * 50;
           } else {
             return 0;
           }
@@ -2001,8 +2113,9 @@ export default {
       }
     },
     cctgl: function () {
+      let a=(this.tgs*100 / this.ccyls).toFixed(0);
       if (this.tgs != 0 && this.ccyls != 0) {
-        return (this.tgs / this.ccyls).toFixed(2);
+        return a+'%';
       } else {
         return "";
       }
@@ -2015,8 +2128,9 @@ export default {
       }
     },
     ccbl: function () {
+      let a=(this.ccyls*100 / this.ylzs).toFixed(0)
       if (this.ylzs != 0 && this.ccyls != 0) {
-        return (this.ccyls / this.ylzs).toFixed(2);
+        return a+'%';
       } else {
         return "";
       }
@@ -2077,7 +2191,7 @@ export default {
     yanshoudefen: function () {
       let a = this.a_tgl;
       let b = this.b_tgl;
-      let c = this.c_tgl;
+      let c = this.c_tgl;      
       let d = 30 - (0.85 - a).toFixed(2) * 100;
       let e = d - (0.95 - b).toFixed(2) * 100;
       let f = 30 - (0.95 - b).toFixed(2) * 100;
