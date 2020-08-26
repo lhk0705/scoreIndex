@@ -1,7 +1,7 @@
 <template>
   <div class="scoreIndex">
     <div class="head">
-      <label class="banbenhao" @change="bbh_change">{{ticeshijian}}{{state}}</label>版本信息
+      <label class="banbenhao" @change="bbh_change">{{ticeshijian}}{{xitongming}}</label>版本信息
     </div>
 
     <div class="bbdf">
@@ -2120,7 +2120,7 @@ export default {
       }
     },
     zss: function () {
-      if (this.tgs != '' && (this.ccyls != '') & (this.cc_btgs != '')) {
+      if (this.tgs !== '' && (this.ccyls !== '') & (this.cc_btgs !== '')) {
         return this.ccyls - this.tgs - this.cc_btgs;
       } else {
         return "";
@@ -2128,59 +2128,59 @@ export default {
     },
     ccbl: function () {
       let a=(this.ccyls*100 / this.ylzs).toFixed(0)
-      if (this.ylzs != '' && this.ccyls != '') {
+      if (this.ylzs !== '' && this.ccyls !== '') {
         return a+'%';
       } else {
         return "";
       }
     },
     a_zss: function () {
-      if (this.a_ylzxgs != '' && this.a_tgs != '' && this.a_btgs != '') {
+      if (this.a_ylzxgs !== '' && this.a_tgs !== '' && this.a_btgs !== '') {
         return this.a_ylzxgs - this.a_tgs - this.a_btgs;
       } else {
         return "";
       }
     },
     a_tgl: function () {
-      if (this.a_tgs != '' && this.a_ylzxgs != '') {
+      if (this.a_tgs !== '' && this.a_ylzxgs !== '') {
         return (this.a_tgs / this.a_ylzxgs).toFixed(2);
       } else {
         return "";
       }
     },
     b_zss: function () {
-      if (this.b_ylzxgs != '' && this.b_tgs != '' && this.b_btgs != '') {
+      if (this.b_ylzxgs !== '' && this.b_tgs !== '' && this.b_btgs !== '') {
         return this.b_ylzxgs - this.b_tgs - this.b_btgs;
       } else {
         return "";
       }
     },
     b_tgl: function () {
-      if (this.b_tgs != '' && this.b_ylzxgs != '') {
+      if (this.b_tgs !== '' && this.b_ylzxgs !== '') {
         return (this.b_tgs / this.b_ylzxgs).toFixed(2);
       } else {
         return "";
       }
     },
     c_zss: function () {
-      if (this.c_ylzxgs != '' && this.c_tgs != '' && this.c_btgs != '') {
+      if (this.c_ylzxgs !== '' && this.c_tgs !== '' && this.c_btgs !== '') {
         return this.c_ylzxgs - this.c_tgs - this.c_btgs;
       } else {
         return "";
       }
     },
     c_tgl: function () {
-      if (this.c_tgs != '' && this.c_ylzxgs != '') {
+      if (this.c_tgs !== '' && this.c_ylzxgs !== '') {
         return (this.c_tgs / this.c_ylzxgs).toFixed(2);
       } else {
         return "";
       }
     },
     banbendefen: function () {
-      if (this.ccdf != '' && this.jiaofuwudefen != '' && this.yanshoudefen != '') {
+      if (this.ccdf !== '' && this.jiaofuwudefen !== '' && this.yanshoudefen !== '') {
         return this.ccdf + this.jiaofuwudefen + this.yanshoudefen;
       } else {
-        if (this.ccdf != '' && this.jiaofuwudefen != '') {
+        if (this.ccdf !== '' && this.jiaofuwudefen !== '') {
           return this.ccdf + this.jiaofuwudefen;
         } else {
           return "";
@@ -2188,6 +2188,7 @@ export default {
       }
     },
     yanshoudefen: function () {
+      
       let a = this.a_tgl;
       let b = this.b_tgl;
       let c = this.c_tgl;      
