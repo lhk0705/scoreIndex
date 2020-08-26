@@ -1760,7 +1760,7 @@ export default {
                 }                   
             $.ajax({
                 type:"post",
-                url:"/addSorce",
+                url:"http://localhost:8088/addSorce",
                 data:JSON.stringify(data),
                 contentType:"application/json",
                 dataType:"json",
@@ -1863,7 +1863,7 @@ export default {
                 }
               $.ajax({
                 type:"post",
-                url:"/addSorce",
+                url:"http://localhost:8088/addSorce",
                 data:JSON.stringify(data),
                 contentType:"application/json",
                 dataType:"json",
@@ -1894,7 +1894,7 @@ export default {
                     }
                   $.ajax({
                     type:"post",
-                    url:"/updateSorce",
+                    url:"http://localhost:8088/updateSorce",
                     data:JSON.stringify(data),
                     contentType:"application/json",
                     dataType:"json",
@@ -1924,7 +1924,7 @@ export default {
                         }
                     $.ajax({
                       type:"post",
-                      url:"/updateCSorce",
+                      url:"http://localhost:8088/updateCSorce",
                       data:JSON.stringify(data),
                       contentType:"application/json",
                       dataType:"json",
