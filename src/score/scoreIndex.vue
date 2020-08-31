@@ -692,7 +692,7 @@
                 <label>
                   <span>*</span>抽测通过率：
                 </label>
-                <el-input size="mini" class="cctgl" v-model="cctgl" placeholder></el-input>
+                <el-input type="number" size="mini" class="cctgl" v-model.number="cctgl" placeholder></el-input>
               </div>
             </el-row>
           </el-col>
@@ -710,7 +710,7 @@
                 <label>
                   <span>*</span>用例总数：
                 </label>
-                <el-input size="mini" class="ylzs" v-model="ylzs" placeholder></el-input>
+                <el-input type="number" size="mini" class="ylzs" v-model="ylzs" placeholder></el-input>
               </div>
             </el-row>
             <el-row>
@@ -1720,7 +1720,7 @@ export default {
                 "ylzs":parseInt(this.ylzs),
                 "ccyls":parseInt(this.ccyls),
                 "tgs":parseInt(this.tgs),
-                "btgs":parseInt(this.btgs),
+                "btgs":parseInt(this.cc_btgs),
                 "zss":this.zss,
                 "cctgl":this.cctgl,
                 "ccbl":this.ccbl,
@@ -1820,10 +1820,10 @@ export default {
                   "cc_begin":this.cc_begin,
                   "cc_end":this.cc_end,
                   "cc_r":this.state_cc_r,
-                  "ylzs":this.ylzs,
-                  "ccyls":this.ccyls,
-                  "tgs":this.tgs,
-                  "btgs":this.cc_btgs,
+                  "ylzs":parseInt(this.ylzs),
+                  "ccyls":parseInt(this.ccyls),
+                  "tgs":parseInt(this.tgs),
+                  "btgs":parseInt(this.cc_btgs),
                   "zss":this.zss,
                   "cctgl":this.cctgl,
                   "ccbl":this.ccbl,
@@ -1831,11 +1831,11 @@ export default {
                   "a_begin":this.a_begin,
                   "a_end":this.a_end,
                   "a_csr":this.a_csr,
-                  "a_ylzxgs":this.a_ylzxgs,
-                  "a_tgs":this.a_tgs,
-                  "a_btgs":this.a_btgs,
+                  "a_ylzxgs":parseInt(this.a_ylzxgs),
+                  "a_tgs":parseInt(this.a_tgs),
+                  "a_btgs":parseInt(this.a_btgs),
                   "a_zss":this.a_zss,
-                  "a_qxs":this.a_qxs,
+                  "a_qxs":parseInt(this.a_qxs),
                   "a_tgl":this.a_tgl,
                   "a_jieguo":this.a_jieguo,
                   "b_begin":-999,
@@ -1882,11 +1882,11 @@ export default {
                     "b_begin":this.b_begin,
                     "b_end":this.b_end,
                     "b_csr":this.b_csr,
-                    "b_ylzxgs":this.b_ylzxgs,
-                    "b_tgs":this.b_tgs,
-                    "b_btgs":this.b_btgs,
+                    "b_ylzxgs":parseInt(this.b_ylzxgs),
+                    "b_tgs":parseInt(this.b_tgs),
+                    "b_btgs":parseInt(this.b_btgs),
                     "b_zss":this.b_zss,
-                    "b_qxs":this.b_qxs,
+                    "b_qxs":parseInt(this.b_qxs),
                     "b_tgl":this.b_tgl,
                     "b_jieguo":this.b_jieguo,
                     "yanshoudefen":this.yanshoudefen,
@@ -1912,11 +1912,11 @@ export default {
                       "c_begin":this.c_begin,
                       "c_end":this.c_end,
                       "c_csr":this.c_csr,
-                      "c_ylzxgs":this.c_ylzxgs,
-                      "c_tgs":this.c_tgs,
-                      "c_btgs":this.c_btgs,
+                      "c_ylzxgs":parseInt(this.c_ylzxgs),
+                      "c_tgs":parseInt(this.c_tgs),
+                      "c_btgs":parseInt(this.c_btgs),
                       "c_zss":this.c_zss,
-                      "c_qxs":this.c_qxs,
+                      "c_qxs":parseInt(this.c_qxs),
                       "c_tgl":this.c_tgl,
                       "c_jieguo":this.c_jieguo,
                       "yanshoudefen":this.yanshoudefen,
@@ -2112,11 +2112,10 @@ export default {
       }
     },
     cctgl: function () {
-      let a=(this.tgs*100 / this.ccyls).toFixed(0);
       if (this.tgs != '' && this.ccyls != '') {
-        return a+'%';
+        return +(this.tgs / this.ccyls).toFixed(2);
       } else {
-        return "";
+        return +"";
       }
     },
     zss: function () {
@@ -2127,9 +2126,9 @@ export default {
       }
     },
     ccbl: function () {
-      let a=(this.ccyls*100 / this.ylzs).toFixed(0)
+      
       if (this.ylzs !== '' && this.ccyls !== '') {
-        return a+'%';
+        return +(this.ccyls / this.ylzs).toFixed(2);
       } else {
         return "";
       }
@@ -2143,7 +2142,7 @@ export default {
     },
     a_tgl: function () {
       if (this.a_tgs !== '' && this.a_ylzxgs !== '') {
-        return (this.a_tgs / this.a_ylzxgs).toFixed(2);
+        return +(this.a_tgs / this.a_ylzxgs).toFixed(2);
       } else {
         return "";
       }
@@ -2157,7 +2156,7 @@ export default {
     },
     b_tgl: function () {
       if (this.b_tgs !== '' && this.b_ylzxgs !== '') {
-        return (this.b_tgs / this.b_ylzxgs).toFixed(2);
+        return +(this.b_tgs / this.b_ylzxgs).toFixed(2);
       } else {
         return "";
       }
@@ -2171,7 +2170,7 @@ export default {
     },
     c_tgl: function () {
       if (this.c_tgs !== '' && this.c_ylzxgs !== '') {
-        return (this.c_tgs / this.c_ylzxgs).toFixed(2);
+        return +(this.c_tgs / this.c_ylzxgs).toFixed(2);
       } else {
         return "";
       }
