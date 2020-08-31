@@ -1717,10 +1717,10 @@ export default {
                 "cc_begin":this.cc_begin,
                 "cc_end":this.cc_end,
                 "cc_r":this.state_cc_r,
-                "ylzs":this.ylzs,
-                "ccyls":this.ccyls,
-                "tgs":this.tgs,
-                "btgs":this.cc_btgs,
+                "ylzs":parseInt(this.ylzs),
+                "ccyls":parseInt(this.ccyls),
+                "tgs":parseInt(this.tgs),
+                "btgs":parseInt(this.btgs),
                 "zss":this.zss,
                 "cctgl":this.cctgl,
                 "ccbl":this.ccbl,
@@ -1760,7 +1760,7 @@ export default {
                 }                   
             $.ajax({
                 type:"post",
-                url:"http://localhost:8088/addSorce",
+                url:"http://192.168.128.247:8088/addSorce",
                 data:JSON.stringify(data),
                 contentType:"application/json",
                 dataType:"json",
@@ -1863,7 +1863,7 @@ export default {
                 }
               $.ajax({
                 type:"post",
-                url:"http://localhost:8088/addSorce",
+                url:"http://192.168.128.247:8088/addSorce",
                 data:JSON.stringify(data),
                 contentType:"application/json",
                 dataType:"json",
@@ -1894,7 +1894,7 @@ export default {
                     }
                   $.ajax({
                     type:"post",
-                    url:"http://localhost:8088/updateSorce",
+                    url:"http://192.168.128.247:8088/updateSorce",
                     data:JSON.stringify(data),
                     contentType:"application/json",
                     dataType:"json",
@@ -1924,7 +1924,7 @@ export default {
                         }
                     $.ajax({
                       type:"post",
-                      url:"http://localhost:8088/updateCSorce",
+                      url:"http://192.168.128.247:8088/updateCSorce",
                       data:JSON.stringify(data),
                       contentType:"application/json",
                       dataType:"json",
