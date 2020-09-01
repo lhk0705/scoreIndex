@@ -1,7 +1,7 @@
 <template>
   <div class="scoreIndex">
     <div class="head">
-      <label class="banbenhao" @change="bbh_change">{{ticeshijian}}{{xitongming}}</label>版本信息
+      <label class="banbenhao">{{ticeshijian}}{{xitongming}}</label>版本信息
     </div>
 
     <div class="bbdf">
@@ -19,7 +19,7 @@
           <strong>版本信息</strong>
         </el-header>
         <el-main class="bbxx2">
-          <el-col span="10">
+          <el-col :span=10>
             <el-row>
               <div class="zubie">
                 <label>
@@ -88,7 +88,7 @@
               </div>
             </el-row>
           </el-col>
-          <el-col span="10">
+          <el-col :span=10>
             <el-row>
               <div class="shijian">
                 <label for>
@@ -100,6 +100,7 @@
                   v-model="ticeshijian"
                   type="date"
                   placeholder="请选择日期"
+                  @change="bbh_change"
                 ></el-date-picker>
               </div>
             </el-row>
@@ -115,6 +116,7 @@
                   placeholder="可索引"
                   @select="handleSelect"
                   size="mini"
+                  @input="bbh_change"
                 ></el-autocomplete>
               </div>
             </el-row>
@@ -168,7 +170,7 @@
               </el-popover>
             </el-header>
             <el-main class="xq_main">
-              <el-col span="10">
+              <el-col :span=10>
                 <el-row>
                   <div class="xq11">
                     <label>
@@ -218,7 +220,7 @@
                   </div>
                 </el-row>
               </el-col>
-              <el-col span="10">
+              <el-col :span=10>
                 <el-row>
                   <div class="xq21">
                     <label for>
@@ -289,7 +291,7 @@
               </el-popover>
             </el-header>
             <el-main class="yl_main">
-              <el-col span="10">
+              <el-col :span=10>
                 <el-row>
                   <div class="yl11">
                     <label>
@@ -369,7 +371,7 @@
                   </div>
                 </el-row>
               </el-col>
-              <el-col span="10">
+              <el-col :span=10>
                 <el-row>
                   <div class="yl21">
                     <label for>
@@ -476,7 +478,7 @@
               </el-popover>
             </el-header>
             <el-main class="bg_main">
-              <el-col span="10">
+              <el-col :span=10>
                 <el-row>
                   <div class="bg11">
                     <label>
@@ -555,7 +557,7 @@
                   </div>
                 </el-row>
               </el-col>
-              <el-col span="10">
+              <el-col :span=10>
                 <el-row>
                   <div class="bg21">
                     <label for>
@@ -645,7 +647,7 @@
         </div>
         <br />
         <div class="cc_main">
-          <el-col span="10">
+          <el-col :span=10>
             <el-row>
               <div class="cc11">
                 <label for>
@@ -696,7 +698,7 @@
               </div>
             </el-row>
           </el-col>
-          <el-col span="10">
+          <el-col :span=10>
             <el-row>
               <div class="cc21">
                 <label for>
@@ -768,7 +770,7 @@
             <el-button size="mini" class="a_delete" round @click="adel">删除</el-button>
           </el-header>
           <el-main class="a_main">
-            <el-col span="10">
+            <el-col :span=10>
               <el-row>
                 <div class="a11">
                   <label for>
@@ -817,7 +819,7 @@
                 </div>
               </el-row>
             </el-col>
-            <el-col span="10">
+            <el-col :span=10>
               <el-row>
                 <div class="a21">
                   <label for>
@@ -871,7 +873,7 @@
             <el-button size="mini" class="b_delete" round @click="bdel">删除</el-button>
           </el-header>
           <el-main class="b_main">
-            <el-col span="10">
+            <el-col :span=10>
               <el-row>
                 <div class="a11">
                   <label for>
@@ -920,7 +922,7 @@
                 </div>
               </el-row>
             </el-col>
-            <el-col span="10">
+            <el-col :span=10>
               <el-row>
                 <div class="a21">
                   <label for>
@@ -974,7 +976,7 @@
             <el-button size="mini" class="c_delete" round @click="cdel">删除</el-button>
           </el-header>
           <el-main class="c_main">
-            <el-col span="10">
+            <el-col :span=10>
               <el-row>
                 <div class="a11">
                   <label for>
@@ -1023,7 +1025,7 @@
                 </div>
               </el-row>
             </el-col>
-            <el-col span="10">
+            <el-col :span=10>
               <el-row>
                 <div class="a21">
                   <label for>
@@ -1219,6 +1221,8 @@ export default {
   },
 
   methods: {
+    handleChange(){
+      },
     adel() {
       let a = confirm("确定删除？");
       if (a) {
@@ -1527,106 +1531,108 @@ export default {
       console.log(item);
     },
     bbh_change(){
+      let vm=this
       if(this.ticeshijian!=''&&this.xitongming!=''){
-        let bbh={"banbenhao":$(this).text()};
+        let bbh={"banbenhao":$(".banbenhao").text()};
         $.ajax({
         type:"post",
         url:"/selectSorce",
         data:JSON.stringify(bbh),
         contentType:"application/json",
         dataType:"json",
-        success: function(data){
-            this.type= data.type;
-            this.plan= data.plan;
-            this.groupName=data.groupname;
-            this.stateperson=data.person;
-            this.banbenguimo=data.banbenguimo;
-            this.jiaofuwudefen=data.jiaofuwudefen;
-            this.xq_tijiao=data.xqTijiao;
-            this.xq_geshi=data.xqGeshi;
-            this.state_xq_tijiaoren=data.xqTijiaoren;
-            this.xq_time=data.xqTime;
-            this.xq_yanchi=data.xqYanchi;
-            this.xq_laiyuan=data.xqLaiyuan;
-            this.xq_change=data.xqChange;
-            this.xuqiudefen=data.xuqiudefen;
-            this.xq_error=data.xqError;
-            this.yl_tijiao=data.ylTijiao;
-            this.yl_geshi=data.ylGeshi;
-            this.state_yl_tijiaoren=data.ylTijiaoren;
-            this.yl_time=data.ylTime;
-            this.yl_yanchi=data.ylYanchi;
-            this.yl_error=data.ylError;
-            this.yl_qz=data.ylQz;
-            this.yl_bt=data.ylBt;
-            this.yl_zxr=data.ylZxr;
-            this.yl_yq=data.ylYq;
-            this.yl_bz=data.ylBz;
-            this.yl_jg=data.ylJg;
-            this.csyldf=data.csyldf;
-            this.bg_tijiao=data.bgTijiao;
-            this.bg_geshi=data.bgGeshi;
-            this.state_bg_tijiaoren=data.bgTijiaoren;
-            this.bg_time=data.bgTime;
-            this.bg_yanchi=data.bgYanchi;
-            this.bg_error=data.bgError;
-            this.bg_qk=data.bgQk;
-            this.bg_hj=data.bgHj;
-            this.bg_fw=data.bgFw;
-            this.bg_qx=data.bgQx;
-            this.bg_jl=data.bgJl;
-            this.csbgdf=data.csbgdf;
-            this.cc_begin=data.ccBegin;
-            this.cc_end=data.ccEnd;
-            this.state_cc_r=data.ccR;
-            this.ylzs=data.ylzs;
-            this.ccyls=data.ccyls;
-            this.tgs=data.tgs;
-            this.cc_btgs=data.ccBtgs;
-            this.zss=data.zss;
-            this.cctgl=data.cctgl;
-            this.ccdf=data.ccdf;
-            this.ccbl=data.ccbl;
-            this.a_begin=data.abegin;
-            this.a_end=data.aend;
-            this.a_csr=data.acsr;
-            this.a_ylzxgs=data.aylzxgs;
-            this.a_tgs=data.atgs;
-            this.a_btgs=data.abtgs;
-            this.a_zss=data.azss;
-            this.a_qxs=data.aqxs;
-            this.a_tgl=data.atgl;
-            this.a_jieguo=data.ajieguo;
-            this.yanshoudefen=data.yanshoudefen;
-            this.banbendefen=data.zongfen;
+        success: (data)=>{
+          this.info=data;
+            vm.type=data.type;
+            vm.plan=data.plan;
+            vm.groupName=data.groupname;
+            vm.stateperson=data.person;
+            vm.banbenguimo=data.banbenguimo;
+            vm.jiaofuwudefen=data.jiaofuwudefen;
+            vm.xq_tijiao=data.xqTijiao;
+            vm.xq_geshi=data.xqGeshi;
+            vm.state_xq_tijiaoren=data.xqTijiaoren;
+            vm.xq_time=data.xqTime;
+            vm.xq_yanchi=data.xqYanchi;
+            vm.xq_laiyuan=data.xqLaiyuan;
+            vm.xq_change=data.xqChange;
+            vm.xuqiudefen=data.xuqiudefen;
+            vm.xq_error=data.xqError;
+            vm.yl_tijiao=data.ylTijiao;
+            vm.yl_geshi=data.ylGeshi;
+            vm.state_yl_tijiaoren=data.ylTijiaoren;
+            vm.yl_time=data.ylTime;
+            vm.yl_yanchi=data.ylYanchi;
+            vm.yl_error=data.ylError;
+            vm.yl_qz=data.ylQz;
+            vm.yl_bt=data.ylBt;
+            vm.yl_zxr=data.ylZxr;
+            vm.yl_yq=data.ylYq;
+            vm.yl_bz=data.ylBz;
+            vm.yl_jg=data.ylJg;
+            vm.csyldf=data.csyldf;
+            vm.bg_tijiao=data.bgTijiao;
+            vm.bg_geshi=data.bgGeshi;
+            vm.state_bg_tijiaoren=data.bgTijiaoren;
+            vm.bg_time=data.bgTime;
+            vm.bg_yanchi=data.bgYanchi;
+            vm.bg_error=data.bgError;
+            vm.bg_qk=data.bgQk;
+            vm.bg_hj=data.bgHj;
+            vm.bg_fw=data.bgFw;
+            vm.bg_qx=data.bgQx;
+            vm.bg_jl=data.bgJl;
+            vm.csbgdf=data.csbgdf;
+            vm.cc_begin=data.ccBegin;
+            vm.cc_end=data.ccEnd;
+            vm.state_cc_r=data.ccR;
+            vm.ylzs=data.ylzs;
+            vm.ccyls=data.ccyls;
+            vm.tgs=data.tgs;
+            vm.cc_btgs=data.ccBtgs;
+            vm.zss=data.zss;
+            vm.cctgl=data.cctgl;
+            vm.ccdf=data.ccdf;
+            vm.ccbl=data.ccbl;
+            vm.a_begin=data.abegin;
+            vm.a_end=data.aend;
+            vm.a_csr=data.acsr;
+            vm.a_ylzxgs=data.aylzxgs;
+            vm.a_tgs=data.atgs;
+            vm.a_btgs=data.abtgs;
+            vm.a_zss=data.azss;
+            vm.a_qxs=data.aqxs;
+            vm.a_tgl=data.atgl;
+            vm.a_jieguo=data.ajieguo;
+            vm.yanshoudefen=data.yanshoudefen;
+            vm.banbendefen=data.zongfen;
             
             // if(b_tongguolv==-999){
             if(data.btgl!=-999){
-                this.b_begin=data.bbegin;
-                this.b_end=data.bend;
-                this.b_csr=data.bcsr;
-                this.b_ylzxgs=data.bylzxgs;
-                this.b_tgs=data.btgs;
-                this.b_btgs=data.bbtgs;
-                this.b_zss=data.bzss;
-                this.b_qxs=data.bqxs;
-                this.b_tgl=data.btgl;
-                this.b_jieguo=data.bjieguo;                
-                this.yanshoudefen=data.yanshoudefen;
-                this.banbendefen=data.zongfen;
+                vm.b_begin=data.bbegin;
+                vm.b_end=data.bend;
+                vm.b_csr=data.bcsr;
+                vm.b_ylzxgs=data.bylzxgs;
+                vm.b_tgs=data.btgs;
+                vm.b_btgs=data.bbtgs;
+                vm.b_zss=data.bzss;
+                vm.b_qxs=data.bqxs;
+                vm.b_tgl=data.btgl;
+                vm.b_jieguo=data.bjieguo;                
+                vm.yanshoudefen=data.yanshoudefen;
+                vm.banbendefen=data.zongfen;
                 if(data.ctgl!=-999){
-                    this.c_begin=data.cbegin;
-                    this.c_end=data.cend;
-                    this.c_csr=data.ccsr;
-                    this.c_ylzxgs=data.cylzxgs;
-                    this.c_tgs=data.ctgs;
-                    this.c_btgs=data.cbtgs;
-                    this.c_zss=data.czss;
-                    this.c_qxs=data.cqxs;
-                    this.c_tgl=data.ctgl;
-                    this.c_jieguo=data.cjieguo;
-                    this.yanshoudefen=data.yanshoudefen;
-                    this.banbendefen=data.zongfen;
+                    vm.c_begin=data.cbegin;
+                    vm.c_end=data.cend;
+                    vm.c_csr=data.ccsr;
+                    vm.c_ylzxgs=data.cylzxgs;
+                    vm.c_tgs=data.ctgs;
+                    vm.c_btgs=data.cbtgs;
+                    vm.c_zss=data.czss;
+                    vm.c_qxs=data.cqxs;
+                    vm.c_tgl=data.ctgl;
+                    vm.c_jieguo=data.cjieguo;
+                    vm.yanshoudefen=data.yanshoudefen;
+                    vm.banbendefen=data.zongfen;
                     
                 }
             }
@@ -1641,7 +1647,8 @@ export default {
     },    
     submit(){
       //判空
-      if(this.groupName==''||
+      if(
+        this.groupName==''||
         this.stateperson==''||
         this.ticeshijian==''||
         this.xitongming==''||
