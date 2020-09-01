@@ -1830,7 +1830,7 @@ export default {
                   "ccdf":this.ccdf,
                   "a_begin":this.a_begin,
                   "a_end":this.a_end,
-                  "a_csr":this.a_csr,
+                  "a_csr":this.state_a_csr,
                   "a_ylzxgs":parseInt(this.a_ylzxgs),
                   "a_tgs":parseInt(this.a_tgs),
                   "a_btgs":parseInt(this.a_btgs),
@@ -1881,7 +1881,7 @@ export default {
                   let data={
                     "b_begin":this.b_begin,
                     "b_end":this.b_end,
-                    "b_csr":this.b_csr,
+                    "b_csr":this.state_b_csr,
                     "b_ylzxgs":parseInt(this.b_ylzxgs),
                     "b_tgs":parseInt(this.b_tgs),
                     "b_btgs":parseInt(this.b_btgs),
@@ -1911,7 +1911,7 @@ export default {
                     let data={
                       "c_begin":this.c_begin,
                       "c_end":this.c_end,
-                      "c_csr":this.c_csr,
+                      "c_csr":this.state_c_csr,
                       "c_ylzxgs":parseInt(this.c_ylzxgs),
                       "c_tgs":parseInt(this.c_tgs),
                       "c_btgs":parseInt(this.c_btgs),
