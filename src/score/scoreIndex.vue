@@ -1533,7 +1533,7 @@ export default {
     bbh_change(){
       let vm=this
       if(this.ticeshijian!=''&&this.xitongming!=''){
-        let bbh={"banbenhao":$(".banbenhao").text()};
+        let bbh={"banbenhao":this.ticeshijian+this.xitongming};
         $.ajax({
         type:"post",
         url:"/selectSorce",
@@ -1541,7 +1541,7 @@ export default {
         contentType:"application/json",
         dataType:"json",
         success: (data)=>{
-          this.info=data;
+          
             vm.type=data.type;
             vm.plan=data.plan;
             vm.groupName=data.groupname;
@@ -2063,7 +2063,8 @@ export default {
   },
 
   computed: {
-    csyldf: function () {
+    csyldf:{
+      get(){
       let a =
         25 -
         this.yl_bt -
@@ -2077,8 +2078,11 @@ export default {
       } else {
         return 0;
       }
+      },
+      set(){}
     },
-    csbgdf: function () {
+    csbgdf: {
+      get(){
       let a =
         20 - this.bg_qx - this.bg_hj - this.bg_fw - this.bg_qk - this.bg_jl;
       if (a > 0) {
@@ -2086,8 +2090,11 @@ export default {
       } else {
         return 0;
       }
+      },
+      set(){}
     },
-    xuqiudefen: function () {
+    xuqiudefen: {
+      get(){
       let a =
         5 -
         (this.xq_tijiao == "是" ? 0 : 5) -
@@ -2097,12 +2104,16 @@ export default {
         return a;
       } else {
         return 0;
-      }
+      }},
+      set(){}
     },
-    jiaofuwudefen: function () {
-      return this.csyldf + this.csbgdf + this.xuqiudefen;
+    jiaofuwudefen: {
+      get(){
+      return this.csyldf + this.csbgdf + this.xuqiudefen;},
+      set(){}
     },
-    ccdf: function () {
+    ccdf:  {
+      get(){
       if (this.cctgl == "") {
         return "";
       } else {
@@ -2117,73 +2128,97 @@ export default {
           return 20;
         }
       }
+      },
+      set(){}
     },
-    cctgl: function () {
+    cctgl: {
+      get(){
       if (this.tgs != '' && this.ccyls != '') {
         return +(this.tgs / this.ccyls).toFixed(2);
       } else {
         return +"";
       }
+      },
+      set(){}
     },
-    zss: function () {
+    zss: {
+      get(){
       if (this.tgs !== '' && (this.ccyls !== '') & (this.cc_btgs !== '')) {
         return this.ccyls - this.tgs - this.cc_btgs;
       } else {
         return "";
       }
+      },
+      set(){}
     },
-    ccbl: function () {
-      
-      if (this.ylzs !== '' && this.ccyls !== '') {
+    ccbl:{
+      get(){if (this.ylzs !== '' && this.ccyls !== '') {
         return +(this.ccyls / this.ylzs).toFixed(2);
       } else {
         return "";
       }
-    },
-    a_zss: function () {
-      if (this.a_ylzxgs !== '' && this.a_tgs !== '' && this.a_btgs !== '') {
+      },
+      set(){}
+    }, 
+    a_zss: {
+      get(){
+        if (this.a_ylzxgs !== '' && this.a_tgs !== '' && this.a_btgs !== '') {
         return this.a_ylzxgs - this.a_tgs - this.a_btgs;
       } else {
         return "";
       }
+     },
+      set(){}
     },
-    a_tgl: function () {
-      if (this.a_tgs !== '' && this.a_ylzxgs !== '') {
+    a_tgl: {
+      get(){
+         if (this.a_tgs !== '' && this.a_ylzxgs !== '') {
         return +(this.a_tgs / this.a_ylzxgs).toFixed(2);
       } else {
         return "";
-      }
+      }},
+      set(){}
     },
-    b_zss: function () {
-      if (this.b_ylzxgs !== '' && this.b_tgs !== '' && this.b_btgs !== '') {
+    b_zss:{
+      get(){
+        if (this.b_ylzxgs !== '' && this.b_tgs !== '' && this.b_btgs !== '') {
         return this.b_ylzxgs - this.b_tgs - this.b_btgs;
       } else {
         return "";
-      }
-    },
-    b_tgl: function () {
-      if (this.b_tgs !== '' && this.b_ylzxgs !== '') {
+      }},
+      set(){}
+    }, 
+    b_tgl: {
+      get(){
+        if (this.b_tgs !== '' && this.b_ylzxgs !== '') {
         return +(this.b_tgs / this.b_ylzxgs).toFixed(2);
       } else {
         return "";
       }
+      },
+      set(){}
     },
-    c_zss: function () {
-      if (this.c_ylzxgs !== '' && this.c_tgs !== '' && this.c_btgs !== '') {
+    c_zss: {
+      get(){
+        if (this.c_ylzxgs !== '' && this.c_tgs !== '' && this.c_btgs !== '') {
         return this.c_ylzxgs - this.c_tgs - this.c_btgs;
       } else {
         return "";
-      }
+      }},
+      set(){}
     },
-    c_tgl: function () {
-      if (this.c_tgs !== '' && this.c_ylzxgs !== '') {
+    c_tgl: {
+      get(){
+        if (this.c_tgs !== '' && this.c_ylzxgs !== '') {
         return +(this.c_tgs / this.c_ylzxgs).toFixed(2);
       } else {
         return "";
-      }
+      }},
+      set(){}
     },
-    banbendefen: function () {
-      if (this.ccdf !== '' && this.jiaofuwudefen !== '' && this.yanshoudefen !== '') {
+    banbendefen: {
+      get(){
+        if (this.ccdf !== '' && this.jiaofuwudefen !== '' && this.yanshoudefen !== '') {
         return this.ccdf + this.jiaofuwudefen + this.yanshoudefen;
       } else {
         if (this.ccdf !== '' && this.jiaofuwudefen !== '') {
@@ -2191,10 +2226,11 @@ export default {
         } else {
           return "";
         }
-      }
+      }},
+      set(){}
     },
-    yanshoudefen: function () {
-      
+    yanshoudefen: {
+      get(){
       let a = this.a_tgl;
       let b = this.b_tgl;
       let c = this.c_tgl;      
@@ -2260,7 +2296,8 @@ export default {
             }
           }
         }
-      }
+      }},
+      set(){}
     },
   },
 };
