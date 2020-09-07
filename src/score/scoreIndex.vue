@@ -112,13 +112,13 @@
                 <label for>
                   <span>*</span>系统名称：
                 </label>                
-                <el-select v-model="xitongming" filterable placeholder="请选择" size="mini" ::disabled="fstDis">
+                <el-select v-model="xitongming" filterable placeholder="请选择" size="mini" :disabled="fstDis" @change="bbh_change">
                   <el-option
                     v-for="item in sysoptions"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value"                    
-                    @change="bbh_change">
+                    >
                   </el-option>
                 </el-select>
               </div>
@@ -1144,6 +1144,7 @@ export default {
       
       ],
       value:'',
+      xitongming:'',
       visible: false,
       b_show: false,
       c_show: false,
@@ -1182,7 +1183,6 @@ export default {
       //系统名和负责人输入框
       restaurants: [],
       person: [],
-      xitongming: "",
       timeout: null,
       stateperson: "",
       timeoutperson: null,
