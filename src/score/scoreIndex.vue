@@ -1595,7 +1595,7 @@ export default {
             vm.ccbl=data.ccbl;
             vm.a_begin=data.abegin;
             vm.a_end=data.aend;
-            vm.a_csr=data.acsr;
+            vm.state_a_csr=data.acsr;
             vm.a_ylzxgs=data.aylzxgs;
             vm.a_tgs=data.atgs;
             vm.a_btgs=data.abtgs;
@@ -1610,7 +1610,7 @@ export default {
             if(data.btgl!=-999){
                 vm.b_begin=data.bbegin;
                 vm.b_end=data.bend;
-                vm.b_csr=data.bcsr;
+                vm.state_b_csr=data.bcsr;
                 vm.b_ylzxgs=data.bylzxgs;
                 vm.b_tgs=data.btgs;
                 vm.b_btgs=data.bbtgs;
@@ -1623,7 +1623,7 @@ export default {
                 if(data.ctgl!=-999){
                     vm.c_begin=data.cbegin;
                     vm.c_end=data.cend;
-                    vm.c_csr=data.ccsr;
+                    vm.state_c_csr=data.ccsr;
                     vm.c_ylzxgs=data.cylzxgs;
                     vm.c_tgs=data.ctgs;
                     vm.c_btgs=data.cbtgs;
@@ -1886,6 +1886,7 @@ export default {
             //二轮数据提交
                 if (this.c_ylzxgs==0) {
                   let data={
+                    "banbenhao":$(".banbenhao").text(),
                     "b_begin":this.b_begin,
                     "b_end":this.b_end,
                     "b_csr":this.state_b_csr,
@@ -1916,6 +1917,7 @@ export default {
                 //三轮数据提交
                 else{
                     let data={
+                      "banbenhao":$(".banbenhao").text(),
                       "c_begin":this.c_begin,
                       "c_end":this.c_end,
                       "c_csr":this.state_c_csr,
