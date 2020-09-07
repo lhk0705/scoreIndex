@@ -7,7 +7,7 @@
     <div class="bbdf">
       <strong>
         版本总得分:
-        <input type="text" v-model="banbendefen" />
+        <input type="text" v-model="banbendefen" :disabled="scoreDis"/>
         分
       </strong>
     </div>
@@ -25,7 +25,7 @@
                 <label>
                   <span>*</span>组别：
                 </label>
-                <el-select v-model="groupName" placeholder="请选择" size="mini">
+                <el-select v-model="groupName" placeholder="请选择" size="mini" :disabled="fstDis">
                   <el-option
                     class="groupName"
                     v-for="item in options"
@@ -49,6 +49,7 @@
                   placeholder="可索引"
                   @select="handleSelectperson"
                   size="mini"
+                  :disabled="fstDis"
                 ></el-autocomplete>
               </div>
             </el-row>
@@ -57,8 +58,8 @@
                 <label for>
                   <span>*</span>版本类型：
                 </label>
-                <el-radio v-model="type" label="常规版本">常规版本</el-radio>
-                <el-radio v-model="type" label="紧急版本">紧急版本</el-radio>
+                <el-radio v-model="type" label="常规版本" :disabled="fstDis">常规版本</el-radio>
+                <el-radio v-model="type" label="紧急版本" :disabled="fstDis">紧急版本</el-radio>
               </div>
             </el-row>
             <el-row>
@@ -73,6 +74,7 @@
                   controls-position="right"
                   @change="handleChange"
                   :min="1"
+                  :disabled="fstDis"
                 ></el-input-number>
                 <el-popover
                   placement="right-start"
@@ -101,6 +103,7 @@
                   type="date"
                   placeholder="请选择日期"
                   @change="bbh_change"
+                  :disabled="fstDis"
                 ></el-date-picker>
               </div>
             </el-row>
@@ -108,16 +111,16 @@
               <div class="mingcheng">
                 <label for>
                   <span>*</span>系统名称：
-                </label>
-                <el-autocomplete
-                  class="xitongming"
-                  v-model="xitongming"
-                  :fetch-suggestions="querySearchAsync"
-                  placeholder="可索引"
-                  @select="handleSelect"
-                  size="mini"
-                  @input="bbh_change"
-                ></el-autocomplete>
+                </label>                
+                <el-select v-model="xitongming" filterable placeholder="请选择" size="mini" ::disabled="fstDis">
+                  <el-option
+                    v-for="item in sysoptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"                    
+                    @change="bbh_change">
+                  </el-option>
+                </el-select>
               </div>
             </el-row>
             <el-row>
@@ -125,8 +128,8 @@
                 <label for>
                   <span>*</span>是否计划内：
                 </label>
-                <el-radio v-model="plan" label="是">是</el-radio>
-                <el-radio v-model="plan" label="否">否</el-radio>
+                <el-radio v-model="plan" label="是" :disabled="fstDis">是</el-radio>
+                <el-radio v-model="plan" label="否" :disabled="fstDis">否</el-radio>
               </div>
             </el-row>
           </el-col>
@@ -142,7 +145,7 @@
         <div class="jfw_fst">
           <strong>
             交付物得分：
-            <input type="text" class="jiaofuwudefen" v-model="jiaofuwudefen" />分
+            <input type="text" class="jiaofuwudefen" v-model="jiaofuwudefen" :disabled="scoreDis"/>分
           </strong>
         </div>
         <br />
@@ -152,7 +155,7 @@
             <el-header class="xq_head" height="40px">
               <strong>
                 需求文档：
-                <input type="text" class="xuqiudefen" v-model="xuqiudefen" />分
+                <input type="text" class="xuqiudefen" v-model="xuqiudefen" :disabled="scoreDis"/>分
               </strong>
               <el-popover
                 placement="right-start"
@@ -176,8 +179,8 @@
                     <label>
                       <span>*</span>是否提交：
                     </label>
-                    <el-radio v-model="xq_tijiao" label="是">是</el-radio>
-                    <el-radio v-model="xq_tijiao" label="否">否</el-radio>
+                    <el-radio v-model="xq_tijiao" label="是" :disabled="fstDis">是</el-radio>
+                    <el-radio v-model="xq_tijiao" label="否" :disabled="fstDis">否</el-radio>
                   </div>
                 </el-row>
                 <el-row>
@@ -192,6 +195,7 @@
                       placeholder="可索引"
                       @select="handleSelectxqtjr"
                       size="mini"
+                      :disabled="fstDis"
                     ></el-autocomplete>
                   </div>
                 </el-row>
@@ -200,8 +204,8 @@
                     <label for>
                       <span>*</span>是否延迟：
                     </label>
-                    <el-radio v-model="xq_yanchi" label="是">是</el-radio>
-                    <el-radio v-model="xq_yanchi" label="否">否</el-radio>
+                    <el-radio v-model="xq_yanchi" label="是" :disabled="fstDis">是</el-radio>
+                    <el-radio v-model="xq_yanchi" label="否" :disabled="fstDis">否</el-radio>
                   </div>
                 </el-row>
                 <el-row>
@@ -216,6 +220,7 @@
                       controls-position="right"
                       @change="handleChange"
                       :min="0"
+                      :disabled="fstDis"
                     ></el-input-number>
                   </div>
                 </el-row>
@@ -226,9 +231,9 @@
                     <label for>
                       <span>*</span>文档格式：
                     </label>
-                    <el-radio v-model="xq_geshi" label="word">word</el-radio>
-                    <el-radio v-model="xq_geshi" label="excel">excel</el-radio>
-                    <el-radio v-model="xq_geshi" label="其他">其他</el-radio>
+                    <el-radio v-model="xq_geshi" label="word" :disabled="fstDis">word</el-radio>
+                    <el-radio v-model="xq_geshi" label="excel" :disabled="fstDis">excel</el-radio>
+                    <el-radio v-model="xq_geshi" label="其他" :disabled="fstDis">其他</el-radio>
                   </div>
                 </el-row>
                 <el-row>
@@ -236,7 +241,7 @@
                     <label for>
                       <span>*</span>提交时间：
                     </label>
-                    <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="xq_time" type="date" placeholder="请选择日期"></el-date-picker>
+                    <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="xq_time" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
                   </div>
                 </el-row>
                 <el-row>
@@ -244,8 +249,8 @@
                     <label for>
                       <span>*</span>需求来源是否明确：
                     </label>
-                    <el-radio v-model="xq_laiyuan" label="是">是</el-radio>
-                    <el-radio v-model="xq_laiyuan" label="否">否</el-radio>
+                    <el-radio v-model="xq_laiyuan" label="是" :disabled="fstDis">是</el-radio>
+                    <el-radio v-model="xq_laiyuan" label="否" :disabled="fstDis">否</el-radio>
                   </div>
                 </el-row>
                 <el-row>
@@ -259,6 +264,7 @@
                       class="xq_error"
                       v-model="xq_error"
                       clearable
+                      :disabled="fstDis"
                     ></el-input>
                   </div>
                 </el-row>
@@ -273,7 +279,7 @@
             <el-header class="yl_head" height="40px">
               <strong>
                 测试用例：
-                <input type="text" class="csyldf" v-model="csyldf" />分
+                <input type="text" class="csyldf" v-model="csyldf" :disabled="scoreDis"/>分
               </strong>
               <el-popover
                 placement="right-start"
@@ -297,8 +303,8 @@
                     <label>
                       <span>*</span>是否提交：
                     </label>
-                    <el-radio v-model="yl_tijiao" label="是">是</el-radio>
-                    <el-radio v-model="yl_tijiao" label="否">否</el-radio>
+                    <el-radio v-model="yl_tijiao" label="是" :disabled="fstDis">是</el-radio>
+                    <el-radio v-model="yl_tijiao" label="否" :disabled="fstDis">否</el-radio>
                   </div>
                 </el-row>
                 <el-row>
@@ -313,6 +319,7 @@
                       placeholder="可索引"
                       @select="handleSelectyltjr"
                       size="mini"
+                      :disabled="fstDis"
                     ></el-autocomplete>
                   </div>
                 </el-row>
@@ -321,8 +328,8 @@
                     <label for>
                       <span>*</span>是否延迟：
                     </label>
-                    <el-radio v-model="yl_yanchi" label="是">是</el-radio>
-                    <el-radio v-model="yl_yanchi" label="否">否</el-radio>
+                    <el-radio v-model="yl_yanchi" label="是" :disabled="fstDis">是</el-radio>
+                    <el-radio v-model="yl_yanchi" label="否" :disabled="fstDis">否</el-radio>
                   </div>
                 </el-row>
                 <el-row>
@@ -337,6 +344,7 @@
                       controls-position="right"
                       @change="handleChange"
                       :min="0"
+                      :disabled="fstDis"
                     ></el-input-number>
                   </div>
                 </el-row>
@@ -352,6 +360,7 @@
                       controls-position="right"
                       @change="handleChange"
                       :min="0"
+                      :disabled="fstDis"
                     ></el-input-number>
                   </div>
                 </el-row>
@@ -367,6 +376,7 @@
                       controls-position="right"
                       @change="handleChange"
                       :min="0"
+                      :disabled="fstDis"
                     ></el-input-number>
                   </div>
                 </el-row>
@@ -377,9 +387,9 @@
                     <label for>
                       <span>*</span>文档格式：
                     </label>
-                    <el-radio v-model="yl_geshi" label="word">word</el-radio>
-                    <el-radio v-model="yl_geshi" label="excel">excel</el-radio>
-                    <el-radio v-model="yl_geshi" label="其他">其他</el-radio>
+                    <el-radio v-model="yl_geshi" label="word" :disabled="fstDis" >word</el-radio>
+                    <el-radio v-model="yl_geshi" label="excel" :disabled="fstDis">excel</el-radio>
+                    <el-radio v-model="yl_geshi" label="其他" :disabled="fstDis">其他</el-radio>
                   </div>
                 </el-row>
                 <el-row>
@@ -387,7 +397,7 @@
                     <label for>
                       <span>*</span>提交时间：
                     </label>
-                    <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="yl_time" type="date" placeholder="请选择日期"></el-date-picker>
+                    <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="yl_time" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
                   </div>
                 </el-row>
                 <el-row>
@@ -402,6 +412,7 @@
                       controls-position="right"
                       @change="handleChange"
                       :min="0"
+                      :disabled="fstDis"
                     ></el-input-number>
                   </div>
                 </el-row>
@@ -417,6 +428,7 @@
                       controls-position="right"
                       @change="handleChange"
                       :min="0"
+                      :disabled="fstDis"
                     ></el-input-number>
                   </div>
                 </el-row>
@@ -432,6 +444,7 @@
                       controls-position="right"
                       @change="handleChange"
                       :min="0"
+                      :disabled="fstDis"
                     ></el-input-number>
                   </div>
                 </el-row>
@@ -446,6 +459,7 @@
                       class="yl_error"
                       v-model="yl_error"
                       clearable
+                      :disabled="fstDis"
                     ></el-input>
                   </div>
                 </el-row>
@@ -460,7 +474,7 @@
             <el-header class="bg_head" height="40px">
               <strong>
                 测试报告：
-                <input type="text" class="csbgdf" v-model="csbgdf" />分
+                <input type="text" class="csbgdf" v-model="csbgdf" :disabled="scoreDis"/>分
               </strong>
               <el-popover
                 placement="right-start"
@@ -484,8 +498,8 @@
                     <label>
                       <span>*</span>是否提交：
                     </label>
-                    <el-radio v-model="bg_tijiao" label="是">是</el-radio>
-                    <el-radio v-model="bg_tijiao" label="否">否</el-radio>
+                    <el-radio v-model="bg_tijiao" label="是" :disabled="fstDis">是</el-radio>
+                    <el-radio v-model="bg_tijiao" label="否" :disabled="fstDis">否</el-radio>
                   </div>
                 </el-row>
                 <el-row>
@@ -500,6 +514,7 @@
                       placeholder="可索引"
                       @select="handleSelectbgtjr"
                       size="mini"
+                      :disabled="fstDis"
                     ></el-autocomplete>
                   </div>
                 </el-row>
@@ -508,8 +523,8 @@
                     <label for>
                       <span>*</span>是否延迟：
                     </label>
-                    <el-radio v-model="bg_yanchi" label="是">是</el-radio>
-                    <el-radio v-model="bg_yanchi" label="否">否</el-radio>
+                    <el-radio v-model="bg_yanchi" label="是" :disabled="fstDis">是</el-radio>
+                    <el-radio v-model="bg_yanchi" label="否" :disabled="fstDis">否</el-radio>
                   </div>
                 </el-row>
                 <el-row>
@@ -524,6 +539,7 @@
                       controls-position="right"
                       @change="handleChange"
                       :min="0"
+                      :disabled="fstDis"
                     ></el-input-number>
                   </div>
                 </el-row>
@@ -539,6 +555,7 @@
                       controls-position="right"
                       @change="handleChange"
                       :min="0"
+                      :disabled="fstDis"
                     ></el-input-number>
                   </div>
                 </el-row>
@@ -553,6 +570,7 @@
                       class="bg_error"
                       v-model="bg_error"
                       clearable
+                      :disabled="fstDis"
                     ></el-input>
                   </div>
                 </el-row>
@@ -563,9 +581,9 @@
                     <label for>
                       <span>*</span>文档格式：
                     </label>
-                    <el-radio v-model="bg_geshi" label="word">word</el-radio>
-                    <el-radio v-model="bg_geshi" label="excel">excel</el-radio>
-                    <el-radio v-model="bg_geshi" label="其他">其他</el-radio>
+                    <el-radio v-model="bg_geshi" label="word" :disabled="fstDis">word</el-radio>
+                    <el-radio v-model="bg_geshi" label="excel" :disabled="fstDis">excel</el-radio>
+                    <el-radio v-model="bg_geshi" label="其他" :disabled="fstDis">其他</el-radio>
                   </div>
                 </el-row>
                 <el-row>
@@ -573,7 +591,7 @@
                     <label for>
                       <span>*</span>提交时间：
                     </label>
-                    <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="bg_time" type="date" placeholder="请选择日期"></el-date-picker>
+                    <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="bg_time" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
                   </div>
                 </el-row>
                 <el-row>
@@ -588,6 +606,7 @@
                       controls-position="right"
                       @change="handleChange"
                       :min="0"
+                      :disabled="fstDis"
                     ></el-input-number>
                   </div>
                 </el-row>
@@ -603,6 +622,7 @@
                       controls-position="right"
                       @change="handleChange"
                       :min="0"
+                      :disabled="fstDis"
                     ></el-input-number>
                   </div>
                 </el-row>
@@ -618,6 +638,7 @@
                       controls-position="right"
                       @change="handleChange"
                       :min="0"
+                      :disabled="fstDis"
                     ></el-input-number>
                   </div>
                 </el-row>
@@ -631,7 +652,7 @@
         <div class="cc_fst">
           <strong>
             抽测得分：
-            <input type="text" class="ccdf" v-model="ccdf" />分
+            <input type="text" class="ccdf" v-model="ccdf" :disabled="scoreDis"/>分
           </strong>
           <el-popover
             placement="right-start"
@@ -653,7 +674,7 @@
                 <label for>
                   <span>*</span>测试开始时间：
                 </label>
-                <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="cc_begin" type="date" placeholder="请选择日期"></el-date-picker>
+                <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="cc_begin" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
               </div>
             </el-row>
             <el-row>
@@ -668,6 +689,7 @@
                   placeholder="可索引"
                   @select="handleSelectccr"
                   size="mini"
+                  :disabled="fstDis"
                 ></el-autocomplete>
               </div>
             </el-row>
@@ -676,17 +698,17 @@
                 <label>
                   <span>*</span>抽测用例数：
                 </label>
-                <el-input size="mini" class="ccyls" v-model="ccyls" placeholder></el-input>
+                <el-input size="mini" class="ccyls" v-model="ccyls" placeholder :disabled="fstDis"></el-input>
               </div>
             </el-row>
             <el-row>
               <div class="cc14">
-                <div class="cc13">
+                
                   <label>
                     <span>*</span>不通过数：
                   </label>
-                  <el-input size="mini" class="btgs" v-model="cc_btgs" placeholder></el-input>
-                </div>
+                  <el-input size="mini" class="btgs" v-model="cc_btgs" placeholder :disabled="fstDis"></el-input>
+                
               </div>
             </el-row>
             <el-row>
@@ -694,7 +716,7 @@
                 <label>
                   <span>*</span>抽测通过率：
                 </label>
-                <el-input type="number" size="mini" class="cctgl" v-model.number="cctgl" placeholder></el-input>
+                <el-input type="number" size="mini" class="cctgl" v-model.number="cctgl" placeholder :disabled="fstDis"></el-input>
               </div>
             </el-row>
           </el-col>
@@ -704,7 +726,7 @@
                 <label for>
                   <span>*</span>测试结束时间：
                 </label>
-                <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="cc_end" type="date" placeholder="请选择日期"></el-date-picker>
+                <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="cc_end" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
               </div>
             </el-row>
             <el-row>
@@ -712,7 +734,7 @@
                 <label>
                   <span>*</span>用例总数：
                 </label>
-                <el-input type="number" size="mini" class="ylzs" v-model="ylzs" placeholder></el-input>
+                <el-input type="number" size="mini" class="ylzs" v-model="ylzs" placeholder :disabled="fstDis"></el-input>
               </div>
             </el-row>
             <el-row>
@@ -720,7 +742,7 @@
                 <label>
                   <span>*</span>通过数：
                 </label>
-                <el-input size="mini" class="tgs" v-model="tgs" placeholder></el-input>
+                <el-input size="mini" class="tgs" v-model="tgs" placeholder :disabled="fstDis"></el-input>
               </div>
             </el-row>
             <el-row>
@@ -728,7 +750,7 @@
                 <label>
                   <span>*</span>阻塞数：
                 </label>
-                <el-input size="mini" class="zss" v-model="zss" placeholder></el-input>
+                <el-input size="mini" class="zss" v-model="zss" placeholder :disabled="fstDis"></el-input>
               </div>
             </el-row>
             <el-row>
@@ -736,7 +758,7 @@
                 <label>
                   <span>*</span>抽测比例：
                 </label>
-                <el-input size="mini" class="ccbl" v-model="ccbl" placeholder></el-input>
+                <el-input size="mini" class="ccbl" v-model="ccbl" placeholder :disabled="fstDis"></el-input>
               </div>
             </el-row>
           </el-col>
@@ -747,7 +769,7 @@
         <div class="ys_fst">
           <strong>
             质控验收测试得分：
-            <input type="text" class="yanshoudefen" v-model="yanshoudefen" />分
+            <input type="text" class="yanshoudefen" v-model="yanshoudefen" :disabled="scoreDis"/>分
           </strong>
           <el-popover
             placement="right-start"
@@ -776,7 +798,7 @@
                   <label for>
                     <span>*</span>测试开始时间：
                   </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="a_begin" type="date" placeholder="请选择日期"></el-date-picker>
+                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="a_begin" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
                 </div>
               </el-row>
               <el-row>
@@ -791,6 +813,7 @@
                     placeholder="可索引"
                     @select="handleSelecta_csr"
                     size="mini"
+                    :disabled="fstDis"
                   ></el-autocomplete>
                 </div>
               </el-row>
@@ -799,7 +822,7 @@
                   <label for>
                     <span>*</span>通过数：
                   </label>
-                  <el-input size="mini" class="a_tgs" v-model="a_tgs"></el-input>
+                  <el-input size="mini" class="a_tgs" v-model="a_tgs" :disabled="fstDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -807,7 +830,7 @@
                   <label for>
                     <span>*</span>阻塞数：
                   </label>
-                  <el-input size="mini" class="a_zss" v-model="a_zss"></el-input>
+                  <el-input size="mini" class="a_zss" v-model="a_zss" :disabled="fstDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -815,7 +838,7 @@
                   <label for>
                     <span>*</span>第一轮版本通过率：
                   </label>
-                  <el-input size="mini" class="a_tgl" v-model="a_tgl"></el-input>
+                  <el-input size="mini" class="a_tgl" v-model="a_tgl" :disabled="fstDis"></el-input>
                 </div>
               </el-row>
             </el-col>
@@ -825,7 +848,7 @@
                   <label for>
                     <span>*</span>测试结束时间：
                   </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="a_end" type="date" placeholder="请选择日期"></el-date-picker>
+                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="a_end" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
                 </div>
               </el-row>
               <el-row>
@@ -833,7 +856,7 @@
                   <label for>
                     <span>*</span>用例执行个数：
                   </label>
-                  <el-input size="mini" class="a_ylzxgs" v-model="a_ylzxgs"></el-input>
+                  <el-input size="mini" class="a_ylzxgs" v-model="a_ylzxgs" :disabled="fstDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -841,7 +864,7 @@
                   <label for>
                     <span>*</span>不通过数：
                   </label>
-                  <el-input size="mini" class="a_btgs" v-model="a_btgs"></el-input>
+                  <el-input size="mini" class="a_btgs" v-model="a_btgs" :disabled="fstDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -849,7 +872,7 @@
                   <label for>
                     <span>*</span>缺陷数：
                   </label>
-                  <el-input size="mini" class="a_qxs" v-model="a_qxs"></el-input>
+                  <el-input size="mini" class="a_qxs" v-model="a_qxs" :disabled="fstDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -857,8 +880,8 @@
                   <label for>
                     <span>*</span>第一轮验收结果：
                   </label>
-                  <el-radio v-model="a_jieguo" label="通过">通过</el-radio>
-                  <el-radio v-model="a_jieguo" label="不通过">不通过</el-radio>
+                  <el-radio v-model="a_jieguo" label="通过" :disabled="fstDis">通过</el-radio>
+                  <el-radio v-model="a_jieguo" label="不通过" :disabled="fstDis">不通过</el-radio>
                 </div>
               </el-row>
             </el-col>
@@ -879,7 +902,7 @@
                   <label for>
                     <span>*</span>测试开始时间：
                   </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="b_begin" type="date" placeholder="请选择日期"></el-date-picker>
+                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="b_begin" type="date" placeholder="请选择日期" :disabled="secDis"></el-date-picker>
                 </div>
               </el-row>
               <el-row>
@@ -894,6 +917,7 @@
                     placeholder="可索引"
                     @select="handleSelectb_csr"
                     size="mini"
+                    :disabled="secDis"
                   ></el-autocomplete>
                 </div>
               </el-row>
@@ -902,7 +926,7 @@
                   <label for>
                     <span>*</span>通过数：
                   </label>
-                  <el-input size="mini" class="b_tgs" v-model="b_tgs"></el-input>
+                  <el-input size="mini" class="b_tgs" v-model="b_tgs" :disabled="secDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -910,7 +934,7 @@
                   <label for>
                     <span>*</span>阻塞数：
                   </label>
-                  <el-input size="mini" class="b_zss" v-model="b_zss"></el-input>
+                  <el-input size="mini" class="b_zss" v-model="b_zss" :disabled="secDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -918,7 +942,7 @@
                   <label for>
                     <span>*</span>第二轮版本通过率：
                   </label>
-                  <el-input size="mini" class="b_tgl" v-model="b_tgl"></el-input>
+                  <el-input size="mini" class="b_tgl" v-model="b_tgl" :disabled="secDis"></el-input>
                 </div>
               </el-row>
             </el-col>
@@ -928,7 +952,7 @@
                   <label for>
                     <span>*</span>测试结束时间：
                   </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="b_end" type="date" placeholder="请选择日期"></el-date-picker>
+                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="b_end" type="date" placeholder="请选择日期" :disabled="secDis"></el-date-picker>
                 </div>
               </el-row>
               <el-row>
@@ -936,7 +960,7 @@
                   <label for>
                     <span>*</span>用例执行个数：
                   </label>
-                  <el-input size="mini" class="b_ylzxgs" v-model="b_ylzxgs"></el-input>
+                  <el-input size="mini" class="b_ylzxgs" v-model="b_ylzxgs" :disabled="secDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -944,7 +968,7 @@
                   <label for>
                     <span>*</span>不通过数：
                   </label>
-                  <el-input size="mini" class="b_btgs" v-model="b_btgs"></el-input>
+                  <el-input size="mini" class="b_btgs" v-model="b_btgs" :disabled="secDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -952,7 +976,7 @@
                   <label for>
                     <span>*</span>缺陷数：
                   </label>
-                  <el-input size="mini" class="b_qxs" v-model="b_qxs"></el-input>
+                  <el-input size="mini" class="b_qxs" v-model="b_qxs" :disabled="secDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -960,8 +984,8 @@
                   <label for>
                     <span>*</span>第二轮验收结果：
                   </label>
-                  <el-radio v-model="b_jieguo" label="通过">通过</el-radio>
-                  <el-radio v-model="b_jieguo" label="不通过">不通过</el-radio>
+                  <el-radio v-model="b_jieguo" label="通过" :disabled="secDis">通过</el-radio>
+                  <el-radio v-model="b_jieguo" label="不通过" :disabled="secDis">不通过</el-radio>
                 </div>
               </el-row>
             </el-col>
@@ -982,7 +1006,7 @@
                   <label for>
                     <span>*</span>测试开始时间：
                   </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="c_begin" type="date" placeholder="请选择日期"></el-date-picker>
+                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="c_begin" type="date" placeholder="请选择日期" :disabled="trdDis"></el-date-picker>
                 </div>
               </el-row>
               <el-row>
@@ -997,6 +1021,7 @@
                     placeholder="可索引"
                     @select="handleSelectc_csr"
                     size="mini"
+                    :disabled="trdDis"
                   ></el-autocomplete>
                 </div>
               </el-row>
@@ -1005,7 +1030,7 @@
                   <label for>
                     <span>*</span>通过数：
                   </label>
-                  <el-input size="mini" class="c_tgs" v-model="c_tgs"></el-input>
+                  <el-input size="mini" class="c_tgs" v-model="c_tgs" :disabled="trdDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -1013,7 +1038,7 @@
                   <label for>
                     <span>*</span>阻塞数：
                   </label>
-                  <el-input size="mini" class="c_zss" v-model="c_zss"></el-input>
+                  <el-input size="mini" class="c_zss" v-model="c_zss" :disabled="trdDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -1021,7 +1046,7 @@
                   <label for>
                     <span>*</span>第三轮版本通过率：
                   </label>
-                  <el-input size="mini" class="c_tgl" v-model="c_tgl"></el-input>
+                  <el-input size="mini" class="c_tgl" v-model="c_tgl" :disabled="trdDis"></el-input>
                 </div>
               </el-row>
             </el-col>
@@ -1031,7 +1056,7 @@
                   <label for>
                     <span>*</span>测试结束时间：
                   </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="c_end" type="date" placeholder="请选择日期"></el-date-picker>
+                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="c_end" type="date" placeholder="请选择日期" :disabled="trdDis"></el-date-picker>
                 </div>
               </el-row>
               <el-row>
@@ -1039,7 +1064,7 @@
                   <label for>
                     <span>*</span>用例执行个数：
                   </label>
-                  <el-input size="mini" class="c_ylzxgs" v-model="c_ylzxgs"></el-input>
+                  <el-input size="mini" class="c_ylzxgs" v-model="c_ylzxgs" :disabled="trdDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -1047,7 +1072,7 @@
                   <label for>
                     <span>*</span>不通过数：
                   </label>
-                  <el-input size="mini" class="c_btgs" v-model="c_btgs"></el-input>
+                  <el-input size="mini" class="c_btgs" v-model="c_btgs" :disabled="trdDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -1055,7 +1080,7 @@
                   <label for>
                     <span>*</span>缺陷数：
                   </label>
-                  <el-input size="mini" class="c_qxs" v-model="c_qxs"></el-input>
+                  <el-input size="mini" class="c_qxs" v-model="c_qxs" :disabled="trdDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -1063,8 +1088,8 @@
                   <label for>
                     <span>*</span>第三轮验收结果：
                   </label>
-                  <el-radio v-model="c_jieguo" label="通过">通过</el-radio>
-                  <el-radio v-model="c_jieguo" label="不通过">不通过</el-radio>
+                  <el-radio v-model="c_jieguo" label="通过" :disabled="trdDis">通过</el-radio>
+                  <el-radio v-model="c_jieguo" label="不通过" :disabled="trdDis">不通过</el-radio>
                 </div>
               </el-row>
             </el-col>
@@ -1090,6 +1115,35 @@ export default {
   name: "scoreIndex",
   data() {
     return {
+      fstDis:false,
+      scoreDis:true,
+      secDis:true,
+      trdDis:true,
+      sysoptions:[{value:'督办系统',label:'督办系统'},
+      {value:'企业文化建设平台（金点子）',label:'企业文化建设平台（金点子）'},
+      {value:'统一邮件系统服务',label:'统一邮件系统服务'},
+      {value:'数字档案管理系统服务',label:'数字档案管理系统服务'},
+      {value:'统一信息平台系统服务（云OA）',label:'统一信息平台系统服务（云OA）'},
+      {value:'新手机办公服务（MOA）',label:'新手机办公服务（MOA）'},
+      {value:'门户',label:'门户'},
+      {value:'融合通讯录',label:'融合通讯录'},
+      {value:'协同任务',label:'协同任务'},
+      {value:'快速审批',label:'快速审批'},
+      {value:'集中化人力系统',label:'集中化人力系统'},
+      {value:'考核平台',label:'考核平台'},
+      {value:'高管系统及人力自助',label:'高管系统及人力自助'},
+      {value:'高管因私出国',label:'高管因私出国'},
+      {value:'集团人力APP',label:'集团人力APP'},
+      {value:'高工评审',label:'高工评审'},
+      {value:'人力核心',label:'人力核心'},
+      {value:'科技创新管理平台',label:'科技创新管理平台'},
+      {value:'PMS',label:'PMS'},
+      {value:'党务纪检管理平台',label:'党务纪检管理平台'},
+      {value:'原OA',label:'原OA'},
+      {value:'全国统一待办服务',label:'全国统一待办服务'},
+      
+      ],
+      value:'',
       visible: false,
       b_show: false,
       c_show: false,
@@ -1281,10 +1335,7 @@ export default {
     },
     bnew() {
       this.c_show = true;
-    },
-    loadAllsys() {
-      return [{ value: "MOA" }, { value: "OA" }, { value: "云OA" }];
-    },
+    },   
     loadAllperson() {
       return [
         { value: "刘玥浩" },
@@ -1327,26 +1378,12 @@ export default {
         { value: "唐海清" },
       ];
     },
-    querySearchAsync(queryString, cb) {
-      var restaurants = this.restaurants;
-      var results = queryString
-        ? restaurants.filter(this.createStateFilter(queryString))
-        : restaurants;
-
-      clearTimeout(this.timeout);
-      this.timeout = setTimeout(() => {
-        cb(results);
-      }, 3000 * Math.random());
-    },
     createStateFilter(queryString) {
       return (xitongming) => {
         return (
           xitongming.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
         );
       };
-    },
-    handleSelect(item) {
-      console.log(item);
     },
     querySearchPerson(queryString, cb) {
       var person = this.person;
@@ -1541,73 +1578,77 @@ export default {
         contentType:"application/json",
         dataType:"json",
         success: (data)=>{
-          
-            vm.type=data.type;
-            vm.plan=data.plan;
-            vm.groupName=data.groupname;
-            vm.stateperson=data.person;
-            vm.banbenguimo=data.banbenguimo;
-            vm.jiaofuwudefen=data.jiaofuwudefen;
-            vm.xq_tijiao=data.xqTijiao;
-            vm.xq_geshi=data.xqGeshi;
-            vm.state_xq_tijiaoren=data.xqTijiaoren;
-            vm.xq_time=data.xqTime;
-            vm.xq_yanchi=data.xqYanchi;
-            vm.xq_laiyuan=data.xqLaiyuan;
-            vm.xq_change=data.xqChange;
-            vm.xuqiudefen=data.xuqiudefen;
-            vm.xq_error=data.xqError;
-            vm.yl_tijiao=data.ylTijiao;
-            vm.yl_geshi=data.ylGeshi;
-            vm.state_yl_tijiaoren=data.ylTijiaoren;
-            vm.yl_time=data.ylTime;
-            vm.yl_yanchi=data.ylYanchi;
-            vm.yl_error=data.ylError;
-            vm.yl_qz=data.ylQz;
-            vm.yl_bt=data.ylBt;
-            vm.yl_zxr=data.ylZxr;
-            vm.yl_yq=data.ylYq;
-            vm.yl_bz=data.ylBz;
-            vm.yl_jg=data.ylJg;
-            vm.csyldf=data.csyldf;
-            vm.bg_tijiao=data.bgTijiao;
-            vm.bg_geshi=data.bgGeshi;
-            vm.state_bg_tijiaoren=data.bgTijiaoren;
-            vm.bg_time=data.bgTime;
-            vm.bg_yanchi=data.bgYanchi;
-            vm.bg_error=data.bgError;
-            vm.bg_qk=data.bgQk;
-            vm.bg_hj=data.bgHj;
-            vm.bg_fw=data.bgFw;
-            vm.bg_qx=data.bgQx;
-            vm.bg_jl=data.bgJl;
-            vm.csbgdf=data.csbgdf;
-            vm.cc_begin=data.ccBegin;
-            vm.cc_end=data.ccEnd;
-            vm.state_cc_r=data.ccR;
-            vm.ylzs=data.ylzs;
-            vm.ccyls=data.ccyls;
-            vm.tgs=data.tgs;
-            vm.cc_btgs=data.ccBtgs;
-            vm.zss=data.zss;
-            vm.cctgl=data.cctgl;
-            vm.ccdf=data.ccdf;
-            vm.ccbl=data.ccbl;
-            vm.a_begin=data.abegin;
-            vm.a_end=data.aend;
-            vm.state_a_csr=data.acsr;
-            vm.a_ylzxgs=data.aylzxgs;
-            vm.a_tgs=data.atgs;
-            vm.a_btgs=data.abtgs;
-            vm.a_zss=data.azss;
-            vm.a_qxs=data.aqxs;
-            vm.a_tgl=data.atgl;
-            vm.a_jieguo=data.ajieguo;
-            vm.yanshoudefen=data.yanshoudefen;
-            vm.banbendefen=data.zongfen;
+              vm.fstDis=true;
+              vm.secDis=false;
+              vm.type=data.type;
+              vm.plan=data.plan;
+              vm.groupName=data.groupname;
+              vm.stateperson=data.person;
+              vm.banbenguimo=data.banbenguimo;
+              vm.jiaofuwudefen=data.jiaofuwudefen;
+              vm.xq_tijiao=data.xqTijiao;
+              vm.xq_geshi=data.xqGeshi;
+              vm.state_xq_tijiaoren=data.xqTijiaoren;
+              vm.xq_time=data.xqTime;
+              vm.xq_yanchi=data.xqYanchi;
+              vm.xq_laiyuan=data.xqLaiyuan;
+              vm.xq_change=data.xqChange;
+              vm.xuqiudefen=data.xuqiudefen;
+              vm.xq_error=data.xqError;
+              vm.yl_tijiao=data.ylTijiao;
+              vm.yl_geshi=data.ylGeshi;
+              vm.state_yl_tijiaoren=data.ylTijiaoren;
+              vm.yl_time=data.ylTime;
+              vm.yl_yanchi=data.ylYanchi;
+              vm.yl_error=data.ylError;
+              vm.yl_qz=data.ylQz;
+              vm.yl_bt=data.ylBt;
+              vm.yl_zxr=data.ylZxr;
+              vm.yl_yq=data.ylYq;
+              vm.yl_bz=data.ylBz;
+              vm.yl_jg=data.ylJg;
+              vm.csyldf=data.csyldf;
+              vm.bg_tijiao=data.bgTijiao;
+              vm.bg_geshi=data.bgGeshi;
+              vm.state_bg_tijiaoren=data.bgTijiaoren;
+              vm.bg_time=data.bgTime;
+              vm.bg_yanchi=data.bgYanchi;
+              vm.bg_error=data.bgError;
+              vm.bg_qk=data.bgQk;
+              vm.bg_hj=data.bgHj;
+              vm.bg_fw=data.bgFw;
+              vm.bg_qx=data.bgQx;
+              vm.bg_jl=data.bgJl;
+              vm.csbgdf=data.csbgdf;
+              vm.cc_begin=data.ccBegin;
+              vm.cc_end=data.ccEnd;
+              vm.state_cc_r=data.ccR;
+              vm.ylzs=data.ylzs;
+              vm.ccyls=data.ccyls;
+              vm.tgs=data.tgs;
+              vm.cc_btgs=data.ccBtgs;
+              vm.zss=data.zss;
+              vm.cctgl=data.cctgl;
+              vm.ccdf=data.ccdf;
+              vm.ccbl=data.ccbl;
+              vm.a_begin=data.abegin;
+              vm.a_end=data.aend;
+              vm.state_a_csr=data.acsr;
+              vm.a_ylzxgs=data.aylzxgs;
+              vm.a_tgs=data.atgs;
+              vm.a_btgs=data.abtgs;
+              vm.a_zss=data.azss;
+              vm.a_qxs=data.aqxs;
+              vm.a_tgl=data.atgl;
+              vm.a_jieguo=data.ajieguo;
+              vm.yanshoudefen=data.yanshoudefen;
+              vm.banbendefen=data.zongfen;
             
             // if(b_tongguolv==-999){
-            if(data.btgl!=-999){
+      if(data.btgl!=-999){
+                vm.fstDis=true;
+                vm.secDis=true;
+                vm.trdDis=false;
                 vm.b_begin=data.bbegin;
                 vm.b_end=data.bend;
                 vm.state_b_csr=data.bcsr;
@@ -1621,6 +1662,9 @@ export default {
                 vm.yanshoudefen=data.yanshoudefen;
                 vm.banbendefen=data.zongfen;
                 if(data.ctgl!=-999){
+                    vm.fstDis=true;
+                    vm.secDis=true;
+                    vm.trdDis=true;
                     vm.c_begin=data.cbegin;
                     vm.c_end=data.cend;
                     vm.state_c_csr=data.ccsr;
@@ -2053,7 +2097,7 @@ export default {
   },
 
   mounted() {
-    this.restaurants = this.loadAllsys();
+    
     this.person = this.loadAllperson();
     this.xq_tijiaoren = this.loadAllperson();
     this.yl_tijiaoren = this.loadAllperson();
