@@ -1,16 +1,12 @@
 .scoreIndex {}
-.pic{
-  height:50px;
-  width:60px;
-  
-}
+
 span {
   color: red;
 }
 .bbhao{
   position: relative;
-  bottom:40px;
-  left:50px
+  top:10px;
+  
 }
 .head {
   height: 50px;
@@ -66,13 +62,13 @@ span {
 
 .guimo {
   position: relative;
-  left: 20px;
+  left: 45px;
   top: 10px;
 }
 
 .mingcheng {
   position: relative;
-  left: 45px;
+  left: 50px;
 }
 
 .shijian {
@@ -293,7 +289,7 @@ span {
 }
 .cc14{
     position: relative;
-    left: 5px; 
+    left: 25px; 
 }
 .cc15{
     position: relative;

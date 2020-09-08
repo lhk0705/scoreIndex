@@ -2,7 +2,7 @@
   <div class="scoreIndex">
     <div class="head">
       
-      <div class="pic"><img src="static\u=3073865373,3613492176&fm=26&gp=0.jpg" class="pic" alt="" ></div>
+      
       <div class="bbhao"><label class="banbenhao">{{ticeshijian}}{{xitongming}}</label>版本信息</div>
     </div>
 
