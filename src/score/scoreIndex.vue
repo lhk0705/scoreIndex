@@ -700,7 +700,7 @@
                 <label>
                   <span>*</span>抽测用例数：
                 </label>
-                <el-input size="mini" class="ccyls" v-model="ccyls" placeholder :disabled="fstDis"></el-input>
+                <el-input :min="0" type="number" size="mini" class="ccyls" v-model="ccyls" placeholder :disabled="fstDis"></el-input>
               </div>
             </el-row>
             <el-row>
@@ -709,7 +709,7 @@
                   <label>
                     <span>*</span>不通过数：
                   </label>
-                  <el-input size="mini" class="btgs" v-model="cc_btgs" placeholder :disabled="fstDis"></el-input>
+                  <el-input :min="0" type="number" size="mini" class="btgs" v-model="cc_btgs" placeholder :disabled="fstDis"></el-input>
                 
               </div>
             </el-row>
@@ -718,7 +718,7 @@
                 <label>
                   <span>*</span>抽测通过率：
                 </label>
-                <el-input type="number" size="mini" class="cctgl" v-model.number="cctgl" placeholder :disabled="fstDis"></el-input>
+                <el-input  size="mini" class="cctgl" v-model.number="cctgl" placeholder :disabled="scoreDis"></el-input>
               </div>
             </el-row>
           </el-col>
@@ -744,7 +744,7 @@
                 <label>
                   <span>*</span>通过数：
                 </label>
-                <el-input size="mini" class="tgs" v-model="tgs" placeholder :disabled="fstDis"></el-input>
+                <el-input type="number" size="mini" class="tgs" v-model="tgs" placeholder :disabled="fstDis"></el-input>
               </div>
             </el-row>
             <el-row>
@@ -752,7 +752,7 @@
                 <label>
                   <span>*</span>阻塞数：
                 </label>
-                <el-input size="mini" class="zss" v-model="zss" placeholder :disabled="fstDis"></el-input>
+                <el-input type="number" size="mini" class="zss" v-model="zss" placeholder :disabled="scoreDis"></el-input>
               </div>
             </el-row>
             <el-row>
@@ -760,7 +760,7 @@
                 <label>
                   <span>*</span>抽测比例：
                 </label>
-                <el-input size="mini" class="ccbl" v-model="ccbl" placeholder :disabled="fstDis"></el-input>
+                <el-input size="mini" class="ccbl" v-model="ccbl" placeholder :disabled="scoreDis"></el-input>
               </div>
             </el-row>
           </el-col>
@@ -824,7 +824,7 @@
                   <label for>
                     <span>*</span>通过数：
                   </label>
-                  <el-input size="mini" class="a_tgs" v-model="a_tgs" :disabled="fstDis"></el-input>
+                  <el-input type="number" size="mini" class="a_tgs" v-model="a_tgs" :disabled="fstDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -832,7 +832,7 @@
                   <label for>
                     <span>*</span>阻塞数：
                   </label>
-                  <el-input size="mini" class="a_zss" v-model="a_zss" :disabled="fstDis"></el-input>
+                  <el-input type="number" size="mini" class="a_zss" v-model="a_zss" :disabled="scoreDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -840,7 +840,7 @@
                   <label for>
                     <span>*</span>第一轮版本通过率：
                   </label>
-                  <el-input size="mini" class="a_tgl" v-model="a_tgl" :disabled="fstDis"></el-input>
+                  <el-input size="mini" class="a_tgl" v-model="a_tgl" :disabled="scoreDis"></el-input>
                 </div>
               </el-row>
             </el-col>
@@ -858,7 +858,7 @@
                   <label for>
                     <span>*</span>用例执行个数：
                   </label>
-                  <el-input size="mini" class="a_ylzxgs" v-model="a_ylzxgs" :disabled="fstDis"></el-input>
+                  <el-input type="number" size="mini" class="a_ylzxgs" v-model="a_ylzxgs" :disabled="fstDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -866,7 +866,7 @@
                   <label for>
                     <span>*</span>不通过数：
                   </label>
-                  <el-input size="mini" class="a_btgs" v-model="a_btgs" :disabled="fstDis"></el-input>
+                  <el-input type="number" size="mini" class="a_btgs" v-model="a_btgs" :disabled="fstDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -874,7 +874,7 @@
                   <label for>
                     <span>*</span>缺陷数：
                   </label>
-                  <el-input size="mini" class="a_qxs" v-model="a_qxs" :disabled="fstDis"></el-input>
+                  <el-input type="number" size="mini" class="a_qxs" v-model="a_qxs" :disabled="fstDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -928,7 +928,7 @@
                   <label for>
                     <span>*</span>通过数：
                   </label>
-                  <el-input size="mini" class="b_tgs" v-model="b_tgs" :disabled="secDis"></el-input>
+                  <el-input type="number" size="mini" class="b_tgs" v-model="b_tgs" :disabled="secDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -936,7 +936,7 @@
                   <label for>
                     <span>*</span>阻塞数：
                   </label>
-                  <el-input size="mini" class="b_zss" v-model="b_zss" :disabled="secDis"></el-input>
+                  <el-input type="number" size="mini" class="b_zss" v-model="b_zss" :disabled="scoreDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -944,7 +944,7 @@
                   <label for>
                     <span>*</span>第二轮版本通过率：
                   </label>
-                  <el-input size="mini" class="b_tgl" v-model="b_tgl" :disabled="secDis"></el-input>
+                  <el-input size="mini" class="b_tgl" v-model="b_tgl" :disabled="scoreDis"></el-input>
                 </div>
               </el-row>
             </el-col>
@@ -962,7 +962,7 @@
                   <label for>
                     <span>*</span>用例执行个数：
                   </label>
-                  <el-input size="mini" class="b_ylzxgs" v-model="b_ylzxgs" :disabled="secDis"></el-input>
+                  <el-input type="number" size="mini" class="b_ylzxgs" v-model="b_ylzxgs" :disabled="secDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -970,7 +970,7 @@
                   <label for>
                     <span>*</span>不通过数：
                   </label>
-                  <el-input size="mini" class="b_btgs" v-model="b_btgs" :disabled="secDis"></el-input>
+                  <el-input type="number" size="mini" class="b_btgs" v-model="b_btgs" :disabled="secDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -978,7 +978,7 @@
                   <label for>
                     <span>*</span>缺陷数：
                   </label>
-                  <el-input size="mini" class="b_qxs" v-model="b_qxs" :disabled="secDis"></el-input>
+                  <el-input type="number" size="mini" class="b_qxs" v-model="b_qxs" :disabled="secDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -1032,7 +1032,7 @@
                   <label for>
                     <span>*</span>通过数：
                   </label>
-                  <el-input size="mini" class="c_tgs" v-model="c_tgs" :disabled="trdDis"></el-input>
+                  <el-input type="number" size="mini" class="c_tgs" v-model="c_tgs" :disabled="trdDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -1040,7 +1040,7 @@
                   <label for>
                     <span>*</span>阻塞数：
                   </label>
-                  <el-input size="mini" class="c_zss" v-model="c_zss" :disabled="trdDis"></el-input>
+                  <el-input type="number" size="mini" class="c_zss" v-model="c_zss" :disabled="scoreDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -1048,7 +1048,7 @@
                   <label for>
                     <span>*</span>第三轮版本通过率：
                   </label>
-                  <el-input size="mini" class="c_tgl" v-model="c_tgl" :disabled="trdDis"></el-input>
+                  <el-input size="mini" class="c_tgl" v-model="c_tgl" :disabled="scoreDis"></el-input>
                 </div>
               </el-row>
             </el-col>
@@ -1066,7 +1066,7 @@
                   <label for>
                     <span>*</span>用例执行个数：
                   </label>
-                  <el-input size="mini" class="c_ylzxgs" v-model="c_ylzxgs" :disabled="trdDis"></el-input>
+                  <el-input type="number" size="mini" class="c_ylzxgs" v-model="c_ylzxgs" :disabled="trdDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -1074,7 +1074,7 @@
                   <label for>
                     <span>*</span>不通过数：
                   </label>
-                  <el-input size="mini" class="c_btgs" v-model="c_btgs" :disabled="trdDis"></el-input>
+                  <el-input type="number" size="mini" class="c_btgs" v-model="c_btgs" :disabled="trdDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -1082,7 +1082,7 @@
                   <label for>
                     <span>*</span>缺陷数：
                   </label>
-                  <el-input size="mini" class="c_qxs" v-model="c_qxs" :disabled="trdDis"></el-input>
+                  <el-input size="mini" type="number" class="c_qxs" v-model="c_qxs" :disabled="trdDis"></el-input>
                 </div>
               </el-row>
               <el-row>
@@ -1693,33 +1693,33 @@ export default {
     },    
     submit(){
       //判空
-      if(
-        this.groupName==''||
-        this.stateperson==''||
-        this.ticeshijian==''||
-        this.xitongming==''||
-        this.state_xq_tijiaoren==''||
-        this.xq_time==''||
-        this.xq_error==''||
-        this.state_yl_tijiaoren==''||
-        this.yl_time==''||
-        this.yl_error==''||
-        this.state_bg_tijiaoren==''||
-        this.bg_time==''||
-        this.bg_error==''||
-        this.cc_begin==''||
-        this.cc_end==''||
-        this.state_cc_r==''||
-        this.ylzs==''||
-        this.tgs==''||
-        this.cc_btgs==''||
-        this.ccyls==''
-        ){
-        this.$message({
-          message: '请填写必填项',
-          type: 'warning'
-        });
-        }
+        if(
+          this.groupName==''||
+          this.stateperson==''||
+          this.ticeshijian==''||
+          this.xitongming==''||
+          this.state_xq_tijiaoren==''||
+          this.xq_time==''||
+          this.xq_error==''||
+          this.state_yl_tijiaoren==''||
+          this.yl_time==''||
+          this.yl_error==''||
+          this.state_bg_tijiaoren==''||
+          this.bg_time==''||
+          this.bg_error==''||
+          this.cc_begin==''||
+          this.cc_end==''||
+          this.state_cc_r==''||
+          this.ylzs==''||
+          this.tgs==''||
+          this.cc_btgs==''||
+          this.ccyls==''
+            ){
+          this.$message({
+            message: '请填写必填项',
+            type: 'warning'
+          });
+          }
       else{
           //紧急版本 
           if(this.a_ylzxgs==0){       
@@ -1822,6 +1822,7 @@ export default {
                         }   
                 });
                 alert("提交成功！")
+                this.$router.go(0)
           }               
           else{
             //先传第一轮数据
@@ -1925,7 +1926,7 @@ export default {
                         }   
                 });
                 alert("提交成功！")
-          
+                this.$router.go(0)
           
             }
             else{
@@ -1957,7 +1958,7 @@ export default {
                     } 
                     });
                     alert("提交成功！");  
-                
+                    this.$router.go(0)
                   
                 }
                 //三轮数据提交
@@ -1988,6 +1989,7 @@ export default {
                       }   
                       });        
                   alert("提交成功！")
+                  this.$router.go(0)
                   }
                  
               }             
@@ -2181,10 +2183,11 @@ export default {
     },
     cctgl: {
       get(){
-      if (this.tgs != '' && this.ccyls != '') {
+      if (this.tgs !== '' && this.ccyls !== '') {
         return +(this.tgs / this.ccyls).toFixed(2);
       } else {
-        return +"";
+
+        return "";
       }
       },
       set(){}
