@@ -9,15 +9,16 @@
       background-color="rgb(42, 142, 230)"
       text-color="white"
       active-text-color="black"
+      :router='true'
     >
     <el-menu-item >
         <img src="static\u=3073865373,3613492176&fm=26&gp=0.jpg" alt="" class="img">
     </el-menu-item>
-    <el-menu-item index="1">
-          <router-link to="/">质控看板</router-link>
+    <el-menu-item index="/">
+          质控看板
         </el-menu-item>
-      <el-menu-item index="2">
-          <router-link to="/scoreIndex">版本数据录入</router-link>
+      <el-menu-item index="/scoreIndex">
+          版本数据录入
         </el-menu-item>
         
       <!-- <el-submenu index="2">

@@ -1117,6 +1117,7 @@ export default {
   name: "scoreIndex",
   data() {
     return {
+      status:0,
       fstDis:false,
       scoreDis:true,
       secDis:true,
@@ -1778,6 +1779,7 @@ export default {
                 "cctgl":this.cctgl,
                 "ccbl":this.ccbl,
                 "ccdf":this.ccdf,
+                "status":1,
                 "a_begin":-999,
                 "a_end":-999,
                 "a_csr":-999,
@@ -1822,11 +1824,12 @@ export default {
                         }   
                 });
                 alert("提交成功！")
-                this.$router.go(0)
+                // this.$router.go(0)
           }               
           else{
             //先传第一轮数据
             if(this.b_ylzxgs==0) {
+              if(this.a_jieguo=="通过"){this.status=1}
               let data={
                   "banbenguimo":this.banbenguimo,
                   "groupName":this.groupName,
@@ -1892,6 +1895,7 @@ export default {
                   "a_qxs":parseInt(this.a_qxs),
                   "a_tgl":this.a_tgl,
                   "a_jieguo":this.a_jieguo,
+                  "status":this.status,
                   "b_begin":-999,
                   "b_end":-999,
                   "b_csr":-999,
@@ -1926,12 +1930,13 @@ export default {
                         }   
                 });
                 alert("提交成功！")
-                this.$router.go(0)
+                // this.$router.go(0)
           
             }
             else{
             //二轮数据提交
                 if (this.c_ylzxgs==0) {
+                  if(this.b_jieguo=="通过"){this.status=1}
                   let data={
                     "banbenhao":$(".banbenhao").text(),
                     "b_begin":this.b_begin,
@@ -1944,6 +1949,7 @@ export default {
                     "b_qxs":parseInt(this.b_qxs),
                     "b_tgl":this.b_tgl,
                     "b_jieguo":this.b_jieguo,
+                    "status":this.status,
                     "yanshoudefen":this.yanshoudefen,
                     "zongfen":this.banbendefen
                     }
@@ -1958,11 +1964,12 @@ export default {
                     } 
                     });
                     alert("提交成功！");  
-                    this.$router.go(0)
+                    // this.$router.go(0)
                   
                 }
                 //三轮数据提交
                 else{
+                  if(this.c_jieguo=="通过"){this.status=1}
                     let data={
                       "banbenhao":$(".banbenhao").text(),
                       "c_begin":this.c_begin,
@@ -1975,6 +1982,7 @@ export default {
                       "c_qxs":parseInt(this.c_qxs),
                       "c_tgl":this.c_tgl,
                       "c_jieguo":this.c_jieguo,
+                      "status":status,
                       "yanshoudefen":this.yanshoudefen,
                       "zongfen":this.banbendefen
                         }
@@ -1989,7 +1997,7 @@ export default {
                       }   
                       });        
                   alert("提交成功！")
-                  this.$router.go(0)
+                  // this.$router.go(0)
                   }
                  
               }             

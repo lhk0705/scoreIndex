@@ -5,7 +5,7 @@
       @open="handleOpen"
       @close="handleClose"
       align="left"
-      router="true"
+      :router="true"
       >
       <el-menu-item index="/">
         <i class="el-icon-menu"></i>
