@@ -1,15 +1,35 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import scoreIndex from '@/score/scoreIndex'
+import scoreIndex from '../components/score/scoreIndex'
+import showin from "../components/show/showin";
+import ing from "../components/show/ing";
+import finish from "../components/show/finish";
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/scoreIndex',
       name: 'scoreIndex',
       component: scoreIndex
-    }
+    },
+    {
+      path: '/',
+      name: 'showin',
+      component: showin,
+      children:[
+        {
+          path: '/ing',
+          name: 'ing',
+          component: ing
+        },
+        {
+          path: '/',
+          name: 'finish',
+          component: finish
+        }
+      ]
+    },
   ]
 })

@@ -5,13 +5,17 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'; 
 import 'element-ui/lib/theme-chalk/index.css';
+import { store } from "./store/store";
 Vue.use(ElementUI);
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+import axios from 'axios';
 
+axios.defaults.baseURL='http://192.168.128.247:8088'
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

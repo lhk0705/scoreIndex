@@ -13,10 +13,13 @@
     <el-menu-item >
         <img src="static\u=3073865373,3613492176&fm=26&gp=0.jpg" alt="" class="img">
     </el-menu-item>
-    
-      <el-menu-item index="1">
-          <router-link to="/">版本数据录入</router-link>
+    <el-menu-item index="1">
+          <router-link to="/">质控看板</router-link>
         </el-menu-item>
+      <el-menu-item index="2">
+          <router-link to="/scoreIndex">版本数据录入</router-link>
+        </el-menu-item>
+        
       <!-- <el-submenu index="2">
         <template slot="title">我的工作台</template>
         <el-menu-item index="2-1">选项1</el-menu-item>
@@ -37,7 +40,16 @@
 
 <script>
 export default {
-
+    data(){
+      return{
+        activeIndex2: '1'
+      } 
+    },
+    methods: {
+        handleSelect(key, keyPath) {
+          console.log(key, keyPath);
+        }
+      }
 };
 </script>
 
