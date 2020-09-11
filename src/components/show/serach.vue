@@ -96,24 +96,43 @@ export default {
           }
           let vers=this.$store.getters.getFinishVer
         //   console.log(sdata.xitongming!==''?'ver.xitongming===sdata.xitongming':'');
-        let a=sdata.xitongming!==''?sdata.xitongming:''
+        // let a=sdata.xitongming!==''?sdata.xitongming:''
         // console.log(a);
-        
-          let result=vers.filter(
-              (ver)=>{return ''
-                // &&
-                // sdata.banbenhao===''?ver.banbenhao===sdata.banbenhao:''&&
-                // sdata.group===''?ver.groupName===sdata.group:''&&
-                // sdata.min_time===''?ver.ticeshijian>=sdata.min_time:''&&
-                // sdata.max_time===''?sdata.max_time>=ver.ticeshijian:''
-                }
-          )
+        console.log(sdata);
+        console.log(vers);
+        let result=[]
+        let a=[]        
+        for(let ver of vers){
+          sdata.xitongming!==''?a.push(ver.xitongming===sdata.xitongming):''
+          sdata.banbenhao!==''?a.push(ver.banbenhao===sdata.banbenhao):''
+          sdata.group!==''?a.push(ver.groupName===sdata.group):''
+          sdata.min_time!==''?a.push(ver.ticeshijian>=sdata.min_time):''
+          sdata.max_time!==''?a.push(sdata.max_time>=ver.ticeshijian):''
+          console.log(a);
+          let b=a.every((item)=>{
+            return item===true
+          })
+          console.log(b);
+          if (b){
+            result.push(ver)
+          }
+          a.length=0
+        }
+        // result=vers.filter(
+        //       (ver)=>{
+        //         return ver.xitongming===sdata.xitongming&&
+                  // ver.banbenhao===sdata.banbenhao&&
+                  // ver.groupName===sdata.group&&
+        //         ver.ticeshijian>=sdata.min_time&&
+        //         sdata.max_time>=ver.ticeshijian
+        //       }
+        //   )
           console.log(result);
            this.$store.commit('setFinishVer',result) 
             // this.$store.commit('filterIngVer',sdata)
       },
       cancel(){
-
+        this.$router.go(0)
       }
   }
 };

@@ -2,10 +2,25 @@ const state={
     finishVer:[{
         "xitongming":'a',
         "banbenhao":'a1',
+        "ticeshijian":'2020-09-08',
+        "groupName":'a3',
+        "person":'a4'
+    },
+    {
+        "xitongming":'a',
+        "banbenhao":'a1',
+        "ticeshijian":'2020-09-07',
+        "groupName":'b3',
+        "person":'a4'
+    },
+    {
+        "xitongming":'a',
+        "banbenhao":'b1',
         "ticeshijian":'2020-09-07',
         "groupName":'a3',
         "person":'a4'
-    },{
+    },
+    {
         "xitongming":'b',
         "banbenhao":'b1',
         "ticeshijian":'2020-09-08',

@@ -4,7 +4,7 @@
   <br>
   <el-table
     :data="finishVer"
-    height="250"
+    height="350"
     border
     style="width: 100%"
     :default-sort = "{prop: 'ticeshijian', order: 'descending'}"
