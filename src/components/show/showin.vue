@@ -1,6 +1,6 @@
 <template>
     <div>
-    <el-row>
+    <el-row class="tac">
         <el-col :span=3>
             <div class="left_nav">
             <left-nav></left-nav>
@@ -24,12 +24,8 @@ export default {
         // "show-finish":finish,
         // "show-ing":ing,
         "left-nav":leftnav
-    },
-    computed:{
-        show(){
-            return this.$store.state.show
-        }
     }
+    
 }
 </script>
 
@@ -37,7 +33,5 @@ export default {
 .show_right{
     padding: 20px;
 }
-.left_nav{
-    
-}
+
 </style>
