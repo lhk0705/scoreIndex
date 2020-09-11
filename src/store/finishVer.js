@@ -30,7 +30,42 @@ const state={
         "xitongming":'c',
         "banbenhao":'c1',
         "ticeshijian":'2020-09-09',
+        "groupName":'d3',
+        "person":'c4'
+    },
+    {
+        "xitongming":'c',
+        "banbenhao":'b1',
+        "ticeshijian":'2020-09-09',
         "groupName":'c3',
+        "person":'c4'
+    },
+    {
+        "xitongming":'c',
+        "banbenhao":'c1',
+        "ticeshijian":'2020-09-09',
+        "groupName":'d3',
+        "person":'c4'
+    },
+    {
+        "xitongming":'b',
+        "banbenhao":'c1',
+        "ticeshijian":'2020-09-09',
+        "groupName":'d3',
+        "person":'c4'
+    },
+    {
+        "xitongming":'c',
+        "banbenhao":'c1',
+        "ticeshijian":'2020-09-10',
+        "groupName":'c3',
+        "person":'c4'
+    },
+    {
+        "xitongming":'c',
+        "banbenhao":'c1',
+        "ticeshijian":'2020-09-12',
+        "groupName":'a3',
         "person":'c4'
     },{
         "xitongming":'d',
