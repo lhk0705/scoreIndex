@@ -1,13 +1,13 @@
 <template>
 <div>
-  <search></search>
+  <search :prop="vers" v-on:changeVer="updateVer"></search>
   <br>
   <el-table
-    :data="finishVer"
+    :data="vers"
     height="350"
     border
     style="width: 100%"
-    :default-sort = "{prop: 'ticeshijian', order: 'descending'}"
+    
     >
     <el-table-column
       prop="xitongming"
@@ -28,7 +28,7 @@
       label="提测时间"
       min-width="120"
       align="center"
-      sortable
+      
       fixed>
     </el-table-column>
     <el-table-column
@@ -36,7 +36,7 @@
       label="组别"
       min-width="80"
       align="center"
-      sortable
+      
       >
     </el-table-column>
     <el-table-column
@@ -100,7 +100,7 @@
     </el-table-column> -->
     <el-table-column label="操作" align="center" min-width="90">
     <template slot-scope="scope">       
-        <el-button @click="getScore(scope.$index,finishVer)">查看</el-button>        
+        <el-button @click="getScore(scope.$index,vers)">查看</el-button>        
     </template>
     </el-table-column>
   </el-table>
@@ -119,16 +119,34 @@ export default {
         }
     },
     computed:{
-        finishVer(){
-             return this.$store.getters.getFinishVer
-            
+        vers:{
+          get(){
+            return this.$store.getters.getFinishVer
+            },
+            set(){
+              
+            }
+             
         }
     },
+    methods:{
+      updateVer(a){
+        // console.log(a);
+        this.$store.commit('setFinishVer',a)
+        
+      },
+      getScore(a,b){
+        console.log(b[a]);
+        this.$router.push({path:'/scoreIndex',query:{ticeshijian:1}})
+
+    }
+    },
+      
     // created(){
     //     axios.get('/')
     //     .then((res)=>{
             
-    //         this.$store.commit('setShow',res.data)
+    //         this.$store.commit('setFinishVer',res.data)
     //     })
     // }
 }

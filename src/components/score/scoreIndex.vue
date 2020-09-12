@@ -1114,6 +1114,11 @@
 </script>
 <script>
 export default {
+  beforeRouteEnter:((to,from,next)=>{
+    console.log(from.path);
+    console.log(this.$route.query.ticeshijian);
+    next(vm=>{console.log(vm);})
+  }),
   name: "scoreIndex",
   data() {
     return {

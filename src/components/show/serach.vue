@@ -58,7 +58,7 @@
         </div>
       </el-col>
       <el-col :span="8">
-        <el-button size="mini" type="primary" @click="search">搜索</el-button>
+        <el-button size="mini" type="primary" @click="search(prop)">搜索</el-button>
         <el-button size="mini"  @click="cancel">重置</el-button>
       </el-col>
     </el-row>
@@ -67,6 +67,10 @@
 
 <script>
 export default {
+  props:{prop:{
+    type:Array,
+    // required:true
+  }},
   data() {
     return {
       // show:[{'xitongming':'a'},{'xitongming':'b'}]
@@ -75,6 +79,7 @@ export default {
       zb: "",
       min_time: "",
       max_time: "",
+      
     }
   },
   computed: {
@@ -86,7 +91,8 @@ export default {
     },
   },
   methods:{
-      search(){
+      search(vers){
+        console.log(vers);
           let sdata={
               "xitongming":this.xtm,
               "banbenhao":this.bbh,
@@ -94,12 +100,7 @@ export default {
               "min_time":this.min_time,
               "max_time":this.max_time,
           }
-          let vers=this.$store.getters.getFinishVer
-        //   console.log(sdata.xitongming!==''?'ver.xitongming===sdata.xitongming':'');
-        // let a=sdata.xitongming!==''?sdata.xitongming:''
-        // console.log(a);
-        console.log(sdata);
-        console.log(vers);
+        // let vers=this.$store.getters.getFinishVer
         let result=[]
         let a=[]        
         for(let ver of vers){
@@ -108,27 +109,19 @@ export default {
           sdata.group!==''?a.push(ver.groupName===sdata.group):''
           sdata.min_time!==''?a.push(ver.ticeshijian>=sdata.min_time):''
           sdata.max_time!==''?a.push(sdata.max_time>=ver.ticeshijian):''
-          console.log(a);
+          // console.log(a);
           let b=a.every((item)=>{
             return item===true
           })
-          console.log(b);
+          // console.log(b);
           if (b){
             result.push(ver)
           }
           a.length=0
         }
-        // result=vers.filter(
-        //       (ver)=>{
-        //         return ver.xitongming===sdata.xitongming&&
-                  // ver.banbenhao===sdata.banbenhao&&
-                  // ver.groupName===sdata.group&&
-        //         ver.ticeshijian>=sdata.min_time&&
-        //         sdata.max_time>=ver.ticeshijian
-        //       }
-        //   )
           console.log(result);
-           this.$store.commit('setFinishVer',result) 
+          //  this.$store.commit('setFinishVer',result)
+          this.$emit("changeVer",result);
             // this.$store.commit('filterIngVer',sdata)
       },
       cancel(){

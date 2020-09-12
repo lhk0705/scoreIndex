@@ -3,7 +3,7 @@
     <el-row class="tac">
         <el-col :span=3>
             <div class="left_nav">
-            <left-nav></left-nav>
+            <left-nav ></left-nav>
             </div>
         </el-col>
         <el-col :span=21 >
@@ -25,6 +25,8 @@ export default {
         // "show-ing":ing,
         "left-nav":leftnav
     }
+    
+    
     
 }
 </script>

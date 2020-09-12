@@ -1,9 +1,9 @@
 <template>
 <div>
-  <search></search>
+  <search :prop="vers" v-on:changeVer="updateVer"></search>
   <br>
   <el-table
-    :data="ingVer"
+    :data="vers"
     height="150"
     border
     style="padding:auto"
@@ -97,10 +97,19 @@ export default {
     "search":search
   },
   computed:{
-        ingVer(){
-             return this.$store.getters.getIngVer
+        vers:{
+          get(){return this.$store.getters.getIngVer},
+          // set(){}
+             
             
         }
+    },
+    methods:{
+      updateVer(a){
+        // console.log(a);
+        this.$store.commit('setIngVer',a)
+        
+      }
     },
 }
 </script>
