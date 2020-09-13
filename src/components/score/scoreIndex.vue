@@ -1113,11 +1113,20 @@
 <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
 </script>
 <script>
+import axios from "axios";
 export default {
   beforeRouteEnter:((to,from,next)=>{
-    console.log(from.path);
-    console.log(this.$route.query.ticeshijian);
-    next(vm=>{console.log(vm);})
+    next(vm=>{
+      let bbh=vm.$route.params.ticeshijian+vm.$route.params.xitongming
+      console.log(bbh);
+      // 获取版本信息并展示在页面
+      // axios.post('',bbh)
+      // .then((res)=>{
+      //   let data=res.data
+      //   vm.ticeshijian=data.ticeshijian
+      // })
+      
+    })
   }),
   name: "scoreIndex",
   data() {

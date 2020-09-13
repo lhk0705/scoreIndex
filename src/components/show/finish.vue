@@ -99,7 +99,7 @@
       sortable>
     </el-table-column> -->
     <el-table-column label="操作" align="center" min-width="90">
-    <template slot-scope="scope">       
+    <template slot-scope="scope">     
         <el-button @click="getScore(scope.$index,vers)">查看</el-button>        
     </template>
     </el-table-column>
@@ -136,8 +136,13 @@ export default {
         
       },
       getScore(a,b){
-        console.log(b[a]);
-        this.$router.push({path:'/scoreIndex',query:{ticeshijian:1}})
+        // console.log(b[a]);
+        this.$router.push({
+          name:'scoreIndex',
+          params:{
+            ticeshijian:b[a].ticeshijian,
+            xitongming:b[a].xitongming
+        }})
 
     }
     },
