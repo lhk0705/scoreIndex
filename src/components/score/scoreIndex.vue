@@ -1132,6 +1132,7 @@ export default {
   data() {
     return {
       status:0,
+      rounds:0,
       fstDis:false,
       scoreDis:true,
       secDis:true,
@@ -1739,6 +1740,7 @@ export default {
                 "ccbl":this.ccbl,
                 "ccdf":this.ccdf,
                 "status":1,
+                "rounds":0,
                 "a_begin":-999,
                 "a_end":-999,
                 "a_csr":-999,
@@ -1855,6 +1857,7 @@ export default {
                   "a_tgl":this.a_tgl,
                   "a_jieguo":this.a_jieguo,
                   "status":this.status,
+                  "rounds":1,
                   "b_begin":-999,
                   "b_end":-999,
                   "b_csr":-999,
@@ -1909,6 +1912,7 @@ export default {
                     "b_tgl":this.b_tgl,
                     "b_jieguo":this.b_jieguo,
                     "status":this.status,
+                    "rounds":2,
                     "yanshoudefen":this.yanshoudefen,
                     "zongfen":this.banbendefen
                     }
@@ -1942,6 +1946,7 @@ export default {
                       "c_tgl":this.c_tgl,
                       "c_jieguo":this.c_jieguo,
                       "status":status,
+                      "rounds":3,
                       "yanshoudefen":this.yanshoudefen,
                       "zongfen":this.banbendefen
                         }
