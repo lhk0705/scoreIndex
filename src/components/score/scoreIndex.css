@@ -1,4 +1,4 @@
-.scoreIndex {}
+
 
 span {
   color: red;
@@ -51,7 +51,7 @@ span {
 
 .fuzeren {
   position: relative;
-  left: 10px;
+  left: 18px;
 }
 
 .leixing {
@@ -103,7 +103,7 @@ span {
 
 .xq12 {
   position: relative;
-  left: 45px;
+  left: 52px;
 }
 
 .xq14 {
@@ -212,7 +212,7 @@ span {
   }
 .bg12{
     position: relative;
-    left: 45px; 
+    left: 55px; 
     top:5px;
 }
 .bg13{
@@ -281,7 +281,7 @@ span {
 }
 .cc12{
     position: relative;
-    left: 20px; 
+    left: 30px; 
 }
 .cc13{
     position: relative;
@@ -337,7 +337,7 @@ span {
 }
 .a12{
     position: relative;
-    left: 20px; 
+    left: 30px; 
 }
 .a13{
     position: relative;
@@ -347,9 +347,7 @@ span {
     position: relative;
     left: 35px; 
 }
-.a15{
-     
-}
+
 .a21{
     position: relative;
     left: 30px; 

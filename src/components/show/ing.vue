@@ -8,7 +8,6 @@
     border
     style="padding:auto"
     :default-sort = "{prop: 'ticeshijian', order: 'descending'}"
-    
     >
     <el-table-column
       prop="xitongming"
@@ -99,16 +98,12 @@ export default {
   computed:{
         vers:{
           get(){return this.$store.getters.getIngVer},
-          // set(){}
-             
-            
+          // set(){}             
         }
     },
     methods:{
       updateVer(a){
-        // console.log(a);
-        this.$store.commit('setIngVer',a)
-        
+        this.$store.commit('setIngVer',a)        
       }
     },
 }

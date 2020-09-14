@@ -6,8 +6,7 @@
     :data="vers"
     height="350"
     border
-    style="width: 100%"
-    
+    style="width: 100%"    
     >
     <el-table-column
       prop="xitongming"
@@ -27,16 +26,14 @@
       prop="ticeshijian"
       label="提测时间"
       min-width="120"
-      align="center"
-      
+      align="center"      
       fixed>
     </el-table-column>
     <el-table-column
       prop="groupName"
       label="组别"
       min-width="80"
-      align="center"
-      
+      align="center"      
       >
     </el-table-column>
     <el-table-column
@@ -115,7 +112,6 @@ export default {
   },
     data(){
         return {
-
         }
     },
     computed:{
@@ -123,17 +119,14 @@ export default {
           get(){
             return this.$store.getters.getFinishVer
             },
-            set(){
-              
-            }
-             
+            set(){              
+            }             
         }
     },
     methods:{
       updateVer(a){
         // console.log(a);
-        this.$store.commit('setFinishVer',a)
-        
+        this.$store.commit('setFinishVer',a)        
       },
       getScore(a,b){
         // console.log(b[a]);
@@ -143,10 +136,8 @@ export default {
             ticeshijian:b[a].ticeshijian,
             xitongming:b[a].xitongming
         }})
-
     }
-    },
-      
+    },      
     // created(){
     //     axios.get('/')
     //     .then((res)=>{

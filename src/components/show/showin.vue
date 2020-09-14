@@ -24,10 +24,7 @@ export default {
         // "show-finish":finish,
         // "show-ing":ing,
         "left-nav":leftnav
-    }
-    
-    
-    
+    }    
 }
 </script>
 

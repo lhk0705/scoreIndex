@@ -10,7 +10,7 @@
 
 <script>
 // import scoreIndex from "./score/scoreIndex.vue";
-import headVue from './components/head';
+import headVue from './components/common/head';
 export default {
   name: 'App',
   components:{

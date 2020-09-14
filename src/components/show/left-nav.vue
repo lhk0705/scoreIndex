@@ -17,8 +17,7 @@
         <i class="el-icon-menu"></i>
         <span slot="title"> 
             未完成
-            </span>
-            
+            </span>            
       </el-menu-item>
     </el-menu>
 </template>

@@ -1,5 +1,6 @@
 const state={
-    finishVer:[{
+    finishVer:[
+    {
         "xitongming":'a',
         "banbenhao":'a1',
         "ticeshijian":'2020-09-08',
