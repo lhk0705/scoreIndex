@@ -1,4 +1,6 @@
-
+.scoreIndex{
+  margin:0px 150px
+}
 
 span {
   color: red;
@@ -269,7 +271,6 @@ span {
 .cc_main div {
     font-size: 14px;
     margin: 4px;
-    
   }
 .cc_main{border: 1px solid black;}
 .ccyls,.cctgl,.btgs,.tgs,.ylzs,.zss,.ccbl{
@@ -371,13 +372,13 @@ span {
 }
 .foot{
     text-align: right;
-    background-color: rgb(216, 209, 209);
+    background-color: rgb(235, 230, 230);
     height:50px;
-    width: 99%;
-    padding-top: 10px;
-    position: fixed;
+    width:82%;
+    padding: 10px;
+    position: fixed;    
+    bottom:5px;
     
-    bottom:10px;
 }
 .a_new,.b_new,.c_new{
     position: relative;

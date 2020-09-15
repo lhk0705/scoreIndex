@@ -1,7 +1,7 @@
 <template>
   <div class="scoreIndex">
     <div class="head">      
-      <div class="bbhao"><label class="banbenhao">{{ticeshijian}}{{xitongming}}</label>版本信息</div>
+      <div class="bbhao"><label >{{banbenhao}}</label>版本信息</div>
     </div>
     <div class="bbdf">
       <strong>
@@ -13,1094 +13,32 @@
     <br />
     <!-- 版本信息-->
     <div>      
-      <el-container>
-        <el-header class="bbxx1" height="30px">
-          <strong>版本信息</strong>
-        </el-header>
-        <el-main class="bbxx2">
-          <el-col :span=10>
-            <el-row>
-              <div class="zubie">
-                <label>
-                  <span>*</span>组别：
-                </label>
-                <el-select v-model="groupName" placeholder="请选择" size="mini" :disabled="fstDis">
-                  <el-option
-                    class="groupName"
-                    v-for="item in group"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select>
-                <div></div>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="fuzeren">
-                <label for>
-                  <span>*</span>系统负责人：
-                </label>
-                <el-select v-model="stateperson" filterable  size="mini" :disabled="fstDis">
-                  <el-option
-                    v-for="item in sysperson"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"                    
-                    >
-                  </el-option>
-                </el-select>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="leixing">
-                <label for>
-                  <span>*</span>版本类型：
-                </label>
-                <el-radio v-model="type" label="常规版本" :disabled="fstDis">常规版本</el-radio>
-                <el-radio v-model="type" label="紧急版本" :disabled="fstDis">紧急版本</el-radio>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="guimo">
-                <label for>
-                  <span>*</span>版本规模：
-                </label>
-                <el-input-number
-                  size="mini"
-                  class="banbenguimo"
-                  v-model="banbenguimo"
-                  controls-position="right"
-                  @change="handleChange"
-                  :min="1"
-                  :disabled="fstDis"
-                ></el-input-number>
-                <el-popover
-                  placement="right-start"
-                  width="200"
-                  trigger="hover"
-                  content="
-                      此版本的需求个数"
-                  >
-                <el-button slot="reference" size="mini">
-                  <i class="icon iconfont icon-wenhao"></i>
-                </el-button>
-              </el-popover>
-              </div>
-            </el-row>
-          </el-col>
-          <el-col :span=10>
-            <el-row>
-              <div class="shijian">
-                <label for>
-                  <span>*</span>提测时间：
-                </label>
-                <el-date-picker
-                  value-format="yyyy-MM-dd"
-                  size="mini"
-                  v-model="ticeshijian"
-                  type="date"
-                  placeholder="请选择日期"
-                  @change="bbh_change"
-                  :disabled="fstDis"
-                ></el-date-picker>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="mingcheng">
-                <label for>
-                  <span>*</span>系统名称：
-                </label>                
-                <el-select v-model="xitongming" filterable placeholder="请选择" size="mini" :disabled="fstDis" @change="bbh_change">
-                  <el-option
-                    v-for="item in sysoptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"                    
-                    >
-                  </el-option>
-                </el-select>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="jihua">
-                <label for>
-                  <span>*</span>是否计划内：
-                </label>
-                <el-radio v-model="plan" label="是" :disabled="fstDis">是</el-radio>
-                <el-radio v-model="plan" label="否" :disabled="fstDis">否</el-radio>
-              </div>
-            </el-row>
-          </el-col>
-        </el-main>
-      </el-container>
+      <vision-head ref="visionhead" @bbhchange="bbh_change"></vision-head>
       <br />
       <br />
     </div>
     <!-- TAB页-->
+    <div>
     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-      <!-- 交付物-->
+      <!--  交付物 -->
       <el-tab-pane label="交付物检查" name="first">
-        <div class="jfw_fst">
-          <strong>
-            交付物得分：
-            <input type="text" class="jiaofuwudefen" v-model="jiaofuwudefen" :disabled="scoreDis"/>分
-          </strong>
-        </div>
-        <br />
-        <!-- 需求文档信息-->
-        <div class="jfw_sec">
-          <el-container>
-            <el-header class="xq_head" height="40px">
-              <strong>
-                需求文档：
-                <input type="text" class="xuqiudefen" v-model="xuqiudefen" :disabled="scoreDis"/>分
-              </strong>
-              <el-popover
-                placement="right-start"
-                width="500"
-                trigger="hover"
-                content="
-                    1、常规版本：建议在需求文档确认完毕之后提交给质控组，在版本提测前2个工作日仍未提交需求文档，视为未及时提交扣3分；
-                    2、常规版本：在版本提测时未提交需求文档，视为未提交，扣5分；
-                    3、紧急版本：在版本提测时向质控组提交需求文档，若提测时未提交需求文档，视为未提交，扣5分；
-                    4、需求文档必须是word或excel格式，若为其他格式视为未提交，扣5分。"
-              >
-                <el-button slot="reference" size="mini">
-                  <i class="icon iconfont icon-wenhao"></i>
-                </el-button>
-              </el-popover>
-            </el-header>
-            <el-main class="xq_main">
-              <el-col :span=10>
-                <el-row>
-                  <div class="xq11">
-                    <label>
-                      <span>*</span>是否提交：
-                    </label>
-                    <el-radio v-model="xq_tijiao" label="是" :disabled="fstDis">是</el-radio>
-                    <el-radio v-model="xq_tijiao" label="否" :disabled="fstDis">否</el-radio>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="xq12">
-                    <label for>
-                      <span>*</span>提交人：
-                    </label>
-                    <el-select v-model="state_xq_tijiaoren" filterable  size="mini" :disabled="fstDis">
-                  <el-option
-                    v-for="item in sysperson"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"                    
-                    >
-                  </el-option>
-                    </el-select>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="xq13">
-                    <label for>
-                      <span>*</span>是否延迟：
-                    </label>
-                    <el-radio v-model="xq_yanchi" label="是" :disabled="fstDis">是</el-radio>
-                    <el-radio v-model="xq_yanchi" label="否" :disabled="fstDis">否</el-radio>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="xq14">
-                    <label for>
-                      <span>*</span>提测后需求变更次数：
-                    </label>
-                    <el-input-number
-                      size="mini"
-                      v-model="xq_change"
-                      class="xq_change"
-                      controls-position="right"
-                      @change="handleChange"
-                      :min="0"
-                      :disabled="fstDis"
-                    ></el-input-number>
-                  </div>
-                </el-row>
-              </el-col>
-              <el-col :span=10>
-                <el-row>
-                  <div class="xq21">
-                    <label for>
-                      <span>*</span>文档格式：
-                    </label>
-                    <el-radio v-model="xq_geshi" label="word" :disabled="fstDis">word</el-radio>
-                    <el-radio v-model="xq_geshi" label="excel" :disabled="fstDis">excel</el-radio>
-                    <el-radio v-model="xq_geshi" label="其他" :disabled="fstDis">其他</el-radio>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="xq22">
-                    <label for>
-                      <span>*</span>提交时间：
-                    </label>
-                    <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="xq_time" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="xq23">
-                    <label for>
-                      <span>*</span>需求来源是否明确：
-                    </label>
-                    <el-radio v-model="xq_laiyuan" label="是" :disabled="fstDis">是</el-radio>
-                    <el-radio v-model="xq_laiyuan" label="否" :disabled="fstDis">否</el-radio>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="xq24">
-                    <label for>
-                      <span>*</span>不符合项：
-                    </label>
-                    <el-input
-                      size="mini"
-                      placeholder="请输入内容"
-                      class="xq_error"
-                      v-model="xq_error"
-                      clearable
-                      :disabled="fstDis"
-                    ></el-input>
-                  </div>
-                </el-row>
-              </el-col>
-            </el-main>
-          </el-container>
-        </div>
-        <br />
-        <!-- 测试用例信息-->
-        <div class="jfw_trd">
-          <el-container>
-            <el-header class="yl_head" height="40px">
-              <strong>
-                测试用例：
-                <input type="text" class="csyldf" v-model="csyldf" :disabled="scoreDis"/>分
-              </strong>
-              <el-popover
-                placement="right-start"
-                width="500"
-                trigger="hover"
-                content="
-                            1、常规版本：在版本提测时未提交测试用例的，扣25分；
-                            2、紧急版本：版本上线后一个自然月内项目组需补充提交自测试用例，超时视为未提交，扣25分。
-                      3、测试用例格式可参考质控组提供的用例模板，但必须包含用例标题、前置条件、操作步骤、预期结果、执行人、执行结果，每缺1项扣5分，扣完25分为止；
-                          4、测试用例内容缺失或错误，必须包含用例标题、前置条件、操作步骤、预期结果、执行人、执行结果未填写或填写错误，每一处扣1分，扣完25分为止。"
-              >
-                <el-button slot="reference" size="mini">
-                  <i class="icon iconfont icon-wenhao"></i>
-                </el-button>
-              </el-popover>
-            </el-header>
-            <el-main class="yl_main">
-              <el-col :span=10>
-                <el-row>
-                  <div class="yl11">
-                    <label>
-                      <span>*</span>是否提交：
-                    </label>
-                    <el-radio v-model="yl_tijiao" label="是" :disabled="fstDis">是</el-radio>
-                    <el-radio v-model="yl_tijiao" label="否" :disabled="fstDis">否</el-radio>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="yl12">
-                    <label for>
-                      <span>*</span>提交人：
-                    </label>
-                    <el-select v-model="state_yl_tijiaoren" filterable  size="mini" :disabled="fstDis">
-                  <el-option
-                    v-for="item in sysperson"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"                    
-                    >
-                  </el-option>
-                    </el-select>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="yl13">
-                    <label for>
-                      <span>*</span>是否延迟：
-                    </label>
-                    <el-radio v-model="yl_yanchi" label="是" :disabled="fstDis">是</el-radio>
-                    <el-radio v-model="yl_yanchi" label="否" :disabled="fstDis">否</el-radio>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="yl14">
-                    <label for>
-                      <span>*</span>用例标题缺失或错误数量：
-                    </label>
-                    <el-input-number
-                      size="mini"
-                      v-model="yl_bt"
-                      class="yl_bt"
-                      controls-position="right"
-                      @change="handleChange"
-                      :min="0"
-                      :disabled="fstDis"
-                    ></el-input-number>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="yl15">
-                    <label for>
-                      <span>*</span>预期结果缺失或错误数量：
-                    </label>
-                    <el-input-number
-                      size="mini"
-                      v-model="yl_yq"
-                      class="yl_yq"
-                      controls-position="right"
-                      @change="handleChange"
-                      :min="0"
-                      :disabled="fstDis"
-                    ></el-input-number>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="yl16">
-                    <label for>
-                      <span>*</span>执行结果缺失或错误数量：
-                    </label>
-                    <el-input-number
-                      size="mini"
-                      v-model="yl_jg"
-                      class="yl_jg"
-                      controls-position="right"
-                      @change="handleChange"
-                      :min="0"
-                      :disabled="fstDis"
-                    ></el-input-number>
-                  </div>
-                </el-row>
-              </el-col>
-              <el-col :span=10>
-                <el-row>
-                  <div class="yl21">
-                    <label for>
-                      <span>*</span>文档格式：
-                    </label>
-                    <el-radio v-model="yl_geshi" label="word" :disabled="fstDis" >word</el-radio>
-                    <el-radio v-model="yl_geshi" label="excel" :disabled="fstDis">excel</el-radio>
-                    <el-radio v-model="yl_geshi" label="其他" :disabled="fstDis">其他</el-radio>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="yl22">
-                    <label for>
-                      <span>*</span>提交时间：
-                    </label>
-                    <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="yl_time" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="yl23">
-                    <label for>
-                      <span>*</span>前置条件缺失或错误数量：
-                    </label>
-                    <el-input-number
-                      size="mini"
-                      v-model="yl_qz"
-                      class="yl_qz"
-                      controls-position="right"
-                      @change="handleChange"
-                      :min="0"
-                      :disabled="fstDis"
-                    ></el-input-number>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="yl24">
-                    <label for>
-                      <span>*</span>执行人缺失或错误数量：
-                    </label>
-                    <el-input-number
-                      size="mini"
-                      v-model="yl_zxr"
-                      class="yl_zxr"
-                      controls-position="right"
-                      @change="handleChange"
-                      :min="0"
-                      :disabled="fstDis"
-                    ></el-input-number>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="yl25">
-                    <label for>
-                      <span>*</span>操作步骤缺失或错误数量：
-                    </label>
-                    <el-input-number
-                      size="mini"
-                      v-model="yl_bz"
-                      class="yl_bz"
-                      controls-position="right"
-                      @change="handleChange"
-                      :min="0"
-                      :disabled="fstDis"
-                    ></el-input-number>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="yl26">
-                    <label for>
-                      <span>*</span>不符合项：
-                    </label>
-                    <el-input
-                      size="mini"
-                      placeholder="请输入内容"
-                      class="yl_error"
-                      v-model="yl_error"
-                      clearable
-                      :disabled="fstDis"
-                    ></el-input>
-                  </div>
-                </el-row>
-              </el-col>
-            </el-main>
-          </el-container>
-        </div>
-        <br />
-        <!-- 测试报告信息-->
-        <div class="jfw_fth">
-          <el-container>
-            <el-header class="bg_head" height="40px">
-              <strong>
-                测试报告：
-                <input type="text" class="csbgdf" v-model="csbgdf" :disabled="scoreDis"/>分
-              </strong>
-              <el-popover
-                placement="right-start"
-                width="500"
-                trigger="hover"
-                content="
-                    1、常规版本：在版本提测时未提交测试报告的，扣20分；
-                    2、紧急版本：版本上线后一个自然月内项目组需补充提交自测试报告，超时视为未提交，扣20分。
-                    3、测试报告可参考质控组提供的报告模板，但必须包含测试范围、测试环境、测试执行情况、缺陷统计分析、测试结论，每缺1项扣5分，扣完20分为止；
-                    4、测试报告内容缺失或错误，必须包含测试范围、测试环境、测试执行情况、缺陷统计分析、测试结论，每一处扣1分，扣完20分为止；"
-              >
-                <el-button slot="reference" size="mini">
-                  <i class="icon iconfont icon-wenhao"></i>
-                </el-button>
-              </el-popover>
-            </el-header>
-            <el-main class="bg_main">
-              <el-col :span=10>
-                <el-row>
-                  <div class="bg11">
-                    <label>
-                      <span>*</span>是否提交：
-                    </label>
-                    <el-radio v-model="bg_tijiao" label="是" :disabled="fstDis">是</el-radio>
-                    <el-radio v-model="bg_tijiao" label="否" :disabled="fstDis">否</el-radio>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="bg12">
-                    <label for>
-                      <span>*</span>提交人：
-                    </label>
-                  <el-select v-model="state_bg_tijiaoren" filterable  size="mini" :disabled="fstDis">
-                  <el-option
-                    v-for="item in sysperson"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"                    
-                    >
-                  </el-option>
-                </el-select>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="bg13">
-                    <label for>
-                      <span>*</span>是否延迟：
-                    </label>
-                    <el-radio v-model="bg_yanchi" label="是" :disabled="fstDis">是</el-radio>
-                    <el-radio v-model="bg_yanchi" label="否" :disabled="fstDis">否</el-radio>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="bg14">
-                    <label for>
-                      <span>*</span>测试环境缺失或错误数量：
-                    </label>
-                    <el-input-number
-                      size="mini"
-                      v-model="bg_hj"
-                      class="bg_hj"
-                      controls-position="right"
-                      @change="handleChange"
-                      :min="0"
-                      :disabled="fstDis"
-                    ></el-input-number>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="bg15">
-                    <label for>
-                      <span>*</span>缺陷统计分析缺失或错误数量：
-                    </label>
-                    <el-input-number
-                      size="mini"
-                      v-model="bg_qx"
-                      class="bg_qx"
-                      controls-position="right"
-                      @change="handleChange"
-                      :min="0"
-                      :disabled="fstDis"
-                    ></el-input-number>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="bg16">
-                    <label for>
-                      <span>*</span>不符合项：
-                    </label>
-                    <el-input
-                      size="mini"
-                      placeholder="请输入内容"
-                      class="bg_error"
-                      v-model="bg_error"
-                      clearable
-                      :disabled="fstDis"
-                    ></el-input>
-                  </div>
-                </el-row>
-              </el-col>
-              <el-col :span=10>
-                <el-row>
-                  <div class="bg21">
-                    <label for>
-                      <span>*</span>文档格式：
-                    </label>
-                    <el-radio v-model="bg_geshi" label="word" :disabled="fstDis">word</el-radio>
-                    <el-radio v-model="bg_geshi" label="excel" :disabled="fstDis">excel</el-radio>
-                    <el-radio v-model="bg_geshi" label="其他" :disabled="fstDis">其他</el-radio>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="bg22">
-                    <label for>
-                      <span>*</span>提交时间：
-                    </label>
-                    <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="bg_time" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="bg23">
-                    <label for>
-                      <span>*</span>测试执行情况缺失或错误数：
-                    </label>
-                    <el-input-number
-                      size="mini"
-                      v-model="bg_qk"
-                      class="bg_qk"
-                      controls-position="right"
-                      @change="handleChange"
-                      :min="0"
-                      :disabled="fstDis"
-                    ></el-input-number>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="bg24">
-                    <label for>
-                      <span>*</span>测试范围缺失或错误数：
-                    </label>
-                    <el-input-number
-                      size="mini"
-                      v-model="bg_fw"
-                      class="bg_fw"
-                      controls-position="right"
-                      @change="handleChange"
-                      :min="0"
-                      :disabled="fstDis"
-                    ></el-input-number>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div class="bg25">
-                    <label for>
-                      <span>*</span>测试结论缺失或错误数：
-                    </label>
-                    <el-input-number
-                      size="mini"
-                      v-model="bg_jl"
-                      class="bg_jl"
-                      controls-position="right"
-                      @change="handleChange"
-                      :min="0"
-                      :disabled="fstDis"
-                    ></el-input-number>
-                  </div>
-                </el-row>
-              </el-col>
-            </el-main>
-          </el-container>
-        </div>
+        <doc ref="doc" ></doc>
       </el-tab-pane>
+      
       <!-- 抽测-->
       <el-tab-pane label="抽测" name="second">
-        <div class="cc_fst">
-          <strong>
-            抽测得分：
-            <input type="text" class="ccdf" v-model="ccdf" :disabled="scoreDis"/>分
-          </strong>
-          <el-popover
-            placement="right-start"
-            width="500"
-            trigger="hover"
-            content="
-                    抽测通过率达到90%，不扣分；低于90%的，每降低1个百分点，扣0.5分。"
-          >
-            <el-button slot="reference" size="mini">
-              <i class="icon iconfont icon-wenhao"></i>
-            </el-button>
-          </el-popover>
-        </div>
-        <br />
-        <div class="cc_main">
-          <el-col :span=10>
-            <el-row>
-              <div class="cc11">
-                <label for>
-                  <span>*</span>测试开始时间：
-                </label>
-                <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="cc_begin" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="cc12">
-                <label for>
-                  <span>*</span>抽测人：
-                </label>                
-                <el-select v-model="state_cc_r" filterable  size="mini" :disabled="fstDis">
-                  <el-option
-                    v-for="item in testPerson"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"                    
-                    >
-                  </el-option>
-                </el-select>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="cc13">
-                <label>
-                  <span>*</span>抽测用例数：
-                </label>
-                <el-input :min="0" type="number" size="mini" class="ccyls" v-model="ccyls" placeholder :disabled="fstDis"></el-input>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="cc14">
-                
-                  <label>
-                    <span>*</span>不通过数：
-                  </label>
-                  <el-input :min="0" type="number" size="mini" class="btgs" v-model="cc_btgs" placeholder :disabled="fstDis"></el-input>
-                
-              </div>
-            </el-row>
-            <el-row>
-              <div class="cc15">
-                <label>
-                  <span>*</span>抽测通过率：
-                </label>
-                <el-input  size="mini" class="cctgl" v-model.number="cctgl" placeholder :disabled="scoreDis"></el-input>
-              </div>
-            </el-row>
-          </el-col>
-          <el-col :span=10>
-            <el-row>
-              <div class="cc21">
-                <label for>
-                  <span>*</span>测试结束时间：
-                </label>
-                <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="cc_end" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="cc22">
-                <label>
-                  <span>*</span>用例总数：
-                </label>
-                <el-input type="number" size="mini" class="ylzs" v-model="ylzs" placeholder :disabled="fstDis"></el-input>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="cc23">
-                <label>
-                  <span>*</span>通过数：
-                </label>
-                <el-input type="number" size="mini" class="tgs" v-model="tgs" placeholder :disabled="fstDis"></el-input>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="cc24">
-                <label>
-                  <span>*</span>阻塞数：
-                </label>
-                <el-input type="number" size="mini" class="zss" v-model="zss" placeholder :disabled="scoreDis"></el-input>
-              </div>
-            </el-row>
-            <el-row>
-              <div class="cc25">
-                <label>
-                  <span>*</span>抽测比例：
-                </label>
-                <el-input size="mini" class="ccbl" v-model="ccbl" placeholder :disabled="scoreDis"></el-input>
-              </div>
-            </el-row>
-          </el-col>
-        </div>
+      <randomtest ref="randomtest" ></randomtest>
       </el-tab-pane>
       <!-- 验收-->
       <el-tab-pane label="质控验收测试" name="third">
-        <div class="ys_fst">
-          <strong>
-            质控验收测试得分：
-            <input type="text" class="yanshoudefen" v-model="yanshoudefen" :disabled="scoreDis"/>分
-          </strong>
-          <el-popover
-            placement="right-start"
-            width="500"
-            trigger="hover"
-            content="
-                    一次通过率达到85%以上的，不扣分；低于85%的，每低于1个百分点，扣1分，扣完30分为止；二次通过率达到95%以上的，不扣分；低于95%的，每低于1个百分点，扣1分，扣完30分为止；三次通过率达到100%，不扣分；低于100%的，每低于1个百分点，扣1分，扣完30分为止；验收测试超过三次，扣30分。"
-          >
-            <el-button slot="reference" size="mini">
-              <i class="icon iconfont icon-wenhao"></i>
-            </el-button>
-          </el-popover>
-        </div>
-        <br />
-        <!-- 一轮验收-->
-        <el-container>
-          <el-header class="a_head" height="30px">
-            <strong>一轮验收</strong>
-            <el-button size="mini" type="primary" class="a_new" round @click="anew">新增</el-button>
-            <el-button size="mini" class="a_delete" round @click="adel">删除</el-button>
-          </el-header>
-          <el-main class="a_main">
-            <el-col :span=10>
-              <el-row>
-                <div class="a11">
-                  <label for>
-                    <span>*</span>测试开始时间：
-                  </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="a_begin" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a12">
-                  <label for>
-                    <span>*</span>测试人：
-                  </label>
-                  <el-select v-model="state_a_csr" filterable  size="mini" :disabled="fstDis">
-                  <el-option
-                    v-for="item in testPerson"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"                    
-                    >
-                  </el-option>
-                </el-select>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a13">
-                  <label for>
-                    <span>*</span>通过数：
-                  </label>
-                  <el-input type="number" size="mini" class="a_tgs" v-model="a_tgs" :disabled="fstDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a14">
-                  <label for>
-                    <span>*</span>阻塞数：
-                  </label>
-                  <el-input type="number" size="mini" class="a_zss" v-model="a_zss" :disabled="scoreDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a15">
-                  <label for>
-                    <span>*</span>第一轮版本通过率：
-                  </label>
-                  <el-input size="mini" class="a_tgl" v-model="a_tgl" :disabled="scoreDis"></el-input>
-                </div>
-              </el-row>
-            </el-col>
-            <el-col :span=10>
-              <el-row>
-                <div class="a21">
-                  <label for>
-                    <span>*</span>测试结束时间：
-                  </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="a_end" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a22">
-                  <label for>
-                    <span>*</span>用例执行个数：
-                  </label>
-                  <el-input type="number" size="mini" class="a_ylzxgs" v-model="a_ylzxgs" :disabled="fstDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a23">
-                  <label for>
-                    <span>*</span>不通过数：
-                  </label>
-                  <el-input type="number" size="mini" class="a_btgs" v-model="a_btgs" :disabled="fstDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a24">
-                  <label for>
-                    <span>*</span>缺陷数：
-                  </label>
-                  <el-input type="number" size="mini" class="a_qxs" v-model="a_qxs" :disabled="fstDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a25">
-                  <label for>
-                    <span>*</span>第一轮验收结果：
-                  </label>
-                  <el-radio v-model="a_jieguo" label="通过" :disabled="fstDis">通过</el-radio>
-                  <el-radio v-model="a_jieguo" label="不通过" :disabled="fstDis">不通过</el-radio>
-                </div>
-              </el-row>
-            </el-col>
-          </el-main>
-        </el-container>
-        <br />
-        <!-- 二轮验收-->
-        <el-container v-show="b_show">
-          <el-header class="b_head" height="30px">
-            <strong>二轮验收</strong>
-            <el-button size="mini" type="primary" class="b_new" round @click="bnew">新增</el-button>
-            <el-button size="mini" class="b_delete" round @click="bdel">删除</el-button>
-          </el-header>
-          <el-main class="b_main">
-            <el-col :span=10>
-              <el-row>
-                <div class="a11">
-                  <label for>
-                    <span>*</span>测试开始时间：
-                  </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="b_begin" type="date" placeholder="请选择日期" :disabled="secDis"></el-date-picker>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a12">
-                  <label for>
-                    <span>*</span>测试人：
-                  </label>
-                <el-select v-model="state_b_csr" filterable  size="mini" :disabled="secDis">
-                  <el-option
-                    v-for="item in testPerson"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"                    
-                    >
-                  </el-option>
-                </el-select>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a13">
-                  <label for>
-                    <span>*</span>通过数：
-                  </label>
-                  <el-input type="number" size="mini" class="b_tgs" v-model="b_tgs" :disabled="secDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a14">
-                  <label for>
-                    <span>*</span>阻塞数：
-                  </label>
-                  <el-input type="number" size="mini" class="b_zss" v-model="b_zss" :disabled="scoreDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a15">
-                  <label for>
-                    <span>*</span>第二轮版本通过率：
-                  </label>
-                  <el-input size="mini" class="b_tgl" v-model="b_tgl" :disabled="scoreDis"></el-input>
-                </div>
-              </el-row>
-            </el-col>
-            <el-col :span=10>
-              <el-row>
-                <div class="a21">
-                  <label for>
-                    <span>*</span>测试结束时间：
-                  </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="b_end" type="date" placeholder="请选择日期" :disabled="secDis"></el-date-picker>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a22">
-                  <label for>
-                    <span>*</span>用例执行个数：
-                  </label>
-                  <el-input type="number" size="mini" class="b_ylzxgs" v-model="b_ylzxgs" :disabled="secDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a23">
-                  <label for>
-                    <span>*</span>不通过数：
-                  </label>
-                  <el-input type="number" size="mini" class="b_btgs" v-model="b_btgs" :disabled="secDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a24">
-                  <label for>
-                    <span>*</span>缺陷数：
-                  </label>
-                  <el-input type="number" size="mini" class="b_qxs" v-model="b_qxs" :disabled="secDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a25">
-                  <label for>
-                    <span>*</span>第二轮验收结果：
-                  </label>
-                  <el-radio v-model="b_jieguo" label="通过" :disabled="secDis">通过</el-radio>
-                  <el-radio v-model="b_jieguo" label="不通过" :disabled="secDis">不通过</el-radio>
-                </div>
-              </el-row>
-            </el-col>
-          </el-main>
-        </el-container>
-        <br />
-        <!-- 三轮验收-->
-        <el-container v-show="c_show">
-          <el-header class="c_head" height="30px">
-            <strong>三轮验收</strong>
-
-            <el-button size="mini" class="c_delete" round @click="cdel">删除</el-button>
-          </el-header>
-          <el-main class="c_main">
-            <el-col :span=10>
-              <el-row>
-                <div class="a11">
-                  <label for>
-                    <span>*</span>测试开始时间：
-                  </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="c_begin" type="date" placeholder="请选择日期" :disabled="trdDis"></el-date-picker>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a12">
-                  <label for>
-                    <span>*</span>测试人：
-                  </label>
-                  <el-select v-model="state_c_csr" filterable  size="mini" :disabled="trdDis">
-                  <el-option
-                    v-for="item in testPerson"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"                    
-                    >
-                  </el-option>
-                </el-select>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a13">
-                  <label for>
-                    <span>*</span>通过数：
-                  </label>
-                  <el-input type="number" size="mini" class="c_tgs" v-model="c_tgs" :disabled="trdDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a14">
-                  <label for>
-                    <span>*</span>阻塞数：
-                  </label>
-                  <el-input type="number" size="mini" class="c_zss" v-model="c_zss" :disabled="scoreDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a15">
-                  <label for>
-                    <span>*</span>第三轮版本通过率：
-                  </label>
-                  <el-input size="mini" class="c_tgl" v-model="c_tgl" :disabled="scoreDis"></el-input>
-                </div>
-              </el-row>
-            </el-col>
-            <el-col :span=10>
-              <el-row>
-                <div class="a21">
-                  <label for>
-                    <span>*</span>测试结束时间：
-                  </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="c_end" type="date" placeholder="请选择日期" :disabled="trdDis"></el-date-picker>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a22">
-                  <label for>
-                    <span>*</span>用例执行个数：
-                  </label>
-                  <el-input type="number" size="mini" class="c_ylzxgs" v-model="c_ylzxgs" :disabled="trdDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a23">
-                  <label for>
-                    <span>*</span>不通过数：
-                  </label>
-                  <el-input type="number" size="mini" class="c_btgs" v-model="c_btgs" :disabled="trdDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a24">
-                  <label for>
-                    <span>*</span>缺陷数：
-                  </label>
-                  <el-input size="mini" type="number" class="c_qxs" v-model="c_qxs" :disabled="trdDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a25">
-                  <label for>
-                    <span>*</span>第三轮验收结果：
-                  </label>
-                  <el-radio v-model="c_jieguo" label="通过" :disabled="trdDis">通过</el-radio>
-                  <el-radio v-model="c_jieguo" label="不通过" :disabled="trdDis">不通过</el-radio>
-                </div>
-              </el-row>
-            </el-col>
-          </el-main>
-        </el-container>
+       <test ref="test"></test>
       </el-tab-pane>
     </el-tabs>
     <br />
     <br />
     <br />
     <br />
-    <br />
+    <br /></div>
     <div class="foot">
       <el-button @click="submit" type="primary" plain>提交</el-button>
       <el-button @click="cancel" plain>取消</el-button>
@@ -1111,7 +49,6 @@
 </script>
 <script>
 import axios from "axios";
-
 export default {
   beforeRouteEnter:((to,from,next)=>{
     next(vm=>{
@@ -1123,177 +60,128 @@ export default {
       //   let data=res.data
       //   vm.ticeshijian=data.ticeshijian
       // })
-      
     })
   }),
+  components:{
+    "vision-head":()=>import('./vision_head'),
+    "doc":()=>import('./doc'),
+    "randomtest":()=>import('./random_test'),
+    "test":()=>import('./test'),
+  },
   name: "scoreIndex",
   data() {
     return {
+      banbenhao:'',
       status:0,
       rounds:0,
-      fstDis:false,
+      // fstDis:false,
       scoreDis:true,
-      secDis:true,
-      trdDis:true,
-      value:'',
-      xitongming:'',
-      visible: false,
-      b_show: false,
-      c_show: false,
-      groupName: "",
-      stateperson: "",
-      state_xq_tijiaoren: "",
-      state_yl_tijiaoren: "",
-      state_bg_tijiaoren: "",
-      state_cc_r: "",
-      state_a_csr: "",
-      state_b_csr: "",
-      state_c_csr: "",
+      // secDis:true,
+      // trdDis:true,
+      value:'',     
+      // xitongming:'',
+      // visible: false,
+      // b_show: false,
+      // c_show: false,
+      // groupName: "",
+      // stateperson: "",
+      // state_xq_tijiaoren: "",
+      // state_yl_tijiaoren: "",
+      // state_bg_tijiaoren: "",
+      // state_cc_r: "",
+      // state_a_csr: "",
+      // state_b_csr: "",
+      // state_c_csr: "",
       pickerOptions: {
         disabledDate(time) {
           return time.getTime() > Date.now();
         },
       },
-      ticeshijian: "",
-      type: "常规版本",
-      plan: "是",
-      banbenguimo: 0,
+      // ticeshijian: this.$refs.visionhead._data.ticeshijian,
+      // type: "常规版本",
+      // plan: "是",
+      // banbenguimo: 0,
       activeName: "first",
-      xq_change: 0,
-      xq_tijiao: "是",
-      xq_yanchi: "否",
-      xq_geshi: "word",
-      xq_time: "",
-      xq_laiyuan: "是",
-      xq_error: "",
-      yl_tijiao: "是",
-      yl_yanchi: "否",
-      yl_geshi: "word",
-      yl_time: "",
-      yl_bt: 0,
-      yl_qz: 0,
-      yl_zxr: 0,
-      yl_yq: 0,
-      yl_bz: 0,
-      yl_jg: 0,
-      yl_error: "",
-      bg_tijiao: "是",
-      bg_yanchi: "否",
-      bg_geshi: "word",
-      bg_time: "",
-      bg_error: "",
-      bg_qx: 0,
-      bg_hj: 0,
-      bg_jl: 0,
-      bg_fw: 0,
-      bg_qk: 0,
-      bg_error: "",
-      cc_begin: "",
-      cc_end: "",
-      ccyls: "",
-      cc_btgs: "",
-      ylzs: "",
-      tgs: "",
-      a_begin: "",
-      a_end: "",
-      a_jieguo: "通过",
-      a_tgs: "",
-      a_btgs: "",
-      a_ylzxgs: "",
-      a_qxs: "",
-      b_begin: "",
-      b_end: "",
-      b_jieguo: "通过",
-      b_tgs: "",
-      b_btgs: "",
-      b_ylzxgs: "",
-      b_qxs: "",
-      c_begin: "",
-      c_end: "",
-      c_jieguo: "通过",
-      c_tgs: "",
-      c_btgs: "",
-      c_ylzxgs: "",
-      c_qxs: "",
+      // xq_change: 0,
+      // xq_tijiao: "是",
+      // xq_yanchi: "否",
+      // xq_geshi: "word",
+      // xq_time: "",
+      // xq_laiyuan: "是",
+      // xq_error: "",
+      // yl_tijiao: "是",
+      // yl_yanchi: "否",
+      // yl_geshi: "word",
+      // yl_time: "",
+      // yl_bt: 0,
+      // yl_qz: 0,
+      // yl_zxr: 0,
+      // yl_yq: 0,
+      // yl_bz: 0,
+      // yl_jg: 0,
+      // yl_error: "",
+      // bg_tijiao: "是",
+      // bg_yanchi: "否",
+      // bg_geshi: "word",
+      // bg_time: "",
+      // bg_error: "",
+      // bg_qx: 0,
+      // bg_hj: 0,
+      // bg_jl: 0,
+      // bg_fw: 0,
+      // bg_qk: 0,
+      // bg_error: "",
+      // cc_begin: "",
+      // cc_end: "",
+      // ccyls: "",
+      // cc_btgs: "",
+      // ylzs: "",
+      // tgs: "",
+      // a_begin: "",
+      // a_end: "",
+      // a_jieguo: "通过",
+      // a_tgs: "",
+      // a_btgs: "",
+      // a_ylzxgs: "",
+      // a_qxs: "",
+      // b_begin: "",
+      // b_end: "",
+      // b_jieguo: "通过",
+      // b_tgs: "",
+      // b_btgs: "",
+      // b_ylzxgs: "",
+      // b_qxs: "",
+      // c_begin: "",
+      // c_end: "",
+      // c_jieguo: "通过",
+      // c_tgs: "",
+      // c_btgs: "",
+      // c_ylzxgs: "",
+      // c_qxs: "",
+      banbendefen:''
     };
   },
-
-  methods: {    
-    handleChange(){
-      },
-    adel() {
-      let a = confirm("确定删除？");
-      if (a) {
-        (this.a_begin = ""),
-          (this.a_end = ""),
-          (this.a_jieguo = "通过"),
-          (this.a_tgs = ""),
-          (this.a_btgs = ""),
-          (this.a_ylzxgs = ""),
-          (this.a_zss = ""),
-          (this.a_tgl = ""),
-          (this.a_qxs = ""),
-          (this.a_csr = ""),
-          (this.state_a_csr = "");
-      } else {
-      }
-    },
-    bdel() {
-      let b = confirm("确定删除？");
-      if (b) {
-        (this.b_begin = ""),
-          (this.b_end = ""),
-          (this.b_jieguo = "通过"),
-          (this.b_tgs = ""),
-          (this.b_btgs = ""),
-          (this.b_ylzxgs = ""),
-          (this.b_zss = ""),
-          (this.b_tgl = ""),
-          (this.b_qxs = ""),
-          (this.b_csr = ""),
-          (this.state_b_csr = ""),
-          (this.b_show = false);
-      } else {
-      }
-    },
-    cdel() {
-      let a = confirm("确定删除？");
-      if (a) {
-        (this.c_begin = ""),
-          (this.c_end = ""),
-          (this.c_jieguo = "通过"),
-          (this.c_tgs = ""),
-          (this.c_btgs = ""),
-          (this.c_ylzxgs = ""),
-          (this.c_zss = ""),
-          (this.c_tgl = ""),
-          (this.c_qxs = ""),
-          (this.c_csr = ""),
-          (this.state_c_csr = ""),
-          (this.c_show = false);
-      } else {
-      }
-    },
-    anew() {
-      this.b_show = true;
-    },
-    bnew() {
-      this.c_show = true;
-    },       
+  // mounted(){
+  //   console.log(this.$refs);
+  // },
+  methods: {          
     handleClick(tab, event) {
-      console.log(tab, event);
+      // console.log(tab, event);
     },
-    bbh_change(){
-      let vm=this
-      if(this.ticeshijian!=''&&this.xitongming!=''){
-        let bbh={"banbenhao":this.ticeshijian+this.xitongming};
-        $.ajax({
-        type:"post",
-        url:"/selectSorce",
-        data:JSON.stringify(bbh),
-        contentType:"application/json",
-        dataType:"json",
-        success: (data)=>{
+    bbh_change(ticeshijian,xitongming){
+      this.banbenhao=ticeshijian+xitongming
+      let bbh={"banbenhao":this.banbenhao}
+      console.log(bbh);     
+        // $.ajax({
+        // type:"post",
+        // url:"/selectSorce",
+        // data:JSON.stringify(bbh),
+        // contentType:"application/json",
+        // dataType:"json",       
+        // success: (data)=>{ 
+          axios.post('/selectSorce',bbh)
+          .then((res)=>{
+          let data=res.data
               vm.fstDis=true;
               vm.secDis=false;
               vm.type=data.type;
@@ -1359,8 +247,6 @@ export default {
               vm.a_jieguo=data.ajieguo;
               vm.yanshoudefen=data.yanshoudefen;
               vm.banbendefen=data.zongfen;
-            
-            // if(b_tongguolv==-999){
       if(data.btgl!=-999){
                 vm.fstDis=true;
                 vm.secDis=true;
@@ -1395,17 +281,15 @@ export default {
                     vm.banbendefen=data.zongfen;
                     
                 }
-            }
-            
-                
-            
-            
-        }
-          });
-      }
-      else{}
+            }       
+          })   
     },    
     submit(){
+      let headdata=this.$refs.visionhead
+      let docdata=this.$refs.doc
+      let randomtestdata=this.$refs.randomtest
+      let testdata=this.$refs.test
+      console.log(headdata.ticeshijian);
       //判空
         if(
           this.groupName==''||
@@ -1823,259 +707,30 @@ export default {
           }
           else{}
       },
+    
   },
-
-  computed: {
-    testPerson(){
-      return this.$store.getters.getTestPerson
-    },
-    sysperson(){
-      return this.$store.getters.getSysPerson
-    },
-    sysoptions(){
-      return this.$store.getters.getSys
-    },
-    group(){
-      return this.$store.getters.getGroup
-    },
-    csyldf:{
-      get(){
-      let a =
-        25 -
-        this.yl_bt -
-        this.yl_qz -
-        this.yl_yq -
-        this.yl_bz -
-        this.yl_jg -
-        this.yl_zxr;
-      if (a > 0) {
-        return a;
-      } else {
-        return 0;
-      }
-      },
-      set(){}
-    },
-    csbgdf: {
-      get(){
-      let a =
-        20 - this.bg_qx - this.bg_hj - this.bg_fw - this.bg_qk - this.bg_jl;
-      if (a > 0) {
-        return a;
-      } else {
-        return 0;
-      }
-      },
-      set(){}
-    },
-    xuqiudefen: {
-      get(){
-      let a =
-        5 -
-        (this.xq_tijiao == "是" ? 0 : 5) -
-        (this.xq_geshi == "其他" ? 5 : 0) -
-        (this.xq_yanchi == "是" ? 2 : 0);
-      if (a > 0) {
-        return a;
-      } else {
-        return 0;
-      }},
-      set(){}
-    },
-    jiaofuwudefen: {
-      get(){
-      return this.csyldf + this.csbgdf + this.xuqiudefen;},
-      set(){}
-    },
-    ccdf:  {
-      get(){
-      if (this.cctgl == "") {
-        return "";
-      } else {
-        let a=(this.tgs / this.ccyls).toFixed(2);
-        if (a < 0.9) {
-          if (a > 0.5) {
-            return 20 - (0.9 - a).toFixed(2) * 50;
-          } else {
-            return 0;
-          }
-        } else {
-          return 20;
-        }
-      }
-      },
-      set(){}
-    },
-    cctgl: {
-      get(){
-      if (this.tgs !== '' && this.ccyls !== '') {
-        return +(this.tgs / this.ccyls).toFixed(2);
-      } else {
-
-        return "";
-      }
-      },
-      set(){}
-    },
-    zss: {
-      get(){
-      if (this.tgs !== '' && (this.ccyls !== '') & (this.cc_btgs !== '')) {
-        return this.ccyls - this.tgs - this.cc_btgs;
-      } else {
-        return "";
-      }
-      },
-      set(){}
-    },
-    ccbl:{
-      get(){if (this.ylzs !== '' && this.ccyls !== '') {
-        return +(this.ccyls / this.ylzs).toFixed(2);
-      } else {
-        return "";
-      }
-      },
-      set(){}
-    }, 
-    a_zss: {
-      get(){
-        if (this.a_ylzxgs !== '' && this.a_tgs !== '' && this.a_btgs !== '') {
-        return this.a_ylzxgs - this.a_tgs - this.a_btgs;
-      } else {
-        return "";
-      }
-     },
-      set(){}
-    },
-    a_tgl: {
-      get(){
-         if (this.a_tgs !== '' && this.a_ylzxgs !== '') {
-        return +(this.a_tgs / this.a_ylzxgs).toFixed(2);
-      } else {
-        return "";
-      }},
-      set(){}
-    },
-    b_zss:{
-      get(){
-        if (this.b_ylzxgs !== '' && this.b_tgs !== '' && this.b_btgs !== '') {
-        return this.b_ylzxgs - this.b_tgs - this.b_btgs;
-      } else {
-        return "";
-      }},
-      set(){}
-    }, 
-    b_tgl: {
-      get(){
-        if (this.b_tgs !== '' && this.b_ylzxgs !== '') {
-        return +(this.b_tgs / this.b_ylzxgs).toFixed(2);
-      } else {
-        return "";
-      }
-      },
-      set(){}
-    },
-    c_zss: {
-      get(){
-        if (this.c_ylzxgs !== '' && this.c_tgs !== '' && this.c_btgs !== '') {
-        return this.c_ylzxgs - this.c_tgs - this.c_btgs;
-      } else {
-        return "";
-      }},
-      set(){}
-    },
-    c_tgl: {
-      get(){
-        if (this.c_tgs !== '' && this.c_ylzxgs !== '') {
-        return +(this.c_tgs / this.c_ylzxgs).toFixed(2);
-      } else {
-        return "";
-      }},
-      set(){}
-    },
-    banbendefen: {
-      get(){
-        if (this.ccdf !== '' && this.jiaofuwudefen !== '' && this.yanshoudefen !== '') {
-        return this.ccdf + this.jiaofuwudefen + this.yanshoudefen;
-      } else {
-        if (this.ccdf !== '' && this.jiaofuwudefen !== '') {
-          return this.ccdf + this.jiaofuwudefen;
-        } else {
-          return "";
-        }
-      }},
-      set(){}
-    },
-    yanshoudefen: {
-      get(){
-      let a = this.a_tgl;
-      let b = this.b_tgl;
-      let c = this.c_tgl;      
-      let d = 30 - (0.85 - a).toFixed(2) * 100;
-      let e = d - (0.95 - b).toFixed(2) * 100;
-      let f = 30 - (0.95 - b).toFixed(2) * 100;
-      //未填数据
-      if (a == 0) {
-        return "";
-      } else {
-        //一轮扣完30分
-        if (a < 0.55) {
-          return 0;
-        } else {
-          //一轮不扣分
-          if (a > 0.85) {
-            //二轮不扣分
-            if (b == 0 || b > 0.95) {
-              //三轮通过或无数据
-              if (c == 0 || c == 1) {
-                return 30;
-              } else {
-                return 0;
-              }
-            }
-            //二轮扣分
-            else {
-              if (f > 0) {
-                //三轮通过或无数据
-                if (c == 0 || c == 1) {
-                  return f;
-                } else {
-                  return 0;
-                }
-              } else {
-                return 0;
-              }
-            }
-          }
-          //一轮扣分小于30
-          else {
-            //二轮不扣分
-            if (b == 0 || b > 0.95) {
-              //三轮通过或无数据
-              if (c == 0 || c == 1) {
-                return d;
-              } else {
-                return 0;
-              }
-            }
-            //二轮扣分
-            else {
-              if (e > 0) {
-                //三轮通过或无数据
-                if (c == 0 || c == 1) {
-                  return e;
-                } else {
-                  return 0;
-                }
-              } else {
-                return 0;
-              }
-            }
-          }
-        }
-      }},
-      set(){}
-    },
+  computed: {    
+    // banbendefen: {
+    //   get(){
+    //      return this.$refs.doc.jiaofuwudefen
+    //     if (this.ccdf !== '' && this.jiaofuwudefen !== '' && this.yanshoudefen !== '') {
+    //     return this.ccdf + this.jiaofuwudefen + this.yanshoudefen;
+    //   } else {
+    //     if (this.ccdf !== '' && this.jiaofuwudefen !== '') {
+    //       return this.ccdf + this.jiaofuwudefen;
+    //     } else {
+    //       return "";
+    //     }
+    //   }
+    //   },
+    //   set(){}
+    // },
   },
+  updated(){
+    console.log(this.$refs);
+    // this.banbendefen=this.$refs.doc.jiaofuwudefen+this.$refs.randomtest.ccdf+this.$refs.test.yanshoudefen
+  },
+  
 };
 </script>
 

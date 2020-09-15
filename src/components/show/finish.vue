@@ -30,7 +30,7 @@
       fixed>
     </el-table-column>
     <el-table-column
-      prop="groupName"
+      prop="groupname"
       label="组别"
       min-width="80"
       align="center"      
@@ -43,7 +43,7 @@
       align="center"
       >
     </el-table-column>
-    <!-- <el-table-column
+    <el-table-column
       prop="jiaofuwudefen"
       label="交付物得分"
       min-width="100"
@@ -69,14 +69,14 @@
       sortable>
     </el-table-column>
     <el-table-column
-      prop="a_tgl"
+      prop="atgl"
       label="首轮通过率"
       min-width="120"
       align="center"
       sortable>
     </el-table-column>
     <el-table-column
-      prop="a_qxs"
+      prop="aqxs"
       label="首轮缺陷数"
       min-width="120"
       align="center"
@@ -94,7 +94,7 @@
       min-width="100"
       align="center"
       sortable>
-    </el-table-column> -->
+    </el-table-column>
     <el-table-column label="操作" align="center" min-width="90">
     <template slot-scope="scope">     
         <el-button @click="getScore(scope.$index,vers)">查看</el-button>        
@@ -106,6 +106,7 @@
 
 <script>
 import search from "./serach";
+import axios from "axios";
 export default {
   components:{
     "search":search
@@ -138,13 +139,12 @@ export default {
         }})
     }
     },      
-    // created(){
-    //     axios.get('/')
-    //     .then((res)=>{
-            
-    //         this.$store.commit('setFinishVer',res.data)
-    //     })
-    // }
+    created(){
+        axios.get('/selectFinishedInfo')
+        .then((res)=>{           
+            this.$store.commit('setFinishVer',res.data)
+        })
+    }
 }
 </script>
 
