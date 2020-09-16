@@ -7,7 +7,7 @@
       align="left"
       :router="true"
       >
-      <el-menu-item index="/">
+      <el-menu-item index="/finish">
         <i class="el-icon-menu"></i>
         <span slot="title">  
             已完成 

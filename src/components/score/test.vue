@@ -22,8 +22,8 @@
         <el-container>
           <el-header class="a_head" height="30px">
             <strong>一轮验收</strong>
-            <el-button size="mini" type="primary" class="a_new" round @click="anew">新增</el-button>
-            <el-button size="mini" class="a_delete" round @click="adel">删除</el-button>
+            <el-button size="mini" type="primary" class="a_new" round @click="anew" :disabled="fstnew">新增</el-button>
+            <el-button size="mini" class="a_delete" round @click="adel" :disabled="fstnew">删除</el-button>
           </el-header>
           <el-main class="a_main">
             <el-col :span=10>
@@ -126,8 +126,8 @@
         <el-container v-show="b_show">
           <el-header class="b_head" height="30px">
             <strong>二轮验收</strong>
-            <el-button size="mini" type="primary" class="b_new" round @click="bnew">新增</el-button>
-            <el-button size="mini" class="b_delete" round @click="bdel">删除</el-button>
+            <el-button size="mini" type="primary" class="b_new" round @click="bnew" :disabled="secnew">新增</el-button>
+            <el-button size="mini" class="b_delete" round @click="bdel" :disabled="secnew">删除</el-button>
           </el-header>
           <el-main class="b_main">
             <el-col :span=10>
@@ -231,7 +231,7 @@
           <el-header class="c_head" height="30px">
             <strong>三轮验收</strong>
 
-            <el-button size="mini" class="c_delete" round @click="cdel">删除</el-button>
+            <el-button size="mini" class="c_delete" round @click="cdel" :disabled="trdnew">删除</el-button>
           </el-header>
           <el-main class="c_main">
             <el-col :span=10>
@@ -336,9 +336,12 @@
 export default {
     data(){
         return{
-        fstDis:false,
-      scoreDis:true,
-      secDis:true,
+    fstnew:false,
+    secnew:false,
+    trdnew:false,
+    fstDis:false,
+    scoreDis:true,
+    secDis:true,
       trdDis:true,
       visible: false,
       b_show: false,

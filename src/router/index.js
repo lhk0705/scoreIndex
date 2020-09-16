@@ -18,6 +18,7 @@ export default new Router({
       path: '/',
       name: 'showin',
       component: showin,
+      redirect:'/finish',
       children:[
         {
           path: '/ing',
@@ -25,7 +26,7 @@ export default new Router({
           component: ing
         },
         {
-          path: '/',
+          path: '/finish',
           name: 'finish',
           component: finish
         }

@@ -106,7 +106,7 @@ export default {
         for(let ver of vers){
           sdata.xitongming!==''?a.push(ver.xitongming===sdata.xitongming):''
           sdata.banbenhao!==''?a.push(ver.banbenhao===sdata.banbenhao):''
-          sdata.group!==''?a.push(ver.groupName===sdata.group):''
+          sdata.group!==''?a.push(ver.groupname===sdata.group):''
           sdata.min_time!==''?a.push(ver.ticeshijian>=sdata.min_time):''
           sdata.max_time!==''?a.push(sdata.max_time>=ver.ticeshijian):''
           // console.log(a);

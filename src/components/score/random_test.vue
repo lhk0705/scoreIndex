@@ -138,29 +138,34 @@ export default {
         }
     },
     computed:{
-    ccdf:  {
-      get(){
+    ccdf:{
+    get(){
         let ccdf=""
       if (this.cctgl == "") {
-        return ccdf;
+        // this.$store.commit('cc',ccdf)
+        // return ccdf;
       } else {
         let a=(this.tgs / this.ccyls).toFixed(2);
         if (a < 0.9) {
           if (a > 0.5) {
               ccdf=20 - (0.9 - a).toFixed(2) * 50
-            return ccdf;
+            //   this.$store.commit('cc',ccdf)
+            // return ccdf;
           } else {
               ccdf=0
-            return ccdf;
+            //   this.$store.commit('cc',ccdf)
+            // return ccdf;
           }
         } else {
             ccdf=20
-          return ccdf;
+        //     this.$store.commit('cc',ccdf)
+        //   return ccdf;
         }
       }
-      this.$store.commit('sumup',{"ccdf":ccdf})
-      },
-      set(){}
+    //   this.$store.commit('cc',ccdf)
+          return ccdf;
+     } ,
+     set(){}
     },
     cctgl: {
       get(){
@@ -198,9 +203,10 @@ export default {
     },
     methods: {     
     handleChange(){
-      },
+    
       
       },
+    }
 }
 </script>
 

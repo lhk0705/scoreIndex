@@ -622,12 +622,15 @@ export default {
       }},
       set(){}
     },
-    jiaofuwudefen(){
+    jiaofuwudefen:{
+        get(){
         let jiaofuwudefen=this.csyldf + this.csbgdf + this.xuqiudefen;
-        this.$store.commit('sumup',{"jiaofuwudefen":jiaofuwudefen})
-        return jiaofuwudefen  
+        // this.$store.commit('jfw',jiaofuwudefen)
+        return jiaofuwudefen
+        },
+        set(){} 
     },
-  },
+},
   
 };
 </script>
