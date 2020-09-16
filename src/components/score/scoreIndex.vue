@@ -49,6 +49,7 @@
 </script>
 <script>
 import axios from "axios";
+import testVue from './test.vue';
 export default {
   beforeRouteEnter:((to,from,next)=>{
     next(vm=>{
@@ -158,7 +159,7 @@ export default {
       // c_btgs: "",
       // c_ylzxgs: "",
       // c_qxs: "",
-      banbendefen:''
+      
     };
   },
   // mounted(){
@@ -289,29 +290,28 @@ export default {
       let docdata=this.$refs.doc
       let randomtestdata=this.$refs.randomtest
       let testdata=this.$refs.test
-      console.log(headdata.ticeshijian);
       //判空
         if(
-          this.groupName==''||
-          this.stateperson==''||
-          this.ticeshijian==''||
-          this.xitongming==''||
-          this.state_xq_tijiaoren==''||
-          this.xq_time==''||
-          this.xq_error==''||
-          this.state_yl_tijiaoren==''||
-          this.yl_time==''||
-          this.yl_error==''||
-          this.state_bg_tijiaoren==''||
-          this.bg_time==''||
-          this.bg_error==''||
-          this.cc_begin==''||
-          this.cc_end==''||
-          this.state_cc_r==''||
-          this.ylzs===''||
-          this.tgs===''||
-          this.cc_btgs===''||
-          this.ccyls===''
+          headdata.groupName==''||
+          headdata.stateperson==''||
+          headdata.ticeshijian==''||
+          headdata.xitongming==''||
+          docdata.state_xq_tijiaoren==''||
+          docdata.xq_time==''||
+          docdata.xq_error==''||
+          docdata.state_yl_tijiaoren==''||
+          docdata.yl_time==''||
+          docdata.yl_error==''||
+          docdata.state_bg_tijiaoren==''||
+          docdata.bg_time==''||
+          docdata.bg_error==''||
+          randomtestdata.cc_begin==''||
+          randomtestdata.cc_end==''||
+          randomtestdata.state_cc_r==''||
+          randomtestdata.ylzs===''||
+          randomtestdata.tgs===''||
+          randomtestdata.cc_btgs===''||
+          randomtestdata.ccyls===''
             ){
           this.$message({
             message: '请填写必填项',
@@ -320,62 +320,62 @@ export default {
           }
       else{
           //紧急版本 
-          if(this.a_ylzxgs==0){       
+          if(testdata.a_ylzxgs==0){       
             let data={
-                "banbenguimo":this.banbenguimo,
-                "groupName":this.groupName,
-                "person":this.stateperson,
-                "ticeshijian":this.ticeshijian,
-                "xitongming":this.xitongming,
-                "type":this.type,
-                "plan":this.plan,
-                "banbenhao":$(".banbenhao").text(),
-                "jiaofuwudefen":this.jiaofuwudefen,
-                "xq_tijiao":this.xq_tijiao,
-                "xq_geshi":this.xq_geshi,
-                "xq_tijiaoren":this.state_xq_tijiaoren,
-                "xq_time":this.xq_time,
-                "xq_yanchi":this.xq_yanchi,
-                "xq_laiyuan":this.xq_laiyuan,
-                "xq_change":this.xq_change,
-                "xq_error":this.xq_error,
-                "xuqiudefen":this.xuqiudefen,
-                "yl_tijiao":this.yl_tijiao,
-                "yl_geshi":this.yl_geshi,
-                "yl_tijiaoren":this.state_yl_tijiaoren,
-                "yl_time":this.yl_time,
-                "yl_yanchi":this.yl_yanchi,
-                "yl_error":this.yl_error,
-                "yl_qz":this.yl_qz,
-                "yl_bt":this.yl_bt,
-                "yl_zxr":this.yl_zxr,
-                "yl_yq":this.yl_yq,
-                "yl_bz":this.yl_bz,
-                "yl_jg":this.yl_jg,
-                "csyldf":this.csyldf,
-                "bg_tijiao":this.bg_tijiao,
-                "bg_geshi":this.bg_geshi,
-                "bg_tijiaoren":this.state_bg_tijiaoren,
-                "bg_time":this.bg_time,
-                "bg_yanchi":this.bg_yanchi,
-                "bg_error":this.bg_error,
-                "bg_qk":this.bg_qk,
-                "bg_hj":this.bg_hj,
-                "bg_fw":this.bg_fw,
-                "bg_qx":this.bg_qx,
-                "bg_jl":this.bg_jl,
-                "csbgdf":this.csbgdf,
-                "cc_begin":this.cc_begin,
-                "cc_end":this.cc_end,
-                "cc_r":this.state_cc_r,
-                "ylzs":parseInt(this.ylzs),
-                "ccyls":parseInt(this.ccyls),
-                "tgs":parseInt(this.tgs),
-                "btgs":parseInt(this.cc_btgs),
-                "zss":this.zss,
-                "cctgl":this.cctgl,
-                "ccbl":this.ccbl,
-                "ccdf":this.ccdf,
+                "banbenguimo":headdata.banbenguimo,
+                "groupName":headdata.groupName,
+                "person":headdata.stateperson,
+                "ticeshijian":headdata.ticeshijian,
+                "xitongming":headdata.xitongming,
+                "type":headdata.type,
+                "plan":headdata.plan,
+                "banbenhao":this.banbenhao,
+                "jiaofuwudefen":docdata.jiaofuwudefen,
+                "xq_tijiao":docdata.xq_tijiao,
+                "xq_geshi":docdata.xq_geshi,
+                "xq_tijiaoren":docdata.state_xq_tijiaoren,
+                "xq_time":docdata.xq_time,
+                "xq_yanchi":docdata.xq_yanchi,
+                "xq_laiyuan":docdata.xq_laiyuan,
+                "xq_change":docdata.xq_change,
+                "xq_error":docdata.xq_error,
+                "xuqiudefen":docdata.xuqiudefen,
+                "yl_tijiao":docdata.yl_tijiao,
+                "yl_geshi":docdata.yl_geshi,
+                "yl_tijiaoren":docdata.state_yl_tijiaoren,
+                "yl_time":docdata.yl_time,
+                "yl_yanchi":docdata.yl_yanchi,
+                "yl_error":docdata.yl_error,
+                "yl_qz":docdata.yl_qz,
+                "yl_bt":docdata.yl_bt,
+                "yl_zxr":docdata.yl_zxr,
+                "yl_yq":docdata.yl_yq,
+                "yl_bz":docdata.yl_bz,
+                "yl_jg":docdata.yl_jg,
+                "csyldf":docdata.csyldf,
+                "bg_tijiao":docdata.bg_tijiao,
+                "bg_geshi":docdata.bg_geshi,
+                "bg_tijiaoren":docdata.state_bg_tijiaoren,
+                "bg_time":docdata.bg_time,
+                "bg_yanchi":docdata.bg_yanchi,
+                "bg_error":docdata.bg_error,
+                "bg_qk":docdata.bg_qk,
+                "bg_hj":docdata.bg_hj,
+                "bg_fw":docdata.bg_fw,
+                "bg_qx":docdata.bg_qx,
+                "bg_jl":docdata.bg_jl,
+                "csbgdf":docdata.csbgdf,
+                "cc_begin":randomtestdata.cc_begin,
+                "cc_end":randomtestdata.cc_end,
+                "cc_r":randomtestdata.state_cc_r,
+                "ylzs":parseInt(randomtestdata.ylzs),
+                "ccyls":parseInt(randomtestdata.ccyls),
+                "tgs":parseInt(randomtestdata.tgs),
+                "btgs":parseInt(randomtestdata.cc_btgs),
+                "zss":randomtestdata.zss,
+                "cctgl":randomtestdata.cctgl,
+                "ccbl":randomtestdata.ccbl,
+                "ccdf":randomtestdata.ccdf,
                 "status":1,
                 "rounds":0,
                 "a_begin":-999,
@@ -411,88 +411,90 @@ export default {
                 "yanshoudefen":-999,
                 "zongfen":this.banbendefen
                 }                   
-            $.ajax({
-                type:"post",
-                url:"http://192.168.128.247:8088/addSorce",
-                data:JSON.stringify(data),
-                contentType:"application/json",
-                dataType:"json",
-                success: function(data){
-                console.log("传输成功");
-                        }   
-                });
-                alert("提交成功！")
+            axios.post('/addSorce',data)
+            .then((res)=>{console.log('传输成功');})
+            // $.ajax({
+            //     type:"post",
+            //     url:"http://192.168.128.247:8088/addSorce",
+            //     data:JSON.stringify(data),
+            //     contentType:"application/json",
+            //     dataType:"json",
+            //     success: function(data){
+            //     console.log("传输成功");
+            //             }   
+            //     });
+            //     alert("提交成功！")
                 // this.$router.go(0)
           }               
           else{
             //先传第一轮数据
-            if(this.b_ylzxgs==0) {
-              if(this.a_jieguo=="通过"){this.status=1}
+            if(testdata.b_ylzxgs==0) {
+              if(testdata.a_jieguo=="通过"){this.status=1}
               let data={
-                  "banbenguimo":this.banbenguimo,
-                  "groupName":this.groupName,
-                  "person":this.stateperson,
-                  "ticeshijian":this.ticeshijian,
-                  "xitongming":this.xitongming,
-                  "type":this.type,
-                  "plan":this.plan,
-                  "banbenhao":$(".banbenhao").text(),
-                  "jiaofuwudefen":this.jiaofuwudefen,
-                  "xq_tijiao":this.xq_tijiao,
-                  "xq_geshi":this.xq_geshi,
-                  "xq_tijiaoren":this.state_xq_tijiaoren,
-                  "xq_time":this.xq_time,
-                  "xq_yanchi":this.xq_yanchi,
-                  "xq_laiyuan":this.xq_laiyuan,
-                  "xq_change":this.xq_change,
-                  "xq_error":this.xq_error,
-                  "xuqiudefen":this.xuqiudefen,
-                  "yl_tijiao":this.yl_tijiao,
-                  "yl_geshi":this.yl_geshi,
-                  "yl_tijiaoren":this.state_yl_tijiaoren,
-                  "yl_time":this.yl_time,
-                  "yl_yanchi":this.yl_yanchi,
-                  "yl_error":this.yl_error,
-                  "yl_qz":this.yl_qz,
-                  "yl_bt":this.yl_bt,
-                  "yl_zxr":this.yl_zxr,
-                  "yl_yq":this.yl_yq,
-                  "yl_bz":this.yl_bz,
-                  "yl_jg":this.yl_jg,
-                  "csyldf":this.csyldf,
-                  "bg_tijiao":this.bg_tijiao,
-                  "bg_geshi":this.bg_geshi,
-                  "bg_tijiaoren":this.state_bg_tijiaoren,
-                  "bg_time":this.bg_time,
-                  "bg_yanchi":this.bg_yanchi,
-                  "bg_error":this.bg_error,
-                  "bg_qk":this.bg_qk,
-                  "bg_hj":this.bg_hj,
-                  "bg_fw":this.bg_fw,
-                  "bg_qx":this.bg_qx,
-                  "bg_jl":this.bg_jl,
-                  "csbgdf":this.csbgdf,
-                  "cc_begin":this.cc_begin,
-                  "cc_end":this.cc_end,
-                  "cc_r":this.state_cc_r,
-                  "ylzs":parseInt(this.ylzs),
-                  "ccyls":parseInt(this.ccyls),
-                  "tgs":parseInt(this.tgs),
-                  "btgs":parseInt(this.cc_btgs),
-                  "zss":this.zss,
-                  "cctgl":this.cctgl,
-                  "ccbl":this.ccbl,
-                  "ccdf":this.ccdf,
-                  "a_begin":this.a_begin,
-                  "a_end":this.a_end,
-                  "a_csr":this.state_a_csr,
-                  "a_ylzxgs":parseInt(this.a_ylzxgs),
-                  "a_tgs":parseInt(this.a_tgs),
-                  "a_btgs":parseInt(this.a_btgs),
-                  "a_zss":this.a_zss,
-                  "a_qxs":parseInt(this.a_qxs),
-                  "a_tgl":this.a_tgl,
-                  "a_jieguo":this.a_jieguo,
+                  "banbenguimo":headdata.banbenguimo,
+                  "groupName":headdata.groupName,
+                  "person":headdata.stateperson,
+                  "ticeshijian":headdata.ticeshijian,
+                  "xitongming":headdata.xitongming,
+                  "type":headdata.type,
+                  "plan":headdata.plan,
+                  "banbenhao":this.banbenhao,
+                  "jiaofuwudefen":docdata.jiaofuwudefen,
+                  "xq_tijiao":docdata.xq_tijiao,
+                  "xq_geshi":docdata.xq_geshi,
+                  "xq_tijiaoren":docdata.state_xq_tijiaoren,
+                  "xq_time":docdata.xq_time,
+                  "xq_yanchi":docdata.xq_yanchi,
+                  "xq_laiyuan":docdata.xq_laiyuan,
+                  "xq_change":docdata.xq_change,
+                  "xq_error":docdata.xq_error,
+                  "xuqiudefen":docdata.xuqiudefen,
+                  "yl_tijiao":docdata.yl_tijiao,
+                  "yl_geshi":docdata.yl_geshi,
+                  "yl_tijiaoren":docdata.state_yl_tijiaoren,
+                  "yl_time":docdata.yl_time,
+                  "yl_yanchi":docdata.yl_yanchi,
+                  "yl_error":docdata.yl_error,
+                  "yl_qz":docdata.yl_qz,
+                  "yl_bt":docdata.yl_bt,
+                  "yl_zxr":docdata.yl_zxr,
+                  "yl_yq":docdata.yl_yq,
+                  "yl_bz":docdata.yl_bz,
+                  "yl_jg":docdata.yl_jg,
+                  "csyldf":docdata.csyldf,
+                  "bg_tijiao":docdata.bg_tijiao,
+                  "bg_geshi":docdata.bg_geshi,
+                  "bg_tijiaoren":docdata.state_bg_tijiaoren,
+                  "bg_time":docdata.bg_time,
+                  "bg_yanchi":docdata.bg_yanchi,
+                  "bg_error":docdata.bg_error,
+                  "bg_qk":docdata.bg_qk,
+                  "bg_hj":docdata.bg_hj,
+                  "bg_fw":docdata.bg_fw,
+                  "bg_qx":docdata.bg_qx,
+                  "bg_jl":docdata.bg_jl,
+                  "csbgdf":docdata.csbgdf,
+                  "cc_begin":randomtestdata.cc_begin,
+                  "cc_end":randomtestdata.cc_end,
+                  "cc_r":randomtestdata.state_cc_r,
+                  "ylzs":parseInt(randomtestdata.ylzs),
+                  "ccyls":parseInt(randomtestdata.ccyls),
+                  "tgs":parseInt(randomtestdata.tgs),
+                  "btgs":parseInt(randomtestdata.cc_btgs),
+                  "zss":randomtestdata.zss,
+                  "cctgl":randomtestdata.cctgl,
+                  "ccbl":randomtestdata.ccbl,
+                  "ccdf":randomtestdata.ccdf,
+                  "a_begin":testdata.a_begin,
+                  "a_end":testdata.a_end,
+                  "a_csr":testdata.state_a_csr,
+                  "a_ylzxgs":parseInt(testdata.a_ylzxgs),
+                  "a_tgs":parseInt(testdata.a_tgs),
+                  "a_btgs":parseInt(testdata.a_btgs),
+                  "a_zss":testdata.a_zss,
+                  "a_qxs":parseInt(testdata.a_qxs),
+                  "a_tgl":testdata.a_tgl,
+                  "a_jieguo":testdata.a_jieguo,
                   "status":this.status,
                   "rounds":1,
                   "b_begin":-999,
@@ -515,7 +517,7 @@ export default {
                   "c_qxs":-999,
                   "c_tgl":-999,
                   "c_jieguo":-999,
-                  "yanshoudefen":this.yanshoudefen,
+                  "yanshoudefen":testdata.yanshoudefen,
                   "zongfen":this.banbendefen
                 }
               $.ajax({
@@ -534,23 +536,23 @@ export default {
             }
             else{
             //二轮数据提交
-                if (this.c_ylzxgs==0) {
-                  if(this.b_jieguo=="通过"){this.status=1}
+                if (testdata.c_ylzxgs==0) {
+                  if(testdata.b_jieguo=="通过"){this.status=1}
                   let data={
-                    "banbenhao":$(".banbenhao").text(),
-                    "b_begin":this.b_begin,
-                    "b_end":this.b_end,
-                    "b_csr":this.state_b_csr,
-                    "b_ylzxgs":parseInt(this.b_ylzxgs),
-                    "b_tgs":parseInt(this.b_tgs),
-                    "b_btgs":parseInt(this.b_btgs),
-                    "b_zss":this.b_zss,
-                    "b_qxs":parseInt(this.b_qxs),
-                    "b_tgl":this.b_tgl,
-                    "b_jieguo":this.b_jieguo,
+                    "banbenhao":this.banbenhao,
+                    "b_begin":testdata.b_begin,
+                    "b_end":testdata.b_end,
+                    "b_csr":testdata.state_b_csr,
+                    "b_ylzxgs":parseInt(testdata.b_ylzxgs),
+                    "b_tgs":parseInt(testdata.b_tgs),
+                    "b_btgs":parseInt(testdata.b_btgs),
+                    "b_zss":testdata.b_zss,
+                    "b_qxs":parseInt(testdata.b_qxs),
+                    "b_tgl":testdata.b_tgl,
+                    "b_jieguo":testdata.b_jieguo,
                     "status":this.status,
                     "rounds":2,
-                    "yanshoudefen":this.yanshoudefen,
+                    "yanshoudefen":testdata.yanshoudefen,
                     "zongfen":this.banbendefen
                     }
                   $.ajax({
@@ -572,19 +574,19 @@ export default {
                   if(this.c_jieguo=="通过"){this.status=1}
                     let data={
                       "banbenhao":$(".banbenhao").text(),
-                      "c_begin":this.c_begin,
-                      "c_end":this.c_end,
-                      "c_csr":this.state_c_csr,
-                      "c_ylzxgs":parseInt(this.c_ylzxgs),
-                      "c_tgs":parseInt(this.c_tgs),
-                      "c_btgs":parseInt(this.c_btgs),
-                      "c_zss":this.c_zss,
-                      "c_qxs":parseInt(this.c_qxs),
-                      "c_tgl":this.c_tgl,
-                      "c_jieguo":this.c_jieguo,
+                      "c_begin":testdata.c_begin,
+                      "c_end":testdata.c_end,
+                      "c_csr":testdata.state_c_csr,
+                      "c_ylzxgs":parseInt(testdata.c_ylzxgs),
+                      "c_tgs":parseInt(testdata.c_tgs),
+                      "c_btgs":parseInt(testdata.c_btgs),
+                      "c_zss":testdata.c_zss,
+                      "c_qxs":parseInt(testdata.c_qxs),
+                      "c_tgl":testdata.c_tgl,
+                      "c_jieguo":thtestdatais.c_jieguo,
                       "status":this.status,
                       "rounds":3,
-                      "yanshoudefen":this.yanshoudefen,
+                      "yanshoudefen":testdata.yanshoudefen,
                       "zongfen":this.banbendefen
                         }
                     $.ajax({
@@ -605,105 +607,107 @@ export default {
           }
       }},
     cancel(){
+      let headdata=this.$refs.visionhead
+      let docdata=this.$refs.doc
+      let randomtestdata=this.$refs.randomtest
+      let testdata=this.$refs.test
           let a=confirm("确定取消？");
           if(a){
-            this.visible=false,
-              this.b_show=false,
-              this.c_show=false,
+              testdata.visible=false,
+              testdata.b_show=false,
+              testdata.c_show=false,
               //项目组别
-              this.groupName="",
+              headdata.groupName="",
               //系统名和负责人输入框
-              this.restaurants=[],
-              this.person =[],
-              this.xitongming= "",
-              this.timeout= null,
-              this.stateperson= "",
-              this.timeoutperson=null,
-              this.xq_tijiaoren= [],
-              this.state_xq_tijiaoren="",
-              this.yl_tijiaoren=[],
-              this.state_yl_tijiaoren="",
-              this.bg_tijiaoren=[],
-              this.state_bg_tijiaoren= "",
-              this.cc_r= [],
-              this.state_cc_r= "",
-              this.a_csr=[],
-              this.state_a_csr= "",
-              this.b_csr= [],
-              this.state_b_csr= "",
-              this.c_csr=[],
-              this.state_c_csr= "",
+              headdata.restaurants=[],
+              headdata.person =[],
+              headdata.xitongming= "",
+              headdata.stateperson= "",              
+              headdata.xq_tijiaoren= [],
+              docdata.state_xq_tijiaoren="",
+              docdata.yl_tijiaoren=[],
+              docdata.state_yl_tijiaoren="",
+              docdata.bg_tijiaoren=[],
+              docdata.state_bg_tijiaoren= "",
+              randomtestdata.cc_r= [],
+              randomtestdata.state_cc_r= "",
+              randomtestdata.a_csr=[],
+              randomtestdata.state_a_csr= "",
+              randomtestdata.b_csr= [],
+              randomtestdata.state_b_csr= "",
+              randomtestdata.c_csr=[],
+              randomtestdata.state_c_csr= "",
               //提测时间
               this.pickerOptions= {
                 disabledDate(time) {
                   return time.getTime() > Date.now();
                 },
               },
-              this.ticeshijian= "",
+              headdata.ticeshijian= "",
               //版本类型
-              this.type="常规版本",
+              headdata.type="常规版本",
               //是否计划内
-              this.plan= "是",
+              headdata.plan= "是",
               //版本规模
-              this.banbenguimo= 0,
+              headdata.banbenguimo= 0,
               //标签页
               this.activeName= "first",
-              this.xq_change= 0,
-              this.xq_tijiao= "是",
-              this.xq_yanchi= "否",
-              this.xq_geshi= "word",
-              this.xq_time= "",
-              this.xq_laiyuan= "是",
-              this.xq_error= "",
-              this.yl_tijiao= "是",
-              this.yl_yanchi= "否",
-              this.yl_geshi="word",
-              this.yl_time= "",
-              this.yl_bt= 0,
-              this.yl_qz=0,
-              this.yl_zxr= 0,
-              this.yl_yq= 0,
-              this.yl_bz= 0,
-              this.yl_jg= 0,
-              this.yl_error= "",
-              this.bg_tijiao= "是",
-              this.bg_yanchi= "否",
-              this.bg_geshi= "word",
-              this.bg_time="",
-              this.bg_error= "",
-              this.bg_qx= 0,
-              this.bg_hj= 0,
-              this.bg_jl= 0,
-              this.bg_fw= 0,
-              this.bg_qk=0,
-              this.bg_error="",
-              this.cc_begin= "",
-              this.cc_end="",
-              this.ccyls="",
-              this.cc_btgs= "",
-              this.ylzs= "",
-              this.tgs= "",
-              this.a_begin="",
-              this.a_end= "",
-              this.a_jieguo="通过",
-              this.a_tgs= "",
-              this.a_btgs= "",
-              this.a_ylzxgs= "",
-              this.a_qxs= "",
-              this.b_begin= "",
-              this.b_end= "",
-              this.b_jieguo= "通过",
-              this.b_tgs= "",
-              this.b_btgs="",
-              this.b_ylzxgs= "",
-              this.b_qxs="",
-              this.c_begin= "",
-              this.c_end="",
-              this.c_jieguo= "通过",
-              this.c_tgs= "",
-              this.c_btgs= "",
-              this.c_ylzxgs= "",
-              this.c_qxs=""
+              docdata.xq_change= 0,
+              docdata.xq_tijiao= "是",
+              docdata.xq_yanchi= "否",
+              docdata.xq_geshi= "word",
+              docdata.xq_time= "",
+              docdata.xq_laiyuan= "是",
+              docdata.xq_error= "",
+              docdata.yl_tijiao= "是",
+              docdata.yl_yanchi= "否",
+              docdata.yl_geshi="word",
+              docdata.yl_time= "",
+              docdata.yl_bt= 0,
+              docdata.yl_qz=0,
+              docdata.yl_zxr= 0,
+              docdata.yl_yq= 0,
+              docdata.yl_bz= 0,
+              docdata.yl_jg= 0,
+              docdata.yl_error= "",
+              docdata.bg_tijiao= "是",
+              docdata.bg_yanchi= "否",
+              docdata.bg_geshi= "word",
+              docdata.bg_time="",
+              docdata.bg_error= "",
+              docdata.bg_qx= 0,
+              docdata.bg_hj= 0,
+              docdata.bg_jl= 0,
+              docdata.bg_fw= 0,
+              docdata.bg_qk=0,
+              docdata.bg_error="",
+              randomtestdata.cc_begin= "",
+              randomtestdata.cc_end="",
+              randomtestdata.ccyls="",
+              randomtestdata.cc_btgs= "",
+              randomtestdata.ylzs= "",
+              randomtestdata.tgs= "",
+              testdata.a_begin="",
+              testdata.a_end= "",
+              testdata.a_jieguo="通过",
+              testdata.a_tgs= "",
+              testdata.a_btgs= "",
+              testdata.a_ylzxgs= "",
+              testdata.a_qxs= "",
+              testdata.b_begin= "",
+              testdata.b_end= "",
+              testdata.b_jieguo= "通过",
+              testdata.b_tgs= "",
+              testdata.b_btgs="",
+              testdata.b_ylzxgs= "",
+              testdata.b_qxs="",
+              testdata.c_begin= "",
+              testdata.c_end="",
+              testdata.c_jieguo= "通过",
+              testdata.c_tgs= "",
+              testdata.c_btgs= "",
+              testdata.c_ylzxgs= "",
+              testdata.c_qxs=""
           }
           else{}
       },
@@ -724,12 +728,19 @@ export default {
     //   }
     //   },
     //   set(){}
-    // },
+    // }, 
+    banbendefen(){
+      return this.$store.getters.getTotal
+    },
+    
   },
-  updated(){
-    console.log(this.$refs);
-    // this.banbendefen=this.$refs.doc.jiaofuwudefen+this.$refs.randomtest.ccdf+this.$refs.test.yanshoudefen
-  },
+  watch:{
+    
+  }
+  // updated(){
+  //   console.log(this.$refs);
+  // this.banbendefen=this.$refs.doc.jiaofuwudefen+this.$refs.randomtest.ccdf+this.$refs.test.yanshoudefen
+  // },
   
 };
 </script>

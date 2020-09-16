@@ -140,20 +140,25 @@ export default {
     computed:{
     ccdf:  {
       get(){
+        let ccdf=""
       if (this.cctgl == "") {
-        return "";
+        return ccdf;
       } else {
         let a=(this.tgs / this.ccyls).toFixed(2);
         if (a < 0.9) {
           if (a > 0.5) {
-            return 20 - (0.9 - a).toFixed(2) * 50;
+              ccdf=20 - (0.9 - a).toFixed(2) * 50
+            return ccdf;
           } else {
-            return 0;
+              ccdf=0
+            return ccdf;
           }
         } else {
-          return 20;
+            ccdf=20
+          return ccdf;
         }
       }
+      this.$store.commit('sumup',{"ccdf":ccdf})
       },
       set(){}
     },
