@@ -62,33 +62,6 @@
       align="center">
     </el-table-column>
     <el-table-column
-      prop="rounds"
-      label="验收轮次"
-      min-width="110"
-      align="center"
-      >
-    </el-table-column>
-    <el-table-column
-      prop="atgl"
-      label="首轮通过率"
-      min-width="120"
-      align="center"
-      >
-    </el-table-column>
-    <el-table-column
-      prop="aqxs"
-      label="首轮缺陷数"
-      min-width="120"
-      align="center"
-      >
-    </el-table-column>
-    <el-table-column
-      prop="yanshoudefen"
-      label="验收得分"
-      min-width="100"
-      align="center">
-    </el-table-column>
-    <el-table-column
       prop="zongfen"
       label="总分"
       min-width="100"
@@ -118,7 +91,7 @@ export default {
     computed:{
         vers:{
           get(){
-            return this.$store.getters.getFinishVer
+            return this.$store.getters.getWarnVer
             },
             set(){              
             }             
@@ -127,7 +100,7 @@ export default {
     methods:{
       updateVer(a){
         // console.log(a);
-        this.$store.commit('setFinishVer',a)        
+        this.$store.commit('setWarnVer',a)        
       },
       getScore(a,b){
         // console.log(b[a]);
@@ -142,7 +115,7 @@ export default {
     created(){
         axios.get('/selectFinishedInfo')
         .then((res)=>{           
-            this.$store.commit('setFinishVer',res.data)
+            this.$store.commit('setWarnVer',res.data)
         })
     }
 }

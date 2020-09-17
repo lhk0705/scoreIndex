@@ -375,7 +375,10 @@ export default {
           }
       else{
           //紧急版本 
-          if(testdata.a_ylzxgs==0){       
+          if(testdata.a_ylzxgs==0){
+            if (headdata.type=='常规版本') {
+              alert('常规版本需输入验收情况！')
+            }else{                 
             let data={
                 "banbenguimo":headdata.banbenguimo,
                 "groupName":headdata.groupName,
@@ -464,12 +467,12 @@ export default {
                 "c_tgl":-999,
                 "c_jieguo":-999,
                 "yanshoudefen":-999,
-                "zongfen":this.banbendefen
+                "zongfen":Number(this.banbendefen)
                 }                   
             axios.post('/addSorce',data)
             .then((res)=>{console.log('传输成功');})
             alert("提交成功！")
-          }               
+          }}               
           else{
             //先传第一轮数据
             if(testdata.b_ylzxgs==0) {
@@ -562,7 +565,7 @@ export default {
                   "c_tgl":-999,
                   "c_jieguo":-999,
                   "yanshoudefen":testdata.yanshoudefen,
-                  "zongfen":this.banbendefen
+                  "zongfen":Number(this.banbendefen)
                 }
               axios.post('/addSorce',data)
             .then((res)=>{console.log('传输成功');})
@@ -589,7 +592,7 @@ export default {
                     "status":this.status,
                     "rounds":2,
                     "yanshoudefen":testdata.yanshoudefen,
-                    "zongfen":this.banbendefen
+                    "zongfen":Number(this.banbendefen)
                     }
                   axios.post('/updateSorce',data)
                   .then((res)=>{console.log('传输成功');})  
@@ -599,9 +602,9 @@ export default {
                 }
                 //三轮数据提交
                 else{
-                  if(this.c_jieguo=="通过"){this.status=1}
+                  if(testdata.c_jieguo=="通过"){this.status=1}
                     let data={
-                      "banbenhao":$(".banbenhao").text(),
+                      "banbenhao":this.banbenhao,
                       "c_begin":testdata.c_begin,
                       "c_end":testdata.c_end,
                       "c_csr":testdata.state_c_csr,
@@ -611,15 +614,16 @@ export default {
                       "c_zss":testdata.c_zss,
                       "c_qxs":parseInt(testdata.c_qxs),
                       "c_tgl":testdata.c_tgl,
-                      "c_jieguo":thtestdatais.c_jieguo,
+                      "c_jieguo":testdata.c_jieguo,
                       "status":this.status,
                       "rounds":3,
                       "yanshoudefen":testdata.yanshoudefen,
-                      "zongfen":this.banbendefen
+                      "zongfen":Number(this.banbendefen)
                         }
                     axios.post('/updateCSorce',data)
                     .then((res)=>{console.log('传输成功');})        
                   alert("提交成功！")
+                  console.log();
                   // this.$router.go(0)
                   }
                  

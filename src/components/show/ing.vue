@@ -80,11 +80,11 @@
       min-width="100"
       align="center">
     </el-table-column> 
-     <!-- <el-table-column label="操作" align="center" width="90">
+     <el-table-column label="操作" align="center" width="90">
     <template slot-scope="scope">       
-        <el-button @click="getScore(scope.$index,data)">查看</el-button>        
+        <el-button @click="getScore(scope.$index,vers)">查看</el-button>        
     </template>
-    </el-table-column> -->
+    </el-table-column>
   </el-table>
   </div>
 </template>
@@ -105,7 +105,16 @@ export default {
     methods:{
       updateVer(a){
         this.$store.commit('setIngVer',a)        
-      }
+      },
+      getScore(a,b){
+        // console.log(b[a]);
+        this.$router.push({
+          name:'scoreIndex',
+          params:{
+            ticeshijian:b[a].ticeshijian,
+            xitongming:b[a].xitongming
+        }})
+    }
     },
     created(){
         axios.get('/selectUNFinishedInfo')

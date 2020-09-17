@@ -7,12 +7,26 @@
       align="left"
       :router="true"
       >
-      <el-menu-item index="/finish">
+      <el-submenu index="/finish">
+      <template slot="title">
         <i class="el-icon-menu"></i>
         <span slot="title">  
             已完成 
             </span>
+      </template>
+      <el-menu-item index="/finish">
+        <i class="el-icon-menu"></i>
+        <span slot="title"> 
+            常规版本
+            </span>            
       </el-menu-item>
+      <el-menu-item index="/warn">
+        <i class="el-icon-menu"></i>
+        <span slot="title"> 
+            紧急版本
+            </span>            
+      </el-menu-item>
+      </el-submenu>
       <el-menu-item index="/ing">
         <i class="el-icon-menu"></i>
         <span slot="title"> 

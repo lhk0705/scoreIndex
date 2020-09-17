@@ -4,6 +4,7 @@ import scoreIndex from '../components/score/scoreIndex'
 import showin from "../components/show/showin";
 import ing from "../components/show/ing";
 import finish from "../components/show/finish";
+import warn from "../components/show/warn.vue";
 
 Vue.use(Router)
 
@@ -29,7 +30,12 @@ export default new Router({
           path: '/finish',
           name: 'finish',
           component: finish
-        }
+        },
+        {
+          path: '/warn',
+          name: 'warn',
+          component: warn
+        },
       ]
     },
   ]
