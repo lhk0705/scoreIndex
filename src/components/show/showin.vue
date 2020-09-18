@@ -1,12 +1,12 @@
 <template>
     <div>
     <el-row class="tac">
-        <el-col :span=3>
+        <el-col :span=4>
             <div class="left_nav">
             <left-nav ></left-nav>
             </div>
         </el-col>
-        <el-col :span=21 >
+        <el-col :span=20 >
             <div class="show_right">
             <router-view></router-view>
             </div>

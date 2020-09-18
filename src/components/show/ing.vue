@@ -9,6 +9,7 @@
     style="padding:auto"
   
     >
+    <el-table-column label="未完成验收的常规版本" align="center">
     <el-table-column
       prop="xitongming"
       label="系统名"
@@ -84,6 +85,7 @@
     <template slot-scope="scope">       
         <el-button @click="getScore(scope.$index,vers)">查看</el-button>        
     </template>
+    </el-table-column>
     </el-table-column>
   </el-table>
   </div>

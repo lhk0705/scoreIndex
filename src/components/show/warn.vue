@@ -4,10 +4,10 @@
   <br>
   <el-table
     :data="vers"
-    height="250"
     border
     style="width: 100%"    
     >
+    <el-table-column label="已完成验收的紧急版本" align="center">
     <el-table-column
       prop="xitongming"
       label="系统名"
@@ -73,6 +73,7 @@
         <el-button @click="getScore(scope.$index,vers)">查看</el-button>        
     </template>
     </el-table-column>
+    </el-table-column>
   </el-table>
   </div>
 </template>
@@ -113,7 +114,7 @@ export default {
     }
     },      
     created(){
-        axios.get('/selectFinishedInfo')
+        axios.get('/selectSpecialInfo')
         .then((res)=>{           
             this.$store.commit('setWarnVer',res.data)
         })

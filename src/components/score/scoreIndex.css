@@ -272,6 +272,12 @@ span {
     font-size: 14px;
     margin: 4px;
   }
+  /* .button{
+    float: right;
+    position: relative;
+    bottom:20px;
+    right:10px
+  } */
 .cc_main{border: 1px solid black;}
 .ccyls,.cctgl,.btgs,.tgs,.ylzs,.zss,.ccbl{
     width: 200px;

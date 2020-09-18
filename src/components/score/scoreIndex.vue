@@ -2,6 +2,7 @@
   <div class="scoreIndex">
     <div class="head">      
       <div class="bbhao"><label >{{banbenhao}}</label>版本信息</div>
+      
     </div>
     <div class="bbdf">
       <strong>
@@ -43,7 +44,8 @@
       </strong>
       <el-button @click="sumup" type="primary" plain>计算总分</el-button>
       <el-button @click="submit" type="primary" plain>提交</el-button>
-      <el-button @click="cancel" plain>取消</el-button>
+      <el-button @click="cancel" plain>清空</el-button>
+      <el-button class="button"  @click="goback">返回上一页</el-button>
     </div>
   </div>
 </template>
@@ -130,6 +132,8 @@ export default {
               randomtestdata.cctgl=data.cctgl;
               randomtestdata.ccdf=data.ccdf;
               randomtestdata.ccbl=data.ccbl;
+              vm.banbendefen=data.zongfen;
+              if(data.atgl!=-999){
               testdata.a_begin=data.abegin;
               testdata.a_end=data.aend;
               testdata.state_a_csr=data.acsr;
@@ -182,6 +186,7 @@ export default {
                     vm.banbendefen=data.zongfen;
                     
                 }
+            }
             }       
           })
     }})    
@@ -737,6 +742,9 @@ export default {
       },
     sumup(){
       this.banbendefen=this.$refs.doc.jiaofuwudefen+this.$refs.randomtest.ccdf+this.$refs.test.yanshoudefen
+    },
+    goback(){
+      this.$router.go(-1)
     }
   },
   computed: {    
