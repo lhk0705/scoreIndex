@@ -1,5 +1,5 @@
 const state={
-    banbendefen:['0','0','0'],
+    banbendefen:['50','0','0'],
     lessons:{}
 }
 const mutations={
@@ -17,6 +17,9 @@ const mutations={
     cc(state,data){
         state.banbendefen.splice(1,1,data)
     },
+    ys(state,data){
+        state.banbendefen.splice(2,1,data)
+    }
     
 }
 const getters={

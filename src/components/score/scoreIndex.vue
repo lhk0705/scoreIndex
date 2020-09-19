@@ -42,7 +42,6 @@
         <input type="text" v-model="banbendefen" :disabled="scoreDis"/>
         分
       </strong>
-      <el-button @click="sumup" type="primary" plain>计算总分</el-button>
       <el-button @click="submit" type="primary" plain>提交</el-button>
       <el-button @click="cancel" plain>清空</el-button>
       <el-button class="button"  @click="goback">返回上一页</el-button>
@@ -211,12 +210,9 @@ export default {
         },
       },
       activeName: "first",
-      banbendefen:''     
+          
     };
   },
-  // beforeDestroy(){
-  //   this.banbendefen=this.$store.getters.banbendefen
-  // },
   methods: {          
     handleClick(tab, event) {
       // console.log(tab, event);
@@ -740,41 +736,15 @@ export default {
           }
           else{}
       },
-    sumup(){
-      this.banbendefen=this.$refs.doc.jiaofuwudefen+this.$refs.randomtest.ccdf+this.$refs.test.yanshoudefen
-    },
     goback(){
       this.$router.go(-1)
     }
   },
   computed: {    
-    // banbendefen: {
-    //   get(){
-    //      return this.$refs.doc.jiaofuwudefen
-    //     if (this.ccdf !== '' && this.jiaofuwudefen !== '' && this.yanshoudefen !== '') {
-    //     return this.ccdf + this.jiaofuwudefen + this.yanshoudefen;
-    //   } else {
-    //     if (this.ccdf !== '' && this.jiaofuwudefen !== '') {
-    //       return this.ccdf + this.jiaofuwudefen;
-    //     } else {
-    //       return "";
-    //     }
-    //   }
-    //   },
-    //   set(){}
-    // }, 
-    // banbendefen(){
-    //   return this.$store.getters.getTotal
-    // },
-  //   banbendefen(){  
-  //    return this.$store.doc.jiaofuwudefen
-  // },
-  // ...mapGetters(['banbendefen'])
+    
+  ...mapGetters(['banbendefen'])
   },
-  // updated(){
-  // console.log(this.$refs);
-  // this.banbendefen=this.$refs.doc.jiaofuwudefen+this.$refs.randomtest.ccdf+this.$refs.test.yanshoudefen
-  // }, 
+  
 }
 </script>
 

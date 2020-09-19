@@ -571,7 +571,10 @@ export default {
       }},
       set(){}
     },
-    }
+    },
+    beforeUpdate(){
+    this.$store.commit('ys',this.yanshoudefen)
+  }
 }
 </script>
 

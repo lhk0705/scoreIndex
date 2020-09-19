@@ -631,7 +631,9 @@ export default {
         set(){} 
     },
 },
-  
+  beforeUpdate(){
+    this.$store.commit('jfw',this.jiaofuwudefen)
+  }
 };
 </script>
 

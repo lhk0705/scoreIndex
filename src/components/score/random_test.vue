@@ -206,7 +206,10 @@ export default {
     
       
       },
-    }
+    },
+  beforeUpdate(){
+    this.$store.commit('cc',this.ccdf)
+  }
 }
 </script>
 
