@@ -1,16 +1,7 @@
 const state={
     banbendefen:['50','0','0'],
-    lessons:{}
 }
 const mutations={
-    // sumup(state,lesson){
-    // state.banbendefen=0
-    // state.lessons[Object.keys(lesson)]=lesson[Object.keys(lesson)];
-    // for (let key in state.lessons) {
-    //     state.banbendefen = Number(state.banbendefen) + Number(state.lessons[key]);
-        
-    //   }
-    // }
     jfw(state,data){
         state.banbendefen.splice(0,1,data)
     },

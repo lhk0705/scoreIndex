@@ -56,7 +56,6 @@ import visionhead from './vision_head';
 import doc from './doc';
 import randomtest from './random_test';
 import test from './test';
-import { mapGetters } from "vuex";
 export default {
   beforeRouteEnter:((to,from,next)=>{
     console.log(from.path);    
@@ -741,8 +740,9 @@ export default {
     }
   },
   computed: {    
-    
-  ...mapGetters(['banbendefen'])
+    banbendefen(){
+      return this.$store.getters.banbendefen
+    }
   },
   
 }
