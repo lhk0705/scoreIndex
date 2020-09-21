@@ -2,14 +2,18 @@
 <div>
   <search :prop="vers" v-on:changeVer="updateVer"></search>
   <br>
+  <el-table border
+    style="width: 100%" 
+    height="40">
+    <el-table-column  label="未完成验收的常规版本" align="center">
+     </el-table-column></el-table>
   <el-table
     :data="vers"
     height="350"
     border
-    style="padding:auto"
-  
+    style="padding:auto"  
     >
-    <el-table-column label="未完成验收的常规版本" align="center">
+
     <el-table-column
       prop="xitongming"
       label="系统名"
@@ -86,7 +90,7 @@
         <el-button @click="getScore(scope.$index,vers)">查看</el-button>        
     </template>
     </el-table-column>
-    </el-table-column>
+    
   </el-table>
   </div>
 </template>

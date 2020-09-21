@@ -5,6 +5,7 @@ import showin from "../components/show/showin";
 import ing from "../components/show/ing";
 import finish from "../components/show/finish";
 import warn from "../components/show/warn.vue";
+import overall from "../components/overall/overall.vue";
 
 Vue.use(Router)
 
@@ -16,7 +17,7 @@ export default new Router({
       component: scoreIndex
     },
     {
-      path: '/',
+      path: '/showin',
       name: 'showin',
       component: showin,
       redirect:'/finish',
@@ -37,6 +38,11 @@ export default new Router({
           component: warn
         },
       ]
+    },
+    {
+      path: '/',
+      name: 'overall',
+      component: overall
     },
   ]
 })

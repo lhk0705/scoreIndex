@@ -1,12 +1,17 @@
 const state={
     finishVer:[
     // {
-        //     "xitongming":'a',
-        //     "banbenhao":'a1',
-        //     "ticeshijian":'2020-09-08',
-        //     "groupName":'a3',
-        //     "person":'a4'
-        // },
+    //         "xitongming":'a',
+    //         "banbenhao":'a1',
+    //         "ticeshijian":'2020-09-08',
+    //         "groupName":'a3',
+    //         "person":'a4',
+    //         "btgs":-999,
+    //         "btgl":-999,
+    //         "ctgs":-999,
+    //         "ctgl":-999
+
+    //     },
         // {
         //     "xitongming":'a',
         //     "banbenhao":'a1',
@@ -94,7 +99,25 @@ const mutations={
     // },
 };
 const getters={
-    getFinishVer:state=>state.finishVer
+    getFinishVer:state=>{
+        let result=[]
+        for(let item of state.finishVer){
+            if(item.btgs===-999){
+                item.btgs="无"
+                item.btgl="无"
+                item.ctgs="无"
+                item.ctgl="无"
+            }
+                else{
+                if(item.ctgs==-999){
+                    item.ctgs="无"
+                    item.ctgl="无"
+                }
+            }
+            result.push(item)
+        }
+        return result
+    }
 };
 
 export default{

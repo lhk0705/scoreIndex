@@ -15,25 +15,15 @@
         <img src="static\u=3073865373,3613492176&fm=26&gp=0.jpg" alt="" class="img">
     </el-menu-item>
     <el-menu-item index="/">
+          质控总览
+        </el-menu-item>
+    <el-menu-item index="/showin">
           质控看板
         </el-menu-item>
       <el-menu-item index="/scoreIndex">
           版本数据录入
         </el-menu-item>
-        
-      <!-- <el-submenu index="2">
-        <template slot="title">我的工作台</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
-        <el-submenu index="2-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="2-4-1">选项1</el-menu-item>
-          <el-menu-item index="2-4-2">选项2</el-menu-item>
-          <el-menu-item index="2-4-3">选项3</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="3" disabled>消息中心</el-menu-item> -->
+
       
     </el-menu>
   </div>
@@ -43,7 +33,7 @@
 export default {
     data(){
       return{
-        activeIndex2: '1'
+        activeIndex2: '/'
       } 
     },
     methods: {

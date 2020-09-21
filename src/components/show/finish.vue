@@ -2,24 +2,31 @@
 <div>
   <search :prop="vers" v-on:changeVer="updateVer"></search>
   <br>
+  <el-table border
+    style="width: 100%" 
+    height="40">
+    <el-table-column  label="已完成验收的常规版本" align="center">
+     </el-table-column></el-table>
   <el-table
     :data="vers"
     border
-    style="width: 100%"    
-    >
-    <el-table-column label="已完成验收的常规版本" align="center">
+    style="width: 100%" 
+    height="300"   
+    >   
     <el-table-column
       prop="xitongming"
       label="系统名"
-      min-width="90"
+      min-width="110"
       align="center"
-      >
+      fixed
+    >
     </el-table-column>
     <el-table-column
       prop="banbenhao"
       label="版本号"
-      min-width="90"
+      min-width="150"
       align="center"
+      fixed
       >
     </el-table-column>
     <el-table-column
@@ -32,6 +39,13 @@
     <el-table-column
       prop="groupname"
       label="组别"
+      min-width="100"
+      align="center"      
+      >
+    </el-table-column>
+    <el-table-column
+      prop="banbenguimo"
+      label="版本规模"
       min-width="80"
       align="center"      
       >
@@ -50,6 +64,13 @@
       align="center">
     </el-table-column>
     <el-table-column
+      prop="ccyls"
+      label="抽测用例数"
+      min-width="100"
+      align="center"      
+      >
+    </el-table-column>
+    <el-table-column
       prop="cctgl"
       label="抽测通过率"
       min-width="100"
@@ -62,23 +83,65 @@
       align="center">
     </el-table-column>
     <el-table-column
+      prop="a_ylzxgs"
+      label="质控用例数"
+      min-width="100"
+      align="center"      
+      >
+    </el-table-column>
+    <el-table-column
       prop="rounds"
       label="验收轮次"
-      min-width="110"
+      min-width="100"
       align="center"
+      >
+    </el-table-column>
+    <el-table-column
+      prop="atgs"
+      label="首轮通过数"
+      min-width="100"
+      align="center"      
       >
     </el-table-column>
     <el-table-column
       prop="atgl"
       label="首轮通过率"
-      min-width="120"
+      min-width="100"
       align="center"
       >
     </el-table-column>
     <el-table-column
       prop="aqxs"
       label="首轮缺陷数"
-      min-width="120"
+      min-width="100"
+      align="center"
+      >
+    </el-table-column>
+    <el-table-column
+      prop="btgs"
+      label="二轮通过数"
+      min-width="100"
+      align="center"      
+      >
+    </el-table-column>
+    <el-table-column
+      prop="btgl"
+      label="二轮通过率"
+      min-width="100"
+      align="center"
+      >
+    </el-table-column>
+    <el-table-column
+      prop="ctgs"
+      label="三轮通过数"
+      min-width="100"
+      align="center"      
+      >
+    </el-table-column>
+    <el-table-column
+      prop="ctgl"
+      label="三轮通过率"
+      min-width="100"
       align="center"
       >
     </el-table-column>
@@ -91,16 +154,16 @@
     <el-table-column
       prop="zongfen"
       label="总分"
-      min-width="100"
+      min-width="60"
       align="center"
       >
     </el-table-column>
-    <el-table-column label="操作" align="center" min-width="80">
+    <el-table-column fixed="right" label="操作" align="center" min-width="80" >
     <template slot-scope="scope">     
         <el-button @click="getScore(scope.$index,vers)">查看</el-button>        
     </template>
     </el-table-column>
-    </el-table-column>
+    
   </el-table>
   </div>
 </template>
