@@ -39,7 +39,7 @@ export default {
         },
       });
       this.title={
-          text:'小组历史版本数',
+          text:'历史版本数',
             left:'25%',
             top:30
       }

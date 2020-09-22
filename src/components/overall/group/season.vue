@@ -42,7 +42,7 @@ export default {
         },
       });
       this.title={
-          text:'小组季度版本数',
+          text:'季度版本数',
             left:'25%',
             top:30
       }

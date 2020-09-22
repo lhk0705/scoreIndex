@@ -8,7 +8,6 @@
       height="300px"
       :title="title"
       :extend="extend"
-      :after-set-option="beforeConfig"
     ></ve-ring>
     <!-- <p>验收轮次：{{rounds}}</p> -->
     <p>验收轮次：{{prop}}</p>
@@ -40,9 +39,9 @@ export default {
         },
       });
       this.title={
-            // text:this.prop,
-            // left:'25%',
-            // top:30     
+            text:'月度版本数',
+            left:'25%',
+            top:30     
       }
       this.extend={
           series:{           
@@ -55,11 +54,13 @@ export default {
                     fontWeight: 'bold'
                 }, 
           }         
-      }
-                
-    return {        
+      }                
+    return {             
         rounds:'',
         mychart: {
+          title:{
+            text:''
+          },
         columns: ["状态", "数量"],
         rows: [],
       },      
@@ -67,20 +68,17 @@ export default {
   },
   created(){
       this.mychart.rows=[
-          { 状态: "已完成", 数量: 1333 },
-          { 状态: "未完成", 数量: 1222 },
+          { 状态: "已完成", 数量: 1333 },{ 状态: "未完成", 数量: 1222 }
       ]     
   },
-  beforeConfig(chartObj){
-        chartObj.setOption({         
-            title:{
-                text:this.prop,  
-            }
-        })
-  },
-//   updated(){
-//       this.beforeConfig()
-//   }
+  watch:{
+    prop:{
+      handler(newV,oldV){
+        this.mychart.rows=[{ 状态: "已完成", 数量: 1233 },{ 状态: "未完成", 数量: 222 }]
+      }
+    }
+  }
+  
   
   
 };

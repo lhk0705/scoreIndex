@@ -39,7 +39,7 @@ export default {
         },
       });
       this.title={
-          text:'小组年度版本数',
+          text:'年度版本数',
             left:'25%',
             top:30
       }
