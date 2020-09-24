@@ -3,7 +3,7 @@
       <div class="cc_fst">
           <strong>
             抽测得分：
-            <input type="text" class="ccdf" v-model="ccdf" :disabled="scoreDis" />分
+            <input type="text" class="ccdf" v-model="ccdf" :disabled="scoreDis" />
           </strong>
           <el-popover
             placement="right-start"

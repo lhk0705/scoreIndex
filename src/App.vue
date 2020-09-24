@@ -1,8 +1,8 @@
 <template>
   <div id="app">
    
-    <appheader></appheader>
-    <router-view></router-view>
+    <appheader ></appheader>
+    <router-view class="a"></router-view>
     <!-- <score-index></score-index>   -->
   
   </div>
@@ -30,4 +30,10 @@ export default {
   color: #2c3e50;
   /* margin-top: 60px; */
 }
+.a{
+  position: relative;
+  top:60px
+}
+
+
 </style>

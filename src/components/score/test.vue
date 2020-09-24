@@ -3,7 +3,7 @@
        <div class="ys_fst">
           <strong>
             质控验收测试得分：
-            <input type="text" class="yanshoudefen" v-model="yanshoudefen" :disabled="scoreDis"/>分
+            <input type="text" class="yanshoudefen" v-model="yanshoudefen" :disabled="scoreDis"/>
           </strong>
           <el-popover
             placement="right-start"

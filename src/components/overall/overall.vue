@@ -29,19 +29,24 @@
     </div>
     <br />
     <el-row class="row">
-      <el-col :span="5">
-        <deptmon></deptmon>
-      </el-col>
-      <el-col :span="5">
+        <el-col :span="5">
         <deptseason></deptseason>
       </el-col>
       <el-col :span="5">
+        <deptmon></deptmon>
+      </el-col> 
+      <el-col :span="11">
         <deptyear></deptyear>
       </el-col>
-      <el-col :span="5">
+     
+      
+    </el-row>
+    <!-- <el-row class="row">
+      
+      <el-col :span="15">
         <deptall></deptall>
       </el-col>
-    </el-row>
+    </el-row> -->
   </div>
 </template>
 

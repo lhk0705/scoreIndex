@@ -39,7 +39,7 @@ export default {
         },
       });
       this.title={
-          text:'部门季度版本数',
+          text:'部门第三季度版本数',
             left:'25%',
             top:30
       }

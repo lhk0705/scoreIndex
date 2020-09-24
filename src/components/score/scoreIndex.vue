@@ -6,9 +6,9 @@
     </div>
     <div class="bbdf">
       <strong>
-        版本总得分:
+        总得分:
         <input type="text" v-model="banbendefen" :disabled="scoreDis"/>
-        分
+      
       </strong>
     </div>
     <br />
@@ -40,7 +40,7 @@
       <strong>
         版本总得分:
         <input type="text" v-model="banbendefen" :disabled="scoreDis"/>
-        分
+        
       </strong>
       <el-button @click="submit" type="primary" plain>提交</el-button>
       <el-button @click="cancel" plain>清空</el-button>

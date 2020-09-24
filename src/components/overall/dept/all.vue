@@ -1,82 +1,42 @@
 <template>
   <div>
-    <ve-ring
+    <ve-line
       :data="mychart"
-      :settings="chartSettings"
-      :legend="legend"
-      width="300px"
-      height="300px"
-        :title="title"
-        :extend="extend"
-    
-    ></ve-ring>
-    <p>验收轮次：{{rounds}}</p>
+    :extend="extend"
+ 
+    ></ve-line>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    (this.chartSettings = {
-      radius: ["40%", "60%"],
-      label:{
-              show:false
-          },
-        //   series:[{
-        //       type:'pie',
-        //       bottom:30
-        //   }]
-    }),
-      (this.legend = {
-        orient: "vertical",
-        right: 20,
-        top:80,
-        // width: 20,
-        itemWidth: 10,
-        itemHeight: 10,
-        textStyle: {
-          fontSize: 10,
-        },
-      });
-      this.title={
-          text:'部门历史版本数',
-            left:'25%',
-            top:30
-      }
-      this.extend={
-          series:{
-            //   type:'pie',
-              right:10,
-            //   emphasis: {
-                label: {
-                    show: true,
-                    position:'center',
-                    formatter:'总版本数:',
-                    fontSize: '10',
-                    fontWeight: 'bold'
-                }
-            // },
-          }
-          
-      }
+    this.extend={
+        'xAxis.0.axisLabel.rotate': 45,
+        series:{
+            smooth:false
+        }
+    }
       
       
     return {
-    rounds:'',
+    
       mychart: {
-        columns: ["状态", "数量"],
+        columns: ["季度", "首轮通过率","验收轮次"],
         rows: [
         //   { 状态: "已完成", 数量: 1333 },
         //   { 状态: "未完成", 数量: 1222},
         ],
-      },
-      
+      }, 
     };
   },
   created(){
       this.mychart.rows=[
-          { 状态: "已完成", 数量: 1333 },
-          { 状态: "未完成", 数量: 1222 },
+          { 季度: "2019四季度", 首轮通过率: 0.22 ,验收轮次:1.5},
+          { 季度: "2020一季度", 首轮通过率: 0.56 ,验收轮次:1.8},
+          { 季度: "2020二季度", 首轮通过率: 0.67 ,验收轮次:1.1},
+          { 季度: "2020三季度", 首轮通过率: 0.43 ,验收轮次:1.9},
+          
       ]
   }
 };

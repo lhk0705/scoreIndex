@@ -3,7 +3,7 @@
     <div class="jfw_fst">
       <strong>
         交付物得分：
-        <input type="text" class="jiaofuwudefen" v-model="jiaofuwudefen" :disabled="scoreDis" />分
+        <input type="text" class="jiaofuwudefen" v-model="jiaofuwudefen" :disabled="scoreDis" />
       </strong>
     </div>
     <br />
@@ -13,7 +13,7 @@
         <el-header class="xq_head" height="40px">
           <strong>
             需求文档：
-            <input type="text" class="xuqiudefen" v-model="xuqiudefen" :disabled="scoreDis" />分
+            <input type="text" class="xuqiudefen" v-model="xuqiudefen" :disabled="scoreDis" />
           </strong>
           <el-popover
             placement="right-start"
@@ -143,7 +143,7 @@
         <el-header class="yl_head" height="40px">
           <strong>
             测试用例：
-            <input type="text" class="csyldf" v-model="csyldf" :disabled="scoreDis" />分
+            <input type="text" class="csyldf" v-model="csyldf" :disabled="scoreDis" />
           </strong>
           <el-popover
             placement="right-start"
@@ -344,7 +344,7 @@
         <el-header class="bg_head" height="40px">
           <strong>
             测试报告：
-            <input type="text" class="csbgdf" v-model="csbgdf" :disabled="scoreDis" />分
+            <input type="text" class="csbgdf" v-model="csbgdf" :disabled="scoreDis" />
           </strong>
           <el-popover
             placement="right-start"

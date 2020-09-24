@@ -50,4 +50,13 @@ export default {
     width:60px;
     color: rgb(10, 126, 146);
 }
+div{
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+.el-menu-demo{
+  position: relative;
+  bottom: 10px;
+}
 </style>

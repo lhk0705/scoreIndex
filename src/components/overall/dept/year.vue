@@ -1,70 +1,27 @@
 <template>
   <div>
-    <ve-ring
+    <ve-line
       :data="mychart"
-      :settings="chartSettings"
-      :legend="legend"
-      width="300px"
-      height="300px"
-        :title="title"
-        :extend="extend"
- 
-    ></ve-ring>
-    <p>验收轮次：{{rounds}}</p>
+    :extend="extend"
+    ></ve-line>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    (this.chartSettings = {
-      radius: ["40%", "60%"],
-      label:{
-              show:false
-          },
-        //   series:[{
-        //       type:'pie',
-        //       bottom:30
-        //   }]
-    }),
-      (this.legend = {
-        orient: "vertical",
-        right: 20,
-        top:80,
-        // width: 20,
-        itemWidth: 10,
-        itemHeight: 10,
-        textStyle: {
-          fontSize: 10,
-        },
-      });
-      this.title={
-          text:'部门年度版本数',
-            left:'25%',
-            top:30
-      }
-      this.extend={
-          series:{
-            //   type:'pie',
-              right:10,
-            //   emphasis: {
-                label: {
-                    show: true,
-                    position:'center',
-                    formatter:'总版本数:',
-                    fontSize: '10',
-                    fontWeight: 'bold'
-                }
-            // },
-          }
-          
-      }
+    this.extend={
+        'xAxis.0.axisLabel.rotate': 45,
+        series:{
+            smooth:false
+        }
+    }
       
       
     return {
-    rounds:'',
+    
       mychart: {
-        columns: ["状态", "数量"],
+        columns: ["月份", "首轮通过率","验收轮次"],
         rows: [
         //   { 状态: "已完成", 数量: 1333 },
         //   { 状态: "未完成", 数量: 1222},
@@ -75,8 +32,18 @@ export default {
   },
   created(){
       this.mychart.rows=[
-          { 状态: "已完成", 数量: 1333 },
-          { 状态: "未完成", 数量: 1222 },
+          { 月份: "10月", 首轮通过率: 0.14 ,验收轮次:1.2},
+          { 月份: "11月", 首轮通过率: 0.5 ,验收轮次:1.6},
+          { 月份: "12月", 首轮通过率: 0.33 ,验收轮次:1.8},
+          { 月份: "1月", 首轮通过率: 0.62 ,验收轮次:0.6},
+          { 月份: "2月", 首轮通过率: 0.60 ,验收轮次:1.3},
+          { 月份: "3月", 首轮通过率: 0.16 ,验收轮次:1.7},
+          { 月份: "4月", 首轮通过率: 0.61 ,验收轮次:1.4},
+          { 月份: "5月", 首轮通过率: 0.33 ,验收轮次:2.3},
+          { 月份: "6月", 首轮通过率: 0.33 ,验收轮次:1.2},
+          { 月份: "7月", 首轮通过率: 0.27 ,验收轮次:1.3},
+          { 月份: "8月", 首轮通过率: 0.31 ,验收轮次:1.9},
+          { 月份: "9月", 首轮通过率: 0.35 ,验收轮次:1.1},
       ]
   }
 };
