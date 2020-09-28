@@ -448,7 +448,11 @@ export default {
     a_zss: {
       get(){
         if (this.a_ylzxgs !== '' && this.a_tgs !== '' && this.a_btgs !== '') {
-        return this.a_ylzxgs - this.a_tgs - this.a_btgs;
+          let result=this.a_ylzxgs - this.a_tgs - this.a_btgs
+          if(result<0){
+              alert("阻塞数不能小于0")
+          }else{return result;}
+        
       } else {
         return "";
       }
@@ -467,7 +471,12 @@ export default {
     b_zss:{
       get(){
         if (this.b_ylzxgs !== '' && this.b_tgs !== '' && this.b_btgs !== '') {
-        return this.b_ylzxgs - this.b_tgs - this.b_btgs;
+          let result=this.b_ylzxgs - this.b_tgs - this.b_btgs
+          if(result<0){
+              alert("阻塞数不能小于0")
+          }
+        else{return result;}
+       
       } else {
         return "";
       }},
@@ -486,7 +495,11 @@ export default {
     c_zss: {
       get(){
         if (this.c_ylzxgs !== '' && this.c_tgs !== '' && this.c_btgs !== '') {
-        return this.c_ylzxgs - this.c_tgs - this.c_btgs;
+          let result=this.c_ylzxgs - this.c_tgs - this.c_btgs
+          if(result<0){
+              alert("阻塞数不能小于0")
+          }
+        else{return result;}
       } else {
         return "";
       }},

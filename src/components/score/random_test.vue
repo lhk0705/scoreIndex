@@ -181,7 +181,11 @@ export default {
     zss: {
       get(){
       if (this.tgs !== '' && (this.ccyls !== '') & (this.cc_btgs !== '')) {
-        return this.ccyls - this.tgs - this.cc_btgs;
+        let result=this.ccyls - this.tgs - this.cc_btgs
+        if(result<0){
+          alert("阻塞数不能小于0！")
+        }else{return result}
+        ;
       } else {
         return "";
       }
