@@ -740,8 +740,11 @@ export default {
     }
   },
   computed: {    
-    banbendefen(){
-      return this.$store.getters.banbendefen
+    banbendefen:{
+      get(){
+        return this.$store.getters.banbendefen
+      }, 
+      set(){}     
     }
   },
   

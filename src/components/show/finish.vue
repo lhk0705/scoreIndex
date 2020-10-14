@@ -83,7 +83,7 @@
       align="center">
     </el-table-column>
     <el-table-column
-      prop="a_ylzxgs"
+      prop="aYlzxgs"
       label="质控用例数"
       min-width="100"
       align="center"      
@@ -97,7 +97,7 @@
       >
     </el-table-column>
     <el-table-column
-      prop="atgs"
+      prop="aTgs"
       label="首轮通过数"
       min-width="100"
       align="center"      
@@ -118,28 +118,28 @@
       >
     </el-table-column>
     <el-table-column
-      prop="btgs"
+      prop="bTgs"
       label="二轮通过数"
       min-width="100"
       align="center"      
       >
     </el-table-column>
     <el-table-column
-      prop="btgl"
+      prop="bTgl"
       label="二轮通过率"
       min-width="100"
       align="center"
       >
     </el-table-column>
     <el-table-column
-      prop="ctgs"
+      prop="cTgs"
       label="三轮通过数"
       min-width="100"
       align="center"      
       >
     </el-table-column>
     <el-table-column
-      prop="ctgl"
+      prop="cTgl"
       label="三轮通过率"
       min-width="100"
       align="center"

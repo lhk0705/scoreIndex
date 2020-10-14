@@ -102,16 +102,16 @@ const getters={
     getFinishVer:state=>{
         let result=[]
         for(let item of state.finishVer){
-            if(item.btgs===-999){
-                item.btgs="无"
-                item.btgl="无"
-                item.ctgs="无"
-                item.ctgl="无"
+            if(item.bTgs===-999){
+                item.bTgs="无"
+                item.bTgl="无"
+                item.cTgs="无"
+                item.cTgl="无"
             }
                 else{
-                if(item.ctgs==-999){
-                    item.ctgs="无"
-                    item.ctgl="无"
+                if(item.cTgs==-999){
+                    item.cTgs="无"
+                    item.cTgl="无"
                 }
             }
             result.push(item)

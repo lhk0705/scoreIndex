@@ -10,7 +10,7 @@
       :extend="extend"
     ></ve-ring>
     <!-- <p>验收轮次：{{rounds}}</p> -->
-    <p>验收轮次：{{prop}}</p>
+    <p>验收轮次：{{rounds}}</p>
   </div>
 </template>
 
@@ -73,8 +73,9 @@ export default {
   },
   watch:{
     prop:{
-      handler(newV,oldV){
+      handler(newV,oldV){        
         this.mychart.rows=[{ 状态: "已完成", 数量: 1233 },{ 状态: "未完成", 数量: 222 }]
+        // this.$axios.post('',newV)
       }
     }
   }
