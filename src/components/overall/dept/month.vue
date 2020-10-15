@@ -15,7 +15,10 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
+ 
   data() {
     (this.chartSettings = {
       radius: ["40%", "60%"],
@@ -43,42 +46,96 @@ export default {
             left:'25%',
             top:30
       }
-      this.extend={
+      // this.extend={
+      //     series:{
+      //       //   type:'pie',
+      //         right:10,
+      //       //   emphasis: {
+      //           label: {
+                  
+      //               show: true,
+      //               position:'center',
+      //               fontSize: '10',
+      //               fontWeight: 'bold',
+      //               formatter:'总版本数：'+ this.getm()
+      //       },
+      //       // },
+      //     },
+          
+          
+      // }
+      
+      
+    return {
+    rounds:'',
+    extend:{
           series:{
             //   type:'pie',
               right:10,
             //   emphasis: {
                 label: {
+                  
                     show: true,
                     position:'center',
-                    formatter:'总版本数:',
                     fontSize: '10',
-                    fontWeight: 'bold'
-                }
+                    fontWeight: 'bold',
+                    formatter:''
+            },
             // },
-          }
+          },
           
-      }
-      
-      
-    return {
-    rounds:'',
+          
+      },
       mychart: {
         columns: ["状态", "数量"],
         rows: [
-        //   { 状态: "已完成", 数量: 1333 },
-        //   { 状态: "未完成", 数量: 1222},
+          // { 状态: "已完成", 数量: this.$store.getters.getFvMon },
+          // { 状态: "未完成", 数量: 1222},
         ],
       },
       
     };
   },
-  created(){
-      this.mychart.rows=[
-          { 状态: "已完成", 数量: 1333 },
-          { 状态: "未完成", 数量: 1222 },
+  beforeMount(){
+    this.mychart.rows=[
+          { 状态: "已完成", 数量: this.$store.getters.getFvMon },
+          { 状态: "未完成", 数量: 2 },
       ]
+  },
+  created(){      
+      // this.getMon()
+      this.SET_DEPT_MONTH();
+      this.$nextTick().then(()=>{      
+      console.log(2);
+      this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getMon 
+      })
+  },
+  
+  methods:{
+    SET_DEPT_MONTH(){
+      axios.get('/v_dept_mon')
+      .then((res)=>{         
+        this.$store.commit('setMon',res.data.total)
+        // console.log(this.$store.getters.getMon);
+        console.log(1); 
+      })
+    },
+    SET_DEPT_fvMONTH(){
+      axios.get("/fv_dept_mon")
+      .then((res)=>{         
+        this.$store.commit('setFvMon',res.data.total)
+        // console.log(this.$store.getters.getMon);
+        // console.log(2); 
+      })
+    },
+    // async  getMon(){
+    //   await this.GET_DEPT_MONTH();
+    //   await this.GET_DEPT_fvMONTH()
+    //   this.getm();
+    // }
+     
   }
+  
 };
 </script>
 
