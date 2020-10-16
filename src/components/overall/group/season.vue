@@ -15,72 +15,102 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
     props:{
         prop:String
     },
   data() {
-    (this.chartSettings = {
+        return {
+      chartSettings : {
       radius: ["40%", "60%"],
       label:{
               show:false
           },
-        //   series:[{
-        //       type:'pie',
-        //       bottom:30
-        //   }]
-    }),
-      (this.legend = {
-       orient: "vertical",
+        
+    },
+      legend: {
+        orient: "vertical",
         right: 20,
         top:80,
         // width: 20,
         itemWidth: 10,
         itemHeight: 10,
         textStyle: {
-          fontSize: 10,
+        fontSize: 10,
         },
-      });
-      this.title={
-          text:'季度版本数',
+      } ,
+      title:{
+            text:'季度版本数',
             left:'25%',
-            top:30
-      }
-      this.extend={
-          series:{
-            //   type:'pie',
+            top:30     
+      },            
+        rounds:'',
+        extend:{
+          series:{           
               right:10,
-            //   emphasis: {
                 label: {
                     show: true,
                     position:'center',
-                    formatter:'总版本数:',
-                    fontSize: '10',
+                    formatter:'',
+                    fontSize: '12',
                     fontWeight: 'bold'
-                }
-            // },
-          }
-          
-      }
-      
-      
-    return {
-    rounds:'',
-      mychart: {
-        columns: ["状态", "数量"],
-        rows: [
-        //   { 状态: "已完成", 数量: 1333 },
-        //   { 状态: "未完成", 数量: 1222},
-        ],
-      },
-      
+                }, 
+          }         
+      } ,
+        mychart: {
+          title:{
+            text:''
+          },
+        columns: ["state", "total"],
+        rows: [],
+      },      
     };
   },
   created(){
-      this.mychart.rows=[
-          { 状态: "已完成", 数量: 1333 },
-          { 状态: "未完成", 数量: 1222 },
-      ]
+      this.title.text=this.prop+'季度版本数' 
+      this.getGSea(this.prop)         
+  },
+    watch:{
+    prop:{
+      handler(newV,oldV){        
+        this.getGSea(newV)
+        this.title.text=newV+'季度版本数'
+      }
+    }
+  },
+  methods:{
+      SET_GROUP_SEA(newV){
+      axios.post('/v_group_sea',{"groupName":newV})
+      .then((res)=>{         
+        this.$store.commit('setGSea',res.data.total)
+        console.log(res.data);
+        // console.log(this.$store.getters.getMon);
+        this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getGSea
+        // console.log(1); 
+      })
+    },
+    SET_GROUP_fvSEA(newV){
+      axios.post('/fv_group_sea',{"groupName":newV})
+      .then((res)=>{         
+        this.$store.commit('setGFvSea',res.data.total)
+        this.mychart.rows[0]={ state: "已完成", total: this.$store.getters.getGFvSea}
+        // console.log(2);
+      })
+    },
+    SET_GROUP_uvSEA(newV){
+      axios.post('/uv_group_sea',{"groupName":newV})
+      .then((res)=>{         
+        this.$store.commit('setGUvSea',res.data.total)
+        this.mychart.rows[1]={ state: "未完成", total: this.$store.getters.getGUvSea }
+        // console.log(3);
+      })
+    },    
+    async  getGSea(newV){
+      await this.SET_GROUP_SEA(newV);
+      await this.SET_GROUP_fvSEA(newV);
+      this.SET_GROUP_uvSEA(newV)
+    }
   }
 };
 </script>

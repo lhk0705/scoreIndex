@@ -42,30 +42,10 @@ export default {
         },
       });
       this.title={
-          text:'部门9月版本数',
+          text:'部门月度版本数',
             left:'25%',
             top:30
-      }
-      // this.extend={
-      //     series:{
-      //       //   type:'pie',
-      //         right:10,
-      //       //   emphasis: {
-      //           label: {
-                  
-      //               show: true,
-      //               position:'center',
-      //               fontSize: '10',
-      //               fontWeight: 'bold',
-      //               formatter:'总版本数：'+ this.getm()
-      //       },
-      //       // },
-      //     },
-          
-          
-      // }
-      
-      
+      }      
     return {
     rounds:'',
     extend:{
@@ -77,7 +57,7 @@ export default {
                   
                     show: true,
                     position:'center',
-                    fontSize: '10',
+                    fontSize: '12',
                     fontWeight: 'bold',
                     formatter:''
             },
@@ -87,28 +67,16 @@ export default {
           
       },
       mychart: {
-        columns: ["状态", "数量"],
+        columns: ["state", "total"],
         rows: [
-          // { 状态: "已完成", 数量: this.$store.getters.getFvMon },
-          // { 状态: "未完成", 数量: 1222},
+          
         ],
       },
       
     };
   },
-  beforeMount(){
-    this.mychart.rows=[
-          { 状态: "已完成", 数量: this.$store.getters.getFvMon },
-          { 状态: "未完成", 数量: 2 },
-      ]
-  },
   created(){      
-      // this.getMon()
-      this.SET_DEPT_MONTH();
-      this.$nextTick().then(()=>{      
-      console.log(2);
-      this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getMon 
-      })
+      this.getMon()
   },
   
   methods:{
@@ -117,22 +85,31 @@ export default {
       .then((res)=>{         
         this.$store.commit('setMon',res.data.total)
         // console.log(this.$store.getters.getMon);
-        console.log(1); 
+        this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getMon
+        // console.log(1); 
       })
     },
     SET_DEPT_fvMONTH(){
       axios.get("/fv_dept_mon")
       .then((res)=>{         
         this.$store.commit('setFvMon',res.data.total)
-        // console.log(this.$store.getters.getMon);
-        // console.log(2); 
+        this.mychart.rows[0]={ state: "已完成", total: this.$store.getters.getFvMon}
+        // console.log(2);
       })
     },
-    // async  getMon(){
-    //   await this.GET_DEPT_MONTH();
-    //   await this.GET_DEPT_fvMONTH()
-    //   this.getm();
-    // }
+    SET_DEPT_uvMONTH(){
+      axios.get("/uv_dept_mon")
+      .then((res)=>{         
+        this.$store.commit('setUvMon',res.data.total)
+        this.mychart.rows[1]={ state: "未完成", total: this.$store.getters.getUvMon }
+        // console.log(3);
+      })
+    },    
+    async  getMon(){
+      await this.SET_DEPT_MONTH();
+      await this.SET_DEPT_fvMONTH();
+      this.SET_DEPT_uvMONTH()
+    }
      
   }
   

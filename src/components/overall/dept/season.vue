@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     (this.chartSettings = {
@@ -39,11 +40,15 @@ export default {
         },
       });
       this.title={
-          text:'部门第三季度版本数',
+          text:'部门季度版本数',
             left:'25%',
             top:30
       }
-      this.extend={
+      
+      
+    return {
+    rounds:'',
+    extend:{
           series:{
             //   type:'pie',
               right:10,
@@ -51,34 +56,60 @@ export default {
                 label: {
                     show: true,
                     position:'center',
-                    formatter:'总版本数:',
-                    fontSize: '10',
+                    formatter:'',
+                    fontSize: '12',
                     fontWeight: 'bold'
                 }
             // },
           }
           
-      }
-      
-      
-    return {
-    rounds:'',
+      },
       mychart: {
-        columns: ["状态", "数量"],
+        columns: ["state", "total"],
         rows: [
-        //   { 状态: "已完成", 数量: 1333 },
-        //   { 状态: "未完成", 数量: 1222},
+        
         ],
       },
       
     };
   },
   created(){
-      this.mychart.rows=[
-          { 状态: "已完成", 数量: 1333 },
-          { 状态: "未完成", 数量: 1222 },
-      ]
+      this.getSea()
+  },
+  methods:{
+    SET_DEPT_SEA(){
+      axios.get('/v_dept_sea')
+      .then((res)=>{         
+        this.$store.commit('setSea',res.data.total)
+        // console.log(this.$store.getters.getMon);
+        this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getSea
+        console.log(1); 
+      })
+    },
+    SET_DEPT_fvSEA(){
+      axios.get("/fv_dept_sea")
+      .then((res)=>{         
+        this.$store.commit('setFvSea',res.data.total)        
+        this.mychart.rows[0]={ state: "已完成", total: this.$store.getters.getFvSea}
+        console.log(2);
+      })
+    },
+    SET_DEPT_uvSEA(){
+      axios.get("/uv_dept_sea")
+      .then((res)=>{         
+        this.$store.commit('setUvSea',res.data.total)
+        this.mychart.rows[1]={ state: "未完成", total: this.$store.getters.getUvSea }
+        
+        console.log(3);
+      })
+    },    
+    async  getSea(){
+      await this.SET_DEPT_SEA();
+      await this.SET_DEPT_fvSEA();
+      this.SET_DEPT_uvSEA()
+    }
   }
+
 };
 </script>
 

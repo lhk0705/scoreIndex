@@ -15,19 +15,21 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-    props:{
+  props:{
         prop:String
     },
-  data() {
-    (this.chartSettings = {
+  data() {                
+    return {
+      chartSettings : {
       radius: ["40%", "60%"],
       label:{
               show:false
           },
         
-    }),
-      (this.legend = {
+    },
+      legend: {
         orient: "vertical",
         right: 20,
         top:80,
@@ -37,46 +39,77 @@ export default {
         textStyle: {
         fontSize: 10,
         },
-      });
-      this.title={
+      } ,
+      title:{
             text:'月度版本数',
             left:'25%',
             top:30     
-      }
-      this.extend={
+      },            
+        rounds:'',
+        extend:{
           series:{           
               right:10,
                 label: {
                     show: true,
                     position:'center',
-                    formatter:'总版本数:',
-                    fontSize: '10',
+                    formatter:'',
+                    fontSize: '12',
                     fontWeight: 'bold'
                 }, 
           }         
-      }                
-    return {             
-        rounds:'',
+      } ,
         mychart: {
           title:{
             text:''
           },
-        columns: ["状态", "数量"],
+        columns: ["state", "total"],
         rows: [],
       },      
     };
   },
   created(){
-      this.mychart.rows=[
-          { 状态: "已完成", 数量: 1333 },{ 状态: "未完成", 数量: 1222 }
-      ]     
+      this.getGMon(this.prop) 
+      this.title.text=this.prop+'月度版本数'   
   },
   watch:{
     prop:{
       handler(newV,oldV){        
-        this.mychart.rows=[{ 状态: "已完成", 数量: 1233 },{ 状态: "未完成", 数量: 222 }]
-        // this.$axios.post('',newV)
+        this.getGMon(newV)
+        this.title.text=newV+'月度版本数'
       }
+    }
+  },
+  methods:{
+    SET_GROUP_MONTH(newV){
+      axios.post('/v_group_mon',{"groupName":newV})
+      .then((res)=>{         
+        this.$store.commit('setGMon',res.data.total)
+        console.log(res.data);
+        // console.log(this.$store.getters.getMon);
+        this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getGMon
+        // console.log(1); 
+      })
+    },
+    SET_GROUP_fvMON(newV){
+      axios.post('/fv_group_mon',{"groupName":newV})
+      .then((res)=>{         
+        this.$store.commit('setGFvMon',res.data.total)
+        this.mychart.rows[0]={ state: "已完成", total: this.$store.getters.getGFvMon}
+        // console.log(2);
+      })
+    },
+    SET_GROUP_uvMONTH(newV){
+      axios.post('/uv_group_mon',{"groupName":newV})
+      .then((res)=>{         
+        this.$store.commit('setGUvMon',res.data.total)
+        this.mychart.rows[1]={ state: "未完成", total: this.$store.getters.getGUvMon }
+        // console.log(3);
+      })
+    },    
+    async  getGMon(newV){
+      await this.SET_GROUP_MONTH(newV);
+      await this.SET_GROUP_fvMON(newV);
+      this.SET_GROUP_uvMONTH(newV)
     }
   }
   

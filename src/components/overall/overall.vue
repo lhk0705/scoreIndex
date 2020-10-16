@@ -11,6 +11,9 @@
             :value="item.value"
           ></el-option>
         </el-select>
+        <el-button @click="change" size="mini">{{value}}</el-button>
+        <br>
+        <p><strong>*注：月度和季度分别表示上一月度和上一季度的数据</strong></p>
       </el-row>
       <el-row>
         <el-col :span="5">
@@ -19,12 +22,19 @@
         <el-col :span="5">
           <groupseason :prop="zb"></groupseason>
         </el-col>
-        <el-col :span="5">
+        <el-col :span="5" v-if="show=='group'">
           <groupyear :prop="zb"></groupyear>
         </el-col>
-        <el-col :span="5">
+        <el-col :span="5" v-else>
+          <randomTest></randomTest>
+        </el-col>
+        <el-col :span="5" v-if="show=='group'">
           <groupall :prop="zb"></groupall>
         </el-col>
+        <el-col :span="5" v-else>
+          <fstTest></fstTest>
+        </el-col>
+        
       </el-row>
     </div>
     <br />
@@ -41,12 +51,6 @@
      
       
     </el-row>
-    <!-- <el-row class="row">
-      
-      <el-col :span="15">
-        <deptall></deptall>
-      </el-col>
-    </el-row> -->
   </div>
 </template>
 
@@ -59,11 +63,14 @@ import groupmon from "./group/month";
 import groupall from "./group/all";
 import groupseason from "./group/season";
 import groupyear from "./group/year";
+import fstTest from "./group/fstTest";
+import randomTest from "./group/randomTest";
 export default {
   data() {
     return {
       zb: "OA系统组",
-      
+      show:'group',
+      value:'月度部门抽测和首轮验收情况'
     };
   },
   components: {
@@ -75,12 +82,26 @@ export default {
     groupall,
     groupseason,
     groupyear,
+    fstTest,
+    randomTest
   },
   computed: {
     group() {
       return this.$store.getters.getGroup;
     },
   },
+  methods:{
+    change(){
+      if(this.value=='月度部门抽测和首轮验收情况'){
+      this.show='nogroup'
+      this.value='小组情况'
+      }
+      else{
+        this.show='group'
+      this.value='月度部门抽测和首轮验收情况'
+      }
+    }
+  }
   
 };
 </script>

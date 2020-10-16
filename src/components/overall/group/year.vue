@@ -15,19 +15,21 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
     props:{
         prop:String
     },
   data() {
-    (this.chartSettings = {
+    return {
+      chartSettings : {
       radius: ["40%", "60%"],
       label:{
               show:false
           },
         
-    }),
-      (this.legend = {
+    },
+      legend: {
         orient: "vertical",
         right: 20,
         top:80,
@@ -35,49 +37,80 @@ export default {
         itemWidth: 10,
         itemHeight: 10,
         textStyle: {
-          fontSize: 10,
+        fontSize: 10,
         },
-      });
-      this.title={
-          text:'年度版本数',
+      } ,
+      title:{
+            text:'年度版本数',
             left:'25%',
-            top:30
-      }
-      this.extend={
-          series:{
-            //   type:'pie',
+            top:30     
+      },            
+        rounds:'',
+        extend:{
+          series:{           
               right:10,
-            //   emphasis: {
                 label: {
                     show: true,
                     position:'center',
-                    formatter:'总版本数:',
-                    fontSize: '10',
+                    formatter:'',
+                    fontSize: '12',
                     fontWeight: 'bold'
-                }
-            // },
-          }
-          
-      }
-      
-      
-    return {
-    rounds:'',
-      mychart: {
-        columns: ["状态", "数量"],
-        rows: [
-        //   { 状态: "已完成", 数量: 1333 },
-        //   { 状态: "未完成", 数量: 1222},
-        ],
-      },
-      
+                }, 
+          }         
+      } ,
+        mychart: {
+          title:{
+            text:''
+          },
+        columns: ["state", "total"],
+        rows: [],
+      },      
     };
   },
   created(){
-      this.mychart.rows=[
-          { 状态: "已完成", 数量: 1333 },
-          { 状态: "未完成", 数量: 1222 },
-      ]
+      this.getGYear(this.prop) 
+      this.title.text=this.prop+'年度版本数'   
+  },
+  watch:{
+    prop:{
+      handler(newV,oldV){        
+        this.getGYear(newV)
+        this.title.text=newV+'年度版本数'
+      }
+    }
+  },
+  methods:{
+    SET_GROUP_YEAR(newV){
+      axios.post('/v_group_year',{"groupName":newV})
+      .then((res)=>{         
+        this.$store.commit('setGYear',res.data.total)
+        console.log(res.data);
+        // console.log(this.$store.getters.getMon);
+        this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getGYear
+        // console.log(1); 
+      })
+    },
+    SET_GROUP_fvYEAR(newV){
+      axios.post('/fv_group_year',{"groupName":newV})
+      .then((res)=>{         
+        this.$store.commit('setGFvYear',res.data.total)
+        this.mychart.rows[0]={ state: "已完成", total: this.$store.getters.getGFvYear}
+        // console.log(2);
+      })
+    },
+    SET_GROUP_uvYEAR(newV){
+      axios.post('/uv_group_year',{"groupName":newV})
+      .then((res)=>{         
+        this.$store.commit('setGUvYear',res.data.total)
+        this.mychart.rows[1]={ state: "未完成", total: this.$store.getters.getGUvYear }
+        // console.log(3);
+      })
+    },    
+    async  getGYear(newV){
+      await this.SET_GROUP_YEAR(newV);
+      await this.SET_GROUP_fvYEAR(newV);
+      this.SET_GROUP_uvYEAR(newV)
+    }
   }
 };
 </script>
