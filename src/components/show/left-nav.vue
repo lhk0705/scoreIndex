@@ -33,6 +33,19 @@
             未完成
             </span>            
       </el-menu-item>
+      <el-menu-item index="/newTask" v-if="user.role==='2'">
+        <i class="el-icon-menu"></i>
+        <span slot="title"> 
+            新建测试任务
+            </span>            
+      </el-menu-item>
+      <el-menu-item index="/myTask" v-else>
+        <i class="el-icon-menu"></i>
+        <span slot="title"> 
+            我的测试任务
+            </span>            
+      </el-menu-item>
+      
     </el-menu>
 </template>
 
@@ -40,10 +53,15 @@
 export default {
 methods: {
       handleOpen(key, keyPath) {
-        console.log(key, keyPath);
+        // console.log(key, keyPath);
       },
       handleClose(key, keyPath) {
-        console.log(key, keyPath);
+        // console.log(key, keyPath);
+      }
+    },
+    computed:{
+      user(){
+        return this.$store.getters.getUser
       }
     }
 }

@@ -1,21 +1,29 @@
 <template>
-  <div id="app">
-   
+  <div id="app" v-if="user">   
     <appheader ></appheader>
     <router-view class="a"></router-view>
-    <!-- <score-index></score-index>   -->
-  
+    <!-- <score-index></score-index>   -->  
+  </div>
+  <div v-else>
+    <login></login>
   </div>
 </template>
 
 <script>
 // import scoreIndex from "./score/scoreIndex.vue";
 import headVue from './components/common/head';
+import login from "./components/login";
 export default {
   name: 'App',
   components:{
   //   "score-index":scoreIndex
     "appheader":headVue,
+    login
+  }, 
+  computed:{
+    user(){
+     return this.$store.getters.getUser
+    }
   }
 }
 </script>

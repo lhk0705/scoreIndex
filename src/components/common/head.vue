@@ -1,6 +1,6 @@
 <template>
-  <div>
-      
+  <div> 
+    <div> 
     <el-menu
       :default-active="activeIndex2"
       class="el-menu-demo"
@@ -23,10 +23,13 @@
       <el-menu-item index="/scoreIndex">
           版本数据录入
         </el-menu-item>
-
-      
+        <el-menu-item class="user">{{user}}
+          <router-link to="/" @click="logOut">【退出】</router-link>
+        </el-menu-item>
+              
     </el-menu>
-  </div>
+   
+  </div></div>    
 </template>
 
 <script>
@@ -38,7 +41,15 @@ export default {
     },
     methods: {
         handleSelect(key, keyPath) {
-          console.log(key, keyPath);
+          // console.log(key, keyPath);
+        },
+        logOut(){
+          this.$store.commit('serUser','')
+        }
+      },
+      computed:{
+        user(){
+          return this.$store.getters.getUser.userId
         }
       }
 };
@@ -58,5 +69,8 @@ div{
 .el-menu-demo{
   position: relative;
   bottom: 10px;
+}
+.user{
+  float: right;
 }
 </style>

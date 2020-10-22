@@ -11,10 +11,11 @@ import total from "./module/total";
 import warnvers from "./warnvers";
 import dept from "./dept";
 import groupv from "./group";
+import user from "./module/user";
 
 export const store=new Vuex.Store({
 
     modules:{
-        finishVer,ingVer,system,group,sysperson,testPerson,total,warnvers,dept,groupv
+        finishVer,ingVer,system,group,sysperson,testPerson,total,warnvers,dept,groupv,user
     }
 })

@@ -28,6 +28,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      xmldom: path.resolve("./node_modules/docxtemplater/es6/browser-versions/xmldom.js"),
     }
   },
   module: {
