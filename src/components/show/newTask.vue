@@ -190,7 +190,20 @@ export default {
       bbh_change(){     
       },
         create(){
-            axios.post('/')
+          let data={
+            groupName:this.groupName,
+            ticeshijian:this.ticeshijian,
+            sysPerson:this.stateperson,
+            xitongming:this.xitongming,
+            type:this.type,
+            plan:this.plan,
+            banbenguimo:this.banbenguimo,
+            testPerson:this.state_cc_r
+          }
+            axios.post('/postTask',data)
+            .then((res)=>{
+              console.log(res.data);
+            })
         }
   },
 };

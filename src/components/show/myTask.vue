@@ -67,9 +67,9 @@ export default {
         }
     },
     created(){
-        axios.post('')
+        axios.post('/getTask',this.$store.getters.getUser.name)
         .then((res)=>{
-
+            this.myTask=res.data
         })
     }
 }

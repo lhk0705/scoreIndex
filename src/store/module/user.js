@@ -1,9 +1,15 @@
 const state={
     user:
+    // {
+    //     userId:'test',
+    //     password:'test',
+    //     role:'1'
+    // },
     {
         userId:'test',
         password:'test',
-        role:'1'
+        role:'2',
+        name:'林舒楠'
     }
 };
 const mutations={

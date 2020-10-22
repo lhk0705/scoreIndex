@@ -33,7 +33,7 @@
             未完成
             </span>            
       </el-menu-item>
-      <el-menu-item index="/newTask" v-if="user.role==='2'">
+      <el-menu-item index="/newTask" v-if="user.role==='1'">
         <i class="el-icon-menu"></i>
         <span slot="title"> 
             新建测试任务
