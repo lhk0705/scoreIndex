@@ -58,8 +58,9 @@ import randomtest from './random_test';
 import test from './test';
 export default {
   beforeRouteEnter:((to,from,next)=>{
-    console.log(from.path);    
+    console.log(from.path);       
     next(vm=>{
+      console.log(vm.$route.params); 
       if(vm.$route.params.ticeshijian!==undefined&&vm.$route.params.xitongming!==undefined){
       let bbh={"banbenhao":vm.$route.params.ticeshijian+vm.$route.params.xitongming}
       console.log(bbh);
@@ -187,7 +188,8 @@ export default {
             }
             }       
           })
-    }})    
+    }
+    })    
   }),
   components:{
     "vision-head":visionhead,

@@ -3,15 +3,17 @@
     <el-table 
     :data="myTask"
     height="250"
+
     border
     >
     <el-table-column
-    prop="group"
+    prop="groupname"
     label="组别"
-    align="center">
+    align="center"
+    min-width="90px">
     </el-table-column>
     <el-table-column
-    prop="sysPerson"
+    prop="sysperson"
     label="系统负责人"
     align="center">
     </el-table-column>
@@ -41,16 +43,17 @@
     align="center">
     </el-table-column>    
     <el-table-column
-    prop="testPerson"
+    prop="testperson"
     label="负责人员"
     align="center">
     </el-table-column>
     <el-table-column
     label="操作"
-    width="90"
+    align="center"
+    min-width="90"
     >
     <template slot-scope="scope">
-        <el-button @click="getScore(scope.$index,vers)">编辑</el-button>
+        <el-button @click="editScore(scope.$index,myTask)">编辑</el-button>
     </template>
     </el-table-column>
 
@@ -63,14 +66,31 @@ import axios from "axios";
 export default {
     data(){
         return{
-            myTask:''
+            myTask:[]
         }
     },
     created(){
-        axios.post('/getTask',this.$store.getters.getUser.name)
+        axios.post('/getTask',{testPerson:this.$store.getters.getUser.name})
         .then((res)=>{
             this.myTask=res.data
         })
+    },
+    methods:{
+        editScore(a,b){
+            this.$router.push({
+                name:'scoreIndex',
+                params:{                
+                ticeshijian:b[a].ticeshijian,
+                xitongming:b[a].xitongming,
+                // sysPerson:b[a].sysperson, 
+                // groupName:b[a].groupname,              
+                // type:b[a].type,
+                // plan:b[a].plan,
+                // banbenguimo:b[a].banbenguimo,
+                // testPerson:b[a].testperson  
+                }
+            })
+        }
     }
 }
 </script>

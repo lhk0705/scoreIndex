@@ -42,7 +42,7 @@ export default {
       } ,
       title:{
             text:'月度版本数',
-            left:'25%',
+            left:'35em',
             top:30     
       },            
         rounds:'',

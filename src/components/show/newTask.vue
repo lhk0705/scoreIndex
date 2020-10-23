@@ -189,22 +189,26 @@ export default {
       },
       bbh_change(){     
       },
-        create(){
+      create(){
           let data={
             groupName:this.groupName,
             ticeshijian:this.ticeshijian,
-            sysPerson:this.stateperson,
+            // sysPperson:this.stateperson,
+            person:this.stateperson,
             xitongming:this.xitongming,
             type:this.type,
             plan:this.plan,
             banbenguimo:this.banbenguimo,
-            testPerson:this.state_cc_r
+            testPerson:this.state_cc_r,
+            banbenhao:this.ticeshijian+this.xitongming,
+            status:0
           }
-            axios.post('/postTask',data)
-            .then((res)=>{
-              console.log(res.data);
-            })
-        }
+          axios.post('/addSorce',data)
+          .then()          
+        },
+        
+        
+       
   },
 };
 </script>

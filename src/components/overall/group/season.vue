@@ -42,7 +42,7 @@ export default {
       } ,
       title:{
             text:'季度版本数',
-            left:'25%',
+            left:'35em',
             top:30     
       },            
         rounds:'',
@@ -60,7 +60,7 @@ export default {
       } ,
         mychart: {
           title:{
-            text:''
+            text:'',
           },
         columns: ["state", "total"],
         rows: [],

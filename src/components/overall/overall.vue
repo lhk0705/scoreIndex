@@ -21,14 +21,14 @@
         </el-col>
         <el-col :span="5">
           <groupseason :prop="zb"></groupseason>
-        </el-col>
-        <el-col :span="5" v-if="show=='group'">
+        </el-col >
+        <el-col  :span="5" v-if="show=='group'">
           <groupyear :prop="zb"></groupyear>
         </el-col>
         <el-col :span="5" v-else>
           <randomTest></randomTest>
         </el-col>
-        <el-col :span="5" v-if="show=='group'">
+        <el-col :span="5"  v-if="show=='group'">
           <groupall :prop="zb"></groupall>
         </el-col>
         <el-col :span="5" v-else>
@@ -63,8 +63,11 @@ import groupmon from "./group/month";
 import groupall from "./group/all";
 import groupseason from "./group/season";
 import groupyear from "./group/year";
-import fstTest from "./group/fstTest";
-import randomTest from "./group/randomTest";
+// import fstTest from "./group/fstTest";
+// import randomTest from "./group/randomTest";
+let fstTest=()=>import ("./group/fstTest")
+let randomTest=()=>import ("./group/randomTest")
+
 export default {
   data() {
     return {
@@ -114,4 +117,7 @@ div {
   border: 1px solid black;
   text-align: left;
 }
+/* .col{
+  border:1px solid black
+} */
 </style>
