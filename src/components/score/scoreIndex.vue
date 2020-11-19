@@ -48,8 +48,7 @@
     </div>
   </div>
 </template>
-<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
-</script>
+
 <script>
 import axios from "axios";
 import visionhead from './vision_head';

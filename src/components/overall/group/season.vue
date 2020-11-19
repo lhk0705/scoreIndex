@@ -80,7 +80,7 @@ export default {
     }
   },
   methods:{
-      SET_GROUP_SEA(newV){
+    SET_GROUP_SEA(newV){
       axios.post('/v_group_sea',{"groupName":newV})
       .then((res)=>{         
         this.$store.commit('setGSea',res.data.total)

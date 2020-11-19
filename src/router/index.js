@@ -18,13 +18,19 @@ export default new Router({
     {
       path: '/scoreIndex',
       name: 'scoreIndex',
-      component: scoreIndex
+      component: scoreIndex,
+      meta:{
+        keepAlive:true
+      }
     },
     {
       path: '/showin',
       name: 'showin',
       component: showin,
       redirect:'/finish',
+      meta:{
+        keepAlive:true
+      },
       children:[
         {
           path: '/ing',
@@ -57,7 +63,10 @@ export default new Router({
     {
       path: '/',
       name: 'overall',
-      component: overall
+      component: overall,
+      meta:{
+        keepAlive:true
+      }
     },
   ]
 })
