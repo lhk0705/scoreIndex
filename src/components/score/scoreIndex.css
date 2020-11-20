@@ -2,6 +2,7 @@
   margin:0px 150px
 }
 
+
 span {
   color: red;
 }
@@ -379,11 +380,13 @@ span {
 .foot{
     text-align: right;
     background-color: rgb(235, 230, 230);
-    height:50px;
-    width:82%;
-    padding: 10px;
+    height:40px;
     position: fixed;    
-    bottom:5px;
+    bottom:0px;
+    left: 158px;
+    z-index: 999;    
+    width: 76%;
+    padding: 10px;
     
 }
 .a_new,.b_new,.c_new{

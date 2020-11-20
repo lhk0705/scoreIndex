@@ -9,19 +9,7 @@
         <el-col :span="10">
           <el-row>
             <div class="zubie">
-              <label>
-                <span>*</span>组别：
-              </label>
-              <el-select v-model="groupName" placeholder="请选择" size="mini" :disabled="fstDis">
-                <el-option
-                  class="groupName"
-                  v-for="item in group"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                ></el-option>
-              </el-select>
-              <div></div>
+              <group ref='groupName'></group>
             </div>
           </el-row>
           <el-row>
@@ -151,7 +139,11 @@
 
 <script>
 import axios from 'axios';
+import group from '../common/formComponents/group'
 export default {
+  components:{
+    group
+  },
   data() {
     return {
         state_cc_r:'',
@@ -191,7 +183,7 @@ export default {
       },
       create(){
           let data={
-            groupName:this.groupName,
+            groupName:this.$refs.groupName.groupName,
             ticeshijian:this.ticeshijian,
             // sysPperson:this.stateperson,
             person:this.stateperson,
@@ -203,6 +195,7 @@ export default {
             banbenhao:this.ticeshijian+this.xitongming,
             status:0
           }
+          // console.log(data);
           axios.post('/addSorce',data)
           .then()          
         },

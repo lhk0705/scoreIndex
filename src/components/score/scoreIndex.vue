@@ -1,4 +1,5 @@
 <template>
+<div >
   <div class="scoreIndex">
     <div class="head">      
       <div class="bbhao"><label >{{banbenhao}}</label>版本信息</div>
@@ -36,7 +37,9 @@
       </el-tab-pane>
     </el-tabs>
     <br /><br /><br /><br /><br /></div>
-    <div class="foot">
+    
+  </div>
+  <div class="foot">
       <strong>
         版本总得分:
         <input type="text" v-model="banbendefen" :disabled="scoreDis"/>
@@ -46,7 +49,7 @@
       <el-button @click="cancel" plain>清空</el-button>
       <el-button class="button"  @click="goback">返回上一页</el-button>
     </div>
-  </div>
+    </div>
 </template>
 
 <script>

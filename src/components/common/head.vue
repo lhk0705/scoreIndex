@@ -1,6 +1,6 @@
 <template>
   <div> 
-    <div> 
+    <div > 
     <el-menu
       :default-active="activeIndex2"
       class="el-menu-demo"
@@ -56,21 +56,24 @@ export default {
 </script>
 
 <style scoped>
+
 .img{
     height:55px;
     width:60px;
-    color: rgb(10, 126, 146);
+    
 }
 div{
   position: fixed;
   width: 100%;
-  z-index: 1;
+  z-index: 999;
 }
 .el-menu-demo{
   position: relative;
   bottom: 10px;
 }
 .user{
-  float: right;
+  /* float: right; */
+  position: absolute;
+  right: 100px;
 }
 </style>

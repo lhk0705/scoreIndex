@@ -3,7 +3,7 @@
   <search :prop="vers" v-on:changeVer="updateVer"></search>
   <br>
   <el-table border
-    style="width: 100%" 
+    width=100%
     height="40">
     <el-table-column  label="已完成验收的常规版本" align="center">
      </el-table-column></el-table>
@@ -11,7 +11,7 @@
     :data="vers"
     border
     style="width: 100%" 
-    height="500"   
+    height="300"   
     >   
     <el-table-column
       prop="xitongming"

@@ -1,7 +1,7 @@
 <template>
   <div id="app" v-if="user">   
     <appheader ></appheader>
-    <router-view class="a"></router-view>
+    <router-view class="a" z-index=1></router-view>
     <!-- <score-index></score-index>   -->  
   </div>
   <div v-else>
@@ -42,6 +42,5 @@ export default {
   position: relative;
   top:60px
 }
-
 
 </style>

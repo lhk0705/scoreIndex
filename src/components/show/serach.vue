@@ -21,15 +21,7 @@
         <el-input v-model="bbh" size="mini" style="width:200px"></el-input>
       </el-col>
       <el-col :span="8">
-        <label>组别：</label>
-        <el-select v-model="zb" placeholder="请选择" size="mini" style="width:200px">
-                  <el-option
-                    v-for="item in group"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-        </el-select>
+        <group ref='groupName'></group>
       </el-col>
     </el-row>
     <br />
@@ -66,11 +58,15 @@
 </template>
 
 <script>
+import group from '../common/formComponents/group'
 export default {
   props:{prop:{
     type:Array,
     // required:true
   }},
+  components:{
+    group
+  },
   data() {
     return {
       // show:[{'xitongming':'a'},{'xitongming':'b'}]
@@ -92,11 +88,11 @@ export default {
   },
   methods:{
       search(vers){
-        console.log(vers);
+        // console.log(this.$refs.groupName.groupName);
           let sdata={
               "xitongming":this.xtm,
               "banbenhao":this.bbh,
-              "group":this.zb,
+              "group":this.$refs.groupName.groupName,
               "min_time":this.min_time,
               "max_time":this.max_time,
           }

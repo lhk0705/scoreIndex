@@ -8,7 +8,7 @@ const state={
     {
         userId:'test',
         password:'test',
-        role:'2',
+        role:'1',
         name:'林舒楠'
     }
 };
