@@ -68,8 +68,9 @@ export default {
     };
   },
   created(){
-      this.getGMon(this.prop) 
-      this.title.text=this.prop+'月度版本数'   
+    this.title.text=this.prop+'月度版本数'   
+    this.getGMon(this.prop) 
+      
   },
   watch:{
     prop:{
@@ -111,10 +112,7 @@ export default {
       await this.SET_GROUP_fvMON(newV);
       this.SET_GROUP_uvMONTH(newV)
     }
-  }
-  
-  
-  
+  } 
 };
 </script>
 
