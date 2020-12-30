@@ -35,7 +35,7 @@
 <script>
 export default {
     data(){
-      return{
+      return{ 
         activeIndex2: '/'
       } 
     },
@@ -45,6 +45,7 @@ export default {
         },
         logOut(){
           this.$store.commit('serUser','')
+          
         }
       },
       computed:{
