@@ -22,7 +22,7 @@ export default {
         }
     },
     mounted(){
-      this.group= this.$store.getters.getGroup;
+      this.group = this.$store.getters.getGroup;
     },
     
 }
