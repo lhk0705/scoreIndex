@@ -1,7 +1,7 @@
 <template>
   <div>
     <ve-line
-      :data="mychart"
+    :data="mychart"
     :extend="extend"
     ></ve-line>
   </div>
