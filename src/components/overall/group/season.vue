@@ -68,8 +68,9 @@ export default {
     };
   },
   created(){
+      this.getGSea(this.prop) 
       this.title.text=this.prop+'季度版本数' 
-      this.getGSea(this.prop)         
+              
   },
     watch:{
     prop:{

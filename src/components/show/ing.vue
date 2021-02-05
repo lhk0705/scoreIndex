@@ -87,7 +87,7 @@
     </el-table-column> 
      <el-table-column label="操作" align="center" width="90">
     <template slot-scope="scope">       
-        <el-button @click="getScore(scope.$index,vers)">查看</el-button>        
+        <el-button @click="getScore(scope.$index,vers)">编辑</el-button>        
     </template>
     </el-table-column>
     

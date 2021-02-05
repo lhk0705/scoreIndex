@@ -62,10 +62,10 @@ export default {
   beforeRouteEnter:((to,from,next)=>{
     console.log(from.path);       
     next(vm=>{
-      console.log(vm.$route.params); 
+      // console.log(vm.$route.params); 
       if(vm.$route.params.ticeshijian!==undefined&&vm.$route.params.xitongming!==undefined){
       let bbh={"banbenhao":vm.$route.params.ticeshijian+vm.$route.params.xitongming}
-      console.log(bbh);
+      // console.log(bbh);
       // 获取版本信息并展示在页面
        axios.post('/selectSorce',bbh)
           .then((res)=>{
@@ -74,11 +74,19 @@ export default {
             let randomtestdata=vm.$refs.randomtest
             let testdata=vm.$refs.test
             let data=res.data
-              vm.banbenhao=data.banbenhao;
-              headdata.fstDis=true;
+            if(!data.xqTime){
+              docdata.fstDis=false;
+              randomtestdata.fstDis=false;
+              testdata.fstDis=false;
+              console.log(1);
+            }else{
               docdata.fstDis=true;
               randomtestdata.fstDis=true;
               testdata.fstDis=true;
+              console.log(2);
+            }
+              vm.banbenhao=data.banbenhao;
+              headdata.fstDis=true;              
               testdata.secDis=false;
               headdata.type=data.type;
               headdata.plan=data.plan;
@@ -134,7 +142,7 @@ export default {
               randomtestdata.ccdf=data.ccdf;
               randomtestdata.ccbl=data.ccbl;
               vm.banbendefen=data.zongfen;
-              if(data.atgl!=-999){
+              if(data.atgl!=-999&&data.xqTime){
               testdata.a_begin=data.abegin;
               testdata.a_end=data.aend;
               testdata.state_a_csr=data.acsr;
@@ -147,7 +155,7 @@ export default {
               testdata.a_jieguo=data.ajieguo;
               testdata.yanshoudefen=data.yanshoudefen;
               vm.banbendefen=data.zongfen;
-      if(data.btgl!=-999){
+              if(data.btgl!=-999&&data.xqTime){
                 headdata.fstDis=true;
                 docdata.fstDis=true;
                 randomtestdata.fstDis=true;
@@ -166,7 +174,7 @@ export default {
                 testdata.b_jieguo=data.bjieguo;                
                 testdata.yanshoudefen=data.yanshoudefen;
                 vm.banbendefen=data.zongfen;
-                if(data.ctgl!=-999){
+                if(data.ctgl!=-999&&data.xqTime){
                     headdata.fstDis=true;
                     docdata.fstDis=true;
                     randomtestdata.fstDis=true;

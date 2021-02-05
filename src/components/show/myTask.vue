@@ -13,7 +13,7 @@
     min-width="90px">
     </el-table-column>
     <el-table-column
-    prop="sysperson"
+    prop="person"
     label="系统负责人"
     align="center">
     </el-table-column>
@@ -72,6 +72,7 @@ export default {
     created(){
         axios.post('/getTask',{testPerson:this.$store.getters.getUser.name})
         .then((res)=>{
+            console.log(res.data);
             this.myTask=res.data
         })
     },

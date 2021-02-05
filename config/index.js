@@ -9,10 +9,11 @@ module.exports = {
     env: require('./dev.env'),
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
     proxyTable: {
       '/': {
-        target: 'http://192.168.128.136:8088',
+        // target: 'http://192.168.128.136:8088',
+        target: 'http://172.21.54.86:8088',
         changeOrigin: true,
         pathRewrite: {
           '^/': ''
@@ -21,10 +22,13 @@ module.exports = {
     },
 
     // Various Dev Server settings
-    host: '192.168.78.159', // can be overwritten by process.env.HOST
+    // host: '192.168.78.159', // can be overwritten by process.env.HOST
+    // host: '8.129.118.208',
+    host:'172.21.54.86',
+    // host:'127.0.0.1',
     // host: 'localhost',
     // host:'192.168.1.6',
-    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 8088, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
@@ -53,7 +57,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps

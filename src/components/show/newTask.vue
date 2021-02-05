@@ -195,9 +195,23 @@ export default {
             banbenhao:this.ticeshijian+this.xitongming,
             status:0
           }
-          // console.log(data);
-          axios.post('/addSorce',data)
-          .then()          
+          if(data.groupName===''||
+          data.ticeshijian===''||
+          data.person===''||
+          data.type===''||
+          data.xitongming===''||
+          data.plan===''||
+          data.banbenguimo===''||
+          data.testPerson===''||
+          data.banbenhao===''
+          )
+          {alert("请输入必填项！")}
+          else{
+            // console.log(data);
+          axios.post('/addTask',data)
+          .then(res=>alert('新建任务成功！'))  
+          }
+                  
         },
         
         

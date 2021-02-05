@@ -1,6 +1,6 @@
 <template>
   <div id="app" v-if="user">   
-    <appheader ></appheader>
+    <headVue ></headVue>
     <router-view class="a" z-index=1></router-view>
     <!-- <score-index></score-index>   -->  
   </div>
@@ -17,7 +17,7 @@ export default {
   name: 'App',
   components:{
   //   "score-index":scoreIndex
-    "appheader":headVue,
+    headVue,
     login
   }, 
   computed:{

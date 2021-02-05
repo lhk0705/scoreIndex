@@ -67,9 +67,14 @@ export default {
       },      
     };
   },
+  beforeMount(){
+    
+  },
+  
   created(){
-    this.title.text=this.prop+'月度版本数'   
     this.getGMon(this.prop) 
+    this.title.text=this.prop+'月度版本数'   
+    
       
   },
   watch:{

@@ -83,7 +83,7 @@ export default {
         this.$store.commit('setSea',res.data.total)
         // console.log(this.$store.getters.getMon);
         this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getSea
-        console.log(1); 
+        // console.log(1); 
       })
     },
     SET_DEPT_fvSEA(){
@@ -91,7 +91,7 @@ export default {
       .then((res)=>{         
         this.$store.commit('setFvSea',res.data.total)        
         this.mychart.rows[0]={ state: "已完成", total: this.$store.getters.getFvSea}
-        console.log(2);
+        // console.log(2);
       })
     },
     SET_DEPT_uvSEA(){
@@ -100,7 +100,7 @@ export default {
         this.$store.commit('setUvSea',res.data.total)
         this.mychart.rows[1]={ state: "未完成", total: this.$store.getters.getUvSea }
         
-        console.log(3);
+        // console.log(3);
       })
     },    
     async  getSea(){

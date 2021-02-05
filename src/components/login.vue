@@ -10,7 +10,7 @@
           <label><strong>密码：</strong></label>
           <el-input v-model="password" size="mini" type="password" placeholder="请输入密码"></el-input>
             <br><br>
-            <el-button class="button" type="primary" size="small" @click="submit">登录</el-button>
+            <el-button class="button" type="primary" size="small" @click="login">登录</el-button>
         </div>
   </div>
 </template>
@@ -21,19 +21,26 @@ data(){
     return {
       userId:'',
        password:'',
-      style:{ 
-        background:"url(" + require("../assets/logo.jpg") + ") no-repeat center " 
-        },
+    //   style:{ 
+    //     background:"url(" + require("../assets/logo.jpg") + ") no-repeat center " 
+    //     },
         
     }
 },
 methods:{
-    // submit(){
-    //     let data=this.$store.getters.getUser
-    //     if(this.userId===data.userId&&this.password===data.password){
-    //         this.$store.setUser(data)
-    //     }
-    // }
+    login(){
+        if(this.userId===''||this.password===''){alert('请填写必填项！')}
+        else{
+        let data=this.$store.getters.getAllUser
+        let result=data.filter(item=>item.userId===this.userId&&this.password===item.password)
+        if(result.length===0){
+            alert("请输入正确的账号密码！")
+        }else{
+        this.$store.commit('setUser',result[0])
+        this.$router.push('/')
+        }
+        }        
+    }
 }
 }
 </script>

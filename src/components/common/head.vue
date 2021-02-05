@@ -24,7 +24,8 @@
           版本数据录入
         </el-menu-item>
         <el-menu-item class="user">{{user}}
-          <router-link to="/" @click="logOut">【退出】</router-link>
+          <!-- <router-link to="/" @click="logOut">【退出】</router-link> -->
+          <span @click="logOut">【退出】</span>
         </el-menu-item>
               
     </el-menu>
@@ -44,13 +45,16 @@ export default {
           // console.log(key, keyPath);
         },
         logOut(){
-          this.$store.commit('serUser','')
+          if(confirm("确定退出系统？")){
+            this.$store.commit('setUser','')
+          // console.log('1');
+          }
           
         }
       },
       computed:{
         user(){
-          return this.$store.getters.getUser.userId
+          return this.$store.getters.getUser.name
         }
       }
 };
