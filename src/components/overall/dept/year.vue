@@ -18,7 +18,7 @@ export default {
     }
       
       
-    return {
+    return { 
     
       mychart: {
         columns: ["月份", "首轮通过率","验收轮次"],
