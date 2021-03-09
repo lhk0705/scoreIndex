@@ -8,9 +8,9 @@ Vue.config.productionTip = false;
 import axios from 'axios';
 
 // dev:
-// axios.defaults.baseURL='http://192.168.128.136:8088'
+axios.defaults.baseURL='http://192.168.128.136:8088'
 // build:
-axios.defaults.baseURL='http://8.140.189.245:80/api/'
+// axios.defaults.baseURL='http://8.140.189.245/api/'
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
