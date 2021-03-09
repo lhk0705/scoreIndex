@@ -14,9 +14,9 @@
     <el-menu-item >
         <img src="static\u=3073865373,3613492176&fm=26&gp=0.jpg" alt="" class="img">
     </el-menu-item>
-    <el-menu-item index="/">
+    <!-- <el-menu-item index="/">
           质控总览
-        </el-menu-item>
+        </el-menu-item> -->
     <el-menu-item index="/showin">
           质控看板
         </el-menu-item>

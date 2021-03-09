@@ -582,6 +582,7 @@ export default {
       get(){
       let a =
         25 -
+        (this.yl_tijiao=="是"?0:25)-       
         this.yl_bt -
         this.yl_qz -
         this.yl_yq -
@@ -599,7 +600,7 @@ export default {
     csbgdf: {
       get(){
       let a =
-        20 - this.bg_qx - this.bg_hj - this.bg_fw - this.bg_qk - this.bg_jl;
+        20 - (this.bg_tijiao=="是"?0:25)-this.bg_qx - this.bg_hj - this.bg_fw - this.bg_qk - this.bg_jl;
       if (a > 0) {
         return a;
       } else {

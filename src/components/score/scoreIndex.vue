@@ -48,6 +48,7 @@
       <el-button @click="submit" type="primary" plain>提交</el-button>
       <el-button @click="cancel" plain>清空</el-button>
       <el-button class="button"  @click="goback">返回上一页</el-button>
+      <el-button @click="load" plain>导出为阶段通报</el-button>
     </div>
     </div>
 </template>
@@ -58,6 +59,10 @@ import visionhead from './vision_head';
 import doc from './doc';
 import randomtest from './random_test';
 import test from './test';
+import docxtemplater from 'docxtemplater';
+import PizZip from 'pizzip';
+import JSZipUtils from 'jszip-utils';
+import {saveAs} from 'file-saver';
 export default {
   beforeRouteEnter:((to,from,next)=>{
     console.log(from.path);       
@@ -749,6 +754,55 @@ export default {
       },
     goback(){
       this.$router.go(-1)
+    },
+    load(){
+      let headdata=this.$refs.visionhead
+      let docdata=this.$refs.doc
+      let randomtestdata=this.$refs.randomtest
+      let testdata=this.$refs.test
+       JSZipUtils.getBinaryContent("static/质控测试阶段通报模板-导出.docx", function(error, content) {
+        // 抛出异常
+        if (error) {
+            throw error;
+        }
+
+        // 创建一个PizZip实例，内容为模板的内容
+        let zip = new PizZip(content);
+        // 创建并加载docxtemplater实例对象
+        let doc = new docxtemplater().loadZip(zip);
+        // 设置模板变量的值
+        let docxData = {
+        	enterpriseName: row.enterpriseName,
+            year: row.year,
+            quarter: row.quarter,
+            validUntil: row.validUntil,
+            totalContract: row.totalContract,
+            lastContract: row.lastContract,
+            currentContract: row.currentContract,
+            totalProject: row.totalProject,
+            oneselfProject: row.oneselfProject,
+            subpackageProject: row.subpackageProject,
+            otherProject: row.otherProject,
+            totalValue: row.totalValue,
+            distributionValue: row.distributionValue,
+            decorateValue: row.decorateValue,
+            otherProvincesValue: row.otherProvincesValue,
+            buildingValue: row.buildingValue,
+            installationValue: row.installationValue,
+            otherValue: row.otherValue,
+            completedValue: row.completedValue,
+            constructionArea: row.constructionArea,
+            newArea: row.newArea,
+            steel: row.steel,
+            wood: row.wood,
+            cement: row.cement,
+            sheetGlass: row.sheetGlass
+        };
+        doc.setData({
+            ...docxData
+        });
+       
+       })
     }
   },
   computed: {    
