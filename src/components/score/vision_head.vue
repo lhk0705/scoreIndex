@@ -145,7 +145,7 @@ export default {
       xitongming: "",
       groupName: "",
       stateperson: "",
-      fstDis:false,
+      fstDis:true,
     };
   },
   computed:{

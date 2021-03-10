@@ -20,7 +20,7 @@
         <br />
         <!-- 一轮验收-->
         <el-container>
-          <el-header class="a_head" height="30px">
+          <el-header class="a_head" height="33px">
             <strong>一轮验收</strong>
             <el-button size="mini" type="primary" class="a_new" round @click="anew" :disabled="fstnew">新增</el-button>
             <el-button size="mini" class="a_delete" round @click="adel" :disabled="fstnew">删除</el-button>

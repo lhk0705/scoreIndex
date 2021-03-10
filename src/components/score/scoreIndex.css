@@ -14,7 +14,7 @@ span {
 .head {
   height: 50px;
   width: 100%;
-  background-color: rgb(248, 246, 246);
+  background-color: rgb(228, 228, 228);
   text-align: left;
   padding-top: 0px;
   font-size: 20px; 
@@ -26,17 +26,20 @@ span {
 }
 
 .bbxx1 {
-
+  background-color: rgb(228, 228, 228);
   text-align: left;
-  border: 1px solid black;
+  border-bottom: 1px solid black;
   padding-top: 5px;
-  font-size: 14px;
+  font-size: 14px; 
 }
 
 .el-container {
   border: 1px solid black;
+  border-radius: 8px;
 }
-
+.bbxx2{
+  border:0.5px solid rgb(255, 255, 255)
+}
 .bbxx2 div {
   font-size: 14px;
   margin: 4px;
@@ -90,9 +93,10 @@ span {
 
 .xq_head {
   text-align: left;
-  border: 1px solid black;
+  border-bottom: 1px solid black;
   padding-top: 5px;
   font-size: 12px;
+  background-color: rgb(228, 228, 228);
 }
 
 .xq_main div {
@@ -133,12 +137,7 @@ span {
   position: relative;
   left: 50px;
 }
-.yl_head {
-    text-align: left;
-    border: 1px solid black;
-    padding-top: 5px;
-    font-size: 12px;
-  }
+
 .yl_main div {
     font-size: 14px;
     margin: 4px;
@@ -202,9 +201,10 @@ span {
 }
 .bg_head {
     text-align: left;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     padding-top: 5px;
     font-size: 12px;
+    background-color: rgb(228, 228, 228);
   }
   .bg_main div {
     font-size: 14px;
@@ -262,24 +262,27 @@ span {
 }
 .yl_head {
     text-align: left;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     padding-top: 5px;
     font-size: 12px;
+    
+    background-color: rgb(228, 228, 228);
   }
 .cc_fst {
     text-align: left;
+    /* background-color: rgb(228, 228, 228);
+    border-radius: 8px; */
   }
 .cc_main div {
     font-size: 14px;
     margin: 4px;
   }
-  /* .button{
-    float: right;
-    position: relative;
-    bottom:20px;
-    right:10px
-  } */
-.cc_main{border: 1px solid black;}
+.cc_main{
+  width:auto;
+  height:250px;
+  border: 1px solid black;
+  border-radius: 6px;
+}
 .ccyls,.cctgl,.btgs,.tgs,.ylzs,.zss,.ccbl{
     width: 200px;
 }
@@ -328,9 +331,10 @@ span {
 }
 .a_head{
     text-align: left;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     padding-top: 5px;
     font-size: 12px; 
+    background-color: rgb(228, 228, 228);
 }
 .a_main div{
     font-size: 14px;
@@ -401,9 +405,10 @@ span {
 }
 .b_head{
     text-align: left;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     padding-top: 5px;
     font-size: 12px; 
+    background-color: rgb(228, 228, 228);
 }
 .b_main div{
     font-size: 14px;
@@ -419,9 +424,10 @@ span {
 }
 .c_head{
     text-align: left;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     padding-top: 5px;
-    font-size: 12px; 
+    font-size: 12px;
+    background-color: rgb(228, 228, 228); 
 }
 .c_main div{
     font-size: 14px;

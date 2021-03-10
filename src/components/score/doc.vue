@@ -530,7 +530,7 @@ export default {
   data() {
     return {
         scoreDis:true,
-        fstDis: false,
+        fstDis:false,
         state_xq_tijiaoren: "",
         state_yl_tijiaoren: "",
         state_bg_tijiaoren: "",
@@ -625,9 +625,15 @@ export default {
     },
     jiaofuwudefen:{
         get(){
+          // if(this.csyldf !== null && this.csbgdf !== null && this.xuqiudefen !== null){
+            // if(this.csyldf !== '' && this.csbgdf !== '' && this.xuqiudefen !== ''){
         let jiaofuwudefen=this.csyldf + this.csbgdf + this.xuqiudefen;
         // this.$store.commit('jfw',jiaofuwudefen)
         return jiaofuwudefen
+        // }
+        // else{
+        //   return ''
+        // }
         },
         set(){} 
     },

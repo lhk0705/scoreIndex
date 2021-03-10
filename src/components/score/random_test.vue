@@ -138,10 +138,47 @@ export default {
         }
     },
     computed:{
+    zss: {
+      get(){
+      // if (this.tgs !== '' && this.ccyls !== '' && this.cc_btgs !== '') {
+        if (this.tgs !== null && this.ccyls !== null && this.cc_btgs !== null) {
+        let result=this.ccyls - this.tgs - this.cc_btgs
+        if(result<0){
+          alert("阻塞数不能小于0！")
+        }else{return result}
+        ;
+      } else {
+        return "";
+      }
+      },
+      set(){}
+    },
+    cctgl: {
+      get(){
+      if (this.tgs !== null && this.ccyls !== null) {
+        return +(this.tgs / this.ccyls).toFixed(2);
+      } else {
+
+        return "";
+      }
+      // return 1
+      },
+      set(){}
+    },
+    
+    ccbl:{
+      get(){if (this.ylzs !== null && this.ccyls !== null) {
+        return +(this.ccyls / this.ylzs).toFixed(2);
+      } else {
+        return "";
+      }
+      },
+      set(){}
+    },
     ccdf:{
     get(){
         let ccdf=""
-      if (this.cctgl == "") {
+      if (this.cctgl === '') {
         // this.$store.commit('cc',ccdf)
         // return ccdf;
       } else {
@@ -166,40 +203,6 @@ export default {
           return ccdf;
      } ,
      set(){}
-    },
-    cctgl: {
-      get(){
-      if (this.tgs !== '' && this.ccyls !== '') {
-        return +(this.tgs / this.ccyls).toFixed(2);
-      } else {
-
-        return "";
-      }
-      },
-      set(){}
-    },
-    zss: {
-      get(){
-      if (this.tgs !== '' && (this.ccyls !== '') & (this.cc_btgs !== '')) {
-        let result=this.ccyls - this.tgs - this.cc_btgs
-        if(result<0){
-          alert("阻塞数不能小于0！")
-        }else{return result}
-        ;
-      } else {
-        return "";
-      }
-      },
-      set(){}
-    },
-    ccbl:{
-      get(){if (this.ylzs !== '' && this.ccyls !== '') {
-        return +(this.ccyls / this.ylzs).toFixed(2);
-      } else {
-        return "";
-      }
-      },
-      set(){}
     }, 
     testPerson(){
       return this.$store.getters.getTestPerson

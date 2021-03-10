@@ -6,11 +6,11 @@
       
     </div>
     <div class="bbdf">
-      <strong>
+      <!-- <strong>
         总得分:
         <input type="text" v-model="banbendefen" :disabled="scoreDis"/>
       
-      </strong>
+      </strong> -->
     </div>
     <br />
     <!-- 版本信息-->
@@ -79,16 +79,17 @@ export default {
             let randomtestdata=vm.$refs.randomtest
             let testdata=vm.$refs.test
             let data=res.data
+            console.log(data);
             if(!data.xqTime){
               docdata.fstDis=false;
               randomtestdata.fstDis=false;
               testdata.fstDis=false;
-              console.log(1);
+              // console.log(1);
             }else{
               docdata.fstDis=true;
               randomtestdata.fstDis=true;
               testdata.fstDis=true;
-              console.log(2);
+              // console.log(2);
             }
               vm.banbenhao=data.banbenhao;
               headdata.fstDis=true;              
@@ -797,6 +798,7 @@ export default {
         bg2:g,
         bg3:h,
         step:step,
+        testPerson:randomtestdata.state_cc_r,
         xitongming:headdata.xitongming,
         groupName:headdata.groupName,
         stateperson:headdata.stateperson,
@@ -833,10 +835,10 @@ export default {
         bg_error:docdata.bg_error,
         ylzs:randomtestdata.ylzs,
         ccyls:randomtestdata.ccyls,
-        ccbl:randomtestdata.ccbl,
+        ccbl:randomtestdata.ccbl*100+'%',
         tgs:randomtestdata.tgs,
         btgs:randomtestdata.cc_btgs,
-        tgl:randomtestdata.cctgl,
+        tgl:randomtestdata.cctgl*100+'%',
         zss:randomtestdata.zss,
         cc_r:randomtestdata.state_cc_r,
         cc_begin:randomtestdata.cc_begin,
@@ -850,7 +852,7 @@ export default {
         a_begin:testdata.a_begin,
         a_end:testdata.a_end,
         a_jieguo:testdata.a_jieguo,
-        a_tgl:testdata.a_tgl,
+        a_tgl:testdata.a_tgl*100+'%',
         a_zsl:testdata.a_zsl,        
         b_ylzxgs:testdata.b_ylzxgs,
         b_tgs:testdata.b_tgs,
@@ -861,7 +863,7 @@ export default {
         b_begin:testdata.b_begin,
         b_end:testdata.b_end,
         b_jieguo:testdata.b_jieguo,
-        b_tgl:testdata.b_tgl,
+        b_tgl:testdata.b_tgl*100+'%',
         b_zsl:testdata.b_zsl,        
         c_ylzxgs:testdata.c_ylzxgs,
         c_tgs:testdata.c_tgs,
@@ -872,7 +874,7 @@ export default {
         c_begin:testdata.c_begin,
         c_end:testdata.c_end,
         c_jieguo:testdata.c_jieguo,
-        c_tgl:testdata.c_tgl,
+        c_tgl:testdata.c_tgl*100+'%',
         c_zsl:testdata.c_zsl,
         };
         doc.setData({
