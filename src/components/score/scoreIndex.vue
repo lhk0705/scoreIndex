@@ -755,53 +755,151 @@ export default {
     goback(){
       this.$router.go(-1)
     },
+    // 导出为阶段通报
     load(){
       let headdata=this.$refs.visionhead
       let docdata=this.$refs.doc
       let randomtestdata=this.$refs.randomtest
       let testdata=this.$refs.test
-       JSZipUtils.getBinaryContent("static/质控测试阶段通报模板-导出.docx", function(error, content) {
+      JSZipUtils.getBinaryContent("static/质控测试阶段通报模板-导出.docx", function(error, content) {
         // 抛出异常
         if (error) {
             throw error;
         }
-
         // 创建一个PizZip实例，内容为模板的内容
         let zip = new PizZip(content);
         // 创建并加载docxtemplater实例对象
         let doc = new docxtemplater().loadZip(zip);
         // 设置模板变量的值
+        let a,b,c,d,e,f,g,h,step
+        docdata.xq_tijiao==='否'?a=1:a=0
+        docdata.xq_yanchi==='是'?b=1:b=0
+        docdata.yl_tijiao==='否'?c=1:c=0
+        docdata.yl_geshi==='word'||docdata.yl_geshi==='excel'?d=0:d=1
+        docdata.yl_yanchi==='是'?e=1:e=0
+        docdata.bg_tijiao==='否'?f=1:f=0
+        docdata.bg_geshi==='word'||docdata.bg_geshi==='excel'?g=0:g=1
+        docdata.bg_yanchi==='是'?h=1:h=0
+        if(testdata.b_jieguo===''){
+          step='第一轮'
+        }else if(testdata.c_jieguo===''){
+          step='第二轮'
+        }else{
+          step='第三轮'
+        }
         let docxData = {
-        	enterpriseName: row.enterpriseName,
-            year: row.year,
-            quarter: row.quarter,
-            validUntil: row.validUntil,
-            totalContract: row.totalContract,
-            lastContract: row.lastContract,
-            currentContract: row.currentContract,
-            totalProject: row.totalProject,
-            oneselfProject: row.oneselfProject,
-            subpackageProject: row.subpackageProject,
-            otherProject: row.otherProject,
-            totalValue: row.totalValue,
-            distributionValue: row.distributionValue,
-            decorateValue: row.decorateValue,
-            otherProvincesValue: row.otherProvincesValue,
-            buildingValue: row.buildingValue,
-            installationValue: row.installationValue,
-            otherValue: row.otherValue,
-            completedValue: row.completedValue,
-            constructionArea: row.constructionArea,
-            newArea: row.newArea,
-            steel: row.steel,
-            wood: row.wood,
-            cement: row.cement,
-            sheetGlass: row.sheetGlass
+        bbs1:a,
+        bbs2:b,
+        yl1:c,
+        yl2:d,
+        yl3:e,
+        bg1:f,
+        bg2:g,
+        bg3:h,
+        step:step,
+        xitongming:headdata.xitongming,
+        groupName:headdata.groupName,
+        stateperson:headdata.stateperson,
+        banbenhao:headdata.xitongming+headdata.ticeshijian,
+        ticeshijian:headdata.ticeshijian,
+        xq_tijiao:docdata.xq_tijiao,
+        xq_geshi:docdata.xq_geshi,
+        xq_tijiaoren:docdata.state_xq_tijiaoren,
+        xq_time:docdata.xq_time,
+        xq_yanchi:docdata.xq_yanchi,
+        xq_error:docdata.xq_error,
+        yl_tijiao:docdata.yl_tijiao,
+        yl_geshi:docdata.yl_geshi,
+        yl_tijiaoren:docdata.state_yl_tijiaoren,
+        yl_time:docdata.yl_time,
+        yl_yanchi:docdata.yl_yanchi,
+        yl_bt:docdata.yl_bt,
+        yl_qz:docdata.yl_qz,
+        yl_bz:docdata.yl_bz,
+        yl_yq:docdata.yl_yq,
+        yl_zxr:docdata.yl_zxr,
+        yl_jg:docdata.yl_jg,
+        yl_error:docdata.yl_error,
+        bg_tijiao:docdata.bg_tijiao,
+        bg_geshi:docdata.bg_geshi,
+        bg_tijiaoren:docdata.state_bg_tijiaoren,
+        bg_time:docdata.bg_time,
+        bg_yanchi:docdata.bg_yanchi,
+        bg_fw:docdata.bg_fw,
+        bg_qk:docdata.bg_qk,
+        bg_hj:docdata.bg_hj,
+        bg_qx:docdata.bg_qx,
+        bg_jl:docdata.bg_jl,
+        bg_error:docdata.bg_error,
+        ylzs:randomtestdata.ylzs,
+        ccyls:randomtestdata.ccyls,
+        ccbl:randomtestdata.ccbl,
+        tgs:randomtestdata.tgs,
+        btgs:randomtestdata.cc_btgs,
+        tgl:randomtestdata.cctgl,
+        zss:randomtestdata.zss,
+        cc_r:randomtestdata.state_cc_r,
+        cc_begin:randomtestdata.cc_begin,
+        cc_end:randomtestdata.cc_end,
+        a_ylzxgs:testdata.a_ylzxgs,
+        a_tgs:testdata.a_tgs,
+        a_btgs:testdata.a_btgs,
+        a_zss:testdata.a_zss,
+        a_qxs:testdata.a_qxs,
+        a_csr:testdata.state_a_csr,
+        a_begin:testdata.a_begin,
+        a_end:testdata.a_end,
+        a_jieguo:testdata.a_jieguo,
+        a_tgl:testdata.a_tgl,
+        a_zsl:testdata.a_zsl,        
+        b_ylzxgs:testdata.b_ylzxgs,
+        b_tgs:testdata.b_tgs,
+        b_btgs:testdata.b_btgs,
+        b_zss:testdata.b_zss,
+        b_qxs:testdata.b_qxs,
+        b_csr:testdata.state_b_csr,
+        b_begin:testdata.b_begin,
+        b_end:testdata.b_end,
+        b_jieguo:testdata.b_jieguo,
+        b_tgl:testdata.b_tgl,
+        b_zsl:testdata.b_zsl,        
+        c_ylzxgs:testdata.c_ylzxgs,
+        c_tgs:testdata.c_tgs,
+        c_btgs:testdata.c_btgs,
+        c_zss:testdata.c_zss,
+        c_qxs:testdata.c_qxs,
+        c_csr:testdata.state_b_csr,
+        c_begin:testdata.c_begin,
+        c_end:testdata.c_end,
+        c_jieguo:testdata.c_jieguo,
+        c_tgl:testdata.c_tgl,
+        c_zsl:testdata.c_zsl,
         };
         doc.setData({
             ...docxData
         });
-       
+       try {
+            // 用模板变量的值替换所有模板变量
+            doc.render();
+        } catch (error) {
+            // 抛出异常
+            let e = {
+                message: error.message,
+                name: error.name,
+                stack: error.stack,
+                properties: error.properties
+            };
+            console.log(JSON.stringify({ error: e }));
+            throw error;
+        }
+
+        // 生成一个代表docxtemplater对象的zip文件（不是一个真实的文件，而是在内存中的表示）
+        let out = doc.getZip().generate({
+            type: "blob",
+            mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        });
+        // 将目标文件对象保存为目标类型的文件，并命名
+        saveAs(out, "质控测试阶段通报.docx");
        })
     }
   },
