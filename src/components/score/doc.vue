@@ -25,7 +25,7 @@
                     3、紧急版本：在版本提测时向质控组提交需求文档，若提测时未提交需求文档，视为未提交，扣5分；
                     4、需求文档必须是word或excel格式，若为其他格式视为未提交，扣5分。"
           >
-            <el-button slot="reference" size="mini">
+            <el-button slot="reference" size="mini" class="bt">
               <i class="icon iconfont icon-wenhao"></i>
             </el-button>
           </el-popover>
@@ -155,7 +155,7 @@
                       3、测试用例格式可参考质控组提供的用例模板，但必须包含用例标题、前置条件、操作步骤、预期结果、执行人、执行结果，每缺1项扣5分，扣完25分为止；
                           4、测试用例内容缺失或错误，必须包含用例标题、前置条件、操作步骤、预期结果、执行人、执行结果未填写或填写错误，每一处扣1分，扣完25分为止。"
           >
-            <el-button slot="reference" size="mini">
+            <el-button slot="reference" size="mini" class="bt">
               <i class="icon iconfont icon-wenhao"></i>
             </el-button>
           </el-popover>
@@ -356,7 +356,7 @@
                     3、测试报告可参考质控组提供的报告模板，但必须包含测试范围、测试环境、测试执行情况、缺陷统计分析、测试结论，每缺1项扣5分，扣完20分为止；
                     4、测试报告内容缺失或错误，必须包含测试范围、测试环境、测试执行情况、缺陷统计分析、测试结论，每一处扣1分，扣完20分为止；"
           >
-            <el-button slot="reference" size="mini">
+            <el-button slot="reference" size="mini" class="bt">
               <i class="icon iconfont icon-wenhao"></i>
             </el-button>
           </el-popover>

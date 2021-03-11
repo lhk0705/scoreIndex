@@ -68,7 +68,7 @@
                 content="
                       此版本的需求个数"
               >
-                <el-button slot="reference" size="mini">
+                <el-button slot="reference" size="mini" class="bt">
                   <i class="icon iconfont icon-wenhao"></i>
                 </el-button>
               </el-popover>

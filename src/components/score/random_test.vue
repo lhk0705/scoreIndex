@@ -12,7 +12,7 @@
             content="
                     抽测通过率达到90%，不扣分；低于90%的，每降低1个百分点，扣0.5分。"
           >
-            <el-button slot="reference" size="mini">
+            <el-button slot="reference" size="mini" class="bt">
               <i class="icon iconfont icon-wenhao"></i>
             </el-button>
           </el-popover>
