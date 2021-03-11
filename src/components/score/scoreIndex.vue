@@ -2,53 +2,54 @@
 <div >
   <div class="scoreIndex">
     <div class="head">      
-      <div class="bbhao"><label >{{banbenhao}}</label>版本信息</div>
+      <div class="bbhao"><label >{{banbenhao}}</label></div>
       
     </div>
-    <div class="bbdf">
+    <!-- <div class="bbdf"> -->
       <!-- <strong>
         总得分:
         <input type="text" v-model="banbendefen" :disabled="scoreDis"/>
       
       </strong> -->
-    </div>
-    <br />
+    <!-- </div> -->
+
     <!-- 版本信息-->
+    <br>
     <div>      
-      <vision-head ref="visionhead" @bbhchange="bbh_change"></vision-head>
+      <!-- <vision-head ref="visionhead" @bbhchange="bbh_change"></vision-head> -->
+      <vision-head ref="visionhead" ></vision-head>
       <br />
-      <br />
+
     </div>
     <!-- TAB页-->
-    <div>
-    <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-      <!--  交付物 -->
-      <el-tab-pane label="交付物检查" name="first">
+    <div >
+    <el-tabs  v-model="activeName" type="card" @tab-click="handleClick">   
+      <el-tab-pane  label="交付物" name="first">
         <doc ref="doc" ></doc>
-      </el-tab-pane>
-      
-      <!-- 抽测-->
-      <el-tab-pane label="抽测" name="second">
+      </el-tab-pane>     
+      <el-tab-pane label="抽测"  name="second">
       <randomtest ref="randomtest" ></randomtest>
       </el-tab-pane>
-      <!-- 验收-->
-      <el-tab-pane label="质控验收测试" name="third">
+      <el-tab-pane label="质控验收测试"   name="third">
        <test ref="test"></test>
       </el-tab-pane>
     </el-tabs>
-    <br /><br /><br /><br /><br /></div>
+    <br /><br /><br /><br />
+    </div>
     
   </div>
   <div class="foot">
-      <strong>
-        版本总得分:
+      <strong class="font">
+        版本总得分
         <input type="text" v-model="banbendefen" :disabled="scoreDis"/>
         
       </strong>
-      <el-button @click="submit" type="primary" plain>提交</el-button>
-      <el-button @click="cancel" plain>清空</el-button>
-      <el-button class="button"  @click="goback">返回上一页</el-button>
-      <el-button @click="load" plain>导出为阶段通报</el-button>
+      <div class="button">
+      <el-button size="mini" @click="submit" type="primary" plain>提交</el-button>
+      <el-button size="mini" @click="cancel" plain>清空</el-button>
+      <el-button size="mini" class="button"  @click="goback">返回上一页</el-button>
+      <el-button size="mini" @click="load" plain>导出为阶段通报</el-button>
+      </div>
     </div>
     </div>
 </template>
@@ -235,129 +236,129 @@ export default {
       // console.log(tab, event);
 
     },
-    bbh_change(ticeshijian,xitongming){
-      this.banbenhao=ticeshijian+xitongming
-      let bbh={"banbenhao":this.banbenhao}
-      console.log(bbh);     
-          axios.post('/selectSorce',bbh)
-          .then((res)=>{
-            if(res.data){
-            let headdata=this.$refs.visionhead
-            let docdata=this.$refs.doc
-            let randomtestdata=this.$refs.randomtest
-            let testdata=this.$refs.test
-            let data=res.data
-              headdata.fstDis=true;
-              docdata.fstDis=true;
-              randomtestdata.fstDis=true;
-              testdata.fstDis=true;
-              testdata.secDis=false;
-              headdata.type=data.type;
-              headdata.plan=data.plan;
-              headdata.groupName=data.groupname;
-              headdata.stateperson=data.person;
-              headdata.banbenguimo=data.banbenguimo;
-              docdata.jiaofuwudefen=data.jiaofuwudefen;
-              docdata.xq_tijiao=data.xqTijiao;
-              docdata.xq_geshi=data.xqGeshi;
-              docdata.state_xq_tijiaoren=data.xqTijiaoren;
-              docdata.xq_time=data.xqTime;
-              docdata.xq_yanchi=data.xqYanchi;
-              docdata.xq_laiyuan=data.xqLaiyuan;
-              docdata.xq_change=data.xqChange;
-              docdata.xuqiudefen=data.xuqiudefen;
-              docdata.xq_error=data.xqError;
-              docdata.yl_tijiao=data.ylTijiao;
-              docdata.yl_geshi=data.ylGeshi;
-              docdata.state_yl_tijiaoren=data.ylTijiaoren;
-              docdata.yl_time=data.ylTime;
-              docdata.yl_yanchi=data.ylYanchi;
-              docdata.yl_error=data.ylError;
-              docdata.yl_qz=data.ylQz;
-              docdata.yl_bt=data.ylBt;
-              docdata.yl_zxr=data.ylZxr;
-              docdata.yl_yq=data.ylYq;
-              docdata.yl_bz=data.ylBz;
-              docdata.yl_jg=data.ylJg;
-              docdata.csyldf=data.csyldf;
-              docdata.bg_tijiao=data.bgTijiao;
-              docdata.bg_geshi=data.bgGeshi;
-              docdata.state_bg_tijiaoren=data.bgTijiaoren;
-              docdata.bg_time=data.bgTime;
-              docdata.bg_yanchi=data.bgYanchi;
-              docdata.bg_error=data.bgError;
-              docdata.bg_qk=data.bgQk;
-              docdata.bg_hj=data.bgHj;
-              docdata.bg_fw=data.bgFw;
-              docdata.bg_qx=data.bgQx;
-              docdata.bg_jl=data.bgJl;
-              docdata.csbgdf=data.csbgdf;
-              randomtestdata.cc_begin=data.ccBegin;
-              randomtestdata.cc_end=data.ccEnd;
-              randomtestdata.state_cc_r=data.ccR;
-              randomtestdata.ylzs=data.ylzs;
-              randomtestdata.ccyls=data.ccyls;
-              randomtestdata.tgs=data.tgs;
-              randomtestdata.cc_btgs=data.ccBtgs;
-              randomtestdata.zss=data.zss;
-              randomtestdata.cctgl=data.cctgl;
-              randomtestdata.ccdf=data.ccdf;
-              randomtestdata.ccbl=data.ccbl;
-              testdata.a_begin=data.abegin;
-              testdata.a_end=data.aend;
-              testdata.state_a_csr=data.acsr;
-              testdata.a_ylzxgs=data.aylzxgs;
-              testdata.a_tgs=data.atgs;
-              testdata.a_btgs=data.abtgs;
-              testdata.a_zss=data.azss;
-              testdata.a_qxs=data.aqxs;
-              testdata.a_tgl=data.atgl;
-              testdata.a_jieguo=data.ajieguo;
-              testdata.yanshoudefen=data.yanshoudefen;
-              this.banbendefen=data.zongfen;
-      if(data.btgl!=-999){
-                headdata.fstDis=true;
-                docdata.fstDis=true;
-                randomtestdata.fstDis=true;
-                testdata.fstDis=true;
-                testdata.secDis=true;
-                testdata.trdDis=false;
-                testdata.b_begin=data.bbegin;
-                testdata.b_end=data.bend;
-                testdata.state_b_csr=data.bcsr;
-                testdata.b_ylzxgs=data.bylzxgs;
-                testdata.b_tgs=data.btgs;
-                testdata.b_btgs=data.bbtgs;
-                testdata.b_zss=data.bzss;
-                testdata.b_qxs=data.bqxs;
-                testdata.b_tgl=data.btgl;
-                testdata.b_jieguo=data.bjieguo;                
-                testdata.yanshoudefen=data.yanshoudefen;
-                this.banbendefen=data.zongfen;
-                if(data.ctgl!=-999){
-                    headdata.fstDis=true;
-                    docdata.fstDis=true;
-                    randomtestdata.fstDis=true;
-                    testdata.fstDis=true;
-                    testdata.secDis=true;
-                    testdata.trdDis=true;
-                    testdata.c_begin=data.cbegin;
-                    testdata.c_end=data.cend;
-                    testdata.state_c_csr=data.ccsr;
-                    testdata.c_ylzxgs=data.cylzxgs;
-                    testdata.c_tgs=data.ctgs;
-                    testdata.c_btgs=data.cbtgs;
-                    testdata.c_zss=data.czss;
-                    testdata.c_qxs=data.cqxs;
-                    testdata.c_tgl=data.ctgl;
-                    testdata.c_jieguo=data.cjieguo;
-                    testdata.yanshoudefen=data.yanshoudefen;
-                    this.banbendefen=data.zongfen;
+    // bbh_change(ticeshijian,xitongming){
+    //   this.banbenhao=ticeshijian+xitongming
+    //   let bbh={"banbenhao":this.banbenhao}
+    //   console.log(bbh);     
+    //       axios.post('/selectSorce',bbh)
+    //       .then((res)=>{
+    //         if(res.data){
+    //         let headdata=this.$refs.visionhead
+    //         let docdata=this.$refs.doc
+    //         let randomtestdata=this.$refs.randomtest
+    //         let testdata=this.$refs.test
+    //         let data=res.data
+    //           headdata.fstDis=true;
+    //           docdata.fstDis=true;
+    //           randomtestdata.fstDis=true;
+    //           testdata.fstDis=true;
+    //           testdata.secDis=false;
+    //           headdata.type=data.type;
+    //           headdata.plan=data.plan;
+    //           headdata.groupName=data.groupname;
+    //           headdata.stateperson=data.person;
+    //           headdata.banbenguimo=data.banbenguimo;
+    //           docdata.jiaofuwudefen=data.jiaofuwudefen;
+    //           docdata.xq_tijiao=data.xqTijiao;
+    //           docdata.xq_geshi=data.xqGeshi;
+    //           docdata.state_xq_tijiaoren=data.xqTijiaoren;
+    //           docdata.xq_time=data.xqTime;
+    //           docdata.xq_yanchi=data.xqYanchi;
+    //           docdata.xq_laiyuan=data.xqLaiyuan;
+    //           docdata.xq_change=data.xqChange;
+    //           docdata.xuqiudefen=data.xuqiudefen;
+    //           docdata.xq_error=data.xqError;
+    //           docdata.yl_tijiao=data.ylTijiao;
+    //           docdata.yl_geshi=data.ylGeshi;
+    //           docdata.state_yl_tijiaoren=data.ylTijiaoren;
+    //           docdata.yl_time=data.ylTime;
+    //           docdata.yl_yanchi=data.ylYanchi;
+    //           docdata.yl_error=data.ylError;
+    //           docdata.yl_qz=data.ylQz;
+    //           docdata.yl_bt=data.ylBt;
+    //           docdata.yl_zxr=data.ylZxr;
+    //           docdata.yl_yq=data.ylYq;
+    //           docdata.yl_bz=data.ylBz;
+    //           docdata.yl_jg=data.ylJg;
+    //           docdata.csyldf=data.csyldf;
+    //           docdata.bg_tijiao=data.bgTijiao;
+    //           docdata.bg_geshi=data.bgGeshi;
+    //           docdata.state_bg_tijiaoren=data.bgTijiaoren;
+    //           docdata.bg_time=data.bgTime;
+    //           docdata.bg_yanchi=data.bgYanchi;
+    //           docdata.bg_error=data.bgError;
+    //           docdata.bg_qk=data.bgQk;
+    //           docdata.bg_hj=data.bgHj;
+    //           docdata.bg_fw=data.bgFw;
+    //           docdata.bg_qx=data.bgQx;
+    //           docdata.bg_jl=data.bgJl;
+    //           docdata.csbgdf=data.csbgdf;
+    //           randomtestdata.cc_begin=data.ccBegin;
+    //           randomtestdata.cc_end=data.ccEnd;
+    //           randomtestdata.state_cc_r=data.ccR;
+    //           randomtestdata.ylzs=data.ylzs;
+    //           randomtestdata.ccyls=data.ccyls;
+    //           randomtestdata.tgs=data.tgs;
+    //           randomtestdata.cc_btgs=data.ccBtgs;
+    //           randomtestdata.zss=data.zss;
+    //           randomtestdata.cctgl=data.cctgl;
+    //           randomtestdata.ccdf=data.ccdf;
+    //           randomtestdata.ccbl=data.ccbl;
+    //           testdata.a_begin=data.abegin;
+    //           testdata.a_end=data.aend;
+    //           testdata.state_a_csr=data.acsr;
+    //           testdata.a_ylzxgs=data.aylzxgs;
+    //           testdata.a_tgs=data.atgs;
+    //           testdata.a_btgs=data.abtgs;
+    //           testdata.a_zss=data.azss;
+    //           testdata.a_qxs=data.aqxs;
+    //           testdata.a_tgl=data.atgl;
+    //           testdata.a_jieguo=data.ajieguo;
+    //           testdata.yanshoudefen=data.yanshoudefen;
+    //           this.banbendefen=data.zongfen;
+    //   if(data.btgl!=-999){
+    //             headdata.fstDis=true;
+    //             docdata.fstDis=true;
+    //             randomtestdata.fstDis=true;
+    //             testdata.fstDis=true;
+    //             testdata.secDis=true;
+    //             testdata.trdDis=false;
+    //             testdata.b_begin=data.bbegin;
+    //             testdata.b_end=data.bend;
+    //             testdata.state_b_csr=data.bcsr;
+    //             testdata.b_ylzxgs=data.bylzxgs;
+    //             testdata.b_tgs=data.btgs;
+    //             testdata.b_btgs=data.bbtgs;
+    //             testdata.b_zss=data.bzss;
+    //             testdata.b_qxs=data.bqxs;
+    //             testdata.b_tgl=data.btgl;
+    //             testdata.b_jieguo=data.bjieguo;                
+    //             testdata.yanshoudefen=data.yanshoudefen;
+    //             this.banbendefen=data.zongfen;
+    //             if(data.ctgl!=-999){
+    //                 headdata.fstDis=true;
+    //                 docdata.fstDis=true;
+    //                 randomtestdata.fstDis=true;
+    //                 testdata.fstDis=true;
+    //                 testdata.secDis=true;
+    //                 testdata.trdDis=true;
+    //                 testdata.c_begin=data.cbegin;
+    //                 testdata.c_end=data.cend;
+    //                 testdata.state_c_csr=data.ccsr;
+    //                 testdata.c_ylzxgs=data.cylzxgs;
+    //                 testdata.c_tgs=data.ctgs;
+    //                 testdata.c_btgs=data.cbtgs;
+    //                 testdata.c_zss=data.czss;
+    //                 testdata.c_qxs=data.cqxs;
+    //                 testdata.c_tgl=data.ctgl;
+    //                 testdata.c_jieguo=data.cjieguo;
+    //                 testdata.yanshoudefen=data.yanshoudefen;
+    //                 this.banbendefen=data.zongfen;
                     
-                }
-            }       
-          }})   
-    },    
+    //             }
+    //         }       
+    //       }})   
+    // },    
     submit(){
       let headdata=this.$refs.visionhead
       let docdata=this.$refs.doc

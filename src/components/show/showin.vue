@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="showin">
     <el-row class="tac">
-        <el-col :span=4>
+        <el-col :span=4 class="left">
             <div class="left_nav">
             <left-nav ></left-nav>
             </div>
@@ -29,8 +29,22 @@ export default {
 </script>
 
 <style scoped>
+.showin{
+    height: 650px;
+    margin-left:-1%;
+}
 .show_right{
     padding: 20px;
 }
-
+.left{
+    height: 92%;
+    /* border-right: 1px solid black; */
+    margin-top: -10px;
+    background-color: rgba(19, 19, 46, 0.712); 
+    
+}
+.tac{
+    height: 100%;
+    /* margin-top: -20px; */
+}
 </style>

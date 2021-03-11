@@ -1,6 +1,6 @@
 <template>
   <div id="app" v-if="user">   
-    <headVue ></headVue>
+    <headVue class="b"></headVue>
     <router-view class="a" z-index=1></router-view>
     <!-- <score-index></score-index>   -->  
   </div>
@@ -37,11 +37,15 @@ export default {
   text-align: center;
   color: #2c3e50;
   /* margin-top: 60px; */
-  /* background-color: grey; */
+  background-color: rgb(248, 248, 248);
 }
 .a{
   position: relative;
-  top:60px
+  top:60px;
+  /* width: 100%; */
+}
+.b{
+  margin-left:-1%;  
 }
 
 </style>

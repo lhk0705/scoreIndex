@@ -3,7 +3,7 @@
       
     <el-container class="main">
         <el-header class="main" height="30px">
-        <strong>创建新的测试任务</strong>
+        <strong>创建测试任务</strong>
       </el-header>
       <el-main class="bbxx2">
         <el-col :span="10">
@@ -232,7 +232,8 @@ export default {
 }
 .father{
     border:1px solid rgb(180, 177, 177) ;
-    border-radius:8px
+    border-radius:8px;
+    background-color: white;
 }
 .btn{
     position: relative;

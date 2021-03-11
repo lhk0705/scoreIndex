@@ -1,7 +1,10 @@
 .scoreIndex{
-  margin:0px 150px
+  margin:0px 150px;
+  
 }
-
+.eltab{
+  background-color: white;
+}
 
 span {
   color: red;
@@ -10,14 +13,15 @@ span {
   position: relative;
   top:10px;
   
+  
 }
 .head {
   height: 50px;
   width: 100%;
   background-color: rgb(228, 228, 228);
   text-align: left;
-  padding-top: 0px;
   font-size: 20px; 
+  background-color: white;
 }
 
 .bbdf {
@@ -26,22 +30,23 @@ span {
 }
 
 .bbxx1 {
-  background-color: rgb(228, 228, 228);
+  background-color: rgb(255, 255, 255);
   text-align: left;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(187, 187, 187);
   padding-top: 5px;
-  font-size: 14px; 
+  font-size: 1em; 
 }
 
 .el-container {
-  border: 1px solid black;
+  border: 1px solid rgb(187, 187, 187);
   border-radius: 8px;
 }
 .bbxx2{
-  border:0.5px solid rgb(255, 255, 255)
+  border:0.5px solid rgb(255, 255, 255);
+  background-color: white;
 }
 .bbxx2 div {
-  font-size: 14px;
+  font-size: 0.8em;
   margin: 4px;
 }
 
@@ -93,14 +98,17 @@ span {
 
 .xq_head {
   text-align: left;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(187, 187, 187);
   padding-top: 5px;
-  font-size: 12px;
-  background-color: rgb(228, 228, 228);
+  font-size: 1em;
+  background-color: rgb(255, 255, 255);
 }
-
+.xq_main{
+  background-color: white;
+  padding-left: 5%;
+}
 .xq_main div {
-  font-size: 14px;
+  font-size: 0.8em;
   margin: 4px;
 }
 
@@ -137,9 +145,12 @@ span {
   position: relative;
   left: 50px;
 }
-
+.yl_main{
+  background-color: white;
+  padding-left: 10%;
+}
 .yl_main div {
-    font-size: 14px;
+    font-size: 0.8em;
     margin: 4px;
   }
 .yl_error {
@@ -203,11 +214,14 @@ span {
     text-align: left;
     border-bottom: 1px solid black;
     padding-top: 5px;
-    font-size: 12px;
-    background-color: rgb(228, 228, 228);
+    font-size: 1em;
+    background-color: rgb(255, 255, 255);
+  }
+  .bg_main{
+    background-color: rgb(255, 255, 255);
   }
   .bg_main div {
-    font-size: 14px;
+    font-size: 0.8em;
     margin: 4px;
   }
 .bg_error {
@@ -262,11 +276,10 @@ span {
 }
 .yl_head {
     text-align: left;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(187, 187, 187);
     padding-top: 5px;
-    font-size: 12px;
-    
-    background-color: rgb(228, 228, 228);
+    font-size: 1em;    
+    background-color: rgb(255, 255, 255);
   }
 .cc_fst {
     text-align: left;
@@ -274,29 +287,33 @@ span {
     border-radius: 8px; */
   }
 .cc_main div {
-    font-size: 14px;
+    font-size: 0.8em;
     margin: 4px;
   }
 .cc_main{
   width:auto;
   height:250px;
-  border: 1px solid black;
+  border: 1px solid rgb(187, 187, 187);
   border-radius: 6px;
+  background-color: white;
 }
 .ccyls,.cctgl,.btgs,.tgs,.ylzs,.zss,.ccbl{
     width: 200px;
 }
 .cc11{
     position: relative;
-    left: 20px; 
+    left: 0px; 
+    text-align: left;
 }
 .cc12{
     position: relative;
-    left: 30px; 
+    left: 0px; 
+    text-align: left;
 }
 .cc13{
     position: relative;
-    left: 18px; 
+    left: 0px;    
+    text-align: left;
 }
 .cc14{
     position: relative;
@@ -331,13 +348,13 @@ span {
 }
 .a_head{
     text-align: left;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(187, 187, 187);
     padding-top: 5px;
-    font-size: 12px; 
-    background-color: rgb(228, 228, 228);
+    font-size: 1em; 
+    background-color: rgb(255, 255, 255);
 }
 .a_main div{
-    font-size: 14px;
+    font-size: 0.8em;
     margin: 4px;
 }
 .a_tgs,.a_btgs,.a_ylzxgs,.a_zss,.a_tgl,.a_qxs{
@@ -382,16 +399,28 @@ span {
     top: 5px;
 }
 .foot{
-    text-align: right;
+    text-align: center;
     background-color: rgb(235, 230, 230);
     height:40px;
     position: fixed;    
     bottom:0px;
-    left: 158px;
+    margin-left: -2%;
     z-index: 999;    
-    width: 76%;
+    width: 100%;
     padding: 10px;
     
+}
+.font{
+  float: left;
+  margin-left: 15%;
+  margin-top: 10px;
+
+}
+.button{
+  margin-top: 5px;
+}
+.a_main,.b_main,.c_main{
+  background-color: white;
 }
 .a_new,.b_new,.c_new{
     position: relative;
@@ -405,13 +434,13 @@ span {
 }
 .b_head{
     text-align: left;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(187, 187, 187);
     padding-top: 5px;
-    font-size: 12px; 
-    background-color: rgb(228, 228, 228);
+    font-size: 1em; 
+    background-color: rgb(255, 255, 255);
 }
 .b_main div{
-    font-size: 14px;
+    font-size: 0.8em;
     margin: 4px;
 }
 .b_delete{
@@ -424,13 +453,13 @@ span {
 }
 .c_head{
     text-align: left;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(187, 187, 187);
     padding-top: 5px;
-    font-size: 12px;
-    background-color: rgb(228, 228, 228); 
+    font-size: 1em;
+    background-color: rgb(255, 255, 255); 
 }
 .c_main div{
-    font-size: 14px;
+    font-size: 0.8em;
     margin: 4px;
 }
 .c_delete{

@@ -131,6 +131,8 @@ export default {
 .header {
   border: 1px solid rgb(240, 237, 237);
   padding: 15px;
+  background-color: white;
+  border-radius: 8px;
 }
 .time {
   position: relative;

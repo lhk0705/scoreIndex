@@ -2,7 +2,7 @@
   <div>
       <div class="cc_fst">
           <strong>
-            抽测得分：
+            抽测得分
             <input type="text" class="ccdf" v-model="ccdf" :disabled="scoreDis" />
           </strong>
           <el-popover

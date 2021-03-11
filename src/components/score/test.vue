@@ -2,7 +2,7 @@
     <div>
        <div class="ys_fst">
           <strong>
-            质控验收测试得分：
+            质控验收测试得分
             <input type="text" class="yanshoudefen" v-model="yanshoudefen" :disabled="scoreDis"/>
           </strong>
           <el-popover
@@ -124,7 +124,7 @@
         <br />
         <!-- 二轮验收-->
         <el-container v-show="b_show">
-          <el-header class="b_head" height="30px">
+          <el-header class="b_head" height="33px">
             <strong>二轮验收</strong>
             <el-button size="mini" type="primary" class="b_new" round @click="bnew" :disabled="secnew">新增</el-button>
             <el-button size="mini" class="b_delete" round @click="bdel" :disabled="secnew">删除</el-button>
@@ -228,7 +228,7 @@
         <br />
         <!-- 三轮验收-->
         <el-container v-show="c_show">
-          <el-header class="c_head" height="30px">
+          <el-header class="c_head" height="33px">
             <strong>三轮验收</strong>
 
             <el-button size="mini" class="c_delete" round @click="cdel" :disabled="trdnew">删除</el-button>

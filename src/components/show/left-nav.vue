@@ -7,44 +7,44 @@
       align="left"
       :router="true"
       >
-      <el-submenu index="/finish">
-      <template slot="title">
+      <el-submenu index="/finish" class="nav">
+      <template slot="title" >
         <i class="el-icon-menu"></i>
-        <span slot="title">  
+        <span slot="title" >  
             已完成 
             </span>
       </template>
-      <el-menu-item index="/finish">
+      <el-menu-item class="nav"  index="/finish">
         <i class="el-icon-menu"></i>
-        <span slot="title"> 
+        <span slot="title" > 
             常规版本
             </span>            
-      </el-menu-item>
-      <el-menu-item index="/warn">
+      </el-menu-item >
+      <el-menu-item class="nav" index="/warn">
         <i class="el-icon-menu"></i>
-        <span slot="title"> 
+        <span slot="title" > 
             紧急版本
             </span>            
-      </el-menu-item>
+      </el-menu-item >
       </el-submenu>
-      <el-menu-item index="/ing">
+      <el-menu-item class="nav" index="/ing">
         <i class="el-icon-menu"></i>
         <span slot="title"> 
             未完成
             </span>            
-      </el-menu-item>
-      <el-menu-item index="/newTask" v-if="user.role==='1'">
+      </el-menu-item >
+      <el-menu-item class="nav" index="/newTask" v-if="user.role==='1'">
         <i class="el-icon-menu"></i>
         <span slot="title"> 
             新建测试任务
             </span>            
-      </el-menu-item>
-      <el-menu-item index="/myTask" v-else>
+      </el-menu-item >
+      <el-menu-item class="nav" index="/myTask" v-else>
         <i class="el-icon-menu"></i>
         <span slot="title"> 
             我的测试任务
             </span>            
-      </el-menu-item>
+      </el-menu-item >
       
     </el-menu>
 </template>
@@ -67,6 +67,20 @@ methods: {
 }
 </script>
 
-<style>
-
+<style scoped>
+.el-menu-vertical-demo{
+  /* background-color: rgba(19, 19, 46, 0.712);  */
+  height: 100%;
+}
+.nav{
+  width: 100.2%; 
+  background-color: rgba(19, 19, 46, 0.712); 
+}
+span{
+  color: rgb(252, 252, 252);
+  font-size: 12px;
+}
+.nav:hover{
+  background-color: rgba(9, 9, 22, 0.712); 
+}
 </style>
