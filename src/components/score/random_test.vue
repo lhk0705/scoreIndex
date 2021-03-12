@@ -19,13 +19,14 @@
         </div>
         <br />
         <div class="cc_main">
-          <el-col :span=10>
+            <div>     
+          <el-col >
             <el-row>
               <div class="cc11">
                 <label for>
                   <span>*</span>测试开始时间：
                 </label>
-                <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="cc_begin" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
+                <!-- <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="cc_begin" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker> -->
               </div>
             </el-row>
             <el-row>
@@ -33,7 +34,7 @@
                 <label for>
                   <span>*</span>抽测人：
                 </label>                
-                <el-select v-model="state_cc_r" filterable  size="mini" :disabled="fstDis">
+                <!-- <el-select v-model="state_cc_r" filterable  size="mini" :disabled="fstDis">
                   <el-option
                     v-for="item in testPerson"
                     :key="item.value"
@@ -41,7 +42,7 @@
                     :value="item.value"                    
                     >
                   </el-option>
-                </el-select>
+                </el-select> -->
               </div>
             </el-row>
             <el-row>
@@ -49,7 +50,7 @@
                 <label>
                   <span>*</span>抽测用例数：
                 </label>
-                <el-input :min="0" type="number" size="mini" class="ccyls" v-model="ccyls" placeholder :disabled="fstDis"></el-input>
+                <!-- <el-input :min="0" type="number" size="mini" class="ccyls" v-model="ccyls" placeholder :disabled="fstDis"></el-input> -->
               </div>
             </el-row>
             <el-row>
@@ -58,7 +59,7 @@
                   <label>
                     <span>*</span>不通过数：
                   </label>
-                  <el-input :min="0" type="number" size="mini" class="btgs" v-model="cc_btgs" placeholder :disabled="fstDis"></el-input>
+                  <!-- <el-input :min="0" type="number" size="mini" class="btgs" v-model="cc_btgs" placeholder :disabled="fstDis"></el-input> -->
                 
               </div>
             </el-row>
@@ -67,17 +68,34 @@
                 <label>
                   <span>*</span>抽测通过率：
                 </label>
-                <el-input  size="mini" class="cctgl" v-model.number="cctgl" placeholder :disabled="scoreDis"></el-input>
+                <!-- <el-input  size="mini" class="cctgl" v-model.number="cctgl" placeholder :disabled="scoreDis"></el-input> -->
               </div>
             </el-row>
-          </el-col>
-          <el-col :span=10>
+          </el-col></div>
+          <div>         
+          <el-col  >            
+            <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="cc_begin" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
+            <el-select v-model="state_cc_r" filterable  size="mini" :disabled="fstDis">
+                  <el-option
+                    v-for="item in testPerson"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"                    
+                    >
+                  </el-option>
+            </el-select>
+            <el-input :min="0" type="number" size="mini" class="ccyls" v-model="ccyls" placeholder :disabled="fstDis"></el-input>
+            <el-input :min="0" type="number" size="mini" class="btgs" v-model="cc_btgs" placeholder :disabled="fstDis"></el-input>
+            <el-input  size="mini" class="cctgl" v-model.number="cctgl" placeholder :disabled="scoreDis"></el-input>
+          </el-col></div>   
+          <div>        
+          <el-col >
             <el-row>
               <div class="cc21">
                 <label for>
                   <span>*</span>测试结束时间：
                 </label>
-                <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="cc_end" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
+                <!-- <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="cc_end" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker> -->
               </div>
             </el-row>
             <el-row>
@@ -85,7 +103,7 @@
                 <label>
                   <span>*</span>用例总数：
                 </label>
-                <el-input type="number" size="mini" class="ylzs" v-model="ylzs" placeholder :disabled="fstDis"></el-input>
+                <!-- <el-input type="number" size="mini" class="ylzs" v-model="ylzs" placeholder :disabled="fstDis"></el-input> -->
               </div>
             </el-row>
             <el-row>
@@ -93,7 +111,7 @@
                 <label>
                   <span>*</span>通过数：
                 </label>
-                <el-input type="number" size="mini" class="tgs" v-model="tgs" placeholder :disabled="fstDis"></el-input>
+                <!-- <el-input type="number" size="mini" class="tgs" v-model="tgs" placeholder :disabled="fstDis"></el-input> -->
               </div>
             </el-row>
             <el-row>
@@ -101,7 +119,7 @@
                 <label>
                   <span>*</span>阻塞数：
                 </label>
-                <el-input type="number" size="mini" class="zss" v-model="zss" placeholder :disabled="scoreDis"></el-input>
+                <!-- <el-input type="number" size="mini" class="zss" v-model="zss" placeholder :disabled="scoreDis"></el-input> -->
               </div>
             </el-row>
             <el-row>
@@ -109,10 +127,19 @@
                 <label>
                   <span>*</span>抽测比例：
                 </label>
-                <el-input size="mini" class="ccbl" v-model="ccbl" placeholder :disabled="scoreDis"></el-input>
+                <!-- <el-input size="mini" class="ccbl" v-model="ccbl" placeholder :disabled="scoreDis"></el-input> -->
               </div>
             </el-row>
-          </el-col>
+          </el-col></div> 
+          <div>
+          <el-col >
+            <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="cc_end" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
+            <el-input type="number" size="mini" class="ylzs" v-model="ylzs" placeholder :disabled="fstDis"></el-input>
+            <el-input type="number" size="mini" class="tgs" v-model="tgs" placeholder :disabled="fstDis"></el-input>
+            <el-input type="number" size="mini" class="zss" v-model="zss" placeholder :disabled="scoreDis"></el-input>
+            <el-input size="mini" class="ccbl" v-model="ccbl" placeholder :disabled="scoreDis"></el-input>
+          </el-col></div>
+          
         </div>
   </div>
 </template>
