@@ -293,75 +293,60 @@ span {
   }
 .cc_main div {
     font-size: 0.8em;
-    margin:5px   4px;
-    
+    margin: 4px;
   }
-
-  .cc_main>div{
-    width: 20%;
-    float: left;
-    font-size: 0.8em;
-    margin:0px   1.5%; 
-    /* border: 1px solid black; */
-  }
-
 .cc_main{
   width:auto;
-  height:200px;
+  height:250px;
   border: 1px solid rgb(187, 187, 187);
   border-radius: 6px;
   background-color: white;
-  padding-left: 5%;
 }
-/* .cc2{
-  text-align: left;
-  margin-left: -5%;
-} */
 .ccyls,.cctgl,.btgs,.tgs,.ylzs,.zss,.ccbl{
     width: 200px;
 }
-
 .cc11{
-    position: relative; 
-    padding-left: 43%;text-align: left;   
-    /* padding-top: 4px; */
+    position: relative;
+    left: 0px; 
+    text-align: left;
 }
 .cc12{
-    position: relative;     
-    padding-left: 43%;text-align: left;padding-top: 8px;   
-    
+    position: relative;
+    left: 0px; 
+    text-align: left;
 }
 .cc13{
-    position: relative;       
-    padding-left: 43%;text-align: left;padding-top: 8px;  
+    position: relative;
+    left: 0px;    
+    text-align: left;
 }
 .cc14{
     position: relative;
-    padding-left: 43%;text-align: left;padding-top: 8px;  
+    left: 25px; 
 }
 .cc15{
     position: relative;
-    padding-left: 43%;text-align: left;padding-top: 8px;  
+    left: 20px; 
 }
 .cc21{
     position: relative;
-    padding-left: 43%;text-align: left;
+    left: 20px; 
 }
 .cc22{
     position: relative;
-    padding-left: 43%;text-align: left;padding-top: 8px;  
+    left: 24px; 
 }
 .cc23{
     position: relative;
-    padding-left: 43%;text-align: left;padding-top: 8px;  
+    left: 30px; 
 }
 .cc24{
     position: relative;
-    padding-left: 43%;text-align: left;padding-top: 8px;  
+    left: 30px; 
 }
 .cc25{
     position: relative;
-    padding-left: 43%;text-align: left;padding-top: 8px;   
+    left: 25px; 
 }
 .ys_fst{
     text-align: left;
