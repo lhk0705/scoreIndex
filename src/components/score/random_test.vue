@@ -19,7 +19,7 @@
         </div>
         <br />
         <div class="cc_main">
-          <el-col :span=10>
+          <el-col :span='10'>
             <el-row>
               <div class="cc11">
                 <label for>
@@ -71,7 +71,7 @@
               </div>
             </el-row>
           </el-col>
-          <el-col :span=10>
+          <el-col :span='10'>
             <el-row>
               <div class="cc21">
                 <label for>
@@ -113,6 +113,7 @@
               </div>
             </el-row>
           </el-col>
+          
         </div>
   </div>
 </template>

@@ -48,7 +48,9 @@
       <el-button size="mini" @click="submit" type="primary" plain>提交</el-button>
       <el-button size="mini" @click="cancel" plain>清空</el-button>
       <el-button size="mini" class="button"  @click="goback">返回上一页</el-button>
-      <el-button size="mini" @click="load" plain>导出为阶段通报</el-button>
+      <el-button size="mini" @click="period" plain>导出阶段通报</el-button>
+      <el-button size="mini" @click="report" plain>导出质控报告</el-button>
+      <!-- <el-button size="mini" @click="score" plain>导出得分表</el-button> -->
       </div>
     </div>
     </div>
@@ -228,7 +230,7 @@ export default {
         },
       },
       activeName: "first",
-          
+         
     };
   },
   methods: {          
@@ -761,7 +763,7 @@ export default {
       this.$router.go(-1)
     },
     // 导出为阶段通报
-    load(){
+    period(){
       let headdata=this.$refs.visionhead
       let docdata=this.$refs.doc
       let randomtestdata=this.$refs.randomtest
@@ -907,7 +909,278 @@ export default {
         // 将目标文件对象保存为目标类型的文件，并命名
         saveAs(out, "质控测试阶段通报.docx");
        })
-    }
+    },
+    // 导出为质量报告
+    report(){
+      let headdata=this.$refs.visionhead
+      let docdata=this.$refs.doc
+      let randomtestdata=this.$refs.randomtest
+      let testdata=this.$refs.test
+      JSZipUtils.getBinaryContent("static/质控验收报告模板-导出.docx", function(error, content) {
+        // 抛出异常
+        if (error) {
+            throw error;
+        }
+        // 创建一个PizZip实例，内容为模板的内容
+        let zip = new PizZip(content);
+        // 创建并加载docxtemplater实例对象
+        let doc = new docxtemplater().loadZip(zip);
+        // 设置模板变量的值
+        let a,b,c,d,e,f,g,h,step
+        docdata.xq_error==='无'?a='符合':a='不符合'
+        docdata.xq_yanchi==='是'?b='不准时':b='准时'
+        docdata.yl_error==='无'?c='符合':c='不符合'
+        docdata.yl_yanchi==='是'?e='不准时':e='准时'
+        docdata.bg_error==='无'?f='符合':f='不符合'
+        docdata.bg_yanchi==='是'?h='不准时':h='准时'
+        let docxData = {
+        xqfh:a,
+        xqyc:b,
+        ylfh:c,
+        ylyc:e,
+        bgfh:f,
+        bgyc:h,
+        testPerson:randomtestdata.state_cc_r,
+        xitongming:headdata.xitongming,
+        groupName:headdata.groupName,
+        stateperson:headdata.stateperson,
+        banbenhao:headdata.xitongming+headdata.ticeshijian,
+        ticeshijian:headdata.ticeshijian,
+        xq_tijiao:docdata.xq_tijiao,
+        xq_geshi:docdata.xq_geshi,
+        xq_tijiaoren:docdata.state_xq_tijiaoren,
+        xq_time:docdata.xq_time,
+        xq_yanchi:docdata.xq_yanchi,
+        xq_error:docdata.xq_error,
+        yl_tijiao:docdata.yl_tijiao,
+        yl_geshi:docdata.yl_geshi,
+        yl_tijiaoren:docdata.state_yl_tijiaoren,
+        yl_time:docdata.yl_time,
+        yl_yanchi:docdata.yl_yanchi,
+        yl_bt:docdata.yl_bt,
+        yl_qz:docdata.yl_qz,
+        yl_bz:docdata.yl_bz,
+        yl_yq:docdata.yl_yq,
+        yl_zxr:docdata.yl_zxr,
+        yl_jg:docdata.yl_jg,
+        yl_error:docdata.yl_error,
+        bg_tijiao:docdata.bg_tijiao,
+        bg_geshi:docdata.bg_geshi,
+        bg_tijiaoren:docdata.state_bg_tijiaoren,
+        bg_time:docdata.bg_time,
+        bg_yanchi:docdata.bg_yanchi,
+        bg_fw:docdata.bg_fw,
+        bg_qk:docdata.bg_qk,
+        bg_hj:docdata.bg_hj,
+        bg_qx:docdata.bg_qx,
+        bg_jl:docdata.bg_jl,
+        bg_error:docdata.bg_error,
+        ylzs:randomtestdata.ylzs,
+        ccyls:randomtestdata.ccyls,
+        ccbl:randomtestdata.ccbl*100+'%',
+        tgs:randomtestdata.tgs,
+        btgs:randomtestdata.cc_btgs,
+        tgl:randomtestdata.cctgl*100+'%',
+        zss:randomtestdata.zss,
+        cc_r:randomtestdata.state_cc_r,
+        cc_begin:randomtestdata.cc_begin,
+        cc_end:randomtestdata.cc_end,
+        a_ylzxgs:testdata.a_ylzxgs,
+        a_tgs:testdata.a_tgs,
+        a_btgs:testdata.a_btgs,
+        a_zss:testdata.a_zss,
+        a_qxs:testdata.a_qxs,
+        a_csr:testdata.state_a_csr,
+        a_begin:testdata.a_begin,
+        a_end:testdata.a_end,
+        a_jieguo:testdata.a_jieguo,
+        a_tgl:testdata.a_tgl*100+'%',
+        a_zsl:testdata.a_zsl,        
+        b_ylzxgs:testdata.b_ylzxgs,
+        b_tgs:testdata.b_tgs,
+        b_btgs:testdata.b_btgs,
+        b_zss:testdata.b_zss,
+        b_qxs:testdata.b_qxs,
+        b_csr:testdata.state_b_csr,
+        b_begin:testdata.b_begin,
+        b_end:testdata.b_end,
+        b_jieguo:testdata.b_jieguo,
+        b_tgl:testdata.b_tgl*100+'%',
+        b_zsl:testdata.b_zsl,        
+        c_ylzxgs:testdata.c_ylzxgs,
+        c_tgs:testdata.c_tgs,
+        c_btgs:testdata.c_btgs,
+        c_zss:testdata.c_zss,
+        c_qxs:testdata.c_qxs,
+        c_csr:testdata.state_b_csr,
+        c_begin:testdata.c_begin,
+        c_end:testdata.c_end,
+        c_jieguo:testdata.c_jieguo,
+        c_tgl:testdata.c_tgl*100+'%',
+        c_zsl:testdata.c_zsl,
+        };
+        doc.setData({
+            ...docxData
+        });
+       try {
+            // 用模板变量的值替换所有模板变量
+            doc.render();
+        } catch (error) {
+            // 抛出异常
+            let e = {
+                message: error.message,
+                name: error.name,
+                stack: error.stack,
+                properties: error.properties
+            };
+            console.log(JSON.stringify({ error: e }));
+            throw error;
+        }
+
+        // 生成一个代表docxtemplater对象的zip文件（不是一个真实的文件，而是在内存中的表示）
+        let out = doc.getZip().generate({
+            type: "blob",
+            mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        });
+        // 将目标文件对象保存为目标类型的文件，并命名
+        saveAs(out, "质控测试报告.docx");
+       })
+    },
+    score(){
+    //   let headdata=this.$refs.visionhead
+    //   let docdata=this.$refs.doc
+    //   let randomtestdata=this.$refs.randomtest
+    //   let testdata=this.$refs.test
+    //   JSZipUtils.getBinaryContent("static/现网版本质量评分明细表模板-导出.xlsx", function(error, content) {
+    //     // 抛出异常
+    //     if (error) {
+    //         throw error;
+    //     }
+    //     // 创建一个PizZip实例，内容为模板的内容
+    //     let zip = new PizZip(content);
+    //     // 创建并加载docxtemplater实例对象
+    //     let doc = new docxtemplater().loadZip(zip);
+    //     // 设置模板变量的值
+    //     let a,b,c,d,e,f,g,h,step
+    //     docdata.xq_error==='无'?a='符合':a='不符合'
+    //     docdata.xq_yanchi==='是'?b='不准时':b='准时'
+    //     docdata.yl_error==='无'?c='符合':c='不符合'
+    //     docdata.yl_yanchi==='是'?e='不准时':e='准时'
+    //     docdata.bg_error==='无'?f='符合':f='不符合'
+    //     docdata.bg_yanchi==='是'?h='不准时':h='准时'
+    //     let docxData = {
+    //     xqfh:a,
+    //     xqyc:b,
+    //     ylfh:c,
+    //     ylyc:e,
+    //     bgfh:f,
+    //     bgyc:h,
+    //     testPerson:randomtestdata.state_cc_r,
+    //     xitongming:headdata.xitongming,
+    //     groupName:headdata.groupName,
+    //     stateperson:headdata.stateperson,
+    //     banbenhao:headdata.xitongming+headdata.ticeshijian,
+    //     ticeshijian:headdata.ticeshijian,
+    //     xq_tijiao:docdata.xq_tijiao,
+    //     xq_geshi:docdata.xq_geshi,
+    //     xq_tijiaoren:docdata.state_xq_tijiaoren,
+    //     xq_time:docdata.xq_time,
+    //     xq_yanchi:docdata.xq_yanchi,
+    //     xq_error:docdata.xq_error,
+    //     yl_tijiao:docdata.yl_tijiao,
+    //     yl_geshi:docdata.yl_geshi,
+    //     yl_tijiaoren:docdata.state_yl_tijiaoren,
+    //     yl_time:docdata.yl_time,
+    //     yl_yanchi:docdata.yl_yanchi,
+    //     yl_bt:docdata.yl_bt,
+    //     yl_qz:docdata.yl_qz,
+    //     yl_bz:docdata.yl_bz,
+    //     yl_yq:docdata.yl_yq,
+    //     yl_zxr:docdata.yl_zxr,
+    //     yl_jg:docdata.yl_jg,
+    //     yl_error:docdata.yl_error,
+    //     bg_tijiao:docdata.bg_tijiao,
+    //     bg_geshi:docdata.bg_geshi,
+    //     bg_tijiaoren:docdata.state_bg_tijiaoren,
+    //     bg_time:docdata.bg_time,
+    //     bg_yanchi:docdata.bg_yanchi,
+    //     bg_fw:docdata.bg_fw,
+    //     bg_qk:docdata.bg_qk,
+    //     bg_hj:docdata.bg_hj,
+    //     bg_qx:docdata.bg_qx,
+    //     bg_jl:docdata.bg_jl,
+    //     bg_error:docdata.bg_error,
+    //     ylzs:randomtestdata.ylzs,
+    //     ccyls:randomtestdata.ccyls,
+    //     ccbl:randomtestdata.ccbl*100+'%',
+    //     tgs:randomtestdata.tgs,
+    //     btgs:randomtestdata.cc_btgs,
+    //     tgl:randomtestdata.cctgl*100+'%',
+    //     zss:randomtestdata.zss,
+    //     cc_r:randomtestdata.state_cc_r,
+    //     cc_begin:randomtestdata.cc_begin,
+    //     cc_end:randomtestdata.cc_end,
+    //     a_ylzxgs:testdata.a_ylzxgs,
+    //     a_tgs:testdata.a_tgs,
+    //     a_btgs:testdata.a_btgs,
+    //     a_zss:testdata.a_zss,
+    //     a_qxs:testdata.a_qxs,
+    //     a_csr:testdata.state_a_csr,
+    //     a_begin:testdata.a_begin,
+    //     a_end:testdata.a_end,
+    //     a_jieguo:testdata.a_jieguo,
+    //     a_tgl:testdata.a_tgl*100+'%',
+    //     a_zsl:testdata.a_zsl,        
+    //     b_ylzxgs:testdata.b_ylzxgs,
+    //     b_tgs:testdata.b_tgs,
+    //     b_btgs:testdata.b_btgs,
+    //     b_zss:testdata.b_zss,
+    //     b_qxs:testdata.b_qxs,
+    //     b_csr:testdata.state_b_csr,
+    //     b_begin:testdata.b_begin,
+    //     b_end:testdata.b_end,
+    //     b_jieguo:testdata.b_jieguo,
+    //     b_tgl:testdata.b_tgl*100+'%',
+    //     b_zsl:testdata.b_zsl,        
+    //     c_ylzxgs:testdata.c_ylzxgs,
+    //     c_tgs:testdata.c_tgs,
+    //     c_btgs:testdata.c_btgs,
+    //     c_zss:testdata.c_zss,
+    //     c_qxs:testdata.c_qxs,
+    //     c_csr:testdata.state_b_csr,
+    //     c_begin:testdata.c_begin,
+    //     c_end:testdata.c_end,
+    //     c_jieguo:testdata.c_jieguo,
+    //     c_tgl:testdata.c_tgl*100+'%',
+    //     c_zsl:testdata.c_zsl,
+    //     };
+    //     doc.setData({
+    //         ...docxData
+    //     });
+    //    try {
+    //         // 用模板变量的值替换所有模板变量
+    //         doc.render();
+    //     } catch (error) {
+    //         // 抛出异常
+    //         let e = {
+    //             message: error.message,
+    //             name: error.name,
+    //             stack: error.stack,
+    //             properties: error.properties
+    //         };
+    //         console.log(JSON.stringify({ error: e }));
+    //         throw error;
+    //     }
+
+    //     // 生成一个代表docxtemplater对象的zip文件（不是一个真实的文件，而是在内存中的表示）
+    //     let out = doc.getZip().generate({
+    //         type: "blob",
+    //         mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    //     });
+    //     // 将目标文件对象保存为目标类型的文件，并命名
+    //     saveAs(out, "质控测试报告.xlsx");
+    //    })
+    },
   },
   computed: {    
     banbendefen:{
@@ -917,6 +1190,7 @@ export default {
       set(){}     
     }
   },
+  
   
 }
 </script>

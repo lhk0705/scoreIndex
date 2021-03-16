@@ -39,12 +39,33 @@
             新建测试任务
             </span>            
       </el-menu-item >
-      <el-menu-item class="nav" index="/myTask" v-else>
+      <el-menu-item class="nav" index="/myTask" v-else-if="user.role==='2'">
         <i class="el-icon-menu"></i>
         <span slot="title"> 
             我的测试任务
             </span>            
       </el-menu-item >
+      <el-submenu index="/newTask" v-else class="nav">
+      <template slot="title" >
+        <i class="el-icon-menu"></i>
+        <span slot="title" >  
+            测试任务 
+            </span>
+      </template>
+      <el-menu-item class="nav" index="/newTask" >
+        <i class="el-icon-menu"></i>
+        <span slot="title"> 
+            新建测试任务
+            </span>            
+      </el-menu-item >
+      <el-menu-item class="nav" index="/myTask" >
+        <i class="el-icon-menu"></i>
+        <span slot="title"> 
+            我的测试任务
+            </span>            
+      </el-menu-item >
+      </el-submenu>
+      
       
     </el-menu>
 </template>

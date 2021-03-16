@@ -13,6 +13,12 @@ const state={
     // }
     users:[
         {
+            userId:'test',
+            password:'test123',
+            role:'3',
+            name:'test'
+        },
+        {
         userId:'bianyingsong',
         password:'bianyingsong123',
         role:'1',
