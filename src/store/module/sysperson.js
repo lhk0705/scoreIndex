@@ -23,6 +23,7 @@ const state={
         { value: "董晨阳" },
         { value: "李晓汇" },
         { value: "殷洵" },
+        { value: "姚帅" },
       ]
 };
 const mutations={

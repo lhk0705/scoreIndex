@@ -307,17 +307,17 @@ span {
 }
 .cc11{
     position: relative;
-    left: 0px; 
+    left: 55px; 
     text-align: left;
 }
 .cc12{
     position: relative;
-    left: 0px; 
+    left: 90px; 
     text-align: left;
 }
 .cc13{
     position: relative;
-    left: 0px;    
+    left: 65px;    
     text-align: left;
 }
 .cc14{
@@ -372,15 +372,15 @@ span {
 }
 .a12{
     position: relative;
-    left: 30px; 
+    left: 25px; 
 }
 .a13{
     position: relative;
-    left: 33px; 
+    left: 28px; 
 }
 .a14{
     position: relative;
-    left: 35px; 
+    left: 30px; 
 }
 
 .a21{
@@ -393,15 +393,15 @@ span {
 }
 .a23{
     position: relative;
-    left: 35px; 
+    left: 33px; 
 }
 .a24{
     position: relative;
-    left: 43px; 
+    left: 38px; 
 }
 .a25{
     position: relative;
-    right: 10px; 
+    right: 15px; 
     top: 5px;
 }
 .foot{
@@ -431,12 +431,12 @@ span {
 .a_new,.b_new,.c_new{
     position: relative;
     left: 75%;
-    bottom:20%;
+    bottom:13%;
 }
 .a_delete{
     position: relative;
     left: 77%;
-    bottom:20%;
+    bottom:13%;
 }
 .b_head{
     text-align: left;
@@ -452,7 +452,7 @@ span {
 .b_delete{
     position: relative;
     left: 77%;
-    bottom:20%;
+    bottom:13%;
 }
 .b_tgs,.b_btgs,.b_ylzxgs,.b_zss,.b_tgl,.b_qxs{
     width: 200px;
@@ -471,7 +471,7 @@ span {
 .c_delete{
     position: relative;
     left: 77%;
-    bottom:20%;
+    bottom:13%;
 }
 .c_tgs,.c_btgs,.c_ylzxgs,.c_zss,.c_tgl,.c_qxs{
     width: 200px;

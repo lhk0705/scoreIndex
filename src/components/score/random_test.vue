@@ -140,8 +140,8 @@ export default {
     computed:{
     zss: {
       get(){
-      // if (this.tgs !== '' && this.ccyls !== '' && this.cc_btgs !== '') {
-        if (this.tgs !== null && this.ccyls !== null && this.cc_btgs !== null) {
+      if (this.tgs !== '' && this.ccyls !== '' && this.cc_btgs !== '') {
+        // if (this.tgs !== null && this.ccyls !== null && this.cc_btgs !== null) {
         let result=this.ccyls - this.tgs - this.cc_btgs
         if(result<0){
           alert("阻塞数不能小于0！")
@@ -155,7 +155,7 @@ export default {
     },
     cctgl: {
       get(){
-      if (this.tgs !== null && this.ccyls !== null) {
+      if (this.tgs !== '' && this.ccyls !== '') {
         return +(this.tgs / this.ccyls).toFixed(2);
       } else {
 
@@ -167,7 +167,7 @@ export default {
     },
     
     ccbl:{
-      get(){if (this.ylzs !== null && this.ccyls !== null) {
+      get(){if (this.ylzs !== '' && this.ccyls !== '') {
         return +(this.ccyls / this.ylzs).toFixed(2);
       } else {
         return "";

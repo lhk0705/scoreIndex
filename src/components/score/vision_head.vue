@@ -7,7 +7,7 @@
       <el-main class="bbxx2">
         <el-col :span="10">
           <el-row>
-            <div class="zubie">
+            <div class="zubie" >
               <label>
                 <span>*</span>组别：
               </label>
@@ -74,7 +74,48 @@
               </el-popover>
             </div>
           </el-row>
-        </el-col>
+        </el-col>       
+        <!-- <el-col :span="6">
+          <el-select v-model="groupName" placeholder="请选择" size="mini" :disabled="fstDis">
+                <el-option
+                  class="groupName"
+                  v-for="item in group"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                ></el-option>
+              </el-select>
+              <el-select v-model="stateperson" filterable size="mini" :disabled="fstDis">
+                <el-option
+                  v-for="item in sysperson"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                ></el-option>
+              </el-select>
+              <el-radio v-model="type" label="常规版本" :disabled="fstDis">常规版本</el-radio>
+              <el-radio v-model="type" label="紧急版本" :disabled="fstDis">紧急版本</el-radio>
+              <el-input-number
+                size="mini"
+                class="banbenguimo"
+                v-model="banbenguimo"
+                controls-position="right"
+                @change="handleChange"
+                :min="1"
+                :disabled="fstDis"
+              ></el-input-number>
+              <el-popover
+                placement="right-start"
+                width="200"
+                trigger="hover"
+                content="
+                      此版本的需求个数"
+              >
+                <el-button slot="reference" size="mini" class="bt">
+                  <i class="icon iconfont icon-wenhao"></i>
+                </el-button>
+              </el-popover>
+        </el-col > -->
         <el-col :span="10">
           <el-row>
             <div class="shijian">
@@ -124,6 +165,34 @@
             </div>
           </el-row>
         </el-col>
+        <!-- <el-col :span="6">
+          <el-date-picker
+                value-format="yyyy-MM-dd"
+                size="mini"
+                v-model="ticeshijian"
+                type="date"
+                placeholder="请选择日期"
+                @change="bbh_change"
+                :disabled="fstDis"
+              ></el-date-picker>
+              <el-select
+                v-model="xitongming"
+                filterable
+                placeholder="请选择"
+                size="mini"
+                :disabled="fstDis"
+                @change="bbh_change"
+              >
+                <el-option
+                  v-for="item in sysoptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                ></el-option>
+              </el-select>
+              <el-radio v-model="plan" label="是" :disabled="fstDis">是</el-radio>
+              <el-radio v-model="plan" label="否" :disabled="fstDis">否</el-radio>
+        </el-col> -->
       </el-main>
     </el-container>
   </div>

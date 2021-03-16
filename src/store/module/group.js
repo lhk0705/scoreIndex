@@ -1,16 +1,16 @@
 const state={
     group:[
         {
-          value: "OA系统组",
-          label: "OA系统组",
+          value: "OA办公组",
+          label: "OA办公组",
         },
         {
-          value: "规划建设组",
-          label: "规划建设组",
+          value: "规划管理组",
+          label: "规划管理组",
         },
         {
-          value: "人力系统组",
-          label: "人力系统组",
+          value: "人力党建组",
+          label: "人力党建组",
         },
         {
           value: "技术研发组",
@@ -21,9 +21,10 @@ const state={
           label: "内部支撑组",
         },
         {
-          value: "平台支撑组",
-          label: "平台支撑组",
+          value: "能力平台组",
+          label: "能力平台组",
         },
+        
         // {
         //     value: "a3",
         //     label: "a3",

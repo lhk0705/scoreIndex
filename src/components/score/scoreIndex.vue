@@ -650,7 +650,7 @@ export default {
           }
       }},
     cancel(){  
-          let a=confirm("确定取消？");
+          let a=confirm("确定清空？");
           if(a){  
             let headdata=this.$refs.visionhead
             let docdata=this.$refs.doc
@@ -750,7 +750,10 @@ export default {
               testdata.c_tgs= "",
               testdata.c_btgs= "",
               testdata.c_ylzxgs= "",
-              testdata.c_qxs=""
+              testdata.c_qxs="",
+              testdata.state_a_csr="",
+              testdata.state_b_csr="",
+              testdata.state_c_csr=""
           }
           else{}
       },
