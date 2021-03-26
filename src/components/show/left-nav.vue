@@ -33,6 +33,12 @@
             验收中
             </span>            
       </el-menu-item >
+      <el-menu-item class="nav" index="/thisMonth">
+        <i class="el-icon-menu"></i>
+        <span slot="title"> 
+            上月质量数据
+            </span>            
+      </el-menu-item >
       <el-menu-item class="nav" index="/newTask" v-if="user.role==='1'">
         <i class="el-icon-menu"></i>
         <span slot="title"> 
@@ -104,4 +110,5 @@ span{
 .nav:hover{
   background-color: rgba(9, 9, 22, 0.712); 
 }
+
 </style>

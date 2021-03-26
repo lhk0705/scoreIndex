@@ -133,6 +133,7 @@ export default {
   padding: 15px;
   background-color: white;
   border-radius: 8px;
+  font-size: 10px;
 }
 .time {
   position: relative;
