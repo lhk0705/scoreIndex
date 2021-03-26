@@ -165,6 +165,10 @@
     </el-table-column>
     
   </el-table>
+  <br>
+  <div class="exportToExcel">
+    <el-button  @click="exportToExcel">导出为EXCEL</el-button>
+  </div>
   </div>
 </template>
 
@@ -201,8 +205,73 @@ export default {
             ticeshijian:b[a].ticeshijian,
             xitongming:b[a].xitongming
         }})
-    }
-    },      
+    },
+    exportToExcel(){
+      require.ensure([], () => {
+        //这里使用绝对路径( @表示src文件夹 )，使用@/+存放export2Excel的路径【也可以写成相对于你当前"xxx.vue"文件的相对路径，例如我的页面放在assets文件夹同级下的views文件夹下的“home.vue”里，那这里路径也可以写成"../assets/excel/Export2Excel"】
+        const {
+          export_json_to_excel
+        } = require("@/excel/Export2Excel");  
+        
+        // 导出的excel表头名信息
+        const tHeader = [
+          "系统名", 
+          "版本号", 
+          "提测时间", 
+          "组别",
+          "版本规模",
+          "负责人",
+          "交付物得分",
+          "抽测用例数",
+          "抽测通过率", 
+          "抽测得分", 
+          "质控用例数", 
+          "验收轮次",
+          "首轮通过数",
+          "首轮通过率",
+          "首轮缺陷数",
+          "二轮通过数",
+          "二轮通过率",
+          "三轮通过数", 
+          "三轮通过率", 
+          "验收得分", 
+          "总分"
+          ]; 
+        const filterVal = [
+          "xitongming",
+          "banbenhao",
+          "ticeshijian",
+          "groupname",
+          "banbenguimo",
+          "person",
+          "jiaofuwudefen",
+          "ccyls",
+          "cctgl",
+          "ccdf",
+          "aYlzxgs",
+          "rounds",
+          "aTgs",
+          "atgl",
+          "aqxs",
+          "bTgs",
+          "bTgl",
+          "cTgs",
+          "cTgl",
+          "yanshoudefen",
+          "zongfen"
+
+        ]; // 导出的excel表头字段名，需要导出表格字段名
+        const list = this.vers;
+        const data = this.formatJson(filterVal, list);
+
+        export_json_to_excel(tHeader, data, "已完成验收的常规版本"); // 导出的表格名称，根据需要自己命名
+      });
+    },
+    //格式转换，直接复制即可,不需要修改什么
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => v[j]));
+    },    
+    } ,    
     created(){
         axios.get('/selectFinishedInfo')
         .then((res)=>{           
@@ -212,6 +281,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.exportToExcel{
+  position: absolute;
+  right: 10px;
+}
 </style>
