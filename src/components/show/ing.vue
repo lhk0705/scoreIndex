@@ -5,7 +5,7 @@
   <el-table border
     style="width: 100%" 
     height="40">
-    <el-table-column  label="未完成验收的常规版本" align="center">
+    <el-table-column  label="验收中的常规版本" align="center">
      </el-table-column></el-table>
   <el-table
     :data="vers"

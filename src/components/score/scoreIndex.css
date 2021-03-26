@@ -49,7 +49,8 @@ span {
   background-color: white;
 }
 .bbxx2 div {
-  font-size: 0.8em;
+  /* font-size: 0.8em; */
+  font-size: 12px;
   margin: 4px;
 }
 
@@ -112,7 +113,8 @@ span {
   padding-left: 5%;
 }
 .xq_main div {
-  font-size: 0.8em;
+  /* font-size: 0.8em; */
+  font-size: 12px;
   margin: 4px;
 }
 
@@ -154,7 +156,8 @@ span {
   padding-left: 10%;
 }
 .yl_main div {
-    font-size: 0.8em;
+    /* font-size: 0.8em; */
+    font-size: 12px;
     margin: 4px;
   }
 .yl_error {
@@ -216,7 +219,7 @@ span {
 }
 .bg_head {
     text-align: left;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(187, 187, 187);
     padding-top: 5px;
     font-size: 1em;
     background-color: rgb(255, 255, 255);
@@ -225,7 +228,8 @@ span {
     background-color: rgb(255, 255, 255);
   }
   .bg_main div {
-    font-size: 0.8em;
+    /* font-size: 0.8em; */
+    font-size: 12px;
     margin: 4px;
   }
 .bg_error {
@@ -242,12 +246,12 @@ span {
 }
 .bg14{
     position: relative;
-    right: 35px; 
+    right: 25px; 
     top:15px;
 }
 .bg15{
     position: relative;
-    right: 50px; 
+    right: 40px; 
     top:15px;
 }
 .bg16{
@@ -292,7 +296,8 @@ span {
     border-radius: 8px; */
   }
 .cc_main div {
-    font-size: 0.8em;
+    /* font-size: 0.8em; */
+    font-size: 12px;
     margin: 4px;
   }
 .cc_main{
@@ -360,7 +365,8 @@ span {
     background-color: rgb(255, 255, 255);
 }
 .a_main div{
-    font-size: 0.8em;
+    /* font-size: 0.8em; */
+    font-size: 12px;
     margin: 4px;
 }
 .a_tgs,.a_btgs,.a_ylzxgs,.a_zss,.a_tgl,.a_qxs{
@@ -446,7 +452,8 @@ span {
     background-color: rgb(255, 255, 255);
 }
 .b_main div{
-    font-size: 0.8em;
+    /* font-size: 0.8em; */
+    font-size: 12px;
     margin: 4px;
 }
 .b_delete{
@@ -465,7 +472,8 @@ span {
     background-color: rgb(255, 255, 255); 
 }
 .c_main div{
-    font-size: 0.8em;
+    /* font-size: 0.8em; */
+    font-size: 12px;
     margin: 4px;
 }
 .c_delete{

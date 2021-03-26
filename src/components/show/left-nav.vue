@@ -30,7 +30,7 @@
       <el-menu-item class="nav" index="/ing">
         <i class="el-icon-menu"></i>
         <span slot="title"> 
-            未完成
+            验收中
             </span>            
       </el-menu-item >
       <el-menu-item class="nav" index="/newTask" v-if="user.role==='1'">
