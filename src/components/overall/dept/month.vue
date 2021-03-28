@@ -41,14 +41,16 @@ export default {
           fontSize: 10,
         },
       });
-      this.title={
+          
+    return {
+    rounds:'',
+    title:{
           text:'部门月度版本数',
             left:'25%',
             top:30
-      }      
-    return {
-    rounds:'',
+      }  ,
     extend:{
+
           series:{
             //   type:'pie',
               right:10,
@@ -77,6 +79,7 @@ export default {
   },
   created(){      
       this.getMon()
+      this.title.text='部门'+new Date().getMonth()+'月版本数'
   },
   
   methods:{

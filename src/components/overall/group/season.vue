@@ -22,6 +22,7 @@ export default {
     },
   data() {
         return {
+          season:'',
       chartSettings : {
       radius: ["40%", "60%"],
       label:{
@@ -42,7 +43,7 @@ export default {
       } ,
       title:{
             text:'季度版本数',
-            left:'35em',
+            left:'35pm',
             top:30     
       },            
         rounds:'',
@@ -68,15 +69,20 @@ export default {
     };
   },
   created(){
+      if(new Date().getMonth()/3<1){
+        this.season=new Date().getFullYear()-1+'年4季度'      
+      }else{
+        this.season=new Date().getFullYear()+'年'+(Math.ceil((new Date().getMonth()+1)/3)-1)+'季度'
+      }
       this.getGSea(this.prop) 
-      this.title.text=this.prop+'季度版本数' 
+      this.title.text=this.prop+this.season+'版本数' 
               
   },
     watch:{
     prop:{
       handler(newV,oldV){        
         this.getGSea(newV)
-        this.title.text=newV+'季度版本数'
+        this.title.text=newV+this.season+'版本数' 
       }
     }
   },

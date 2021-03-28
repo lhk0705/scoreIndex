@@ -12,7 +12,7 @@
       :router='true'
     >
     <el-menu-item >
-        <img src="static\u=3073865373,3613492176&fm=26&gp=0.jpg" alt="" class="img">
+        <img src="static\QMS.jfif" alt="" class="img">
     </el-menu-item>
     <el-menu-item index="/">
           质控总览
@@ -72,10 +72,12 @@ div{
   position: fixed;
   width: 100%;
   z-index: 999;
+  
 }
 .el-menu-demo{
   position: relative;
   bottom: 10px;
+ 
 }
 .user{
   /* float: right; */

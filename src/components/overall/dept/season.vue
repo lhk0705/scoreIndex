@@ -38,16 +38,15 @@ export default {
         textStyle: {
           fontSize: 10,
         },
-      });
-      this.title={
+      });      
+    return {
+    season:'',
+    rounds:'',
+    title:{
           text:'部门季度版本数',
             left:'25%',
             top:30
-      }
-      
-      
-    return {
-    rounds:'',
+    },
     extend:{
           series:{
             //   type:'pie',
@@ -74,7 +73,13 @@ export default {
     };
   },
   created(){
+    if(new Date().getMonth()/3<1){
+        this.season=new Date().getFullYear()-1+'年4季度'      
+      }else{
+        this.season=new Date().getFullYear()+'年'+(Math.ceil((new Date().getMonth()+1)/3)-1)+'季度'
+      }
       this.getSea()
+      this.title.text='部门'+this.season+'版本数' 
   },
   methods:{
     SET_DEPT_SEA(){

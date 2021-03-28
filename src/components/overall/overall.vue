@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <el-row>
-        <label>组别：</label>
+        <!-- <label>组别</label> -->
         <el-select v-model="zb" placeholder="请选择" size="mini" style="width:200px">
           <el-option
             v-for="item in group"
@@ -12,8 +12,6 @@
           ></el-option>
         </el-select>
         <el-button @click="change" size="mini">{{value}}</el-button>
-        <br>
-        <p><strong>*注：月度和季度分别表示上一月度和上一季度的数据</strong></p>
       </el-row>
       <el-row>
         <el-col :span="5">
@@ -117,7 +115,8 @@ div {
   border: 1px solid black;
   text-align: left;
 }
-/* .col{
-  border:1px solid black
-} */
+*{
+  font-size: 12px;
+}
+
 </style>

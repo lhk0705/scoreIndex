@@ -22,6 +22,7 @@ export default {
     },
   data() {                
     return {
+      month:new Date().getMonth(),
       chartSettings : {
       radius: ["40%", "60%"],
       label:{
@@ -41,7 +42,7 @@ export default {
         },
       } ,
       title:{
-            text:'月度版本数',
+            text:'版本数',
             left:'35em',
             top:30     
       },            
@@ -73,7 +74,7 @@ export default {
   
   created(){
     this.getGMon(this.prop) 
-    this.title.text=this.prop+'月度版本数'   
+    this.title.text=this.prop+this.month+'月版本数'   
     
       
   },
@@ -81,7 +82,7 @@ export default {
     prop:{
       handler(newV,oldV){        
         this.getGMon(newV)
-        this.title.text=newV+'月度版本数'
+        this.title.text=newV+this.month+'月版本数'
       }
     }
   },

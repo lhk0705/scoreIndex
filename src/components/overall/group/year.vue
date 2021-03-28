@@ -69,13 +69,13 @@ export default {
   },
   created(){
       this.getGYear(this.prop) 
-      this.title.text=this.prop+'年度版本数'   
+      this.title.text=this.prop+(new Date().getFullYear()-1)+'年版本数'   
   },
   watch:{
     prop:{
       handler(newV,oldV){        
         this.getGYear(newV)
-        this.title.text=newV+'年度版本数'
+        this.title.text=this.prop+(new Date().getFullYear()-1)+'年版本数'
       }
     }
   },
