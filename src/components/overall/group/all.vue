@@ -82,7 +82,7 @@ export default {
       axios.post('/v_group_all',{"groupName":newV})
       .then((res)=>{         
         this.$store.commit('setGAll',res.data.total)
-        console.log(res.data);
+        // console.log(res.data);
         // console.log(this.$store.getters.getMon);
         this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getGAll
         // console.log(1); 
@@ -104,10 +104,18 @@ export default {
         // console.log(3);
       })
     },    
+    SET_GROUP_ROUNDS(newV){
+      axios.post("/r_group_all",{'groupName':newV}).then((res)=>{
+      this.rounds=res.data.total.toFixed(1)
+      // console.log(res.data);
+
+    })
+    },
     async  getGAll(newV){
       await this.SET_GROUP_ALL(newV);
       await this.SET_GROUP_fvALL(newV);
-      this.SET_GROUP_uvALL(newV)
+      await this.SET_GROUP_uvALL(newV);
+      this.SET_GROUP_ROUNDS(newV)
     }
   }
 };

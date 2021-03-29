@@ -80,6 +80,10 @@ export default {
   created(){      
       this.getMon()
       this.title.text='部门'+new Date().getMonth()+'月版本数'
+      axios.get("/r_dept_mon").then((res)=>{
+      this.rounds=res.data.total.toFixed(1)
+      // console.log(res.data);
+    })
   },
   
   methods:{

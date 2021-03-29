@@ -24,13 +24,14 @@
           <groupyear :prop="zb"></groupyear>
         </el-col>
         <el-col :span="5" v-else>
-          <randomTest></randomTest>
+          <deptmon></deptmon>
         </el-col>
         <el-col :span="5"  v-if="show=='group'">
           <groupall :prop="zb"></groupall>
+          
         </el-col>
         <el-col :span="5" v-else>
-          <fstTest></fstTest>
+          <deptseason></deptseason>
         </el-col>
         
       </el-row>
@@ -38,13 +39,13 @@
     <br />
     <el-row class="row">
         <el-col :span="5">
-        <deptseason></deptseason>
+        <randomTest></randomTest>
       </el-col>
       <el-col :span="5">
-        <deptmon></deptmon>
+        <fstTest></fstTest>
       </el-col> 
       <el-col :span="11">
-        <deptyear></deptyear>
+        <pastTwelve></pastTwelve>
       </el-col>
      
       
@@ -54,9 +55,8 @@
 
 <script>
 import deptmon from "./dept/month";
-import deptall from "./dept/all";
 import deptseason from "./dept/season";
-import deptyear from "./dept/year";
+import pastTwelve from "./dept/pastTwelve";
 import groupmon from "./group/month";
 import groupall from "./group/all";
 import groupseason from "./group/season";
@@ -69,16 +69,15 @@ let randomTest=()=>import ("./group/randomTest")
 export default {
   data() {
     return {
-      zb: "OA系统组",
+      zb: "OA办公组",
       show:'group',
-      value:'月度部门抽测和首轮验收情况'
+      value:'部门质量情况'
     };
   },
   components: {
     deptmon,
-    deptall,
     deptseason,
-    deptyear,
+    pastTwelve,
     groupmon,
     groupall,
     groupseason,
@@ -93,13 +92,13 @@ export default {
   },
   methods:{
     change(){
-      if(this.value=='月度部门抽测和首轮验收情况'){
+      if(this.value=='部门质量情况'){
       this.show='nogroup'
       this.value='小组情况'
       }
       else{
         this.show='group'
-      this.value='月度部门抽测和首轮验收情况'
+      this.value='部门质量情况'
       }
     }
   }

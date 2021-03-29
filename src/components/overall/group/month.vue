@@ -68,14 +68,10 @@ export default {
       },      
     };
   },
-  beforeMount(){
-    
-  },
   
   created(){
     this.getGMon(this.prop) 
     this.title.text=this.prop+this.month+'月版本数'   
-    
       
   },
   watch:{
@@ -91,7 +87,7 @@ export default {
       axios.post('/v_group_mon',{"groupName":newV})
       .then((res)=>{         
         this.$store.commit('setGMon',res.data.total)
-        console.log(res.data);
+        // console.log(res.data);
         // console.log(this.$store.getters.getMon);
         this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getGMon
         // console.log(1); 
@@ -112,11 +108,18 @@ export default {
         this.mychart.rows[1]={ state: "未完成", total: this.$store.getters.getGUvMon }
         // console.log(3);
       })
-    },    
+    }, 
+    SET_GROUP_ROUNDS(newV){
+      axios.post("/r_group_mon",{groupName:newV}).then((res)=>{
+      this.rounds=res.data.total.toFixed(1)
+      // console.log(res.data);
+    })
+    },
     async  getGMon(newV){
       await this.SET_GROUP_MONTH(newV);
       await this.SET_GROUP_fvMON(newV);
-      this.SET_GROUP_uvMONTH(newV)
+      await this.SET_GROUP_uvMONTH(newV);
+      this.SET_GROUP_ROUNDS(newV)
     }
   } 
 };

@@ -80,6 +80,7 @@ export default {
       }
       this.getSea()
       this.title.text='部门'+this.season+'版本数' 
+    
   },
   methods:{
     SET_DEPT_SEA(){
@@ -108,10 +109,18 @@ export default {
         // console.log(3);
       })
     },    
+    SET_DEPT_ROUNDS(){
+      axios.get("/r_dept_sea").then((res)=>{
+      this.rounds=res.data.total.toFixed(1)
+      // console.log(res.data);
+
+    })
+    }, 
     async  getSea(){
       await this.SET_DEPT_SEA();
       await this.SET_DEPT_fvSEA();
-      this.SET_DEPT_uvSEA()
+      await this.SET_DEPT_uvSEA();
+      this.SET_DEPT_ROUNDS()
     }
   }
 
