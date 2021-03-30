@@ -51,7 +51,7 @@
        <div class="button">
       <el-button size="mini" @click="submit" type="primary" plain>提交</el-button>
       <el-button size="mini" @click="cancel" plain>清空</el-button>
-      <el-button size="mini" class="button"  @click="goback">返回上一页</el-button>
+      <el-button size="mini"  @click="goback">返回上一页</el-button>
       <el-button size="mini" @click="period" plain>导出阶段通报</el-button>
       <el-button size="mini" @click="report" plain>导出质控报告</el-button>
       <el-button size="mini" @click="score" plain>导出得分表</el-button>
