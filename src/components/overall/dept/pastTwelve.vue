@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     this.extend={
@@ -31,6 +32,10 @@ export default {
     };
   },
   created(){
+    axios.post("/r_avg_mon",{'time':'20210201'}).then(res=>{
+        console.log(res.data.total);
+    })
+
       this.mychart.rows=[
           { 月份: "10月", 首轮通过率: 0.14 ,验收轮次:1.2},
           { 月份: "11月", 首轮通过率: 0.5 ,验收轮次:1.6},

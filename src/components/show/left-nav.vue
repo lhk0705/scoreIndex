@@ -36,7 +36,7 @@
       <el-menu-item class="nav" index="/thisMonth">
         <i class="el-icon-menu"></i>
         <span slot="title"> 
-            上月质量数据
+            上一周期质量数据
             </span>            
       </el-menu-item >
       <el-menu-item class="nav" index="/newTask" v-if="user.role==='1'">

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="overall">
     <div class="row">
       <el-row>
         <!-- <label>组别</label> -->
@@ -17,14 +17,14 @@
         <el-col :span="5">
           <groupmon :prop="zb"></groupmon>
         </el-col>
-        <el-col :span="5">
+        <el-col :span="5"> 
           <groupseason :prop="zb"></groupseason>
         </el-col >
         <el-col  :span="5" v-if="show=='group'">
           <groupyear :prop="zb"></groupyear>
         </el-col>
         <el-col :span="5" v-else>
-          <deptmon></deptmon>
+          <deptmon ref="deptmon"></deptmon>
         </el-col>
         <el-col :span="5"  v-if="show=='group'">
           <groupall :prop="zb"></groupall>
@@ -61,12 +61,11 @@ import groupmon from "./group/month";
 import groupall from "./group/all";
 import groupseason from "./group/season";
 import groupyear from "./group/year";
-// import fstTest from "./group/fstTest";
-// import randomTest from "./group/randomTest";
 let fstTest=()=>import ("./group/fstTest")
 let randomTest=()=>import ("./group/randomTest")
-
+ 
 export default {
+ 
   data() {
     return {
       zb: "OA办公组",
@@ -101,7 +100,17 @@ export default {
       this.value='部门质量情况'
       }
     }
+  },
+  created(){
+    
+    // this.$nextTick(() => {
+    //   // 解决v-charts不显示问题
+    //   // 调用以下的方法实现环图重新渲染
+    //   this.$refs.deptmon.resize()
+    //   // this.$refs.chart_two.echarts.resize()
+    // })
   }
+  
   
 };
 </script>
@@ -109,13 +118,16 @@ export default {
 <style scoped>
 div {
   margin: 10px 2%;
+  /* background-color: rgb(248, 248, 248); */
 }
+
 .row {
   border: 1px solid black;
   text-align: left;
 }
 *{
   font-size: 12px;
+  
 }
 
 </style>

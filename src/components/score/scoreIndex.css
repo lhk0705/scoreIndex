@@ -17,6 +17,7 @@ span {
   top:10px;
   
   
+  
 }
 .head {
   height: 50px;
@@ -413,7 +414,7 @@ span {
 .foot{
     text-align: center;
     background-color: rgb(235, 230, 230);
-    height:40px;
+    height:30px;
     position: fixed;    
     bottom:0px;
     margin-left: -2%;
@@ -422,14 +423,15 @@ span {
     padding: 10px;
     
 }
-.font{
-  float: left;
-  margin-left: 15%;
-  margin-top: 10px;
-
+.head_font{
+  float: right;
+  margin-right: 5%;
+  margin-top: -10px;
+  font-size:12px
 }
 .button{
   margin-top: 5px;
+
 }
 .a_main,.b_main,.c_main{
   background-color: white;
@@ -489,4 +491,5 @@ input{
     border:none;
     text-align: center;
     border-bottom:1px solid black ;
+    width: 70px;
 }

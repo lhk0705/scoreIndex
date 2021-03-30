@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import axios from 'axios'
   export default {
     data () {
       return {
@@ -46,6 +47,7 @@
     },
     created(){
       this.RD_TEST()
+      this.extend.title.text=(new Date().getMonth()+1)+'月首轮验收通过率'
     },
     methods:{
       OA(){

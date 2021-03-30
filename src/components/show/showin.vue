@@ -30,14 +30,15 @@ export default {
 
 <style scoped>
 .showin{
-    height: 650px;
+    height: 860px;
     margin-left:-1%;
+    background-color: rgb(248, 248, 248);
 }
 .show_right{
     padding: 20px;
 }
 .left{
-    height: 92%;
+    height: 102%;
     /* border-right: 1px solid black; */
     margin-top: -10px;
     background-color: rgba(19, 19, 46, 0.712); 

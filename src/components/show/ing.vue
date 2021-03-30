@@ -9,7 +9,7 @@
      </el-table-column></el-table>
   <el-table
     :data="vers"
-    height="300"
+    height="20em"
     border
     style="padding:auto"  
     >

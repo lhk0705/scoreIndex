@@ -11,7 +11,7 @@
       active-text-color="black"
       :router='true'
     >
-    <el-menu-item >
+    <el-menu-item  index="/">
         <img src="static\QMS.jfif" alt="" class="img">
     </el-menu-item>
     <el-menu-item index="/">

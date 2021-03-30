@@ -38,11 +38,13 @@ export default {
   color: #2c3e50;
   /* margin-top: 60px; */
   background-color: rgb(248, 248, 248);
+
 }
 .a{
   position: relative;
   top:60px;
   /* width: 100%; */
+  
 }
 .b{
   margin-left:-1%;  

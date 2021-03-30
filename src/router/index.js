@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-let scoreIndex=()=>import ('@/components/score/scoreIndex')
-let showin=()=>import ("@/components/show/showin")
-let ing=()=>import("@/components/show/ing")
-let finish=()=>import("@/components/show/finish")
-let warn=()=>import("@/components/show/warn.vue")
-let overall=()=>import("@/components/overall/overall.vue")
-let newTask=()=>import("@/components/show/newTask.vue")
-let myTask=()=>import("@/components/show/myTask.vue")
-let thisMonth=()=>import("@/components/show/thisMonth.vue")
+let scoreIndex=()=>import ('../components/score/scoreIndex.vue')
+let showin=()=>import ("../components/show/showin.vue")
+let ing=()=>import("../components/show/ing")
+let finish=()=>import("../components/show/finish.vue")
+let warn=()=>import("../components/show/warn.vue")
+let overall=()=>import("../components/overall/overall")
+let newTask=()=>import("../components/show/newTask.vue")
+let myTask=()=>import("../components/show/myTask.vue")
+let thisMonth=()=>import("../components/show/thisMonth.vue")
 
 
 Vue.use(Router)

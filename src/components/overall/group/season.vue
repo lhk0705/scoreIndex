@@ -43,7 +43,7 @@ export default {
       } ,
       title:{
             text:'季度版本数',
-            left:'35pm',
+            left:'15pm',
             top:30     
       },            
         rounds:'',

@@ -11,7 +11,7 @@
     :data="vers"
     border
     style="width: 100%" 
-    height="300"   
+    height="20em"   
     >   
     <el-table-column
       prop="xitongming"

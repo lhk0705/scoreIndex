@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import axios from 'axios'
   export default {
     data () {
       return {
@@ -14,7 +15,7 @@
           top:"130px"
         },
         title:{
-          text:"本月首轮验收通过率",
+          text:"",
           left:"center"
         },
         legend:{
@@ -44,6 +45,7 @@
     },
     created(){
       this.FST_TEST()
+      this.extend.title.text=new Date().getMonth()+'月首轮验收通过率'
     },
     methods:{
       OA(){
