@@ -33,7 +33,7 @@
             验收中
             </span>            
       </el-menu-item >
-      <el-menu-item class="nav" index="/thisMonth">
+      <el-menu-item class="nav" index="/lastPeriod">
         <i class="el-icon-menu"></i>
         <span slot="title"> 
             上一周期质量数据

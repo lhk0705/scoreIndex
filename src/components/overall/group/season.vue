@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="this.$store.getters.getGSea!==0">
     <ve-ring
       :data="mychart"
       :settings="chartSettings"
@@ -11,6 +11,14 @@
    
     ></ve-ring>
     <p>验收轮次：{{rounds}}</p>
+  </div>
+  <div v-else >
+    <div class="noData1">
+    <strong>
+      {{title.text}}</strong></div>
+    <br>
+    <div class="noData">
+    <strong>无提测版本</strong></div>    
   </div>
 </template>
 
@@ -131,5 +139,20 @@ export default {
 </script>
 
 <style scoped>
-
+.noData{
+  /* border:1px solid black; */
+  font-size:18px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+  
+}
+.noData1{
+  font-size:18px; 
+  text-align: center;
+  position: relative;
+  top:32px
+}
 </style>

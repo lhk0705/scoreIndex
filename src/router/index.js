@@ -9,7 +9,7 @@ let warn=()=>import("../components/show/warn.vue")
 let overall=()=>import("../components/overall/overall")
 let newTask=()=>import("../components/show/newTask.vue")
 let myTask=()=>import("../components/show/myTask.vue")
-let thisMonth=()=>import("../components/show/thisMonth.vue")
+let lastPeriod=()=>import("../components/show/lastPeriod.vue")
 
 
 Vue.use(Router)
@@ -59,9 +59,9 @@ export default new Router({
           component: myTask
         },
         {
-          path: '/thisMonth',
-          name: 'thisMonth',
-          component: thisMonth
+          path: '/lastPeriod',
+          name: 'lastPeriod',
+          component: lastPeriod
         },
 
       ]
