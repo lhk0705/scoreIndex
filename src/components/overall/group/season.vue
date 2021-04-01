@@ -4,7 +4,7 @@
       :data="mychart"
       :settings="chartSettings"
       :legend="legend"
-      width="300px"
+      width="120%"
       height="300px"
         :title="title"
         :extend="extend"
@@ -40,7 +40,7 @@ export default {
     },
       legend: {
         orient: "vertical",
-        right: 20,
+        right: 60,
         top:80,
         // width: 20,
         itemWidth: 10,
@@ -51,7 +51,7 @@ export default {
       } ,
       title:{
             text:'季度版本数',
-            left:'15pm',
+            left:'25%',
             top:30     
       },            
         rounds:'',
@@ -124,7 +124,7 @@ export default {
     SET_GROUP_ROUNDS(newV){
       axios.post("/r_group_sea",{'groupName':newV}).then((res)=>{
       this.rounds=res.data.total.toFixed(1)
-      console.log(res.data.total.toFixed(1));
+      
 
     })
     },   
@@ -154,5 +154,8 @@ export default {
   text-align: center;
   position: relative;
   top:32px
+}
+p{
+  text-align: center;
 }
 </style>

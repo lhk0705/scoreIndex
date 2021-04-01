@@ -4,7 +4,7 @@
       :data="mychart"
       :settings="chartSettings"
       :legend="legend"
-      width="300px"
+      width="120%"
       height="300px"
       :title="title"
       :extend="extend"
@@ -40,7 +40,7 @@ export default {
     },
       legend: {
         orient: "vertical",
-        right: 20,
+        right: 40,
         top:80,
         // width: 20,
         itemWidth: 10,
@@ -51,7 +51,7 @@ export default {
       } ,
       title:{
             text:'版本数',
-            left:'35em',
+            left:'25%',
             top:30     
       },            
         rounds:'',
@@ -150,5 +150,7 @@ export default {
   position: relative;
   top:32px
 }
-
+p{
+  text-align: center;
+}
 </style>

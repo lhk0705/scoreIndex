@@ -31,26 +31,51 @@ export default {
       
     };
   },
+  methods:{
+    
+    // 获取验收轮次\首轮通过率
+    getLastTwelve(){    
+      for(let i=0;i<12;i++){        
+        let rounds,passrate,month,time;
+        // let month
+        if(new Date().getMonth()-i>0){
+        month=new Date().getMonth()-i
+        time=String(new Date().getFullYear()*10000+(new Date().getMonth()-i)*100+new Date().getDate());
+        }else{
+          month=12+new Date().getMonth()-i
+          time=String((new Date().getFullYear()-1)*10000+(12+new Date().getMonth()-i)*100+new Date().getDate());
+        }
+        // console.log(time);         
+     axios.post("/r_avg_mon",{'time':time}).then(res=>{
+        // console.log(res.data.total);
+        if(res.data.total===''){
+        rounds=0
+        }else{
+          rounds=res.data.total
+        }        
+        axios.post("/p_avg_mon",{'time':time}).then(res=>{
+        // console.log(res.data.total);
+        passrate=res.data.total
+        this.mychart.rows.unshift({
+          月份: month+"月", 首轮通过率: passrate,验收轮次:rounds
+        })                 
+    })              
+    })        
+      }
+    //   axios.post("/p_avg_mon",{'time':'20201101'}).then(res=>{
+    //     // console.log(res.data.total);
+    //     let rounds=res.data.total
+    //     console.log(rounds);
+                
+    // })
+    
+      // console.log(this.mychart.rows);
+    },
+    
+    
+  },
   created(){
-    axios.post("/r_avg_mon",{'time':'20210201'}).then(res=>{
-        console.log(res.data.total);
-    })
-
-      this.mychart.rows=[
-          { 月份: "10月", 首轮通过率: 0.14 ,验收轮次:1.2},
-          { 月份: "11月", 首轮通过率: 0.5 ,验收轮次:1.6},
-          { 月份: "12月", 首轮通过率: 0.33 ,验收轮次:1.8},
-          { 月份: "1月", 首轮通过率: 0.62 ,验收轮次:0.6},
-          { 月份: "2月", 首轮通过率: 0.60 ,验收轮次:1.3},
-          { 月份: "3月", 首轮通过率: 0.16 ,验收轮次:1.7},
-          { 月份: "4月", 首轮通过率: 0.61 ,验收轮次:1.4},
-          { 月份: "5月", 首轮通过率: 0.33 ,验收轮次:2.3},
-          { 月份: "6月", 首轮通过率: 0.33 ,验收轮次:1.2},
-          
-          { 月份: "7月", 首轮通过率: 0.27 ,验收轮次:1.3},
-          { 月份: "8月", 首轮通过率: 0.31 ,验收轮次:1.9},
-          { 月份: "9月", 首轮通过率: 0.35 ,验收轮次:1.1},
-      ]
+    this.getLastTwelve()
   }
 };
 </script>

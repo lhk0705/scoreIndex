@@ -292,7 +292,7 @@ export default {
          startDate=new Date().getUTCFullYear()+''+new Date().getMonth()+'16',
         endDate=new Date().getFullYear()+''+(new Date().getMonth()+1)+'15';
       }else{
-        this.label=new Date().getUTCFullYear()+'年'+(new Date().getMonth()-1)+'月16日'+'~'+new Date().getFullYear()+''+new Date().getFullYear()+'年'+new Date().getMonth()+'月15日'+'版本数据'
+        this.label=new Date().getUTCFullYear()+'年'+(new Date().getMonth()-1)+'月16日'+'~'+new Date().getFullYear()+'年'+new Date().getMonth()+'月15日'+'版本数据'
          startDate=new Date().getFullYear()+''+(new Date().getMonth()-1)+'16',
         endDate=new Date().getFullYear()+''+new Date().getMonth()+'15';
       }

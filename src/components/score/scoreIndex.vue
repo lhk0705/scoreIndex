@@ -7,7 +7,7 @@
 
       <strong class="head_font">
         版本总得分
-        <input type="text" v-model="banbendefenS" :disabled="scoreDis"/>
+        <input type="text" v-model="banbendefen" :disabled="scoreDis"/>
         
       </strong></div>
       
@@ -97,6 +97,7 @@ export default {
               testdata.fstDis=true;
               // console.log(2);
             }
+            
               vm.banbenhao=data.banbenhao;
               headdata.fstDis=true;              
               testdata.secDis=false;
@@ -928,6 +929,7 @@ export default {
     },
     // 导出为得分表
     score(){
+      // console.log(this.$refs.docdata.xuqiudefen);
     require.ensure([], () => {
         //这里使用绝对路径( @表示src文件夹 )，使用@/+存放export2Excel的路径【也可以写成相对于你当前"xxx.vue"文件的相对路径，例如我的页面放在assets文件夹同级下的views文件夹下的“home.vue”里，那这里路径也可以写成"../assets/excel/Export2Excel"】
         const {
@@ -977,17 +979,17 @@ export default {
             "xitongming":this.$refs.visionhead.xitongming,
             "stateperson":this.$refs.visionhead.stateperson,
             "plan":this.$refs.visionhead.plan,
-            "xuqiudefen":this.$refs.docdata.xuqiudefen,
-            "csyldf":this.$refs.docdata.csyldf,
-            "csbgdf":this.$refs.docdata.csbgdf,
-            "jiaofuwudefen":this.$refs.docdata.jiaofuwudefen,
-            "cc1":this.$refs.randomtestdata.ccbl+'('+this.$refs.randomtestdata.ccyls+'/'+this.$refs.randomtestdata.ylzs+')',
-            "cc2":this.$refs.randomtestdata.cctgl+'('+this.$refs.randomtestdata.tgs+'/'+this.$refs.randomtestdata.ccyls+')',
-            "ccdf":this.$refs.randomtestdata.ccdf,
-            "first":this.$refs.testdata.a_qxs+'/'+this.$refs.testdata.a_tgl,
-            "second":this.$refs.testdata.b_qxs+'/'+this.$refs.testdata.b_tgl,
-            "third":this.$refs.testdata.c_qxs+'/'+this.$refs.testdata.c_tgl,
-            "yanshoudefen":this.$refs.testdata.yanshoudefen,
+            "xuqiudefen":this.$refs.doc.xuqiudefen,
+            "csyldf":this.$refs.doc.csyldf,
+            "csbgdf":this.$refs.doc.csbgdf,
+            "jiaofuwudefen":this.$refs.doc.jiaofuwudefen,
+            "cc1":this.$refs.randomtest.ccbl+'('+this.$refs.randomtest.ccyls+'/'+this.$refs.randomtest.ylzs+')',
+            "cc2":this.$refs.randomtest.cctgl+'('+this.$refs.randomtest.tgs+'/'+this.$refs.randomtest.ccyls+')',
+            "ccdf":this.$refs.randomtest.ccdf,
+            "first":this.$refs.test.a_qxs+'/'+this.$refs.test.a_tgl,
+            "second":this.$refs.test.b_qxs+'/'+this.$refs.test.b_tgl,
+            "third":this.$refs.test.c_qxs+'/'+this.$refs.test.c_tgl,
+            "yanshoudefen":this.$refs.test.yanshoudefen,
             "banbendefen":this.banbendefen
           }
           

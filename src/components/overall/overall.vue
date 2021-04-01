@@ -13,7 +13,7 @@
         </el-select>
         <el-button @click="change" size="mini">{{value}}</el-button>
       </el-row>
-      <el-row>
+      <el-row class="row1">
         <el-col :span="5">
           <groupmon :prop="zb"></groupmon>
         </el-col>
@@ -129,5 +129,8 @@ div {
   font-size: 12px;
   
 }
-
+.row1>div{
+  /* border: 1px solid black; */
+  width: 20%;
+}
 </style>

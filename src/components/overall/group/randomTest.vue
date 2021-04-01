@@ -47,7 +47,7 @@ import axios from 'axios'
     },
     created(){
       this.RD_TEST()
-      this.extend.title.text=(new Date().getMonth()+1)+'月首轮验收通过率'
+      this.extend.title.text=new Date().getMonth()+'月抽测通过率'
     },
     methods:{
       OA(){
