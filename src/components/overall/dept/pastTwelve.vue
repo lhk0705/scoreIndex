@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div ><strong>
+    <h2>过去12个月部门整体质量变化</h2></strong>
     <ve-line
     :data="mychart"
     :extend="extend"
+    :title='title'
     ></ve-line>
   </div>
 </template>
@@ -20,7 +22,8 @@ export default {
       
       
     return { 
-    
+      
+      
       mychart: {
         columns: ["月份", "首轮通过率","验收轮次"],
         rows: [
@@ -48,14 +51,18 @@ export default {
         // console.log(time);         
      axios.post("/r_avg_mon",{'time':time}).then(res=>{
         // console.log(res.data.total);
-        if(res.data.total===''){
-        rounds=0
-        }else{
+        // if(res.data.total===undefined){
+        // rounds=0
+        // }else{
           rounds=res.data.total
-        }        
+        // }        
         axios.post("/p_avg_mon",{'time':time}).then(res=>{
         // console.log(res.data.total);
-        passrate=res.data.total
+        // if(res.data.total===undefined){
+        // passrate=0
+        // }else{
+          passrate=res.data.total
+        // } 
         this.mychart.rows.unshift({
           月份: month+"月", 首轮通过率: passrate,验收轮次:rounds
         })                 
@@ -76,10 +83,17 @@ export default {
   },
   created(){
     this.getLastTwelve()
+  },
+  beforeDestroy(){
+    this.mychart.rows=[]
   }
+  
 };
 </script>
 
 <style scoped>
-
+h2{
+  text-align: center;
+  font-size: 28;
+}
 </style>

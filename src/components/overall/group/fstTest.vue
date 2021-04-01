@@ -23,7 +23,7 @@ import axios from 'axios'
         }
       },
         chartData: {
-          columns: [ 'group','OA办公组','人力党建组','规划管理组','技术研发组','能力平台组','内部支撑组'],
+          columns: [ 'group'],
           rows: [
             // {
             // 'OA办公组': oa, 
@@ -33,12 +33,12 @@ import axios from 'axios'
             // '能力平台组':ss ,
             // '内部支撑组':is,},  
             { 'group': '' ,
-            'OA办公组': '0.8', 
-            '人力党建组':'0.9' ,
-            '规划管理组':'0.9' ,
-            '技术研发组':'0.9' ,
-            '能力平台组':'0.9' ,
-            '内部支撑组':'0.9' ,},
+            'OA办公组': '', 
+            '人力党建组':'' ,
+            '规划管理组':'' ,
+            '技术研发组':'' ,
+            '能力平台组':'' ,
+            '内部支撑组':'' ,},
           ]
         }
       }
@@ -50,33 +50,52 @@ import axios from 'axios'
     methods:{
       OA(){
       axios.post("/fst_pass",{'groupName':'OA办公组'}).then(res=>{
+           if(res.data.total!==undefined){
+          this.chartData.columns.push('OA办公组')
           this.chartData.rows[0].OA办公组=res.data.total.toFixed(1)
+        }       
           // console.log(res.data.total);
       })
       },
       HR(){
       axios.post("/fst_pass",{'groupName':'人力党建组'}).then(res=>{
+          // this.chartData.rows[0].人力党建组=res.data.total.toFixed(1)
+          if(res.data.total!==undefined){
+          this.chartData.columns.push('人力党建组')
           this.chartData.rows[0].人力党建组=res.data.total.toFixed(1)
+        }
       })
       },
       PP(){
       axios.post("/fst_pass",{'groupName':'规划管理组'}).then(res=>{
+          if(res.data.total!==undefined){
+          this.chartData.columns.push('规划管理组')
           this.chartData.rows[0].规划管理组=res.data.total.toFixed(1)
+        }   
       })
       },
       DEV(){
       axios.post("/fst_pass",{'groupName':'技术研发组'}).then(res=>{
+          if(res.data.total!==undefined){
+          this.chartData.columns.push('技术研发组')
           this.chartData.rows[0].技术研发组=res.data.total.toFixed(1)
+        }   
       })
       },
       SS(){
       axios.post("/fst_pass",{'groupName':'能力平台组'}).then(res=>{
+          if(res.data.total!==undefined){
+          this.chartData.columns.push('能力平台组')
           this.chartData.rows[0].能力平台组=res.data.total.toFixed(1)
+        }   
       })
       },
       IS(){
       axios.post("/fst_pass",{'groupName':'内部支撑组'}).then(res=>{
+          if(res.data.total!==undefined){
+          this.chartData.columns.push('内部支撑组')
           this.chartData.rows[0].内部支撑组=res.data.total.toFixed(1)
+        }   
       })
       },
       async FST_TEST(){
