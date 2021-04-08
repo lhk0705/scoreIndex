@@ -43,10 +43,10 @@ export default {
         // let month
         if(new Date().getMonth()-i>0){
         month=new Date().getMonth()-i
-        time=String(new Date().getFullYear()*10000+(new Date().getMonth()-i)*100+new Date().getDate());
+        time=String(new Date().getFullYear()*10000+(new Date().getMonth()-i)*100+1);
         }else{
           month=12+new Date().getMonth()-i
-          time=String((new Date().getFullYear()-1)*10000+(12+new Date().getMonth()-i)*100+new Date().getDate());
+          time=String((new Date().getFullYear()-1)*10000+(12+new Date().getMonth()-i)*100+1);
         }
         // console.log(time);         
      axios.post("/r_avg_mon",{'time':time}).then(res=>{
@@ -57,7 +57,7 @@ export default {
           rounds=res.data.total
         // }        
         axios.post("/p_avg_mon",{'time':time}).then(res=>{
-        // console.log(res.data.total);
+        console.log(res.data);
         // if(res.data.total===undefined){
         // passrate=0
         // }else{

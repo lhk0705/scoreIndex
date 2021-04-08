@@ -92,7 +92,7 @@
       align="center">
     </el-table-column>
     <el-table-column
-      prop="aYlzxgs"
+      prop="aylzxgs"
       label="质控用例数"
       min-width="100"
       align="center"      
@@ -106,7 +106,7 @@
       >
     </el-table-column>
     <el-table-column
-      prop="aTgs"
+      prop="atgs"
       label="首轮通过数"
       min-width="100"
       align="center"      
@@ -127,28 +127,28 @@
       >
     </el-table-column>
     <el-table-column
-      prop="bTgs"
+      prop="btgs"
       label="二轮通过数"
       min-width="100"
       align="center"      
       >
     </el-table-column>
     <el-table-column
-      prop="bTgl"
+      prop="btgl"
       label="二轮通过率"
       min-width="100"
       align="center"
       >
     </el-table-column>
     <el-table-column
-      prop="cTgs"
+      prop="ctgs"
       label="三轮通过数"
       min-width="100"
       align="center"      
       >
     </el-table-column>
     <el-table-column
-      prop="cTgl"
+      prop="ctgl"
       label="三轮通过率"
       min-width="100"
       align="center"
@@ -286,18 +286,18 @@ export default {
     }, 
     // 获取上一周期数据
     setData(){
-      let startDate,endDate;
+      let beginTime,endTime;
       if(new Date().getDate()>15){ 
         this.label=new Date().getUTCFullYear()+'年'+new Date().getUTCMonth()+'月16日'+'~'+new Date().getFullYear()+'年'+(new Date().getMonth()+1)+'月15日'+'版本数据'      
-         startDate=new Date().getUTCFullYear()+''+new Date().getMonth()+'16',
-        endDate=new Date().getFullYear()+''+(new Date().getMonth()+1)+'15';
+         beginTime=new Date().getUTCFullYear()+'0'+new Date().getMonth()+'16',
+        endTime=new Date().getFullYear()+'0'+(new Date().getMonth()+1)+'15';
       }else{
         this.label=new Date().getUTCFullYear()+'年'+(new Date().getMonth()-1)+'月16日'+'~'+new Date().getFullYear()+'年'+new Date().getMonth()+'月15日'+'版本数据'
-         startDate=new Date().getFullYear()+''+(new Date().getMonth()-1)+'16',
-        endDate=new Date().getFullYear()+''+new Date().getMonth()+'15';
+         beginTime=new Date().getFullYear()+'0'+(new Date().getMonth()-1)+'16',
+        endTime=new Date().getFullYear()+'0'+new Date().getMonth()+'15';
       }
-      console.log(startDate,endDate);
-        axios.post('/lastPeriod',[startDate,endDate])
+      console.log(beginTime,endTime);
+        axios.post('/lastPeriod',{'beginTime':beginTime,'endTime':endTime})
         .then((res)=>{           
             this.$store.commit('setLastPeriod',res.data)
         })
