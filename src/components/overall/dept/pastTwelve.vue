@@ -57,7 +57,7 @@ export default {
           rounds=res.data.total
         // }        
         axios.post("/p_avg_mon",{'time':time}).then(res=>{
-        console.log(res.data);
+        // console.log(res.data);
         // if(res.data.total===undefined){
         // passrate=0
         // }else{

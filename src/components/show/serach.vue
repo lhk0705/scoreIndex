@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+<div class="header">
     <el-row>
       <el-col :span="8" >
         <label>系统名：</label>
@@ -16,19 +16,23 @@
           ></el-option>
         </el-select>
       </el-col>
-      <el-col :span="8">
+      <el-col :span="10">
         <label>版本号：</label>
         <el-input v-model="bbh" size="mini" style="width:200px"></el-input>
       </el-col>
-      <el-col :span="8">
-        <group ref='groupName'></group>
+      <el-col :span="6">
+        <el-button size="mini" type="primary" @click="search(prop)">搜索</el-button>
+        
       </el-col>
     </el-row>
     <br />
     <br />
     <el-row>
-      <el-col :span="10">
-        <div class="time">
+      <el-col :span="8">
+        <group ref='groupName'></group>
+        
+      </el-col>
+      <el-col :span="10"><div class="time">          
           <label>提测时间：</label>
           <el-date-picker
                   value-format="yyyy-MM-dd"
@@ -49,8 +53,7 @@
                 ></el-date-picker>
         </div>
       </el-col>
-      <el-col :span="8">
-        <el-button size="mini" type="primary" @click="search(prop)">搜索</el-button>
+      <el-col :span="6">        
         <el-button size="mini"  @click="cancel">重置</el-button>
       </el-col>
     </el-row>

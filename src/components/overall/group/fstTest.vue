@@ -33,12 +33,7 @@ import axios from 'axios'
             // '能力平台组':ss ,
             // '内部支撑组':is,},  
             { 'group': '' ,
-            'OA办公组': '', 
-            '人力党建组':'' ,
-            '规划管理组':'' ,
-            '技术研发组':'' ,
-            '能力平台组':'' ,
-            '内部支撑组':'' ,},
+            },
           ]
         }
       }
@@ -48,63 +43,32 @@ import axios from 'axios'
       this.extend.title.text=new Date().getMonth()+'月首轮验收通过率'
     },
     methods:{
-      OA(){
-      axios.post("/fst_pass",{'groupName':'OA办公组'}).then(res=>{
-           if(res.data.total!==undefined){
-          this.chartData.columns.push('OA办公组')
-          this.chartData.rows[0].OA办公组=res.data.total.toFixed(1)
-        }       
-          // console.log(res.data.total);
-      })
-      },
-      HR(){
-      axios.post("/fst_pass",{'groupName':'人力党建组'}).then(res=>{
-          // this.chartData.rows[0].人力党建组=res.data.total.toFixed(1)
-          if(res.data.total!==undefined){
-          this.chartData.columns.push('人力党建组')
-          this.chartData.rows[0].人力党建组=res.data.total.toFixed(1)
+      time(){
+        let time;
+        if(new Date().getMonth()===12){       
+        time=String((new Date().getFullYear()-1)*10000+12*100+1);
+        }else{          
+        time=String(new Date().getFullYear()*10000+(new Date().getMonth())*100+1);
         }
-      })
+        return time
       },
-      PP(){
-      axios.post("/fst_pass",{'groupName':'规划管理组'}).then(res=>{
-          if(res.data.total!==undefined){
-          this.chartData.columns.push('规划管理组')
-          this.chartData.rows[0].规划管理组=res.data.total.toFixed(1)
+     // 获取上月首轮通过率
+      getGroup(time,groupName){
+        axios.post("/fst_pass",{'groupName':groupName,'time':time}).then(res=>{
+        if(res.data.total!==undefined){
+        this.chartData.columns.push(groupName)
+        this.chartData.rows[0][groupName]=res.data.total.toFixed(1)
         }   
       })
       },
-      DEV(){
-      axios.post("/fst_pass",{'groupName':'技术研发组'}).then(res=>{
-          if(res.data.total!==undefined){
-          this.chartData.columns.push('技术研发组')
-          this.chartData.rows[0].技术研发组=res.data.total.toFixed(1)
-        }   
-      })
-      },
-      SS(){
-      axios.post("/fst_pass",{'groupName':'能力平台组'}).then(res=>{
-          if(res.data.total!==undefined){
-          this.chartData.columns.push('能力平台组')
-          this.chartData.rows[0].能力平台组=res.data.total.toFixed(1)
-        }   
-      })
-      },
-      IS(){
-      axios.post("/fst_pass",{'groupName':'内部支撑组'}).then(res=>{
-          if(res.data.total!==undefined){
-          this.chartData.columns.push('内部支撑组')
-          this.chartData.rows[0].内部支撑组=res.data.total.toFixed(1)
-        }   
-      })
-      },
-      async FST_TEST(){
-        await this.OA();
-        await this.HR();
-        await this.PP();
-        await this.DEV();
-        await this.SS();
-        this.IS();
+      FST_TEST(){
+        let time=this.time();
+        this.getGroup(time,'OA办公组');
+        this.getGroup(time,'人力党建组');
+        this.getGroup(time,'规划管理组');
+        this.getGroup(time,'技术研发组');
+        this.getGroup(time,'能力平台组');
+        this.getGroup(time,'内部支撑组');
 
       }
     }

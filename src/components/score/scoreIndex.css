@@ -423,12 +423,14 @@ span {
     padding: 10px;
     
 }
-.head_font{
-  float: right;
-  margin-right: 5%;
-  margin-top: -10px;
+/* .head_font{
+  border: 1px solid black;
+  
+  position: absolute;
+  left: 15%;
+  margin-top: 10px;
   font-size:12px
-}
+} */
 /* .button{
   margin-top: 10px;
 

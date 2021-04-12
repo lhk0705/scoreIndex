@@ -2,14 +2,14 @@
 <div >
   <div class="scoreIndex">
     <div class="head">      
-      <div class="bbhao"><label >{{banbenhao}}2021-01-02企业文化管理平台</label></div>
-      <div>
+      <div class="bbhao"><label >{{banbenhao}}</label></div>
+      <!-- <div>
 
       <strong class="head_font">
         版本总得分
         <input type="text" v-model="banbendefen" :disabled="scoreDis"/>
         
-      </strong></div>
+      </strong></div> -->
       
     </div>
     <!-- <div class="bbdf"> -->
@@ -44,11 +44,13 @@
     </div>    
   </div>
   <div class="foot">
-       <!-- <strong class="font">
+       
+       <div class="button">
+         <!--<strong class="head_font">  -->
+         <strong >
         版本总得分
         <input type="text" v-model="banbendefen" :disabled="scoreDis"/>       
-      </strong> -->
-       <div class="button">
+      </strong>
       <el-button size="mini" @click="submit" type="primary" plain>提交</el-button>
       <el-button size="mini" @click="cancel" plain>清空</el-button>
       <el-button size="mini"  @click="goback">返回上一页</el-button>
