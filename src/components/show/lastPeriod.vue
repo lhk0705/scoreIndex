@@ -306,50 +306,91 @@ export default {
             this.$store.commit('setLastPeriod',res.data)
         })
     } ,
+    // 获取月报涉及的时间
     getDate(){
-      let startDate,endDate,year=new Date().getFullYear(),month=new Date().getMonth()+1,date=new Date().getDate();
+      let beforeStart,beforeEnd,startDate,endDate,
+      nextMonth, beforeMonth,  
+      //month为上一个月  
+      year=new Date().getFullYear(),month=new Date().getMonth(),date=new Date().getDate();
       if(date>16){
-      month===1?
-      startDate=(year-1)*10000+12*100+16:startDate=year*10000+(month-1)*100+16;
-      month===1?
-      endDate=year*10000+1*100+15:endDate=year*10000+month*100+15
-      }else if(month===2){
+        if(month===12){
+          startDate=(year-1)*10000+12*100+16;
+          endDate=year*10000+1*100+15;
+        }else{
+          startDate=year*10000+month*100+16;
+          endDate=year*10000+(month+1)*100+15
+        }
+      }else if(month===1){
       startDate=(year-1)*10000+12*100+16
       endDate=year*10000+1*100+15   
-      }else if(month===1){
+      }else if(month===12){
         startDate=(year-1)*10000+11*100+16;
          endDate=(year-1)*10000+12*100+15
       }else{
-        startDate=year*10000+(month-2)*100+16;
-        endDate=year*10000+(month-1)*100+15  
-      }      
-      // console.log([startDate.toString().substring(0,4),endDate.toString().substring(4,6)]);
-      return [startDate,endDate,endDate.toString().substring(0,4),endDate.toString().substring(4,6)]
+        startDate=year*10000+(month-1)*100+16;
+        endDate=year*10000+month*100+15  
+      }
+      // 求下一个月份
+      endDate.toString().substring(4,6)==='12'?nextMonth='01':nextMonth=+endDate.toString().substring(4,6)+1;
+      // 求上一份月报的日期
+      let lastMonth=startDate.toString().substring(4,6),
+      lastYear=startDate.toString().substring(0,4)
+      // console.log(lastMonth);
+      if( lastMonth==='01'){
+        beforeStart=(year-1)*10000+12*100+16;
+        beforeEnd=year*10000+1*100+15;
+      }else if(lastMonth==='12'){
+        beforeStart=(year-1)*10000+(lastMonth-1)*100+16;
+        beforeEnd=(year-1)*10000+lastMonth*100+15;
+      }else{
+        beforeStart=lastYear*10000+(lastMonth-1)*100+16;
+          beforeEnd=lastYear*10000+lastMonth*100+15;
+      }
+      beforeMonth=beforeStart.toString().substring(4,6);
+      // console.log(     
+      // '这个月的月报日期：'+startDate+'~'+endDate+
+      // '月报年月：'+
+      // endDate.toString().substring(0,4),
+      // endDate.toString().substring(4,6),      
+      // '上一个月：'+lastMonth+
+      // '下一个月：'+nextMonth+
+      // '前一个月：'+beforeMonth+
+      // '上个月的月报日期：'+beforeStart+'~'+beforeEnd,      
+      // );
+      return [+startDate,
+      +endDate,
+      +endDate.toString().substring(0,4),
+      +endDate.toString().substring(4,6),      
+      +lastMonth,
+      +nextMonth,
+      +beforeStart,
+      +beforeEnd,      
+      +beforeMonth,      
+      ]
       
       
     },
     // 获取小组数据
-      getGroup(groupName){
-        let groupData=[],date=this.getDate()
-              axios.post('/monthReportGroup',{'startDate':date[0],'endDate':date[1],'groupName':groupName}).then(res=>{
-                  groupData.push(res.data[0])
+    getGroup(startDate,endDate,groupName){
+        let groupData='';
+              axios.post('/monthReportGroup',{'startDate':startDate,'endDate':endDate,'groupName':groupName}).then(res=>{
+                  groupData=res.data[0]
               })
               return groupData
             },
     // 获取月报数据
-    getReportData(){
-      
-      let allData='',date=this.getDate();      
-      console.log(date);
-      axios.post('/monthReportAll',{'startDate':date[0],'endDate':date[1]}).then(res=>{
+    getReportData(startDate,endDate){      
+      let allData='';    
+      // console.log(date);
+      axios.post('/monthReportAll',{'startDate':startDate,'endDate':endDate}).then(res=>{
         allData=res.data[0]       
       })
       return allData
     },
     // 导出为月报
     exportToReport(){
-      
-      // let allData=this.getReportData(),groupData=this.getGroup();
+      let that=this
+      let date=that.getDate()
       JSZipUtils.getBinaryContent("static/部门质量报告模板.docx", function(error, content) {
         // 抛出异常
         if (error) {
@@ -359,20 +400,52 @@ export default {
         let zip = new PizZip(content);
         // 创建并加载docxtemplater实例对象
         let doc = new docxtemplater().loadZip(zip);
+        // 获取月报涉及月份数据
+        let year=date[2],month=date[3];
+        // 获取两份月报数据
+        // let allData=that.getReportData(date[0],date[1])
+        // let lastData=that.getReportData(date[6],date[7])
+        // 获取两次小组数据
+        // groupData=[];
+        // groupData.push(that.getGroup(date[0],date[1],'OA系统组'));
+        // groupData.push(that.getGroup(date[0],date[1],'规划管理组'))
+        // groupData.push(that.getGroup(date[0],date[1],'人力党建组'))
+        // groupData.push(that.getGroup(date[0],date[1],'技术研发组'))
+        // groupData.push(that.getGroup(date[0],date[1],'内部支撑组'))
+        // groupData.push(that.getGroup(date[0],date[1],'能力平台组'))
+        // let lastGroup=[];
+        // lastGroup.push(that.getGroup(date[6],date[7],'OA系统组'));
+        // lastGroup.push(that.getGroup(date[6],date[7],'规划管理组'))
+        // lastGroup.push(that.getGroup(date[6],date[7],'人力党建组'))
+        // lastGroup.push(that.getGroup(date[6],date[7],'技术研发组'))
+        // lastGroup.push(that.getGroup(date[6],date[7],'内部支撑组'))
+        // lastGroup.push(that.getGroup(date[6],date[7],'能力平台组'))
         // 设置模板变量的值
-        let year=this.getDate()[2],month=this.getDate()[3];
-        // docdata.xq_error==='无'?a='符合':a='不符合'
-        // docdata.xq_yanchi==='是'?b='不准时':b='准时'
-        // docdata.yl_error==='无'?c='符合':c='不符合'
-        // docdata.yl_yanchi==='是'?e='不准时':e='准时'
-        // docdata.bg_error==='无'?f='符合':f='不符合'
-        // docdata.bg_yanchi==='是'?h='不准时':h='准时'
         let docxData = {
         year:year,
-        
+        month:month,
+        lastMonth:date[4],
+        beforeMonth:date[8],
+        nextMonth:date[5],
+        _avgRuleRdt:1,
+        _passRateA:1,
+        _passRateB:1,
+        _passRateC:1,
+        _passRateWarn:1,
+        _ruleDocRate:1,
+        _ruleYlRate:1,
+        _ruleBgRate:1,
+        _rdtFullScoreRate:1,        
+        _warnDocRate:1,
+        _warnYlRate:1,        
+        _warnBgRate:1, 
+        _avgRuleRdtGroup:1,    
+        _warnGroupDocRate:1,
+        _warnGroupYlRate:1,
+        _warnGroupBgRate:1,
         };
         doc.setData({
-            ...docxData
+            ...docxData,...allData,
         });
        try {
             // 用模板变量的值替换所有模板变量
@@ -397,16 +470,12 @@ export default {
         // 将目标文件对象保存为目标类型的文件，并命名
         saveAs(out, "部门质量报告"+year+'年'+month+"月.docx");
        })
-       console.log(year,month);
-    },
-    
-    
-    
-    } ,
-      
+      //  console.log(year,month);
+    },    
+    } ,      
     created(){
       this.setData()
-      this.getDate()
+      // this.getDate()
     }
 }
 </script>
