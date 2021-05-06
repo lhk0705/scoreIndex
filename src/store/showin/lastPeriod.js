@@ -14,16 +14,16 @@ const getters={
     getLastPeriod:state=>{
         let result=[]
         for(let item of state.lastPeriod){
-            if(item.bTgs===-999){
-                item.bTgs="无"
-                item.bTgl="无"
-                item.cTgs="无"
-                item.cTgl="无"
+            if(item.btgs===-999){
+                item.btgs="无"
+                item.btgl="无"
+                item.ctgs="无"
+                item.ctgl="无"
             }
                 else{
-                if(item.cTgs==-999){
-                    item.cTgs="无"
-                    item.cTgl="无"
+                if(item.ctgs===-999){
+                    item.ctgs="无"
+                    item.ctgl="无"
                 }
             }
             result.push(item)

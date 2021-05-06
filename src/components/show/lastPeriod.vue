@@ -379,10 +379,11 @@ export default {
               return groupData
             },
     // 获取月报数据
-    getReportData(startDate,endDate){      
+    getReportData(){      
       let allData='';    
       // console.log(date);
-      axios.post('/monthReportAll',{'startDate':startDate,'endDate':endDate}).then(res=>{
+      // axios.post('/monthReportAll',{'startDate':startDate,'endDate':endDate}).then(res=>{
+        axios.post('/monthReportAll',{'month':'20210403'}).then(res=>{
         allData=res.data[0]       
       })
       return allData
@@ -404,6 +405,8 @@ export default {
         let year=date[2],month=date[3];
         // 获取两份月报数据
         // let allData=that.getReportData(date[0],date[1])
+        let allData=that.getReportData()
+        console.log(allData);
         // let lastData=that.getReportData(date[6],date[7])
         // 获取两次小组数据
         // groupData=[];
