@@ -48,7 +48,7 @@ export default {
       } ,
       title:{
             text:'历史版本数',
-            left:'25%',
+            left:'15%',
             top:30     
       },            
         rounds:'',
@@ -75,13 +75,13 @@ export default {
   },
   created(){
       this.getGAll(this.prop) 
-      this.title.text=this.prop+'历史版本数'   
+      this.title.text='历史版本数'   
   },
   watch:{
     prop:{
       handler(newV,oldV){        
         this.getGAll(newV)
-        this.title.text=newV+'历史版本数'
+        this.title.text='历史版本数'
       }
     }
   },

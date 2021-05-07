@@ -51,7 +51,7 @@ export default {
       } ,
       title:{
             text:'季度版本数',
-            left:'15%',
+            // left:'15%',
             top:30     
       },            
         rounds:'',
@@ -83,14 +83,15 @@ export default {
         this.season=new Date().getFullYear()+'年'+(Math.ceil((new Date().getMonth()+1)/3)-1)+'季度'
       }
       this.getGSea(this.prop) 
-      this.title.text=this.prop+this.season+'版本数' 
+      this.title.text=this.season+'版本数' 
       
   },
     watch:{
     prop:{
       handler(newV,oldV){        
         this.getGSea(newV)
-        this.title.text=newV+this.season+'版本数' 
+        console.log(newV);
+        this.title.text=this.season+'版本数' 
       }
     }
   },

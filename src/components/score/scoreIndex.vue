@@ -2,30 +2,12 @@
 <div >
   <div class="scoreIndex">
     <div class="head">      
-      <div class="bbhao"><label >{{banbenhao}}</label></div>
-      <!-- <div>
-
-      <strong class="head_font">
-        版本总得分
-        <input type="text" v-model="banbendefen" :disabled="scoreDis"/>
-        
-      </strong></div> -->
-      
+      <div class="bbhao"><label >{{banbenhao}}</label></div>      
     </div>
-    <!-- <div class="bbdf"> -->
-      <!-- <strong>
-        总得分:
-        <input type="text" v-model="banbendefen" :disabled="scoreDis"/>
-      
-      </strong> -->
-    <!-- </div> -->
-    <!-- 版本信息-->
     <br>
     <div>      
-      <!-- <vision-head ref="visionhead" @bbhchange="bbh_change"></vision-head> -->
       <vision-head ref="visionhead" ></vision-head>
       <br />
-
     </div>
     <!-- TAB页-->
     <div >
@@ -656,7 +638,9 @@ export default {
     },
     // 导出为阶段通报
     period(){
+      
       let data=this.getAllData()
+      console.log(data.xq_time);
       let randomtestData=this.$refs.randomtest,testdata=this.$refs.test;
       JSZipUtils.getBinaryContent("static/质控测试阶段通报模板-导出.docx", function(error, content) {
         // 抛出异常

@@ -162,6 +162,9 @@ export default {
       fstDis:false,
     };
   },
+  mounted(){
+    this.$refs.groupName.groupName=''
+  },
   computed:{
     sysperson(){
       return this.$store.getters.getSysPerson

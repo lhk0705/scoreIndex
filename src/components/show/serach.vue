@@ -81,6 +81,9 @@ export default {
       
     }
   },
+  mounted(){
+    this.$refs.groupName.groupName=''
+  },
   computed: {
     sysoptions() {
       return this.$store.getters.getSys;

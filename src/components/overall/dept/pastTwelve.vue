@@ -1,6 +1,6 @@
 <template>
   <div ><strong>
-    <h2>过去12个月部门整体质量变化</h2></strong>
+    <h2>部门整体质量走势</h2></strong>
     <ve-line
     :data="mychart"
     :extend="extend"

@@ -16,7 +16,8 @@ import axios from 'axios'
         },
         title:{
           text:"",
-          left:"center"
+          left:"center",
+          top:30
         },
         legend:{
           top:"40px"

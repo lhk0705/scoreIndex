@@ -1,34 +1,26 @@
 <template>
   <div class="overall">
-    <div class="row">
-      <el-row>
-        <!-- <label>组别</label> -->
-        <el-select v-model="zb" placeholder="请选择" size="mini" style="width:200px">
-          <el-option
-            v-for="item in group"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          ></el-option>
-        </el-select>
-        <el-button @click="change" size="mini">{{value}}</el-button>
+    <!-- 方案一 -->
+    <!-- <div class="row">
+      <el-row >
+        <el-col ><group @groupChange='groupChange'></group></el-col>
+        <el-col ><el-button @click="change" size="mini">{{value}}</el-button></el-col>           
       </el-row>
       <el-row class="row1">
         <el-col :span="5">
-          <groupmon :prop="zb"></groupmon>
+          <groupmon :prop="groupName"></groupmon>
         </el-col>
         <el-col :span="5"> 
-          <groupseason :prop="zb"></groupseason>
+          <groupseason :prop="groupName"></groupseason>
         </el-col >
         <el-col  :span="5" v-if="show=='group'">
-          <groupyear :prop="zb"></groupyear>
+          <groupyear :prop="groupName"></groupyear>
         </el-col>
         <el-col :span="5" v-else>
           <deptmon ref="deptmon"></deptmon>
         </el-col>
         <el-col :span="5"  v-if="show=='group'">
-          <groupall :prop="zb"></groupall>
-          
+          <groupall :prop="groupName"></groupall>         
         </el-col>
         <el-col :span="5" v-else>
           <deptseason></deptseason>
@@ -46,14 +38,57 @@
       </el-col> 
       <el-col :span="11">
         <pastTwelve></pastTwelve>
+      </el-col>     
+    </el-row> -->
+    <!-- 方案二 -->
+    <el-tabs  class="tab" v-model="activeName" type="card" >
+      <el-tab-pane label="部门" name="first">
+        <el-row class="row1">
+          <el-col :span="5" >
+          <deptmon ref="deptmon"></deptmon>
+        </el-col>
+        <el-col :span="5">
+          <deptseason></deptseason>
+        </el-col>
+         <el-col :span="5">
+        <randomTest></randomTest>
       </el-col>
-     
-      
-    </el-row>
+      <el-col :span="5">
+        <fstTest></fstTest>
+      </el-col> 
+        </el-row>
+        <el-row class="row">
+          <el-col :span="20">
+        <pastTwelve></pastTwelve>
+      </el-col>
+        </el-row>
+      </el-tab-pane>
+      <el-tab-pane label="小组" name="second">
+          <group @groupChange='groupChange'></group>
+          <el-row class="row1">
+          <el-col >
+          <groupmon :prop="groupName"></groupmon>
+        </el-col>
+        <el-col > 
+          <groupseason :prop="groupName"></groupseason>
+        </el-col >
+        <el-col   >
+          <groupyear :prop="groupName"></groupyear>
+        </el-col>
+        <el-col   >
+          <groupall :prop="groupName"></groupall>         
+        </el-col>
+          </el-row>
+      </el-tab-pane>
+      <el-tab-pane label="系统" name="third">
+
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
 <script>
+import group from "../common/formComponents/group";
 import deptmon from "./dept/month";
 import deptseason from "./dept/season";
 import pastTwelve from "./dept/pastTwelve";
@@ -68,9 +103,11 @@ export default {
  
   data() {
     return {
-      zb: "OA办公组",
+      // zb: "OA办公组",
+      groupName:'OA办公组',
       show:'group',
-      value:'部门质量情况'
+      value:'部门质量情况',
+      activeName: "first",
     };
   },
   components: {
@@ -82,12 +119,8 @@ export default {
     groupseason,
     groupyear,
     fstTest,
-    randomTest
-  },
-  computed: {
-    group() {
-      return this.$store.getters.getGroup;
-    },
+    randomTest,
+    group
   },
   methods:{
     change(){
@@ -99,17 +132,11 @@ export default {
         this.show='group'
       this.value='部门质量情况'
       }
+    },
+    groupChange(newV){
+      this.groupName=newV
     }
   },
-  created(){
-    
-    // this.$nextTick(() => {
-    //   // 解决v-charts不显示问题
-    //   // 调用以下的方法实现环图重新渲染
-    //   this.$refs.deptmon.resize()
-    //   // this.$refs.chart_two.echarts.resize()
-    // })
-  }
   
   
 };
@@ -118,19 +145,22 @@ export default {
 <style scoped>
 div {
   margin: 10px 2%;
-  /* background-color: rgb(248, 248, 248); */
 }
 
-.row {
+.row,.row1 {
+  width: 100%;
   border: 1px solid black;
-  text-align: left;
+  /* text-align: left; */
 }
 *{
-  font-size: 12px;
-  
+  font-size: 12px; 
 }
 .row1>div{
   /* border: 1px solid black; */
   width: 20%;
+}
+.tab{
+  width: 85%;
+  margin: auto;
 }
 </style>

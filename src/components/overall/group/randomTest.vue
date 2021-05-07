@@ -16,7 +16,8 @@ import axios from 'axios'
         },
         title:{
           text:"本月抽测通过率",
-          left:"center"
+          left:"center",
+          top:30
         },
         legend:{
           top:"40px"

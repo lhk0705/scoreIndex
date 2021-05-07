@@ -17,13 +17,18 @@ import bus from '../bus'
 export default {
     data(){
         return{
-            groupName:'',
+            groupName:'OA办公组',
             group:[]
         }
     },
     mounted(){
       this.group = this.$store.getters.getGroup;
     },
+    watch:{
+      groupName(newV,oldV){
+        this.$emit('groupChange',newV);       
+      }
+    }
     
 }
 </script>

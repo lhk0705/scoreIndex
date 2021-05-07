@@ -51,7 +51,7 @@ export default {
       } ,
       title:{
             text:'版本数',
-            left:'25%',
+            left:'15%',
             top:30     
       },            
         rounds:'',
@@ -79,14 +79,14 @@ export default {
   
   created(){
     this.getGMon(this.prop) 
-    this.title.text=this.prop+this.month+'月版本数'   
+    this.title.text=this.month+'月版本数'   
       
   },
   watch:{
     prop:{
       handler(newV,oldV){        
-        this.getGMon(newV)
-        this.title.text=newV+this.month+'月版本数'
+        this.getGMon(newV);
+        this.title.text=this.month+'月版本数'
       }
     }
   },
