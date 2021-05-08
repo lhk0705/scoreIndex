@@ -559,7 +559,7 @@ export default {
         xq_tijiao: "是",
         xq_yanchi: "否",
         xq_geshi: "word",
-        xq_time: '',
+        xq_time: this.$store.getters.getXqTime,
         xq_laiyuan: "是",
         xq_error: "",
         yl_tijiao: "是",
@@ -583,17 +583,14 @@ export default {
         bg_jl: 0,
         bg_fw: 0,
         bg_qk: 0,
-        bg_error: "",
-      
+        bg_error: "",      
     };
   },
-  mounted(){
-    this.xq_time=this.$refs.xqtime.date
-  },
-  methods: {
-    handleChange() {},
-  },
   computed:{
+    // xq_time(){
+    // this.$store.commit('setXqTime','2')
+    //   return this.$store.getters.getXqTime
+    // }, 
     sysperson(){
       return this.$store.getters.getSysPerson
     },

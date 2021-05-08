@@ -638,9 +638,8 @@ export default {
     },
     // 导出为阶段通报
     period(){
-      
       let data=this.getAllData()
-      console.log(data.xq_time);
+      console.log(data.xq_time);      
       let randomtestData=this.$refs.randomtest,testdata=this.$refs.test;
       JSZipUtils.getBinaryContent("static/质控测试阶段通报模板-导出.docx", function(error, content) {
         // 抛出异常

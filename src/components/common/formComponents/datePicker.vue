@@ -6,6 +6,7 @@
 </template>
 
 <script>
+
 export default {
 data(){
     return{
@@ -16,7 +17,13 @@ data(){
         },
       },
     }
-}
+},
+  watch:{
+    date(newV,oldV){
+      this.$
+    }
+  }
+
 }
 </script>
 
