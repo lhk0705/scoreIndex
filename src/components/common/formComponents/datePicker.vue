@@ -20,7 +20,7 @@ data(){
 },
   watch:{
     date(newV,oldV){
-      this.$
+      this.$store.commit('setXqTime',newV)
     }
   }
 

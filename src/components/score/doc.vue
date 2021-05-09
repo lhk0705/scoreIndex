@@ -99,15 +99,15 @@
                 <label for>
                   <span>*</span>提交时间：
                 </label>
-                <!-- <el-date-picker
+                <el-date-picker
                   size="mini"
                   value-format="yyyy-MM-dd"
                   v-model="xq_time"
                   type="date"
                   placeholder="请选择日期"
                   :disabled="fstDis"
-                ></el-date-picker> -->
-                <date-picker ref='xqtime' :disabled="fstDis"></date-picker>
+                ></el-date-picker>
+                <!-- <date-picker ref='xqtime' :disabled="fstDis"></date-picker> -->
               </div>
             </el-row>
             <el-row>
@@ -266,15 +266,15 @@
                 <label for>
                   <span>*</span>提交时间：
                 </label>
-                <!-- <el-date-picker
+                <el-date-picker
                   size="mini"
                   value-format="yyyy-MM-dd"
                   v-model="yl_time"
                   type="date"
                   placeholder="请选择日期"
                   :disabled="fstDis"
-                ></el-date-picker> -->
-                <date-picker ref="yltime" :disabled="fstDis"></date-picker>
+                ></el-date-picker>
+                <!-- <date-picker ref="yltime" :disabled="fstDis"></date-picker> -->
               </div>
             </el-row>
             <el-row>
@@ -471,15 +471,15 @@
                 <label for>
                   <span>*</span>提交时间：
                 </label>
-                <!-- <el-date-picker
+                <el-date-picker
                   size="mini"
                   value-format="yyyy-MM-dd"
                   v-model="bg_time"
                   type="date"
                   placeholder="请选择日期"
                   :disabled="fstDis"
-                ></el-date-picker> -->
-                <date-picker ref='bgtime' :disabled="fstDis"></date-picker>
+                ></el-date-picker>
+                <!-- <date-picker ref='bgtime' :disabled="fstDis"></date-picker> -->
               </div>
             </el-row>
             <el-row>
@@ -538,11 +538,11 @@
 </template>
 
 <script>
-import datePicker from "../common/formComponents/datePicker";
+// import datePicker from "../common/formComponents/datePicker";
 export default {
-  components:{
-    datePicker
-  },
+  // components:{
+  //   datePicker
+  // },
   data() {
     return {
         scoreDis:true,
@@ -559,7 +559,7 @@ export default {
         xq_tijiao: "是",
         xq_yanchi: "否",
         xq_geshi: "word",
-        xq_time: this.$store.getters.getXqTime,
+        xq_time: '',
         xq_laiyuan: "是",
         xq_error: "",
         yl_tijiao: "是",
