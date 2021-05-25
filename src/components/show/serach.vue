@@ -29,7 +29,7 @@
     <br />
     <el-row>
       <el-col :span="8">
-        <group ref='groupName'></group>
+        <label>组别：</label><group ref='groupName'></group>
         
       </el-col>
       <el-col :span="10"><div class="time">          

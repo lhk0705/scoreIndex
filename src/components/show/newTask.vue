@@ -9,7 +9,7 @@
         <el-col :span="10">
           <el-row>
             <div class="zubie">
-              <group ref='groupName'></group>
+              <label>组别：</label><group ref='groupName'></group>
             </div>
           </el-row>
           <el-row>

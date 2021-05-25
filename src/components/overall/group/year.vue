@@ -50,7 +50,7 @@ export default {
       } ,
       title:{
             text:'年度版本数',
-            // left:'15%',
+            left:'30%',
             top:30     
       },            
         rounds:'',

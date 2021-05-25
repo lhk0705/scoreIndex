@@ -1,10 +1,10 @@
 <template>
   <div class="overall">
     <!-- 方案一 -->
-    <!-- <div class="row">
+    <div class="row">
       <el-row >
-        <el-col ><group @groupChange='groupChange'></group></el-col>
-        <el-col ><el-button @click="change" size="mini">{{value}}</el-button></el-col>           
+        <label>组别:</label><group @groupChange='groupChange'></group>
+       <el-button @click="change" size="mini">{{value}}</el-button>      
       </el-row>
       <el-row class="row1">
         <el-col :span="5">
@@ -39,24 +39,25 @@
       <el-col :span="11">
         <pastTwelve></pastTwelve>
       </el-col>     
-    </el-row> -->
+    </el-row>
     <!-- 方案二 -->
-    <el-tabs  class="tab" v-model="activeName" type="card" >
+    <!-- <el-tabs  class="tab" v-model="activeName" type="card" >
       <el-tab-pane label="部门" name="first">
         <el-row class="row1">
-          <el-col :span="5" >
-          <deptmon ref="deptmon"></deptmon>
+          <el-col >
+          <groupmon :prop="groupName"></groupmon>
         </el-col>
-        <el-col :span="5">
-          <deptseason></deptseason>
+        <el-col > 
+          <groupseason :prop="groupName"></groupseason>
+        </el-col >
+        <el-col  >
+          <groupyear :prop="groupName"></groupyear>
         </el-col>
-         <el-col :span="5">
-        <randomTest></randomTest>
-      </el-col>
-      <el-col :span="5">
-        <fstTest></fstTest>
-      </el-col> 
-        </el-row>
+        <el-col   >
+          <groupall :prop="groupName"></groupall>         
+        </el-col>
+          </el-row>
+        
         <el-row class="row">
           <el-col :span="20">
         <pastTwelve></pastTwelve>
@@ -66,24 +67,24 @@
       <el-tab-pane label="小组" name="second">
           <group @groupChange='groupChange'></group>
           <el-row class="row1">
-          <el-col >
-          <groupmon :prop="groupName"></groupmon>
+          <el-col :span="4" >
+          <deptmon ref="deptmon"></deptmon>
         </el-col>
-        <el-col > 
-          <groupseason :prop="groupName"></groupseason>
-        </el-col >
-        <el-col   >
-          <groupyear :prop="groupName"></groupyear>
+        <el-col :span="4">
+          <deptseason></deptseason>
         </el-col>
-        <el-col   >
-          <groupall :prop="groupName"></groupall>         
-        </el-col>
-          </el-row>
+         <el-col :span="4">
+        <randomTest></randomTest>
+      </el-col>
+      <el-col :span="4">
+        <fstTest></fstTest>
+      </el-col> 
+        </el-row>
       </el-tab-pane>
       <el-tab-pane label="系统" name="third">
 
       </el-tab-pane>
-    </el-tabs>
+    </el-tabs> -->
   </div>
 </template>
 
@@ -147,9 +148,10 @@ div {
   margin: 10px 2%;
 }
 
-.row,.row1 {
-  width: 100%;
+.row{
+  width: 90%;
   border: 1px solid black;
+  margin: auto;
   /* text-align: left; */
 }
 *{
@@ -159,8 +161,9 @@ div {
   /* border: 1px solid black; */
   width: 20%;
 }
-.tab{
+/* .tab{
   width: 85%;
   margin: auto;
-}
+} */
+
 </style>

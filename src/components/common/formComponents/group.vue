@@ -1,6 +1,6 @@
 <template>
-  <div>
-      <label>组别：</label>
+
+      
       <el-select v-model="groupName" placeholder="请选择" size="mini" style="width:200px">
           <el-option
             v-for="item in group"
@@ -9,7 +9,7 @@
             :value="item.value"
           ></el-option>
         </el-select>
-  </div>
+
 </template>
 
 <script>

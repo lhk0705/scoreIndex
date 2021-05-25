@@ -51,7 +51,7 @@ export default {
       } ,
       title:{
             text:'季度版本数',
-            // left:'15%',
+            left:'30%',
             top:30     
       },            
         rounds:'',
@@ -159,4 +159,5 @@ export default {
 p{
   text-align: center;
 }
+
 </style>

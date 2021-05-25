@@ -48,7 +48,7 @@ export default {
       } ,
       title:{
             text:'历史版本数',
-            left:'15%',
+            left:'35%',
             top:30     
       },            
         rounds:'',
