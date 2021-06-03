@@ -86,8 +86,8 @@ export default {
   },
   watch:{
     prop:{
-      handler(newV,oldV){        
-        this.getGMon(newV);
+      async handler(newV,oldV){        
+        await this.getGMon(newV);
         if(this.$store.getters.getGMon===''){
           this.show=false
         }

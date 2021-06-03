@@ -586,6 +586,35 @@ export default {
         bg_error: "",      
     };
   },
+  watch:{
+    xq_tijiao(newV,oldV){
+      if(newV==='否'){
+        this.state_xq_tijiaoren='无';
+        this.xq_time='0000-00-00';
+      }else{
+        this.state_xq_tijiaoren='';
+        this.xq_time='';
+      }
+    },
+    yl_tijiao(newV,oldV){
+      if(newV==='否'){
+        this.state_yl_tijiaoren='无';
+        this.yl_time='0000-00-00';
+      }else{
+        this.state_yl_tijiaoren='';
+        this.yl_time='';
+      }
+    },
+    bg_tijiao(newV,oldV){
+      if(newV==='否'){
+        this.state_bg_tijiaoren='无';
+        this.bg_time='0000-00-00';
+      }else{
+        this.state_bg_tijiaoren='';
+        this.bg_time='';
+      }
+    },
+  },
   computed:{
     // xq_time(){
     // this.$store.commit('setXqTime','2')

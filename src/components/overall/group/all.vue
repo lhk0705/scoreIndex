@@ -80,12 +80,12 @@ export default {
   },
   watch:{
     prop:{
-      handler(newV,oldV){        
-        this.getGAll(newV)
+      async handler(newV,oldV){        
+        await this.getGAll(newV)
         if(this.$store.getters.getGAll===''){
           this.show=false
         }
-        this.title.text=newV+'历史版本数'
+        this.title.text='历史版本数'
       }
     }
   },

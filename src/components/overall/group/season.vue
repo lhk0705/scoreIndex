@@ -90,8 +90,8 @@ export default {
   },
     watch:{
     prop:{
-      handler(newV,oldV){        
-        this.getGSea(newV)
+      async handler(newV,oldV){        
+        await this.getGSea(newV)
         if(this.$store.getters.getGSea===''){
           this.show=false
         }

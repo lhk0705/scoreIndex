@@ -84,8 +84,8 @@ export default {
   },
   watch:{
     prop:{
-      handler(newV,oldV){        
-        this.getGYear(newV)
+      async handler(newV,oldV){        
+        await this.getGYear(newV)
         if(this.$store.getters.getGYear===''){
           this.show=false
           
