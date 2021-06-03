@@ -85,9 +85,10 @@
       min-width="100"
       align="center">
     </el-table-column> 
-     <el-table-column label="操作" align="center" width="90">
-    <template slot-scope="scope">       
-        <el-button @click="getScore(scope.$index,vers)">编辑</el-button>        
+     <el-table-column label="操作" align="center" width="150">
+    <template slot-scope="scope" >       
+        <el-button @click="getScore(scope.$index,vers)" type="primary" size="mini">编辑</el-button>  
+        <el-button @click="delScore(scope.$index,vers)" size="mini">删除</el-button>          
     </template>
     </el-table-column>
     
@@ -124,6 +125,15 @@ export default {
             ticeshijian:b[a].ticeshijian,
             xitongming:b[a].xitongming
         }})
+    },
+
+    delScore(a,b){
+        // console.log(b[a]);
+        if(confirm("确定删除"+b[a].banbenhao+'的数据？')){
+           axios.post('/delScore',{"banbenhao":b[a].banbenhao}).then(this.$router.go(0))
+          // this.$router.go(0)
+        }
+       
     },
     exportToExcel(){
       require.ensure([], () => {

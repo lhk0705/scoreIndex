@@ -290,16 +290,18 @@ export default {
     }, 
     // 获取上一周期数据
     setData(){
-      let beginTime,endTime;
-      if(new Date().getDate()>15){ 
-        this.label=new Date().getUTCFullYear()+'年'+new Date().getUTCMonth()+'月16日'+'~'+new Date().getFullYear()+'年'+(new Date().getMonth()+1)+'月15日'+'版本数据'      
-         beginTime=new Date().getUTCFullYear()+'0'+new Date().getMonth()+'16',
-        endTime=new Date().getFullYear()+'0'+(new Date().getMonth()+1)+'15';
-      }else{
-        this.label=new Date().getUTCFullYear()+'年'+(new Date().getMonth()-1)+'月16日'+'~'+new Date().getFullYear()+'年'+new Date().getMonth()+'月15日'+'版本数据'
-         beginTime=new Date().getFullYear()+'0'+(new Date().getMonth()-1)+'16',
-        endTime=new Date().getFullYear()+'0'+new Date().getMonth()+'15';
-      }
+      let beginTime=this.getDate()[0],endTime=this.getDate()[1];
+      // if(new Date().getDate()>15){ 
+      //   this.label=new Date().getUTCFullYear()+'年'+new Date().getUTCMonth()+'月16日'+'~'+new Date().getFullYear()+'年'+(new Date().getMonth()+1)+'月15日'+'版本数据'      
+      //    beginTime=new Date().getUTCFullYear()+'0'+new Date().getMonth()+'16',
+      //   endTime=new Date().getFullYear()+'0'+(new Date().getMonth()+1)+'15';
+      // }else{
+      //   this.label=new Date().getUTCFullYear()+'年'+(new Date().getMonth()-1)+'月16日'+'~'+new Date().getFullYear()+'年'+new Date().getMonth()+'月15日'+'版本数据'
+      //    beginTime=new Date().getFullYear()+'0'+(new Date().getMonth()-1)+'16',
+      //   endTime=new Date().getFullYear()+'0'+new Date().getMonth()+'15';       
+      // }
+      this.label=beginTime.toString().substring(0,4)+'年'+(+beginTime.toString().substring(4,6))+'月1日'+
+      '~'+endTime.toString().substring(0,4)+'年'+(+endTime.toString().substring(4,6))+'月1日'+'版本数据'
       // console.log(beginTime,endTime);
         axios.post('/lastPeriod',{'beginTime':beginTime,'endTime':endTime})
         .then((res)=>{           
@@ -309,49 +311,69 @@ export default {
     // 获取月报涉及的时间
     getDate(){
       let beforeStart,beforeEnd,startDate,endDate,
-      nextMonth, beforeMonth,  
+      nextMonth, beforeMonth, 
       //month为上一个月  
-      year=new Date().getFullYear(),month=new Date().getMonth(),date=new Date().getDate();
-      if(date>16){
-        if(month===12){
-          startDate=(year-1)*10000+12*100+16;
-          endDate=year*10000+1*100+15;
-        }else{
-          startDate=year*10000+month*100+16;
-          endDate=year*10000+(month+1)*100+15
-        }
-      }else if(month===1){
-      startDate=(year-1)*10000+12*100+16
-      endDate=year*10000+1*100+15   
-      }else if(month===12){
-        startDate=(year-1)*10000+11*100+16;
-         endDate=(year-1)*10000+12*100+15
-      }else{
-        startDate=year*10000+(month-1)*100+16;
-        endDate=year*10000+month*100+15  
+      year=new Date().getFullYear(),month=new Date().getMonth(),lastMonth;
+      if(month===12){
+        startDate=year*10000+12*100+1;
+        endDate=(year+1)*10000+1*100+1;
+        beforeStart=year*10000+11*100+1;
       }
-      // 求下一个月份
-      endDate.toString().substring(4,6)==='12'?nextMonth='01':nextMonth=+endDate.toString().substring(4,6)+1;
-      // 求上一份月报的日期
-      let lastMonth=startDate.toString().substring(4,6),
-      lastYear=startDate.toString().substring(0,4)
-      // console.log(lastMonth);
-      if( lastMonth==='01'){
-        beforeStart=(year-1)*10000+12*100+16;
-        beforeEnd=year*10000+1*100+15;
-      }else if(lastMonth==='12'){
-        beforeStart=(year-1)*10000+(lastMonth-1)*100+16;
-        beforeEnd=(year-1)*10000+lastMonth*100+15;
+      else if(month===1){
+        startDate=year*10000+1*100+1;
+        endDate=year*10000+2*100+1;
+        beforeStart=(year-1)*10000+12*100+1;
       }else{
-        beforeStart=lastYear*10000+(lastMonth-1)*100+16;
-          beforeEnd=lastYear*10000+lastMonth*100+15;
+        startDate=year*10000+month*100+1;
+        endDate=year*10000+(month+1)*100+1;
+        beforeStart=year*10000+(month-1)*100+1;
       }
-      beforeMonth=beforeStart.toString().substring(4,6);
+      beforeEnd=startDate
+      {// 
+      // if(date>16){
+      //   if(month===12){
+      //     startDate=(year-1)*10000+12*100+16;
+      //     endDate=year*10000+1*100+15;
+      //   }else{
+      //     startDate=year*10000+month*100+16;
+      //     endDate=year*10000+(month+1)*100+15
+      //   }
+      // }else if(month===1){
+      // startDate=(year-1)*10000+12*100+16
+      // endDate=year*10000+1*100+15   
+      // }else if(month===12){
+      //   startDate=(year-1)*10000+11*100+16;
+      //    endDate=(year-1)*10000+12*100+15
+      // }else{
+      //   startDate=year*10000+(month-1)*100+16;
+      //   endDate=year*10000+month*100+15  
+      // }
+      // // 求下一个月份
+      // endDate.toString().substring(4,6)==='12'?nextMonth='01':nextMonth=+endDate.toString().substring(4,6)+1;
+      // // 求上一份月报的日期
+      // let lastMonth=startDate.toString().substring(4,6),
+      // lastYear=startDate.toString().substring(0,4)
+      // // console.log(lastMonth);
+      // if( lastMonth==='01'){
+      //   beforeStart=(year-1)*10000+12*100+16;
+      //   beforeEnd=year*10000+1*100+15;
+      // }else if(lastMonth==='12'){
+      //   beforeStart=(year-1)*10000+(lastMonth-1)*100+16;
+      //   beforeEnd=(year-1)*10000+lastMonth*100+15;
+      // }else{
+      //   beforeStart=lastYear*10000+(lastMonth-1)*100+16;
+      //     beforeEnd=lastYear*10000+lastMonth*100+15;
+      // }
+      // beforeMonth=+beforeStart.toString().substring(4,6);
+      }
+      lastMonth=+beforeStart.toString().substring(4,6);
+      lastMonth==='01'?beforeMonth='12':beforeMonth=+lastMonth-1;
+      nextMonth=+endDate.toString().substring(4,6);      
       // console.log(     
       // '这个月的月报日期：'+startDate+'~'+endDate+
       // '月报年月：'+
-      // endDate.toString().substring(0,4),
-      // endDate.toString().substring(4,6),      
+      // startDate.toString().substring(0,4),
+      // startDate.toString().substring(4,6),      
       // '上一个月：'+lastMonth+
       // '下一个月：'+nextMonth+
       // '前一个月：'+beforeMonth+
@@ -359,19 +381,17 @@ export default {
       // );
       return [+startDate,
       +endDate,
-      +endDate.toString().substring(0,4),
-      +endDate.toString().substring(4,6),      
+      +startDate.toString().substring(0,4),
+      +startDate.toString().substring(4,6),      
       +lastMonth,
       +nextMonth,
       +beforeStart,
       +beforeEnd,      
       +beforeMonth,      
-      ]
-      
-      
+      ]     
     },
     // 获取小组数据
-    getGroup(startDate,endDate,groupName){
+    getGroup(startDate,endDate,groupName){     
         let groupData='';
               axios.post('/monthReportGroup',{'startDate':startDate,'endDate':endDate,'groupName':groupName}).then(res=>{
                   groupData=res.data[0]
@@ -382,8 +402,8 @@ export default {
     getReportData(){      
       let allData='';    
       // console.log(date);
-      // axios.post('/monthReportAll',{'startDate':startDate,'endDate':endDate}).then(res=>{
-        axios.post('/monthReportAll',{'month':'20210403'}).then(res=>{
+      axios.post('/monthReportAll',{'startDate':startDate,'endDate':endDate}).then(res=>{
+        // axios.post('/monthReportAll',{'month':'20210403'}).then(res=>{
         allData=res.data[0]       
       })
       return allData
@@ -391,7 +411,8 @@ export default {
     // 导出为月报
     exportToReport(){
       let that=this
-      let date=that.getDate()
+      // let date=that.getDate()
+      that.getDate()
       JSZipUtils.getBinaryContent("static/部门质量报告模板.docx", function(error, content) {
         // 抛出异常
         if (error) {
@@ -425,27 +446,27 @@ export default {
         // lastGroup.push(that.getGroup(date[6],date[7],'能力平台组'))
         // 设置模板变量的值
         let docxData = {
-        year:year,
-        month:month,
-        lastMonth:date[4],
-        beforeMonth:date[8],
-        nextMonth:date[5],
-        _avgRuleRdt:1,
-        _passRateA:1,
-        _passRateB:1,
-        _passRateC:1,
-        _passRateWarn:1,
-        _ruleDocRate:1,
-        _ruleYlRate:1,
-        _ruleBgRate:1,
-        _rdtFullScoreRate:1,        
-        _warnDocRate:1,
-        _warnYlRate:1,        
-        _warnBgRate:1, 
-        _avgRuleRdtGroup:1,    
-        _warnGroupDocRate:1,
-        _warnGroupYlRate:1,
-        _warnGroupBgRate:1,
+        // year:year,
+        // month:month,
+        // lastMonth:date[4],
+        // beforeMonth:date[8],
+        // nextMonth:date[5],
+        // _avgRuleRdt:1,
+        // _passRateA:1,
+        // _passRateB:1,
+        // _passRateC:1,
+        // _passRateWarn:1,
+        // _ruleDocRate:1,
+        // _ruleYlRate:1,
+        // _ruleBgRate:1,
+        // _rdtFullScoreRate:1,        
+        // _warnDocRate:1,
+        // _warnYlRate:1,        
+        // _warnBgRate:1, 
+        // _avgRuleRdtGroup:1,    
+        // _warnGroupDocRate:1,
+        // _warnGroupYlRate:1,
+        // _warnGroupBgRate:1,
         };
         doc.setData({
             ...docxData,...allData,
@@ -473,7 +494,7 @@ export default {
         // 将目标文件对象保存为目标类型的文件，并命名
         saveAs(out, "部门质量报告"+year+'年'+month+"月.docx");
        })
-      //  console.log(year,month);
+       console.log(year,month);
     },    
     } ,      
     created(){

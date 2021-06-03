@@ -1,5 +1,6 @@
 <template>
-  <div v-if="this.$store.getters.getGSea!==0">
+
+  <div v-if="show">
     <ve-ring
       :data="mychart"
       :settings="chartSettings"
@@ -73,7 +74,8 @@ export default {
           },
         columns: ["state", "total"],
         rows: [],
-      },      
+      }, 
+      show:true,     
     };
   },
   created(){
@@ -90,13 +92,17 @@ export default {
     prop:{
       handler(newV,oldV){        
         this.getGSea(newV)
-        console.log(newV);
+        if(this.$store.getters.getGSea===''){
+          this.show=false
+        }
+        // console.log(newV);
         this.title.text=this.season+'版本数' 
       }
     }
   },
   methods:{
     SET_GROUP_SEA(newV){
+      this.$store.commit('setGSea','')
       axios.post('/v_group_sea',{"groupName":newV})
       .then((res)=>{         
         this.$store.commit('setGSea',res.data.total)
@@ -107,6 +113,7 @@ export default {
       })
     },
     SET_GROUP_fvSEA(newV){
+      this.$store.commit('setGFvSea','')
       axios.post('/fv_group_sea',{"groupName":newV})
       .then((res)=>{         
         this.$store.commit('setGFvSea',res.data.total)
@@ -115,6 +122,7 @@ export default {
       })
     },
     SET_GROUP_uvSEA(newV){
+      this.$store.commit('setGUvSea','')
       axios.post('/uv_group_sea',{"groupName":newV})
       .then((res)=>{         
         this.$store.commit('setGUvSea',res.data.total)

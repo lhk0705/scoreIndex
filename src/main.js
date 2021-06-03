@@ -9,7 +9,7 @@ import axios from 'axios';
 
 // dev:
 axios.defaults.baseURL='http://192.168.128.136:8088'
-// build:
+// build:prd
 // axios.defaults.baseURL='http://8.140.189.245/api/'
 /* eslint-disable no-new */
 new Vue({

@@ -56,9 +56,54 @@ export default {
     // },
 
     // 获取验收轮次\首轮通过率
-    getLastTwelve(){    
-      for(let i=0;i<12;i++){
+    // getLastTwelve(){    
+    //   for(let i=0;i<12;i++){
 
+    //     let month,time,passrate,rounds;
+    //     if(new Date().getMonth()-i>0){
+    //     month=new Date().getMonth()-i
+    //     time=String(new Date().getFullYear()*10000+(new Date().getMonth()-i)*100+1);
+    //     }else{
+    //       month=12+new Date().getMonth()-i
+    //       time=String((new Date().getFullYear()-1)*10000+(12+new Date().getMonth()-i)*100+1);
+    //     }
+    //     // console.log(time,this.getPass(time));  
+    //     // axios.all([this.getRounds(time),this.getPass(time)]).then(axios.spread((res1,res2)=>{
+    //     // 
+    //     // })) 
+    //     // this.mychart.rows.unshift({
+    //     //   月份: month+"月", 首轮通过率:this.getPass(time)  ,验收轮次:this.getRounds()
+    //     //   })       
+    //   axios.post("/r_avg_mon",{'time':time}).then(res=>{
+    //       // rounds=res.data.total
+    //       res.data.total==0?rounds=undefined:rounds=res.data.total 
+    //       axios.post("/p_avg_mon",{'time':time}).then(res=>{
+    //       // passrate=res.data.total 
+    //       res.data.total==0?passrate=undefined:passrate=res.data.total 
+    //       // console.log(rounds,passrate);  
+    //       // console.log(time); 
+    //       this.mychart.rows.unshift({
+    //       月份: month+"月", 首轮通过率: passrate,验收轮次:rounds
+    //       })          
+    // })                         
+    // })
+        
+              
+      
+    //   }
+
+    // },
+   request(url,data){
+     return new Promise((resolve,reject)=>{
+       axios.post(url,data).then(res=>{
+         resolve(res.data.total)
+       }).catch(err=>{
+         reject(err)
+       })
+     })
+   },
+   async getPastTwelve(){
+       for(let i=0;i<12;i++){
         let month,time,passrate,rounds;
         if(new Date().getMonth()-i>0){
         month=new Date().getMonth()-i
@@ -67,40 +112,20 @@ export default {
           month=12+new Date().getMonth()-i
           time=String((new Date().getFullYear()-1)*10000+(12+new Date().getMonth()-i)*100+1);
         }
-        // console.log(time,this.getPass(time));  
-        // axios.all([this.getRounds(time),this.getPass(time)]).then(axios.spread((res1,res2)=>{
-        // 
-        // })) 
-        // this.mychart.rows.unshift({
-        //   月份: month+"月", 首轮通过率:this.getPass(time)  ,验收轮次:this.getRounds()
-        //   })       
-      axios.post("/r_avg_mon",{'time':time}).then(res=>{
-          // rounds=res.data.total
-          res.data.total==0?rounds=undefined:rounds=res.data.total 
-          axios.post("/p_avg_mon",{'time':time}).then(res=>{
-          // passrate=res.data.total 
-          res.data.total==0?passrate=undefined:passrate=res.data.total 
-          // console.log(rounds,passrate);  
-          // console.log(time); 
-          this.mychart.rows.unshift({
+        passrate=await this.request("/p_avg_mon",{'time':time})        
+        rounds=await this.request("/r_avg_mon",{'time':time})
+        console.log(passrate,rounds);
+       this.mychart.rows.unshift({
           月份: month+"月", 首轮通过率: passrate,验收轮次:rounds
-          })          
-    })                         
-    })
-        
-              
-      
-      }
-
-    },
-   
-    
+          })   
+   }
+   }
   },
   mounted() {
     // console.log(this.mychart.rows); 
   },
   created(){
-    this.getLastTwelve()
+    this.getPastTwelve()
   },
   beforeDestroy(){
     this.mychart.rows=[]

@@ -24,6 +24,21 @@ const state={
         { value: "李晓汇" },
         { value: "殷洵" },
         { value: "姚帅" },
+        { value: "郝燕挺" },
+        { value: "张幸蕊" },
+        { value: "潘陈升" },
+        { value: "王婷琦" },
+        { value: "陈璇" },
+        { value: "韩跃" },
+        { value: "宋晶晶" },
+        { value: "王佳林" },
+        { value: "李玉莹" },
+        { value: "金凡博" },
+        { value: "宋培" },
+        { value: "薛仰壮" },
+        { value: "侯晓华" },
+        { value: "宋璞璇" },
+        { value: "方全" },
       ]
 };
 const mutations={

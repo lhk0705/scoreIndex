@@ -72,6 +72,30 @@ const state={
             role:'2',
             name:'崔雪梅'
         },
+        {
+            userId:'lihuilan',
+            password:'lihuilan123',
+            role:'2',
+            name:'黎慧岚'
+        },
+        {
+            userId:'zhouyaohui',
+            password:'zhouyaohui123',
+            role:'2',
+            name:'周耀辉'
+        },
+        {
+            userId:'lixili',
+            password:'lixili123',
+            role:'2',
+            name:'李细丽'
+        },
+        {
+            userId:'ruanbiqing',
+            password:'ruanbiqing123',
+            role:'2',
+            name:'阮必清'
+        },
     ]
 };
 const mutations={

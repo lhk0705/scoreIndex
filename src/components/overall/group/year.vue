@@ -1,5 +1,6 @@
 <template>
-  <div v-if="this.$store.getters.getGYear!==0">
+
+  <div v-if="show">
     <ve-ring
       :data="mychart"
       :settings="chartSettings"
@@ -12,14 +13,15 @@
     ></ve-ring>
     <p>验收轮次：{{rounds}}</p>
   </div>
-  <div v-else >
+  <div  v-else>
     <div class="noData1">
-    <strong>
+    <strong >
       {{title.text}}</strong></div>
     <br>
     <div class="noData">
     <strong>无提测版本</strong></div>    
   </div>
+
 </template>
 
 <script>
@@ -72,7 +74,8 @@ export default {
           },
         columns: ["state", "total"],
         rows: [],
-      },      
+      }, 
+      show:true,     
     };
   },
   created(){
@@ -83,14 +86,20 @@ export default {
     prop:{
       handler(newV,oldV){        
         this.getGYear(newV)
+        if(this.$store.getters.getGYear===''){
+          this.show=false
+          
+        }
         this.title.text=(new Date().getFullYear()-1)+'年版本数'
       }
     }
   },
   methods:{
     SET_GROUP_YEAR(newV){
+      this.$store.commit('setGYear','')
       axios.post('/v_group_year',{"groupName":newV})
-      .then((res)=>{         
+      .then((res)=>{ 
+        console.log(1);        
         this.$store.commit('setGYear',res.data.total)
         // console.log(res.data);
         // console.log(this.$store.getters.getMon);
@@ -99,6 +108,7 @@ export default {
       })
     },
     SET_GROUP_fvYEAR(newV){
+      this.$store.commit('setGFvYear','')
       axios.post('/fv_group_year',{"groupName":newV})
       .then((res)=>{         
         this.$store.commit('setGFvYear',res.data.total)
@@ -107,6 +117,7 @@ export default {
       })
     },
     SET_GROUP_uvYEAR(newV){
+      this.$store.commit('setGUvYear','')
       axios.post('/uv_group_year',{"groupName":newV})
       .then((res)=>{         
         this.$store.commit('setGUvYear',res.data.total)

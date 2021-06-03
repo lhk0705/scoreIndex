@@ -1,6 +1,6 @@
 <template>
-  <div v-if="this.$store.getters.getGMon!==0">     
-    <ve-ring
+  <div v-if="show" >     
+    <ve-ring 
       :data="mychart"
       :settings="chartSettings"
       :legend="legend"
@@ -12,14 +12,15 @@
     <!-- <p>验收轮次：{{rounds}}</p> -->
     <p>验收轮次：{{rounds}}</p>
   </div>
-  <div v-else >
+  <div  v-else>
     <div class="noData1">
     <strong>
       {{title.text}}</strong></div>
     <br>
     <div class="noData">
     <strong>无提测版本</strong></div>    
-  </div>
+  </div> 
+
 </template>
 
 <script>
@@ -73,7 +74,8 @@ export default {
           },
         columns: ["state", "total"],
         rows: [],
-      },      
+      }, 
+      show:true,     
     };
   },
   
@@ -86,12 +88,16 @@ export default {
     prop:{
       handler(newV,oldV){        
         this.getGMon(newV);
+        if(this.$store.getters.getGMon===''){
+          this.show=false
+        }
         this.title.text=this.month+'月版本数'
       }
     }
   },
   methods:{
     SET_GROUP_MONTH(newV){
+      this.$store.commit('setGMon','')
       axios.post('/v_group_mon',{"groupName":newV})
       .then((res)=>{         
         this.$store.commit('setGMon',res.data.total)
@@ -102,6 +108,7 @@ export default {
       })
     },
     SET_GROUP_fvMON(newV){
+      this.$store.commit('setGFvMon','')
       axios.post('/fv_group_mon',{"groupName":newV})
       .then((res)=>{         
         this.$store.commit('setGFvMon',res.data.total)
@@ -110,6 +117,7 @@ export default {
       })
     },
     SET_GROUP_uvMONTH(newV){
+      this.$store.commit('setGUvMon','')
       axios.post('/uv_group_mon',{"groupName":newV})
       .then((res)=>{         
         this.$store.commit('setGUvMon',res.data.total)
@@ -153,4 +161,5 @@ export default {
 p{
   text-align: center;
 }
+
 </style>

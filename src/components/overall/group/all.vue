@@ -1,5 +1,5 @@
 <template>
-  <div class="ring" v-if="this.$store.getters.getGAll!==0">
+  <div  v-if="show">
     <ve-ring
       :data="mychart"
       :settings="chartSettings"
@@ -70,7 +70,8 @@ export default {
           },
         columns: ["state", "total"],
         rows: [],
-      },      
+      },  
+      show:true,    
     };
   },
   created(){
@@ -81,12 +82,16 @@ export default {
     prop:{
       handler(newV,oldV){        
         this.getGAll(newV)
-        this.title.text='历史版本数'
+        if(this.$store.getters.getGAll===''){
+          this.show=false
+        }
+        this.title.text=newV+'历史版本数'
       }
     }
   },
   methods:{
     SET_GROUP_ALL(newV){
+      this.$store.commit('setGAll','')
       axios.post('/v_group_all',{"groupName":newV})
       .then((res)=>{         
         this.$store.commit('setGAll',res.data.total)
@@ -97,6 +102,7 @@ export default {
       })
     },
     SET_GROUP_fvALL(newV){
+      this.$store.commit('setGFvAll','')
       axios.post('/fv_group_all',{"groupName":newV})
       .then((res)=>{         
         this.$store.commit('setGFvAll',res.data.total)
@@ -105,6 +111,7 @@ export default {
       })
     },
     SET_GROUP_uvALL(newV){
+      this.$store.commit('setGUvAll','')
       axios.post('/uv_group_all',{"groupName":newV})
       .then((res)=>{         
         this.$store.commit('setGUvAll',res.data.total)
@@ -116,7 +123,6 @@ export default {
       axios.post("/r_group_all",{'groupName':newV}).then((res)=>{
       this.rounds=res.data.total.toFixed(1)
       // console.log(res.data);
-
     })
     },
     async  getGAll(newV){
@@ -149,4 +155,5 @@ export default {
 p{
   text-align: center;
 }
+
 </style>
