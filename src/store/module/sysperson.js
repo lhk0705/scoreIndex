@@ -42,7 +42,14 @@ const state={
       ]
 };
 const mutations={
-
+    insertSysP(state,data){
+        state.push(data);
+        // localStorage.setItem('sysper',JSON.stringify(state))
+    },
+    removeSysP(state,data){
+        state=state.filter(item=>{return item.value!==data});
+        // localStorage.removeItem('sysper',JSON.stringify(data))
+    },
 };
 const getters={
     getSysPerson(state){

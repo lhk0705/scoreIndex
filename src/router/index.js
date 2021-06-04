@@ -10,6 +10,7 @@ let overall=()=>import("../components/overall/overall")
 let newTask=()=>import("../components/show/newTask.vue")
 let myTask=()=>import("../components/show/myTask.vue")
 let lastPeriod=()=>import("../components/show/lastPeriod.vue")
+let data=()=>import("../components/show/data.vue")
 
 
 Vue.use(Router)
@@ -63,7 +64,11 @@ export default new Router({
           name: 'lastPeriod',
           component: lastPeriod
         },
-
+        {
+          path: '/data',
+          name: 'data',
+          component: data
+        },
       ]
     },
     {

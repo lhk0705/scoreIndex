@@ -11,7 +11,7 @@
         :extend="extend"
         
     ></ve-ring>
-    <p>验收轮次：{{rounds}}</p>
+    <p>{{rounds}}</p>
   </div>
   <div  v-else>
     <div class="noData1">
@@ -84,27 +84,32 @@ export default {
   },
   watch:{
     prop:{
-      async handler(newV,oldV){        
-        await this.getGYear(newV)
-        if(this.$store.getters.getGYear===''){
-          this.show=false
-          
-        }
+      handler(newV,oldV){        
+        this.getGYear(newV)        
         this.title.text=(new Date().getFullYear()-1)+'年版本数'
       }
     }
   },
-  methods:{
+  methods:{   
     SET_GROUP_YEAR(newV){
       this.$store.commit('setGYear','')
       axios.post('/v_group_year',{"groupName":newV})
       .then((res)=>{ 
-        console.log(1);        
-        this.$store.commit('setGYear',res.data.total)
+        // console.log(1);
+        // console.log(res.data.total);
+        if(res.data.total===undefined){
+          this.show=false
+          // console.log(2);
+        }  else{
+          this.show=true
+           this.$store.commit('setGYear',res.data.total)
         // console.log(res.data);
         // console.log(this.$store.getters.getMon);
         this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getGYear
         // console.log(1); 
+        }      
+       
+        
       })
     },
     SET_GROUP_fvYEAR(newV){
@@ -127,8 +132,12 @@ export default {
     },
     SET_GROUP_ROUNDS(newV){
       axios.post("/r_group_year",{'groupName':newV}).then((res)=>{
-      this.rounds=res.data.total.toFixed(1)
-      // console.log(res.data);
+      if(res.data.total===undefined){
+          this.rounds="无已完成验收的版本"
+        }else{
+      // console.log("验收轮次："+res.data.total);
+      this.rounds="验收轮次："+res.data.total.toFixed(1)
+        }
 
     })
     },    
@@ -136,7 +145,8 @@ export default {
       await this.SET_GROUP_YEAR(newV);
       await this.SET_GROUP_fvYEAR(newV);
       await this.SET_GROUP_uvYEAR(newV);
-      this.SET_GROUP_ROUNDS(newV)
+      this.SET_GROUP_ROUNDS(newV);
+      
     }
   }
 };

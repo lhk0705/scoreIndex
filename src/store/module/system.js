@@ -45,7 +45,14 @@ const state={
     ],
 };
 const mutations={
-
+    insertSys(state,data){
+        state.push(data);
+        // localStorage.setItem('system',JSON.stringify(state))
+    },
+    removeSys(state,data){
+        state=state.filter(item=>{return item.value!==data});
+        // localStorage.removeItem('system',JSON.stringify(data))
+    },
 };
 const getters={
     getSys(state){

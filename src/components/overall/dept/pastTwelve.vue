@@ -114,7 +114,7 @@ export default {
         }
         passrate=await this.request("/p_avg_mon",{'time':time})        
         rounds=await this.request("/r_avg_mon",{'time':time})
-        console.log(passrate,rounds);
+        // console.log(passrate,rounds);
        this.mychart.rows.unshift({
           月份: month+"月", 首轮通过率: passrate,验收轮次:rounds
           })   

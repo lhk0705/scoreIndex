@@ -9,7 +9,7 @@
         :title="title"
         :extend="extend"
     ></ve-ring>
-    <p>验收轮次：{{rounds}}</p>
+    <p>{{rounds}}</p>
   </div>
   <div v-else >
     <div class="noData1">
@@ -80,11 +80,8 @@ export default {
   },
   watch:{
     prop:{
-      async handler(newV,oldV){        
-        await this.getGAll(newV)
-        if(this.$store.getters.getGAll===''){
-          this.show=false
-        }
+      handler(newV,oldV){        
+        this.getGAll(newV)
         this.title.text='历史版本数'
       }
     }
@@ -93,12 +90,19 @@ export default {
     SET_GROUP_ALL(newV){
       this.$store.commit('setGAll','')
       axios.post('/v_group_all',{"groupName":newV})
-      .then((res)=>{         
+      .then((res)=>{ 
+        // console.log("版本总数"+res.data.total); 
+        if(res.data.total===undefined){
+          this.show=false
+          // console.log(2);
+        }  else{
+          this.show=true       
         this.$store.commit('setGAll',res.data.total)
-        // console.log(res.data);
+        
         // console.log(this.$store.getters.getMon);
         this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getGAll
         // console.log(1); 
+        }
       })
     },
     SET_GROUP_fvALL(newV){
@@ -121,8 +125,14 @@ export default {
     },    
     SET_GROUP_ROUNDS(newV){
       axios.post("/r_group_all",{'groupName':newV}).then((res)=>{
-      this.rounds=res.data.total.toFixed(1)
-      // console.log(res.data);
+        if(res.data.total===undefined){
+          this.rounds="无已完成验收的版本"
+        }else{
+      // console.log("验收轮次："+res.data.total);
+      this.rounds="验收轮次："+res.data.total.toFixed(1)
+        }
+      
+      
     })
     },
     async  getGAll(newV){

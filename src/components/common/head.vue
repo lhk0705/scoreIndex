@@ -46,7 +46,7 @@ export default {
         },
         logOut(){
           if(confirm("确定退出系统？")){
-            this.$store.commit('setUser','')
+            this.$store.commit('setUserName','')
             this.$router.go(0)
           // console.log('1');
           }

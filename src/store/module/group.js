@@ -44,31 +44,28 @@ const state={
           value: "内部支撑组",
           label: "内部支撑组",
         },
-        
-        // {
-        //     value: "a3",
-        //     label: "a3",
-        //   },
-        //   {
-        //     value: "b3",
-        //     label: "b3",
-        //   },
-        //   {
-        //     value: "c3",
-        //     label: "c3",
-        //   },
-        //   {
-        //     value: "d3",
-        //     label: "d3",
-        //   },
       ],
 };
 const mutations={
-
+  insertGroup(state,data){
+    state.group.push({value:data,label:data});
+    localStorage.setItem('group',JSON.stringify(state.group))
+},
+  removeGroup(data){
+    state.group=state.group.filter(item=>{
+      console.log(item);
+      return item.value===data});
+    localStorage.removeItem('group',JSON.stringify(data))
+},
 };
 const getters={
     getGroup(state){
-        return state.group
+      if(localStorage.getItem('group')){
+        return JSON.parse(localStorage.getItem('group'))
+      }else{
+         return state.group
+      }
+       
     }
 };
 export default {

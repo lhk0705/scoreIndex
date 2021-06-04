@@ -11,7 +11,7 @@
         :extend="extend"
    
     ></ve-ring>
-    <p>验收轮次：{{rounds}}</p>
+    <p>{{rounds}}</p>
   </div>
   <div v-else >
     <div class="noData1">
@@ -90,11 +90,8 @@ export default {
   },
     watch:{
     prop:{
-      async handler(newV,oldV){        
-        await this.getGSea(newV)
-        if(this.$store.getters.getGSea===''){
-          this.show=false
-        }
+    handler(newV,oldV){        
+        this.getGSea(newV)
         // console.log(newV);
         this.title.text=this.season+'版本数' 
       }
@@ -104,12 +101,18 @@ export default {
     SET_GROUP_SEA(newV){
       this.$store.commit('setGSea','')
       axios.post('/v_group_sea',{"groupName":newV})
-      .then((res)=>{         
+      .then((res)=>{
+         if(res.data.total===undefined){
+          this.show=false
+          // console.log(2);
+        }  else{
+          this.show=true         
         this.$store.commit('setGSea',res.data.total)
         // console.log(res.data);
         // console.log(this.$store.getters.getMon);
         this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getGSea
         // console.log(1); 
+        }
       })
     },
     SET_GROUP_fvSEA(newV){
@@ -132,7 +135,12 @@ export default {
     }, 
     SET_GROUP_ROUNDS(newV){
       axios.post("/r_group_sea",{'groupName':newV}).then((res)=>{
-      this.rounds=res.data.total.toFixed(1)
+      if(res.data.total===undefined){
+          this.rounds="无已完成验收的版本"
+        }else{
+      // console.log("验收轮次："+res.data.total);
+      this.rounds="验收轮次："+res.data.total.toFixed(1)
+        }
       
 
     })

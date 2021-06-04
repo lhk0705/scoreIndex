@@ -17,7 +17,14 @@ const state={
       ]
 };
 const mutations={
-
+    insertTestP(state,data){
+        state.push(data);
+        localStorage.setItem('testper',JSON.stringify(state))
+    },
+    removeTestP(state,data){
+        state=state.filter(item=>{return item.value!==data});
+        localStorage.removeItem('testper',JSON.stringify(data))
+    },
 };
 const getters={
     getTestPerson(state){

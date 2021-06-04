@@ -36,7 +36,7 @@ methods:{
         if(result.length===0){
             alert("请输入正确的账号密码！")
         }else{
-        this.$store.commit('setUser',result[0])
+        this.$store.commit('setUserName',result[0])
         this.$router.push('/')
         }
         }        

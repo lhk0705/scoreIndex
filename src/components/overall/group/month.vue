@@ -10,7 +10,7 @@
       :extend="extend"
     ></ve-ring>
     <!-- <p>验收轮次：{{rounds}}</p> -->
-    <p>验收轮次：{{rounds}}</p>
+    <p>{{rounds}}</p>
   </div>
   <div  v-else>
     <div class="noData1">
@@ -86,11 +86,8 @@ export default {
   },
   watch:{
     prop:{
-      async handler(newV,oldV){        
-        await this.getGMon(newV);
-        if(this.$store.getters.getGMon===''){
-          this.show=false
-        }
+      handler(newV,oldV){        
+        this.getGMon(newV);
         this.title.text=this.month+'月版本数'
       }
     }
@@ -99,12 +96,18 @@ export default {
     SET_GROUP_MONTH(newV){
       this.$store.commit('setGMon','')
       axios.post('/v_group_mon',{"groupName":newV})
-      .then((res)=>{         
+      .then((res)=>{  
+        if(res.data.total===undefined){
+          this.show=false
+          // console.log(2);
+        }  else{
+          this.show=true       
         this.$store.commit('setGMon',res.data.total)
         // console.log(res.data);
         // console.log(this.$store.getters.getMon);
         this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getGMon
         // console.log(1); 
+        }
       })
     },
     SET_GROUP_fvMON(newV){
@@ -127,8 +130,12 @@ export default {
     }, 
     SET_GROUP_ROUNDS(newV){
       axios.post("/r_group_mon",{groupName:newV}).then((res)=>{
-      this.rounds=res.data.total.toFixed(1)
-      // console.log(res.data);
+      if(res.data.total===undefined){
+          this.rounds="无已完成验收的版本"
+        }else{
+      // console.log("验收轮次："+res.data.total);
+      this.rounds="验收轮次："+res.data.total.toFixed(1)
+        }
     })
     },
     async  getGMon(newV){

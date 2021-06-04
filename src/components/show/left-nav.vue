@@ -39,19 +39,19 @@
             上一周期质量数据
             </span>            
       </el-menu-item >
-      <el-menu-item class="nav" index="/newTask" v-if="user.role==='1'">
+      <el-menu-item class="nav" index="/newTask" v-show="user.role==='1'">
         <i class="el-icon-menu"></i>
         <span slot="title"> 
             新建测试任务
             </span>            
       </el-menu-item >
-      <el-menu-item class="nav" index="/myTask" v-else-if="user.role==='2'">
+      <el-menu-item class="nav" index="/myTask" v-show="user.role==='2'">
         <i class="el-icon-menu"></i>
         <span slot="title"> 
             我的测试任务
             </span>            
       </el-menu-item >
-      <el-submenu index="/newTask" v-else class="nav">
+      <el-submenu index="/newTask" class="nav" v-show="user.role==='0'" >
       <template slot="title" >
         <i class="el-icon-menu"></i>
         <span slot="title" >  
@@ -71,7 +71,12 @@
             </span>            
       </el-menu-item >
       </el-submenu>
-      
+      <el-menu-item class="nav" index="/data" v-show="user.role==='0'" >
+        <i class="el-icon-menu"></i>
+        <span slot="title"> 
+            数据管理
+            </span>            
+      </el-menu-item >
       
     </el-menu>
 </template>
