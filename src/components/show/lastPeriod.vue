@@ -379,15 +379,20 @@ export default {
       // '前一个月：'+beforeMonth+
       // '上个月的月报日期：'+beforeStart+'~'+beforeEnd,      
       // );
-      return [+startDate,
-      +endDate,
+      return [String(startDate),
+      String(endDate),
       +startDate.toString().substring(0,4),
-      +startDate.toString().substring(4,6),      
-      +lastMonth,
-      +nextMonth,
-      +beforeStart,
-      +beforeEnd,      
-      +beforeMonth,      
+      +startDate.toString().substring(4,6),
+      String(lastMonth),
+      String(nextMonth),
+      String(beforeStart),
+      String(beforeEnd),
+      String(beforeMonth),      
+      // +lastMonth,
+      // +nextMonth,
+      // +beforeStart,
+      // +beforeEnd,      
+      // +beforeMonth,      
       ]     
     },
     // 获取小组数据
@@ -399,11 +404,11 @@ export default {
               return groupData
             },
     // 获取月报数据
-    getReportData(){      
+    getAll(startDate,endDate){      
       let allData='';    
       // console.log(date);
-      axios.post('/monthReportAll',{'startDate':startDate,'endDate':endDate}).then(res=>{
-        // axios.post('/monthReportAll',{'month':'20210403'}).then(res=>{
+      // axios.post('/monthReportAll',{'startDate':startDate,'endDate':endDate}).then(res=>{
+        axios.post('/monthReportAll',{'startDate':'20210301'}).then(res=>{
         allData=res.data[0]       
       })
       return allData
@@ -411,8 +416,8 @@ export default {
     // 导出为月报
     exportToReport(){
       let that=this
-      // let date=that.getDate()
-      that.getDate()
+      let date=that.getDate()
+      // that.getDate()
       JSZipUtils.getBinaryContent("static/部门质量报告模板.docx", function(error, content) {
         // 抛出异常
         if (error) {
@@ -425,10 +430,9 @@ export default {
         // 获取月报涉及月份数据
         let year=date[2],month=date[3];
         // 获取两份月报数据
-        // let allData=that.getReportData(date[0],date[1])
-        let allData=that.getReportData()
-        console.log(allData);
-        // let lastData=that.getReportData(date[6],date[7])
+        let allData=that.getAll(date[0],date[1])
+        // console.log(allData);
+        // let lastData=that.getAll(date[6],date[7])
         // 获取两次小组数据
         // groupData=[];
         // groupData.push(that.getGroup(date[0],date[1],'OA系统组'));
@@ -446,31 +450,32 @@ export default {
         // lastGroup.push(that.getGroup(date[6],date[7],'能力平台组'))
         // 设置模板变量的值
         let docxData = {
-        // year:year,
-        // month:month,
-        // lastMonth:date[4],
-        // beforeMonth:date[8],
-        // nextMonth:date[5],
-        // _avgRuleRdt:1,
-        // _passRateA:1,
-        // _passRateB:1,
-        // _passRateC:1,
-        // _passRateWarn:1,
-        // _ruleDocRate:1,
-        // _ruleYlRate:1,
-        // _ruleBgRate:1,
-        // _rdtFullScoreRate:1,        
-        // _warnDocRate:1,
-        // _warnYlRate:1,        
-        // _warnBgRate:1, 
-        // _avgRuleRdtGroup:1,    
-        // _warnGroupDocRate:1,
-        // _warnGroupYlRate:1,
-        // _warnGroupBgRate:1,
+        year:year,
+        month:month,
+        lastMonth:date[4],
+        beforeMonth:date[8],
+        nextMonth:date[5],
+        _avgRuleRdt:1,
+        _passRateA:1,
+        _passRateB:1,
+        _passRateC:1,
+        _passRateWarn:1,
+        _ruleDocRate:1,
+        _ruleYlRate:1,
+        _ruleBgRate:1,
+        _rdtFullScoreRate:1,        
+        _warnDocRate:1,
+        _warnYlRate:1,        
+        _warnBgRate:1, 
+        _avgRuleRdtGroup:1,    
+        _warnGroupDocRate:1,
+        _warnGroupYlRate:1,
+        _warnGroupBgRate:1,
         };
         doc.setData({
             ...docxData,...allData,
         });
+        console.log(allData);
        try {
             // 用模板变量的值替换所有模板变量
             doc.render();
@@ -494,7 +499,7 @@ export default {
         // 将目标文件对象保存为目标类型的文件，并命名
         saveAs(out, "部门质量报告"+year+'年'+month+"月.docx");
        })
-       console.log(year,month);
+      //  console.log(year,month);
     },    
     } ,      
     created(){
