@@ -26,7 +26,7 @@ export default {
       rounds:'',
       passrate:'',
       mychart: {
-        columns: ["月份", "首轮通过率","验收轮次"],
+        columns: ["月份", "首轮通过率","平均验收轮次"],
         rows: [
         //   { 状态: "已完成", 数量: 1333 },
         //   { 状态: "未完成", 数量: 1222},
@@ -116,7 +116,7 @@ export default {
         rounds=await this.request("/r_avg_mon",{'time':time})
         // console.log(passrate,rounds);
        this.mychart.rows.unshift({
-          月份: month+"月", 首轮通过率: passrate,验收轮次:rounds
+          月份: month+"月", 首轮通过率: passrate,平均验收轮次:rounds
           })   
    }
    }

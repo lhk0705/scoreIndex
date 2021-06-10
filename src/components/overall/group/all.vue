@@ -87,59 +87,86 @@ export default {
     }
   },
   methods:{
-    SET_GROUP_ALL(newV){
-      this.$store.commit('setGAll','')
-      axios.post('/v_group_all',{"groupName":newV})
-      .then((res)=>{ 
-        // console.log("版本总数"+res.data.total); 
-        if(res.data.total===undefined){
-          this.show=false
+     request(url,groupName){
+      return new Promise((resolve,reject)=>{
+      axios.post(url,{"groupName":groupName})
+      .then((res)=>{  
+        // if(res.data.total===undefined){
+          // this.show=false
           // console.log(2);
-        }  else{
-          this.show=true       
-        this.$store.commit('setGAll',res.data.total)
-        
-        // console.log(this.$store.getters.getMon);
-        this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getGAll
+        // }  else{
+          // this.show=true       
+        resolve(res.data.total)
         // console.log(1); 
-        }
+        // }
+      }).catch(err=>{
+        reject(err)
       })
+      })    
     },
-    SET_GROUP_fvALL(newV){
-      this.$store.commit('setGFvAll','')
-      axios.post('/fv_group_all',{"groupName":newV})
-      .then((res)=>{         
-        this.$store.commit('setGFvAll',res.data.total)
-        this.mychart.rows[0]={ state: "已完成", total: this.$store.getters.getGFvAll}
-        // console.log(2);
-      })
-    },
-    SET_GROUP_uvALL(newV){
-      this.$store.commit('setGUvAll','')
-      axios.post('/uv_group_all',{"groupName":newV})
-      .then((res)=>{         
-        this.$store.commit('setGUvAll',res.data.total)
-        this.mychart.rows[1]={ state: "未完成", total: this.$store.getters.getGUvAll }
-        // console.log(3);
-      })
-    },    
-    SET_GROUP_ROUNDS(newV){
-      axios.post("/r_group_all",{'groupName':newV}).then((res)=>{
-        if(res.data.total===undefined){
-          this.rounds="无已完成验收的版本"
-        }else{
-      // console.log("验收轮次："+res.data.total);
-      this.rounds="验收轮次："+res.data.total.toFixed(1)
-        }
+    // SET_GROUP_ALL(newV){
+    //   this.$store.commit('setGAll','')
+    //   axios.post('/v_group_all',{"groupName":newV})
+    //   .then((res)=>{ 
+    //     // console.log("版本总数"+res.data.total); 
+    //     if(res.data.total===undefined){
+    //       this.show=false
+    //       // console.log(2);
+    //     }  else{
+    //       this.show=true       
+    //     this.$store.commit('setGAll',res.data.total)
+        
+    //     // console.log(this.$store.getters.getMon);
+    //     this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getGAll
+    //     // console.log(1); 
+    //     }
+    //   })
+    // },
+    // SET_GROUP_fvALL(newV){
+    //   this.$store.commit('setGFvAll','')
+    //   axios.post('/fv_group_all',{"groupName":newV})
+    //   .then((res)=>{         
+    //     this.$store.commit('setGFvAll',res.data.total)
+    //     this.mychart.rows[0]={ state: "已完成", total: this.$store.getters.getGFvAll}
+    //     // console.log(2);
+    //   })
+    // },
+    // SET_GROUP_uvALL(newV){
+    //   this.$store.commit('setGUvAll','')
+    //   axios.post('/uv_group_all',{"groupName":newV})
+    //   .then((res)=>{         
+    //     this.$store.commit('setGUvAll',res.data.total)
+    //     this.mychart.rows[1]={ state: "未完成", total: this.$store.getters.getGUvAll }
+    //     // console.log(3);
+    //   })
+    // },    
+    // SET_GROUP_ROUNDS(newV){
+    //   axios.post("/r_group_all",{'groupName':newV}).then((res)=>{
+    //     if(res.data.total===undefined){
+    //       this.rounds="无已完成验收的版本"
+    //     }else{
+    //   // console.log("验收轮次："+res.data.total);
+    //   this.rounds="平均验收轮次："+res.data.total.toFixed(1)
+    //     }
       
       
-    })
-    },
+    // })
+    // },
     async  getGAll(newV){
-      await this.SET_GROUP_ALL(newV);
-      await this.SET_GROUP_fvALL(newV);
-      await this.SET_GROUP_uvALL(newV);
-      this.SET_GROUP_ROUNDS(newV)
+      // await this.SET_GROUP_ALL(newV);
+      // await this.SET_GROUP_fvALL(newV);
+      // await this.SET_GROUP_uvALL(newV);
+      // this.SET_GROUP_ROUNDS(newV)
+      let bbs,ywc,wwc,r
+      bbs=await this.request('/v_group_all',newV)
+      ywc=await this.request('/fv_group_all',newV)
+      wwc=await this.request('/uv_group_all',newV)
+      r =await this.request('/r_group_all',newV)
+      bbs===undefined?this.show=false:this.show=true
+      this.extend.series.label.formatter= '总版本数：'+bbs
+      this.mychart.rows[0]={ state: "已完成", total: ywc}
+      this.mychart.rows[1]={ state: "未完成", total: wwc }
+      r===undefined?this.rounds="无已完成验收的版本":this.rounds="平均验收轮次："+ r
     }
   }
 };

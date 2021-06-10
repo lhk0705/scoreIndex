@@ -10,7 +10,7 @@
         :extend="extend"
      
     ></ve-ring>
-    <p>验收轮次：{{rounds}}</p>
+    <p>{{rounds}}</p>
   </div>
 </template>
 
@@ -87,35 +87,62 @@ export default {
   },
   
   methods:{
-    SET_DEPT_MONTH(){
-      axios.get('/v_dept_mon')
-      .then((res)=>{         
-        this.$store.commit('setMon',res.data.total)
-        // console.log(this.$store.getters.getMon);
-        this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getMon
+    request(url){
+      return new Promise((resolve,reject)=>{
+      axios.get(url)
+      .then((res)=>{  
+        // if(res.data.total===undefined){
+          // this.show=false
+          // console.log(2);
+        // }  else{
+          // this.show=true       
+        resolve(res.data.total)
         // console.log(1); 
+        // }
+      }).catch(err=>{
+        reject(err)
       })
+      })    
     },
-    SET_DEPT_fvMONTH(){
-      axios.get("/fv_dept_mon")
-      .then((res)=>{         
-        this.$store.commit('setFvMon',res.data.total)
-        this.mychart.rows[0]={ state: "已完成", total: this.$store.getters.getFvMon}
-        // console.log(2);
-      })
-    },
-    SET_DEPT_uvMONTH(){
-      axios.get("/uv_dept_mon")
-      .then((res)=>{         
-        this.$store.commit('setUvMon',res.data.total)
-        this.mychart.rows[1]={ state: "未完成", total: this.$store.getters.getUvMon }
-        // console.log(3);
-      })
-    },    
+    // SET_DEPT_MONTH(){
+    //   axios.get('/v_dept_mon')
+    //   .then((res)=>{         
+    //     this.$store.commit('setMon',res.data.total)
+    //     // console.log(this.$store.getters.getMon);
+    //     this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getMon
+    //     // console.log(1); 
+    //   })
+    // },
+    // SET_DEPT_fvMONTH(){
+    //   axios.get("/fv_dept_mon")
+    //   .then((res)=>{         
+    //     this.$store.commit('setFvMon',res.data.total)
+    //     this.mychart.rows[0]={ state: "已完成", total: this.$store.getters.getFvMon}
+    //     // console.log(2);
+    //   })
+    // },
+    // SET_DEPT_uvMONTH(){
+    //   axios.get("/uv_dept_mon")
+    //   .then((res)=>{         
+    //     this.$store.commit('setUvMon',res.data.total)
+    //     this.mychart.rows[1]={ state: "未完成", total: this.$store.getters.getUvMon }
+    //     // console.log(3);
+    //   })
+    // },    
     async  getMon(){
-      await this.SET_DEPT_MONTH();
-      await this.SET_DEPT_fvMONTH();
-      this.SET_DEPT_uvMONTH()
+      // await this.SET_DEPT_MONTH();
+      // await this.SET_DEPT_fvMONTH();
+      // this.SET_DEPT_uvMONTH()
+      let bbs,ywc,wwc,r
+      bbs=await this.request('/v_dept_mon')
+      ywc=await this.request('/fv_dept_mon')
+      wwc=await this.request('/uv_dept_mon')
+      r =await this.request('/r_dept_mon')
+      bbs===undefined?this.show=false:this.show=true
+      this.extend.series.label.formatter= '总版本数：'+bbs
+      this.mychart.rows[0]={ state: "已完成", total: ywc}
+      this.mychart.rows[1]={ state: "未完成", total: wwc }
+      r===undefined?this.rounds="无已完成验收的版本":this.rounds="平均验收轮次："+ r
     }
      
   }
