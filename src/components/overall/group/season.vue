@@ -176,7 +176,7 @@ export default {
       this.extend.series.label.formatter= '总版本数：'+bbs
       this.mychart.rows[0]={ state: "已完成", total: ywc}
       this.mychart.rows[1]={ state: "未完成", total: wwc }
-      r===undefined?this.rounds="无已完成验收的版本":this.rounds="平均验收轮次："+ r
+      r===undefined?this.rounds="无已完成验收的版本":this.rounds="平均验收轮次："+ r.toFixed(1)
     }
   }
 };

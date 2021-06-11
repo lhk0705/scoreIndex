@@ -138,9 +138,25 @@ export default {
       },
         }
     },
+    watch:{
+      ylzs(newV,oldV){
+        if(newV==='0'){
+          this.cc_btgs=0;
+          this.tgs=0;
+          this.ccyls=0;
+        }else{
+          // this.cc_btgs='';
+          // this.tgs='';
+          // this.ccyls='';
+        }
+      }
+    },
     computed:{
     zss: {
       get(){
+        if(this.ylzs==='0'){
+          return 0
+        }else{
       if (this.tgs !== '' && this.ccyls !== '' && this.cc_btgs !== '') {
         // if (this.tgs !== null && this.ccyls !== null && this.cc_btgs !== null) {
         let result=this.ccyls - this.tgs - this.cc_btgs
@@ -151,11 +167,14 @@ export default {
       } else {
         return "";
       }
-      },
+      }},
       set(){}
     },
     cctgl: {
       get(){
+        if(this.ylzs==='0'){
+          return 0
+        }else{
       if (this.tgs !== '' && this.ccyls !== '') {
         return +(this.tgs / this.ccyls).toFixed(2);
       } else {
@@ -163,21 +182,28 @@ export default {
         return "";
       }
       // return 1
-      },
+      }},
       set(){}
     },
     
     ccbl:{
-      get(){if (this.ylzs !== '' && this.ccyls !== '') {
+      get(){
+        if(this.ylzs==='0'){
+          return 0
+        }else{
+      if (this.ylzs !== '' && this.ccyls !== '') {
         return +(this.ccyls / this.ylzs).toFixed(2);
       } else {
         return "";
       }
-      },
+      }},
       set(){}
     },
     ccdf:{
-    get(){
+      get(){
+        if(this.ylzs==='0'){
+          return 0
+        }else{
         let ccdf=""
       if (this.cctgl === '') {
         // this.$store.commit('cc',ccdf)
@@ -186,7 +212,8 @@ export default {
         let a=(this.tgs / this.ccyls).toFixed(2);
         if (a < 0.9) {
           if (a > 0.5) {
-              ccdf=20 - (0.9 - a).toFixed(2) * 50
+              ccdf=20 - ((0.9 - a) * 50).toFixed(2)
+              // ccdf=20 - ((0.9 - a) .toFixed(2)* 50)
             //   this.$store.commit('cc',ccdf)
             // return ccdf;
           } else {
@@ -202,7 +229,7 @@ export default {
       }
     //   this.$store.commit('cc',ccdf)
           return ccdf;
-     } ,
+         }} ,
      set(){}
     }, 
     testPerson(){

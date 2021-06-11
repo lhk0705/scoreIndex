@@ -69,22 +69,24 @@ export default {
             let randomtestdata=vm.$refs.randomtest
             let testdata=vm.$refs.test
             let data=res.data
-            console.log(data);
+            // console.log(data);
             if(!data.xqTime){
               docdata.fstDis=false;
               randomtestdata.fstDis=false;
               testdata.fstDis=false;
+              testdata.secDis=true;
               // console.log(1);
             }else{
               docdata.fstDis=true;
               randomtestdata.fstDis=true;
               testdata.fstDis=true;
+              testdata.secDis=false;
               // console.log(2);
             }
             
               vm.banbenhao=data.banbenhao;
               headdata.fstDis=true;              
-              testdata.secDis=false;
+              // testdata.secDis=false;
               headdata.type=data.type;
               headdata.plan=data.plan;
               headdata.ticeshijian=data.ticeshijian;
@@ -363,7 +365,8 @@ export default {
                 "c_jieguo":-999,
                 "yanshoudefen":-999,
                 "zongfen":Number(this.banbendefen)
-                }                   
+                } 
+                // console.log(data);                  
             axios.post('/addSorce',data)
             .then((res)=>{console.log('传输成功');})
             alert("提交成功！")
@@ -466,7 +469,7 @@ export default {
             .then((res)=>{console.log('传输成功');})
             alert("提交成功！")
                 // this.$router.go(0)
-          
+          console.log(data);  
             }
             else{
             //二轮数据提交

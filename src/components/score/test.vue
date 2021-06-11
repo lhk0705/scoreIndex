@@ -520,12 +520,14 @@ export default {
     },
     yanshoudefen: {
       get(){
+        // console.log(this.a_tgl, this.b_tgl,this.c_tgl);
       let a = this.a_tgl;
       let b = this.b_tgl;
       let c = this.c_tgl;      
-      let d = 30 - (0.85 - a).toFixed(2) * 100;
-      let e = d - (0.95 - b).toFixed(2) * 100;
-      let f = 30 - (0.95 - b).toFixed(2) * 100;
+      let d = 30 - ((0.85 - a)* 100).toFixed(2);
+      let e = d - ((0.95 - b)* 100).toFixed(2);
+      let f = 30 - ((0.95 - b)* 100).toFixed(2);
+      // console.log(((0.85 - a)* 100).toFixed(2) );
       //未填数据
       if (a == 0) {
         return "";

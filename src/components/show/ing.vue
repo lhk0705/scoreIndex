@@ -9,7 +9,7 @@
      </el-table-column></el-table>
   <el-table
     :data="vers"
-    height="20em"
+    height="40em"
     border
     style="padding:auto"  
     >
@@ -19,6 +19,7 @@
       label="系统名"
       min-width="85"
       align="center"
+      fixed
       >
     </el-table-column>
     <el-table-column
@@ -26,6 +27,7 @@
       label="版本号"
       min-width="100"
       align="center"
+      fixed
      >
     </el-table-column>
     <el-table-column
@@ -85,7 +87,7 @@
       min-width="100"
       align="center">
     </el-table-column> 
-     <el-table-column label="操作" align="center" width="150">
+     <el-table-column label="操作" align="center" width="150" fixed="right">
     <template slot-scope="scope" >       
         <el-button @click="getScore(scope.$index,vers)" type="primary" size="mini">编辑</el-button>  
         <el-button @click="delScore(scope.$index,vers)" size="mini">删除</el-button>          

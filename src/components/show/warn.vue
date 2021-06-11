@@ -11,7 +11,7 @@
     :data="vers"
     border
     style="width: 100%"
-    height="20em"   
+    height="40em"   
     >
 
     <el-table-column

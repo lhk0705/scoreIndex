@@ -210,15 +210,28 @@ export default {
           )
           {alert("请输入必填项！")}
           else{
-            // console.log(data);
-          axios.post('/addTask',data)
-          .then(res=>alert('新建任务成功！'))  
-          }
-                  
-        },
-        
-        
-       
+            let bbh=data.ticeshijian+data.xitongming;
+            let allscore=[];
+            axios.get('/selectFinishedInfo').then(res=>{
+              allscore=allscore.concat(res.data)
+              // console.log(allBbh);
+              axios.get('/selectUNFinishedInfo').then(res=>{
+              allscore=allscore.concat(res.data)
+              axios.get('/selectSpecialInfo').then(res=>{
+              allscore=allscore.concat(res.data)
+              let result=allscore.filter(item=>{
+               return item.banbenhao===bbh
+              })
+              if(result.length>0) {alert(bbh+'已存在！请勿重复添加')}else{
+                console.log(data);
+                axios.post('/addTask',data)
+                .then(res=>alert('新建任务成功！')) 
+              }
+              })
+              })
+            })          
+          }                  
+        },       
   },
 };
 </script>

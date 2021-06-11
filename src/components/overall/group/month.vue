@@ -168,7 +168,7 @@ export default {
       wwc=await this.request('/uv_group_mon',newV)
       r =await this.request('/r_group_mon',newV)
       bbs===undefined?this.show=false:this.show=true
-      r===undefined?this.rounds="无已完成验收的版本":this.rounds="平均验收轮次："+ r
+      r===undefined?this.rounds="无已完成验收的版本":this.rounds="平均验收轮次："+ r.toFixed(1)
       this.extend.series.label.formatter= '总版本数：'+bbs
       this.mychart.rows[0]={ state: "已完成", total: ywc}
       this.mychart.rows[1]={ state: "未完成", total: wwc }
