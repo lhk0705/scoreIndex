@@ -405,20 +405,27 @@ export default {
             },
     // 获取月报数据
     getAll(startDate,endDate){      
-      let allData='';    
-      // console.log(date);
-      // axios.post('/monthReportAll',{'startDate':startDate,'endDate':endDate}).then(res=>{
-        axios.post('/monthReportAll',{'startDate':'20210301'}).then(res=>{
-        allData=res.data[0]       
-      })
-      return allData
+      return new Promise((resolve,reject)=>{
+        // console.log(date);
+      // axios.post('/monthReportAll',{'startDate':startDate}).then(res=>{
+       axios.post('/monthReportAll',{'startDate':'20210301'}).then(res=>{
+        //  console.log(1);
+        resolve(res.data)
+      }).catch(err=>{
+        reject(err)
+      }) 
+      // console.log(res.data);
+      // console.log(1);
+      // return res.data
+
+      })          
     },
     // 导出为月报
-    exportToReport(){
+     exportToReport(){
       let that=this
       let date=that.getDate()
       // that.getDate()
-      JSZipUtils.getBinaryContent("static/部门质量报告模板.docx", function(error, content) {
+      JSZipUtils.getBinaryContent("static/部门质量报告模板.docx",async function(error, content) {
         // 抛出异常
         if (error) {
             throw error;
@@ -430,8 +437,13 @@ export default {
         // 获取月报涉及月份数据
         let year=date[2],month=date[3];
         // 获取两份月报数据
-        let allData=that.getAll(date[0],date[1])
-        // console.log(allData);
+      //   let allData=''
+      //   axios.post('/monthReportAll',{'startDate':'20210301'}).then(res=>{
+      //   allData=res.data 
+      // })
+      let allData=await that.getAll(date[0],date[1]) 
+      // await console.log(2);     
+      // console.log(allData);
         // let lastData=that.getAll(date[6],date[7])
         // 获取两次小组数据
         // groupData=[];

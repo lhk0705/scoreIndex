@@ -4,11 +4,11 @@
       <div class="userInsert" >
           <h2>质控数据管理系统</h2>
           <label><strong>用户名：</strong></label>
-          <el-input v-model="userId" size="mini" placeholder="请输入用户名"></el-input>
+          <el-input v-model="userId" size="mini" placeholder="请输入用户名" @keyup.enter.native="login"></el-input>
             <br>
             <br>
           <label><strong>密码：</strong></label>
-          <el-input v-model="password" size="mini" type="password" placeholder="请输入密码"></el-input>
+          <el-input v-model="password" size="mini" type="password" placeholder="请输入密码" @keyup.enter.native="login"></el-input>
             <br><br>
             <el-button class="button" type="primary" size="small" @click="login">登录</el-button>
         </div>
