@@ -407,8 +407,8 @@ export default {
     getAll(startDate,endDate){      
       return new Promise((resolve,reject)=>{
         // console.log(date);
-      // axios.post('/monthReportAll',{'startDate':startDate}).then(res=>{
-       axios.post('/monthReportAll',{'startDate':'20210301'}).then(res=>{
+      axios.post('/monthReportAll',{'startDate':startDate}).then(res=>{
+      //  axios.post('/monthReportAll',{'startDate':'20210301'}).then(res=>{
         //  console.log(1);
         resolve(res.data)
       }).catch(err=>{
@@ -419,6 +419,28 @@ export default {
       // return res.data
 
       })          
+    },
+    // 转换月报数据
+    exchangeData(obj){
+      let noData={
+        inPlan:'',
+        outPlan:'',
+        passRateB:'无二轮验收的版本',
+        passRateC:'无三轮验收的版本',
+        passRateWarn:'',
+      }
+    for(let key in obj){
+        // 百分率转换
+        if(/\w*Rate\w*/.test(key)||/\w*Rdt\w*/.test(key)){
+            obj[key]=obj[key]*100+'%'            
+        }
+        // null情况转换
+        if(obj[key]===null){
+          obj[key]='b'    
+        }
+
+      }
+      return obj
     },
     // 导出为月报
      exportToReport(){
@@ -435,16 +457,12 @@ export default {
         // 创建并加载docxtemplater实例对象
         let doc = new docxtemplater().loadZip(zip);
         // 获取月报涉及月份数据
-        let year=date[2],month=date[3];
+        let year=date[2],thisMonth=date[3];
+        // console.log(year,month);
         // 获取两份月报数据
-      //   let allData=''
-      //   axios.post('/monthReportAll',{'startDate':'20210301'}).then(res=>{
-      //   allData=res.data 
-      // })
-      let allData=await that.getAll(date[0],date[1]) 
-      // await console.log(2);     
-      // console.log(allData);
-        // let lastData=that.getAll(date[6],date[7])
+      let allData=await that.getAll(date[0],date[1]), 
+       lastData=await that.getAll(date[6],date[7]);
+      // console.log(allData,lastData);       
         // 获取两次小组数据
         // groupData=[];
         // groupData.push(that.getGroup(date[0],date[1],'OA系统组'));
@@ -463,31 +481,46 @@ export default {
         // 设置模板变量的值
         let docxData = {
         year:year,
-        month:month,
+        thisMonth:thisMonth,
         lastMonth:date[4],
         beforeMonth:date[8],
         nextMonth:date[5],
-        _avgRuleRdt:1,
-        _passRateA:1,
-        _passRateB:1,
-        _passRateC:1,
-        _passRateWarn:1,
-        _ruleDocRate:1,
-        _ruleYlRate:1,
-        _ruleBgRate:1,
-        _rdtFullScoreRate:1,        
-        _warnDocRate:1,
-        _warnYlRate:1,        
-        _warnBgRate:1, 
-        _avgRuleRdtGroup:1,    
-        _warnGroupDocRate:1,
-        _warnGroupYlRate:1,
-        _warnGroupBgRate:1,
+        // _avgRuleRdt:Number(allData.avgRuleRdt)-Number(lastData.avgRuleRdt),
+        _versionSum:'',
+        _avgRuleRdt:'', 
+        _passRateA:'', 
+        _passRateB:'', 
+        _passRateC:'', 
+        _passRateWarn:'', 
+        _ruleDocRate:'', 
+        _ruleYlRate:'', 
+        _ruleBgRate:'', 
+        _rdtFullScoreRate:'',         
+        _warnDocRate:'', 
+        _warnYlRate:'',        
+        _warnBgRate:'', 
+        _avgRuleRdtGroup:'',    
+        _warnGroupDocRate:'',
+        _warnGroupYlRate:'',
+        _warnGroupBgRate:'',
         };
+        for(let key in docxData){
+          if(/_\w*/.test(key)){
+            docxData[key]=allData[key.substring(1,)]-lastData[key.substring(1,)]
+            if(docxData[key]>0){
+            docxData[key]='提高'+(docxData[key]*100).toFixed(0)+'%'
+          }else if(docxData[key]===0){
+            docxData[key]='持平'
+          }else{
+            docxData[key]='下降'+(-docxData[key]*100).toFixed(0)+'%'
+          }
+          }
+          
+        }
         doc.setData({
-            ...docxData,...allData,
+            ...docxData,...that.exchangeData(allData),
         });
-        console.log(allData);
+        // console.log(docxData);
        try {
             // 用模板变量的值替换所有模板变量
             doc.render();
@@ -509,7 +542,7 @@ export default {
             mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         });
         // 将目标文件对象保存为目标类型的文件，并命名
-        saveAs(out, "部门质量报告"+year+'年'+month+"月.docx");
+        saveAs(out, "部门质量报告"+year+'年'+thisMonth+"月.docx");
        })
       //  console.log(year,month);
     },    
