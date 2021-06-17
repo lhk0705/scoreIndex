@@ -1,0 +1,85 @@
+let beforeStart,beforeEnd,startDate,endDate,
+      nextMonth, beforeMonth, 
+      //month为上一个月  
+      year=new Date().getFullYear(),month=new Date().getMonth(),lastMonth;
+      if(month===12){
+        startDate=year*10000+12*100+1;
+        endDate=(year+1)*10000+1*100+1;
+        beforeStart=year*10000+11*100+1;
+      }
+      else if(month===1){
+        startDate=year*10000+1*100+1;
+        endDate=year*10000+2*100+1;
+        beforeStart=(year-1)*10000+12*100+1;
+      }else{
+        startDate=year*10000+month*100+1;
+        endDate=year*10000+(month+1)*100+1;
+        beforeStart=year*10000+(month-1)*100+1;
+      }
+      beforeEnd=startDate
+      {// 
+      // if(date>16){
+      //   if(month===12){
+      //     startDate=(year-1)*10000+12*100+16;
+      //     endDate=year*10000+1*100+15;
+      //   }else{
+      //     startDate=year*10000+month*100+16;
+      //     endDate=year*10000+(month+1)*100+15
+      //   }
+      // }else if(month===1){
+      // startDate=(year-1)*10000+12*100+16
+      // endDate=year*10000+1*100+15   
+      // }else if(month===12){
+      //   startDate=(year-1)*10000+11*100+16;
+      //    endDate=(year-1)*10000+12*100+15
+      // }else{
+      //   startDate=year*10000+(month-1)*100+16;
+      //   endDate=year*10000+month*100+15  
+      // }
+      // // 求下一个月份
+      // endDate.toString().substring(4,6)==='12'?nextMonth='01':nextMonth=+endDate.toString().substring(4,6)+1;
+      // // 求上一份月报的日期
+      // let lastMonth=startDate.toString().substring(4,6),
+      // lastYear=startDate.toString().substring(0,4)
+      // // console.log(lastMonth);
+      // if( lastMonth==='01'){
+      //   beforeStart=(year-1)*10000+12*100+16;
+      //   beforeEnd=year*10000+1*100+15;
+      // }else if(lastMonth==='12'){
+      //   beforeStart=(year-1)*10000+(lastMonth-1)*100+16;
+      //   beforeEnd=(year-1)*10000+lastMonth*100+15;
+      // }else{
+      //   beforeStart=lastYear*10000+(lastMonth-1)*100+16;
+      //     beforeEnd=lastYear*10000+lastMonth*100+15;
+      // }
+      // beforeMonth=+beforeStart.toString().substring(4,6);
+      }
+      lastMonth=+beforeStart.toString().substring(4,6);
+      lastMonth==='01'?beforeMonth='12':beforeMonth=+lastMonth-1;
+      nextMonth=+endDate.toString().substring(4,6);      
+      // console.log(     
+      // '这个月的月报日期：'+startDate+'~'+endDate+
+      // '月报年月：'+
+      // startDate.toString().substring(0,4),
+      // startDate.toString().substring(4,6),      
+      // '上一个月：'+lastMonth+
+      // '下一个月：'+nextMonth+
+      // '前一个月：'+beforeMonth+
+      // '上个月的月报日期：'+beforeStart+'~'+beforeEnd,      
+      // );
+      return [String(startDate),
+      String(endDate),
+      +startDate.toString().substring(0,4),
+      +startDate.toString().substring(4,6),
+      String(lastMonth),
+      String(nextMonth),
+      String(beforeStart),
+      String(beforeEnd),
+      String(beforeMonth),      
+      // +lastMonth,
+      // +nextMonth,
+      // +beforeStart,
+      // +beforeEnd,      
+      // +beforeMonth,      
+      ]     
+    },

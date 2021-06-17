@@ -15,14 +15,20 @@
         <img src="static\QMS.jfif" alt="" class="img">
     </el-menu-item>
     <el-menu-item index="/">
-          质控总览
+          质量全景
         </el-menu-item>
     <el-menu-item index="/showin">
-          质控看板
+          质量看板
         </el-menu-item>
-      <el-menu-item index="/scoreIndex">
-          版本数据录入
+      <!-- <el-menu-item index="/scoreIndex">
+          数据录入
+        </el-menu-item> -->
+        <!-- <el-menu-item index="/scoreIndex">
+          质量报告
         </el-menu-item>
+        <el-menu-item index="/scoreIndex">
+          数据管理
+        </el-menu-item> -->
         <el-menu-item class="user">{{user}}
           <!-- <router-link to="/" @click="logOut">【退出】</router-link> -->
           <span @click="logOut">【退出】</span>

@@ -1,11 +1,35 @@
 <template>
-  <div ><strong>
+  <div>
+  <div>
+      <el-button :style="depS" @click="dep" size="mini">部门</el-button>
+      <el-button :style="sysS" @click="sys" size="mini">系统</el-button>
+      <el-select size="mini" v-show="this.show==='sys'" v-model="systemName">
+        <el-option
+            v-for="item in sysoptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          ></el-option>
+      </el-select>
+    </div>
+  <div v-if="this.show==='dep'">   
+    <strong>
     <h2>部门整体质量走势</h2></strong>
     <ve-line
     :data="mychart"
     :extend="extend"
     :title='title'
     ></ve-line>
+  </div>
+  <div v-else>
+    <strong>
+    <h2>系统质量走势</h2></strong>
+    <ve-line
+    :data="sysChart"
+    :extend="extend"
+    :title='title'
+    ></ve-line>
+  </div>
   </div>
 </template>
 
@@ -18,81 +42,29 @@ export default {
         series:{
             smooth:false
         }
-    }
-      
-      
-    return { 
-      
+    }     
+    return {
+      depS:{background:'white'},
+      sysS:{background:'rgb(224, 223, 223)'}, 
+      show:'dep',
+      systemName:'ERP集中门户',
       rounds:'',
       passrate:'',
       mychart: {
         columns: ["月份", "首轮通过率","平均验收轮次"],
         rows: [
-        //   { 状态: "已完成", 数量: 1333 },
-        //   { 状态: "未完成", 数量: 1222},
         ],
         
       },
-      
+      sysChart: {
+        columns: ["提测日期", "首轮通过率","验收轮次"],
+        rows: [
+        ],
+        
+      },
     };
   },
   methods:{
-    // getRounds(){
-    //   let data;
-    //   new Promise((resolve,reject)=>{
-    //     axios.post("/r_avg_mon",{'time':'20210301'}).then(res=>
-    //     {resolve(res.data.total)})
-    //   }).then(res=>{
-    //     data=res
-    //   })
-    //   console.log(data);
-    //   return data
-    // },
-    // getPass(time){
-    //   let passRate
-    //   axios.post("/p_avg_mon",{'time':time}).then(res=>{
-    //       passRate=res.data.total})
-    //       return passRate
-    // },
-
-    // 获取验收轮次\首轮通过率
-    // getLastTwelve(){    
-    //   for(let i=0;i<12;i++){
-
-    //     let month,time,passrate,rounds;
-    //     if(new Date().getMonth()-i>0){
-    //     month=new Date().getMonth()-i
-    //     time=String(new Date().getFullYear()*10000+(new Date().getMonth()-i)*100+1);
-    //     }else{
-    //       month=12+new Date().getMonth()-i
-    //       time=String((new Date().getFullYear()-1)*10000+(12+new Date().getMonth()-i)*100+1);
-    //     }
-    //     // console.log(time,this.getPass(time));  
-    //     // axios.all([this.getRounds(time),this.getPass(time)]).then(axios.spread((res1,res2)=>{
-    //     // 
-    //     // })) 
-    //     // this.mychart.rows.unshift({
-    //     //   月份: month+"月", 首轮通过率:this.getPass(time)  ,验收轮次:this.getRounds()
-    //     //   })       
-    //   axios.post("/r_avg_mon",{'time':time}).then(res=>{
-    //       // rounds=res.data.total
-    //       res.data.total==0?rounds=undefined:rounds=res.data.total 
-    //       axios.post("/p_avg_mon",{'time':time}).then(res=>{
-    //       // passrate=res.data.total 
-    //       res.data.total==0?passrate=undefined:passrate=res.data.total 
-    //       // console.log(rounds,passrate);  
-    //       // console.log(time); 
-    //       this.mychart.rows.unshift({
-    //       月份: month+"月", 首轮通过率: passrate,验收轮次:rounds
-    //       })          
-    // })                         
-    // })
-        
-              
-      
-    //   }
-
-    // },
    request(url,data){
      return new Promise((resolve,reject)=>{
        axios.post(url,data).then(res=>{
@@ -102,6 +74,7 @@ export default {
        })
      })
    },
+  //  获取部门数据
    async getPastTwelve(){
        for(let i=0;i<12;i++){
         let month,time,passrate,rounds;
@@ -117,21 +90,51 @@ export default {
         // passrate===undefined?passrate='无':passrate=passrate
         // rounds===undefined?rounds='无':rounds=passrate
         // console.log(passrate,rounds);
-       this.mychart.rows.unshift({
+        this.mychart.rows.unshift({
           月份: month+"月", 首轮通过率: passrate,平均验收轮次:rounds
           })   
    }
-   }
+   },
+  //  获取系统数据
+   async getSystem(systemName){
+        sysDate=await this.request("/sysDate",{'systemName':systemName})
+        rounds=await this.request("/sys_rounds",{'systemName':systemName})        
+        passrate=await this.request("/sys_pass",{'systemName':systemName})
+        // score=await this.request("/sys_score",{'systemName':systemName})
+        this.sysChart.rows.unshift({
+          提测日期: sysDate, 首轮通过率: passrate,验收轮次:rounds
+          })   
+   },
+  // 切换图表
+  dep(){
+    this.show='dep';
+    this.depS.background='white';
+    this.sysS.background='rgb(224, 223, 223)'
   },
-  mounted() {
-    // console.log(this.mychart.rows); 
+  sys(){
+    this.show='sys';
+    this.depS.background='rgb(224, 223, 223)'
+    this.sysS.background='white';
+  }, 
   },
   created(){
-    this.getPastTwelve()
+    this.getPastTwelve();
+    this.getSystem(this.systemName)
   },
   beforeDestroy(){
-    this.mychart.rows=[]
-  }
+    this.mychart.rows=[];
+    this.sysChart.rows=[]
+  },
+  computed: {
+    sysoptions() {
+      return this.$store.getters.getSys;
+    },
+  },
+  watch:{
+    systemName(newV,oldV){
+      this.getSystem(newV)
+    }
+  },
   
 };
 </script>
@@ -141,4 +144,11 @@ h2{
   text-align: center;
   font-size: 28;
 }
+.btn{
+  float: left;
+  /* background-color: rgb(224, 223, 223); */
+}
+/* .btn:hover{
+  cursor: pointer;
+} */
 </style>

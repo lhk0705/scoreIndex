@@ -1,5 +1,5 @@
 <template>
-  <div class="overall">
+  <div >
     <!-- 方案一 -->
     <div class="row">
       <el-row >
@@ -107,7 +107,7 @@ export default {
       // zb: "OA办公组",
       groupName:'OA办公组',
       show:'group',
-      value:'部门质量情况',
+      value:'切换成部门质量情况',
       activeName: "first",
     };
   },
@@ -125,13 +125,13 @@ export default {
   },
   methods:{
     change(){
-      if(this.value=='部门质量情况'){
+      if(this.value=='切换成部门质量情况'){
       this.show='nogroup'
-      this.value='小组情况'
+      this.value='切换成小组情况'
       }
       else{
         this.show='group'
-      this.value='部门质量情况'
+      this.value='切换成部门质量情况'
       }
     },
     groupChange(newV){
@@ -150,8 +150,10 @@ div {
 
 .row{
   width: 90%;
-  border: 1px solid black;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 8px;
   margin: auto;
+  background-color: white;
   /* text-align: left; */
 }
 *{

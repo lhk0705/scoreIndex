@@ -84,7 +84,7 @@ watch:{
              list=this.$store.getters.getTestPerson
         }else if(this.dataItem==='账号'){
            list=this.$store.getters.getAllUser
-        }else if(newV==='组别'){
+        }else if(this.dataItem==='组别'){
              list=this.$store.getters.getGroup
         }else{
              list=this.$store.getters.getSys

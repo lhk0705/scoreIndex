@@ -644,7 +644,7 @@ export default {
       let data=this.getAllData()
       console.log(data.xq_time);      
       let randomtestData=this.$refs.randomtest,testdata=this.$refs.test;
-      JSZipUtils.getBinaryContent("static/质控测试阶段通报模板-导出.docx", function(error, content) {
+      JSZipUtils.getBinaryContent("static/模板/质控测试阶段通报模板-导出.docx", function(error, content) {
         // 抛出异常
         if (error) {
             throw error;
@@ -726,7 +726,7 @@ export default {
       let data=this.getAllData()
       let randomtestdata=this.$refs.randomtest
       let testdata=this.$refs.test
-      JSZipUtils.getBinaryContent("static/质控验收报告模板-导出.docx", function(error, content) {
+      JSZipUtils.getBinaryContent("static/模板/质控验收报告模板-导出.docx", function(error, content) {
         // 抛出异常
         if (error) {
             throw error;

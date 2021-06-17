@@ -329,56 +329,9 @@ export default {
         beforeStart=year*10000+(month-1)*100+1;
       }
       beforeEnd=startDate
-      {// 
-      // if(date>16){
-      //   if(month===12){
-      //     startDate=(year-1)*10000+12*100+16;
-      //     endDate=year*10000+1*100+15;
-      //   }else{
-      //     startDate=year*10000+month*100+16;
-      //     endDate=year*10000+(month+1)*100+15
-      //   }
-      // }else if(month===1){
-      // startDate=(year-1)*10000+12*100+16
-      // endDate=year*10000+1*100+15   
-      // }else if(month===12){
-      //   startDate=(year-1)*10000+11*100+16;
-      //    endDate=(year-1)*10000+12*100+15
-      // }else{
-      //   startDate=year*10000+(month-1)*100+16;
-      //   endDate=year*10000+month*100+15  
-      // }
-      // // 求下一个月份
-      // endDate.toString().substring(4,6)==='12'?nextMonth='01':nextMonth=+endDate.toString().substring(4,6)+1;
-      // // 求上一份月报的日期
-      // let lastMonth=startDate.toString().substring(4,6),
-      // lastYear=startDate.toString().substring(0,4)
-      // // console.log(lastMonth);
-      // if( lastMonth==='01'){
-      //   beforeStart=(year-1)*10000+12*100+16;
-      //   beforeEnd=year*10000+1*100+15;
-      // }else if(lastMonth==='12'){
-      //   beforeStart=(year-1)*10000+(lastMonth-1)*100+16;
-      //   beforeEnd=(year-1)*10000+lastMonth*100+15;
-      // }else{
-      //   beforeStart=lastYear*10000+(lastMonth-1)*100+16;
-      //     beforeEnd=lastYear*10000+lastMonth*100+15;
-      // }
-      // beforeMonth=+beforeStart.toString().substring(4,6);
-      }
       lastMonth=+beforeStart.toString().substring(4,6);
       lastMonth==='01'?beforeMonth='12':beforeMonth=+lastMonth-1;
       nextMonth=+endDate.toString().substring(4,6);      
-      // console.log(     
-      // '这个月的月报日期：'+startDate+'~'+endDate+
-      // '月报年月：'+
-      // startDate.toString().substring(0,4),
-      // startDate.toString().substring(4,6),      
-      // '上一个月：'+lastMonth+
-      // '下一个月：'+nextMonth+
-      // '前一个月：'+beforeMonth+
-      // '上个月的月报日期：'+beforeStart+'~'+beforeEnd,      
-      // );
       return [String(startDate),
       String(endDate),
       +startDate.toString().substring(0,4),
@@ -387,12 +340,7 @@ export default {
       String(nextMonth),
       String(beforeStart),
       String(beforeEnd),
-      String(beforeMonth),      
-      // +lastMonth,
-      // +nextMonth,
-      // +beforeStart,
-      // +beforeEnd,      
-      // +beforeMonth,      
+      String(beforeMonth),         
       ]     
     },
     // 获取小组数据
@@ -414,40 +362,88 @@ export default {
       }).catch(err=>{
         reject(err)
       }) 
-      // console.log(res.data);
-      // console.log(1);
-      // return res.data
+
 
       })          
     },
-    // 转换月报数据
-    exchangeData(obj){
-      let noData={
-        inPlan:'',
-        outPlan:'',
-        passRateB:'无二轮验收的版本',
-        passRateC:'无三轮验收的版本',
-        passRateWarn:'',
-      }
-    for(let key in obj){
+    // 对月报数据进行过滤
+    exchangeData(obj1,obj2){
+      const noData={
+        versionSum:'无提测版本',
+        versionRule:'无常规版本',
+        versionWarnTc:'无紧急版本',
+        avgRuleRdt:'无常规版本',
+        passRateA:'无首轮验收版本',
+        passRateB:'无二轮验收版本',
+        passRateC:'无三轮验收版本',
+        versionWarn:'无',
+        passRateWarn:'无紧急版本',
+        inPlan:'无计划内版本',
+        outPlan:'无计划外版本',
+        ruleDocRate:'无常规版本',
+        ruleYlRate:'无常规版本',
+        ruleBgRate:'无常规版本',
+        rdtFullScore:'无常规版本',
+        rdtFullScoreRate:'无常规版本',
+        passVerA:'无常规版本',
+        passRateA:'无常规版本',
+        passVerB:'无常规版本',
+        passRateB:'无常规版本',
+        passVerC:'无常规版本',
+        passRateC:'无常规版本',
+        warnDocRate:'无紧急版本',
+        warnYlRate:'无紧急版本',
+        warnBgRate:'无紧急版本',
+        passRateWarn:'无紧急版本',
+        rdtResult:'无常规版本'
+      }      
+    for(let key in obj1){             
+        // null情况转换
+        if(obj1[key]===null||obj1[key]===0){
+          obj1[key]=noData[key];
+          obj2['_'+key]=''    
+        }else{
         // 百分率转换
         if(/\w*Rate\w*/.test(key)||/\w*Rdt\w*/.test(key)){
-            obj[key]=obj[key]*100+'%'            
+            obj1[key]=obj1[key]*100+'%'          
         }
-        // null情况转换
-        if(obj[key]===null){
-          obj[key]='b'    
+        let hasData={
+        versionSum:'提测版本共'+obj1.versionSum+'个',
+        versionRule:'常规版本'+obj1.versionRule+'个',
+        versionWarnTc:obj1.versionWarnTc+'个紧急版本',
+        avgRuleRdt:'整体抽测通过率为'+obj1.avgRuleRdt,
+        passRateA:'首轮验收通过率为'+obj1.passRateA,
+        passRateB:'二轮验收通过率为'+obj1.passRateB,
+        passRateC:'三轮验收通过率为'+obj1.passRateC,
+        versionWarn:'进行了'+obj1.versionWarn+'个',
+        passRateWarn:'整体抽测通过率为'+obj1.passRateWarn,
+        inPlan:obj1.inPlan+'个计划内',
+        outPlan:obj1.outPlan+'个计划外',
+        ruleDocRate:'需求文档提交率'+obj1.ruleDocRate,
+        ruleYlRate:'测试用例提交率'+obj1.ruleYlRate,
+        ruleBgRate:'测试报告提交率'+obj1.ruleBgRate,
+        rdtFullScore:'抽测满分的版本有'+obj1.rdtFullScore+'个',
+        rdtFullScoreRate:'占总版本数量的'+obj1.rdtFullScoreRate,
+        passVerA:'第一轮验收通过'+obj1.passVerA+'个版本',
+        passVerB:'第二轮验收通过'+obj1.passVerB+'个版本',
+        passVerC:'第三轮验收通过'+obj1.passVerC+'个版本',
+        warnDocRate:'需求文档提交率'+obj1.warnDocRate,
+        warnYlRate:'测试用例提交率'+obj1.warnYlRate,
+        warnBgRate:'测试报告提交率'+obj1.warnBgRate,
+        passRateWarn:'整体抽测通过率为'+obj1.passRateWarn,
+        rdtResult:'用例抽测情况整体'+obj1.rdtResult
+      } 
+         obj1[key]=hasData[key] 
         }
-
       }
-      return obj
+      return {...obj1,...obj2}
     },
     // 导出为月报
      exportToReport(){
       let that=this
       let date=that.getDate()
       // that.getDate()
-      JSZipUtils.getBinaryContent("static/部门质量报告模板.docx",async function(error, content) {
+      JSZipUtils.getBinaryContent("static/模板/部门质量报告模板.docx",async function(error, content) {
         // 抛出异常
         if (error) {
             throw error;
@@ -458,10 +454,10 @@ export default {
         let doc = new docxtemplater().loadZip(zip);
         // 获取月报涉及月份数据
         let year=date[2],thisMonth=date[3];
-        // console.log(year,month);
         // 获取两份月报数据
-      let allData=await that.getAll(date[0],date[1]), 
-       lastData=await that.getAll(date[6],date[7]);
+        let allData=await that.getAll(date[0],date[1]), 
+        lastData=await that.getAll(date[6],date[7]);
+        allData.rdtFullScoreRate>0.75?allData['rdtResult']='良好':allData['rdtResult']='一般'
       // console.log(allData,lastData);       
         // 获取两次小组数据
         // groupData=[];
@@ -485,7 +481,6 @@ export default {
         lastMonth:date[4],
         beforeMonth:date[8],
         nextMonth:date[5],
-        // _avgRuleRdt:Number(allData.avgRuleRdt)-Number(lastData.avgRuleRdt),
         _versionSum:'',
         _avgRuleRdt:'', 
         _passRateA:'', 
@@ -499,28 +494,29 @@ export default {
         _warnDocRate:'', 
         _warnYlRate:'',        
         _warnBgRate:'', 
-        _avgRuleRdtGroup:'',    
-        _warnGroupDocRate:'',
-        _warnGroupYlRate:'',
-        _warnGroupBgRate:'',
+        // _avgRuleRdtGroup:'',    
+        // _warnGroupDocRate:'',
+        // _warnGroupYlRate:'',
+        // _warnGroupBgRate:'',
         };
+        // 对环比数据进行过滤
         for(let key in docxData){
           if(/_\w*/.test(key)){
             docxData[key]=allData[key.substring(1,)]-lastData[key.substring(1,)]
             if(docxData[key]>0){
-            docxData[key]='提高'+(docxData[key]*100).toFixed(0)+'%'
+            docxData[key]='，环比'+docxData.lastMonth+'月提高'+(docxData[key]*100).toFixed(0)+'%'
           }else if(docxData[key]===0){
-            docxData[key]='持平'
+            docxData[key]='，环比'+docxData.lastMonth+'月持平'
+          }else if(docxData[key]<0){
+            docxData[key]='，环比'+docxData.lastMonth+'月下降'+(-docxData[key]*100).toFixed(0)+'%'
           }else{
-            docxData[key]='下降'+(-docxData[key]*100).toFixed(0)+'%'
+            docxData[key]='，无环比数据（'+docxData.lastMonth+'月无版本）'
           }
-          }
-          
-        }
+          }       
+        }       
         doc.setData({
-            ...docxData,...that.exchangeData(allData),
+          ...that.exchangeData(allData,docxData),
         });
-        // console.log(docxData);
        try {
             // 用模板变量的值替换所有模板变量
             doc.render();
@@ -549,7 +545,6 @@ export default {
     } ,      
     created(){
       this.setData()
-      // this.getDate()
     }
 }
 </script>
