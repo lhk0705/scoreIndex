@@ -64,12 +64,10 @@ import axios from 'axios'
       },
       FST_TEST(){
         let time=this.time();
-        this.getGroup(time,'OA办公组');
-        this.getGroup(time,'人力党建组');
-        this.getGroup(time,'规划管理组');
-        this.getGroup(time,'技术研发组');
-        this.getGroup(time,'能力平台组');
-        this.getGroup(time,'内部支撑组');
+        let group=this.$store.getters.getGroup;
+        for(let item of group){
+          this.getGroup(time,item.value);
+        }
 
       }
     }

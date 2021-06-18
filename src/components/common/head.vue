@@ -23,12 +23,12 @@
       <!-- <el-menu-item index="/scoreIndex">
           数据录入
         </el-menu-item> -->
-        <el-menu-item index="/report">
+        <!-- <el-menu-item index="/report">
           质量报告
         </el-menu-item>
         <el-menu-item index="/data" v-show="user.role==='0'">
           数据管理
-        </el-menu-item>
+        </el-menu-item> -->
         <el-menu-item class="user">{{user.name}}
           <!-- <router-link to="/" @click="logOut">【退出】</router-link> -->
           <span @click="logOut">【退出】</span>
