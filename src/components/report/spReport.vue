@@ -1,5 +1,5 @@
 <template>
-  
+  <div>spReport</div>
 </template>
 
 <script>

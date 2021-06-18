@@ -44,7 +44,7 @@ export default {
     rounds:'',
     title:{
           text:'部门季度版本数',
-            left:'15pm',
+            left:'30pm',
             top:30
     },
     extend:{

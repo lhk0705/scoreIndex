@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="dataManage">
         <div class="list">
           <el-select size="mini" class="select" v-model="dataItem">
               <el-option
@@ -168,5 +168,9 @@ li{
 .button{
     position:relative;
     top:20px
+}
+.dataManage{
+    width: 80%;
+    margin: 0 auto;
 }
 </style>

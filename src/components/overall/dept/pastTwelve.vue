@@ -23,7 +23,7 @@
   </div>
   <div v-else>
     <strong>
-    <h2>系统质量走势</h2></strong>
+    <h2>系统版本质量走势</h2></strong>
     <ve-line
     :data="sysChart"
     :extend="extend"
@@ -41,6 +41,10 @@ export default {
         'xAxis.0.axisLabel.rotate': 45,
         series:{
             smooth:false
+        },
+        grid:{
+          width:'75%',
+          left:'center'
         }
     }     
     return {

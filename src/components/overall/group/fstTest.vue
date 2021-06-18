@@ -17,10 +17,10 @@ import axios from 'axios'
         title:{
           text:"",
           left:"center",
-          // top:30
+          top:30
         },
         legend:{
-          top:"40px"
+          top:"60px"
         }
       },
         chartData: {

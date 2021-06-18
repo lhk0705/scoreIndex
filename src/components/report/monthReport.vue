@@ -1,5 +1,7 @@
 <template>
-  
+  <div>
+      monthReport
+  </div>
 </template>
 
 <script>

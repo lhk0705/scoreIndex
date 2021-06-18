@@ -41,7 +41,7 @@ export default {
     },
       legend: {
         orient: "vertical",
-        right: 60,
+        right: 40,
         top:80,
         // width: 20,
         itemWidth: 10,

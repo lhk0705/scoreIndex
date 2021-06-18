@@ -1,18 +1,39 @@
 <template>
   <div >
+    
     <!-- 方案一 -->
     <div class="row">
+      <div>
+      <el-button :style="depS" @click="dep" size="mini">部门</el-button>
+      <el-button :style="grpS" @click="grp" size="mini">小组</el-button>
+      <group @groupChange='groupChange' v-show="show=='group'"></group>
+      <!-- <el-select size="mini" v-show="this.show==='sys'" v-model="systemName">
+        <el-option
+            v-for="item in sysoptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          ></el-option>
+      </el-select> -->
+    </div>
       <el-row >
-        <label>组别:</label><group @groupChange='groupChange'></group>
-       <el-button @click="change" size="mini">{{value}}</el-button>      
+        <!-- <label>组别:</label> -->
+       <!-- <el-button @click="change" size="mini">{{value}}</el-button>       -->
       </el-row>
       <el-row class="row1">
-        <el-col :span="5">
+        <el-col :span="5" v-if="show=='group'">
           <groupmon :prop="groupName"></groupmon>
         </el-col>
-        <el-col :span="5"> 
+        <el-col :span="5" v-else>
+        <randomTest></randomTest>
+      </el-col>
+      
+        <el-col :span="5" v-if="show=='group'"> 
           <groupseason :prop="groupName"></groupseason>
         </el-col >
+        <el-col :span="5" v-else>
+        <fstTest></fstTest>
+      </el-col>
         <el-col  :span="5" v-if="show=='group'">
           <groupyear :prop="groupName"></groupyear>
         </el-col>
@@ -30,13 +51,8 @@
     </div>
     <br />
     <el-row class="row">
-        <el-col :span="5">
-        <randomTest></randomTest>
-      </el-col>
-      <el-col :span="5">
-        <fstTest></fstTest>
-      </el-col> 
-      <el-col :span="11">
+         
+      <el-col >
         <pastTwelve></pastTwelve>
       </el-col>     
     </el-row>
@@ -106,9 +122,12 @@ export default {
     return {
       // zb: "OA办公组",
       groupName:'OA办公组',
-      show:'group',
+      show:'dep',
       value:'切换成部门质量情况',
       activeName: "first",
+      depS:{background:'white'},
+      grpS:{background:'rgb(224, 223, 223)'}, 
+      
     };
   },
   components: {
@@ -124,16 +143,27 @@ export default {
     group
   },
   methods:{
-    change(){
-      if(this.value=='切换成部门质量情况'){
-      this.show='nogroup'
-      this.value='切换成小组情况'
-      }
-      else{
-        this.show='group'
-      this.value='切换成部门质量情况'
-      }
-    },
+    // change(){
+    //   if(this.value=='切换成部门质量情况'){
+    //   this.show='nogroup'
+    //   this.value='切换成小组情况'
+    //   }
+    //   else{
+    //     this.show='group'
+    //   this.value='切换成部门质量情况'
+    //   }
+    // },
+    // 切换图表
+  dep(){
+    this.show='dep';
+    this.depS.background='white';
+    this.grpS.background='rgb(224, 223, 223)'
+  },
+  grp(){
+    this.show='group';
+    this.depS.background='rgb(224, 223, 223)'
+    this.grpS.background='white';
+  },
     groupChange(newV){
       this.groupName=newV
     }
@@ -162,6 +192,9 @@ div {
 .row1>div{
   /* border: 1px solid black; */
   width: 20%;
+  position: relative;
+  bottom:30px;
+  height: 330px;
 }
 /* .tab{
   width: 85%;

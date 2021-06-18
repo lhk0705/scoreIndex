@@ -12,15 +12,15 @@ import axios from 'axios'
       return {
       extend:{
         grid:{
-          top:"130px"
+          top:130
         },
         title:{
           text:"本月抽测通过率",
           left:"center",
-          // top:30
+          top:30
         },
         legend:{
-          top:"40px"
+          top:60
         }
       },
         chartData: {

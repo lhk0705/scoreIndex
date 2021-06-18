@@ -10,13 +10,37 @@ let overall=()=>import("../components/overall/overall")
 let newTask=()=>import("../components/show/newTask.vue")
 let myTask=()=>import("../components/show/myTask.vue")
 let lastPeriod=()=>import("../components/show/lastPeriod.vue")
-let data=()=>import("../components/show/data.vue")
+let data=()=>import("../components/data/data.vue")
+let report=()=>import("../components/report/report.vue")
+let monthReport=()=>import("../components/report/monthReport.vue")
+let spReport=()=>import("../components/report/spReport.vue")
 
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/report',
+      name: 'report',
+      component: report,
+      redirect:'/monthReport',
+      meta:{
+        keepAlive:true
+      },
+      children:[
+        {
+          path: '/monthReport',
+          name: 'monthReport',
+          component: monthReport
+        },
+        {
+          path: '/spReport',
+          name: 'spReport',
+          component: spReport
+        },
+      ]
+    },
     {
       path: '/scoreIndex',
       name: 'scoreIndex',
@@ -64,13 +88,14 @@ export default new Router({
           name: 'lastPeriod',
           component: lastPeriod
         },
-        {
+        
+      ]
+    },
+    {
           path: '/data',
           name: 'data',
           component: data
         },
-      ]
-    },
     {
       path: '/',
       name: 'overall',

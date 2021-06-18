@@ -71,12 +71,12 @@
             </span>            
       </el-menu-item >
       </el-submenu>
-      <el-menu-item class="nav" index="/data" v-show="user.role==='0'" >
+      <!-- <el-menu-item class="nav" index="/data" v-show="user.role==='0'" >
         <i class="el-icon-menu"></i>
         <span slot="title"> 
             数据管理
             </span>            
-      </el-menu-item >
+      </el-menu-item > -->
       
     </el-menu>
 </template>

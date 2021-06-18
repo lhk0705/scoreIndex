@@ -8,7 +8,7 @@
       @select="handleSelect"
       background-color="rgb(42, 142, 230)"
       text-color="white"
-      active-text-color="black"
+      
       :router='true'
     >
     <el-menu-item  index="/">
@@ -23,13 +23,13 @@
       <!-- <el-menu-item index="/scoreIndex">
           数据录入
         </el-menu-item> -->
-        <!-- <el-menu-item index="/scoreIndex">
+        <el-menu-item index="/report">
           质量报告
         </el-menu-item>
-        <el-menu-item index="/scoreIndex">
+        <el-menu-item index="/data" v-show="user.role==='0'">
           数据管理
-        </el-menu-item> -->
-        <el-menu-item class="user">{{user}}
+        </el-menu-item>
+        <el-menu-item class="user">{{user.name}}
           <!-- <router-link to="/" @click="logOut">【退出】</router-link> -->
           <span @click="logOut">【退出】</span>
         </el-menu-item>
@@ -61,7 +61,7 @@ export default {
       },
       computed:{
         user(){
-          return this.$store.getters.getUser.name
+          return this.$store.getters.getUser
         }
       }
 };
