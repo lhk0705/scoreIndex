@@ -242,6 +242,8 @@ export default {
       let docdata=this.$refs.doc
       let randomtestdata=this.$refs.randomtest
       let testdata=this.$refs.test
+      let submitDate='1900-01-01'
+      // console.log(submitDate);
       //判空
         if(
           headdata.groupName==''||
@@ -374,8 +376,9 @@ export default {
           else{
             //先传第一轮数据
             if(testdata.b_ylzxgs==0) {
-              if(testdata.a_jieguo=="通过"){this.status=1}
+              if(testdata.a_jieguo=="通过"){this.status=1;submitDate=new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate()}
               let data={
+                'submitDate':submitDate,
                   "banbenguimo":headdata.banbenguimo,
                   "groupName":headdata.groupName,
                   "person":headdata.stateperson,
@@ -465,17 +468,19 @@ export default {
                   "yanshoudefen":testdata.yanshoudefen,
                   "zongfen":Number(this.banbendefen)
                 }
+                // console.log(data);
               axios.post('/addSorce',data)
             .then((res)=>{console.log('传输成功');})
             alert("提交成功！")
                 // this.$router.go(0)
-          console.log(data);  
+          // console.log(data);  
             }
             else{
             //二轮数据提交
                 if (testdata.c_ylzxgs==0) {
-                  if(testdata.b_jieguo=="通过"){this.status=1}
+                  if(testdata.b_jieguo=="通过"){this.status=1;submitDate=new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate()}
                   let data={
+                    'submitDate':submitDate,
                     "banbenhao":this.banbenhao,
                     "b_begin":testdata.b_begin,
                     "b_end":testdata.b_end,
@@ -492,6 +497,7 @@ export default {
                     "yanshoudefen":testdata.yanshoudefen,
                     "zongfen":Number(this.banbendefen)
                     }
+                    // console.log(data);
                   axios.post('/updateSorce',data)
                   .then((res)=>{console.log('传输成功');})  
                     // this.$router.go(0)
@@ -500,8 +506,9 @@ export default {
                 }
                 //三轮数据提交
                 else{
-                  if(testdata.c_jieguo=="通过"){this.status=1}
+                  if(testdata.c_jieguo=="通过"){this.status=1;submitDate=new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate()}
                     let data={
+                      'submitDate':submitDate,
                       "banbenhao":this.banbenhao,
                       "c_begin":testdata.c_begin,
                       "c_end":testdata.c_end,
@@ -518,10 +525,10 @@ export default {
                       "yanshoudefen":testdata.yanshoudefen,
                       "zongfen":Number(this.banbendefen)
                         }
+                        // console.log(data);
                     axios.post('/updateCSorce',data)
                     .then((res)=>{console.log('传输成功');})        
                   alert("提交成功！")
-                  console.log();
                   // this.$router.go(0)
                   }
                  
