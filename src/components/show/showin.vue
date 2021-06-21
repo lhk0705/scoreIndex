@@ -18,7 +18,7 @@
 <script>
 // import finish from "./finish";
 // import ing from "./ing";
-import leftnav from "./left-nav";
+import leftnav from "./showCommon/left-nav.vue";
 export default {
     components:{
         // "show-finish":finish,

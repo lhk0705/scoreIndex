@@ -4,16 +4,19 @@ import Router from 'vue-router'
 let scoreIndex=()=>import ('../components/score/scoreIndex.vue')
 let showin=()=>import ("../components/show/showin.vue")
 let ing=()=>import("../components/show/ing")
-let finish=()=>import("../components/show/finish.vue")
-let warn=()=>import("../components/show/warn.vue")
+let finish=()=>import("../components/show/finished/finish.vue")
+let warn=()=>import("../components/show/finished/warn.vue")
 let overall=()=>import("../components/overall/overall")
-let newTask=()=>import("../components/show/newTask.vue")
-let myTask=()=>import("../components/show/myTask.vue")
+let newTask=()=>import("../components/show/task/newTask.vue")
+let myTask=()=>import("../components/show/task/myTask.vue")
 let lastPeriod=()=>import("../components/show/lastPeriod.vue")
+let systemTable=()=>import("../components/show/systemTable.vue")
 let data=()=>import("../components/data/data.vue")
 let report=()=>import("../components/report/report.vue")
-let monthReport=()=>import("../components/report/monthReport.vue")
-let spReport=()=>import("../components/report/spReport.vue")
+let monthReport=()=>import("../components/report/reports/monthReport.vue")
+let spReport=()=>import("../components/report/reports/spReport.vue")
+let testReport=()=>import("../components/report/reports/testReport.vue")
+let roundReport=()=>import("../components/report/reports/roundReport.vue")
 
 
 Vue.use(Router)
@@ -33,6 +36,16 @@ export default new Router({
           path: '/monthReport',
           name: 'monthReport',
           component: monthReport
+        },
+        {
+          path: '/roundReport',
+          name: 'roundReport',
+          component: roundReport
+        },
+        {
+          path: '/testReport',
+          name: 'testReport',
+          component: testReport
         },
         {
           path: '/spReport',
@@ -62,6 +75,11 @@ export default new Router({
           path: '/ing',
           name: 'ing',
           component: ing
+        },
+        {
+          path: '/systemTable',
+          name: 'systemTable',
+          component: systemTable
         },
         {
           path: '/finish',

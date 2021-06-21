@@ -183,7 +183,7 @@
 </template>
 
 <script>
-import search from "./serach";
+import search from "./showCommon/serach";
 import axios from "axios";
 import docxtemplater from 'docxtemplater';
 import PizZip from 'pizzip';

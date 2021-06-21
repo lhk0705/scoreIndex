@@ -139,7 +139,7 @@
 
 <script>
 import axios from 'axios';
-import group from '../common/formComponents/group'
+import group from '@/components/common/formComponents/group.vue'
 export default {
   components:{
     group
@@ -237,7 +237,7 @@ export default {
 </script>
 
 <style scoped>
-@import "../score/scoreIndex.css";
+@import "../../score/scoreIndex.css";
 .ccr{
     position:relative;
     left:13%;

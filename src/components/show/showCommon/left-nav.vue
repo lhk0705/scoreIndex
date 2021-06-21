@@ -11,7 +11,7 @@
       <template slot="title" >
         <i class="el-icon-menu"></i>
         <span slot="title" >  
-            已完成 
+            已完成验收的版本 
             </span>
       </template>
       <el-menu-item class="nav"  index="/finish">
@@ -30,13 +30,20 @@
       <el-menu-item class="nav" index="/ing">
         <i class="el-icon-menu"></i>
         <span slot="title"> 
-            验收中
+            验收中的版本
             </span>            
       </el-menu-item >
+      
       <el-menu-item class="nav" index="/lastPeriod">
         <i class="el-icon-menu"></i>
         <span slot="title"> 
-            上一周期质量数据
+            上一周期版本
+            </span>            
+      </el-menu-item >
+      <el-menu-item class="nav" index="/systemTable">
+        <i class="el-icon-menu"></i>
+        <span slot="title"> 
+            系统专项数据
             </span>            
       </el-menu-item >
       <el-menu-item class="nav" index="/newTask" v-show="user.role==='1'">

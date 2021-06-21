@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import group from '../common/formComponents/group'
+import group from '@/components/common/formComponents/group.vue'
 export default {
   props:{prop:{
     type:Array,
