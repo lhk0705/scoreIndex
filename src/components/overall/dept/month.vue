@@ -32,7 +32,7 @@ export default {
     }),
       (this.legend = {
         // orient: "vertical",
-        right: 20,
+        right: 'center',
         top:70,
         // width: 20,
         itemWidth: 10,
