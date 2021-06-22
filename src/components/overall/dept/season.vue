@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div  class="ring">
     <ve-ring
       :data="mychart"
       :settings="chartSettings"
       :legend="legend"
-      width="300px"
+      width="100%"
       height="300px"
         :title="title"
         :extend="extend"
@@ -19,7 +19,7 @@ import axios from "axios";
 export default {
   data() {
     (this.chartSettings = {
-      radius: ["40%", "60%"],
+      radius: ["50%", "65%"],
       label:{
               show:false
           },
@@ -29,9 +29,9 @@ export default {
         //   }]
     }),
       (this.legend = {
-        orient: "vertical",
+        // orient: "vertical",
         right: 20,
-        top:80,
+        top:70,
         // width: 20,
         itemWidth: 10,
         itemHeight: 10,
@@ -44,13 +44,13 @@ export default {
     rounds:'',
     title:{
           text:'部门季度版本数',
-            left:'30pm',
+            left:'center',
             top:30
     },
     extend:{
           series:{
             //   type:'pie',
-              right:10,
+              // right:10,
             //   emphasis: {
                 label: {
                     show: true,
@@ -155,5 +155,8 @@ export default {
 </script>
 
 <style scoped>
-
+.ring{
+  position: relative;
+  bottom:30px
+}
 </style>

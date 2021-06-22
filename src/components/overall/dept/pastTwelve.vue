@@ -1,5 +1,6 @@
 <template>
   <div>
+    <br>
   <div>
       <el-button :style="depS" @click="dep" size="mini">部门</el-button>
       <el-button :style="sysS" @click="sys" size="mini">系统</el-button>

@@ -3,7 +3,7 @@
     
     <!-- 方案一 -->
     <div class="row">
-      <div>
+      <div class="button">
       <el-button :style="depS" @click="dep" size="mini">部门</el-button>
       <el-button :style="grpS" @click="grp" size="mini">小组</el-button>
       <group @groupChange='groupChange' v-show="show=='group'"></group>
@@ -50,12 +50,14 @@
       </el-row>
     </div>
     <br />
-    <el-row class="row">
-         
+    <div class="row">
+     <el-row class="row2">
       <el-col >
-        <pastTwelve></pastTwelve>
-      </el-col>     
-    </el-row>
+        <div class="line">
+        <pastTwelve></pastTwelve></div>
+      </el-col>
+      </el-row>         
+    </div>
     <!-- 方案二 -->
     <!-- <el-tabs  class="tab" v-model="activeName" type="card" >
       <el-tab-pane label="部门" name="first">
@@ -175,26 +177,50 @@ export default {
 
 <style scoped>
 div {
-  margin: 10px 2%;
+  margin: 10px 0.5%;
 }
-
+.button{
+  width:98%;
+  /* border: 1px solid rgb(197, 197, 197); */
+  border-radius: 4px;
+  background-color: white;
+  margin:auto;
+  position: relative;
+  top:20px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .row{
   width: 90%;
-  border: 1px solid rgb(197, 197, 197);
+  /* border: 1px solid rgb(197, 197, 197); */
   border-radius: 8px;
   margin: auto;
-  background-color: white;
+  /* background-color: white; */
+  height: 100%;
   /* text-align: left; */
+  position: relative;
+  bottom:20px
 }
 *{
   font-size: 12px; 
 }
 .row1>div{
-  /* border: 1px solid black; */
-  width: 20%;
+  /* border: 1px solid rgb(197, 197, 197); */
+  border-radius: 4px;
+  background-color: white;
+  width: 24%;
   position: relative;
-  bottom:30px;
+  /* bottom:30px; */
   height: 330px;
+  
+}
+.line{
+background-color: white;
+position: relative;
+bottom:50px;
+right:0.5%;
 }
 /* .tab{
   width: 85%;

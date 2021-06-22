@@ -1,10 +1,10 @@
 <template>
-  <div  v-if="show">
+  <div  v-if="show" class="ring">
     <ve-ring
       :data="mychart"
       :settings="chartSettings"
       :legend="legend"
-      width="120%"
+      width="100%"
       height="300px"
         :title="title"
         :extend="extend"
@@ -30,15 +30,15 @@ export default {
   data() {
     return {
       chartSettings : {
-      radius: ["40%", "60%"],
+      radius: ["50%", "65%"],
       label:{
               show:false
           },        
     },
       legend: {
-        orient: "vertical",
-        right: 40,
-        top:80,
+        // orient: "vertical",
+        right: 10,
+        top:70,
         // width: 20,
         itemWidth: 10,
         itemHeight: 10,
@@ -48,13 +48,12 @@ export default {
       } ,
       title:{
             text:'历史版本数',
-            left:'35%',
+            left:'center',
             top:30     
       },            
         rounds:'',
         extend:{
           series:{           
-              right:10,
                 label: {
                     show: true,
                     position:'center',
@@ -192,5 +191,8 @@ export default {
 p{
   text-align: center;
 }
-
+.ring{
+  position: relative;
+  bottom:30px
+}
 </style>

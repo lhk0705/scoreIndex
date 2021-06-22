@@ -1,5 +1,6 @@
 <template>
-  <ve-histogram 
+  <ve-histogram
+  class="his" 
   :data="chartData"
   :extend="extend"
   ></ve-histogram>
@@ -20,7 +21,7 @@ import axios from 'axios'
           top:30
         },
         legend:{
-          top:60
+          top:65
         }
       },
         chartData: {
@@ -70,5 +71,8 @@ import axios from 'axios'
 </script>
 
 <style scoped>
-
+.his{
+  position: relative;
+  bottom:30px
+}
 </style>
