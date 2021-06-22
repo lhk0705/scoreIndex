@@ -178,7 +178,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 300px;
+  width: 100%;
   height: 300px;
   
 }

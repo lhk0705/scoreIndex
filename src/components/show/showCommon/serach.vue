@@ -143,6 +143,6 @@ export default {
 }
 .time {
   position: relative;
-  left: 2%;
+  left: 12%;
 }
 </style>
