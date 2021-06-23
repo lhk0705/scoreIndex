@@ -162,6 +162,8 @@ export default {
       wwc=await this.request('/uv_group_all',newV)
       r =await this.request('/r_group_all',newV)
       bbs===undefined?this.show=false:this.show=true
+      ywc===undefined?ywc=0:ywc=ywc
+      wwc===undefined?wwc=0:wwc=wwc
       this.extend.series.label.formatter= '总版本数：'+bbs
       this.mychart.rows[0]={ state: "已完成", total: ywc}
       this.mychart.rows[1]={ state: "未完成", total: wwc }

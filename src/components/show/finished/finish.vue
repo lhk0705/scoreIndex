@@ -158,12 +158,22 @@
       align="center"
       >
     </el-table-column>
+    <!-- <el-table-column fixed="right" label="操作" align="center" min-width="150" v-if="user.role==='1'||user.role==='0'">
+    <template slot-scope="scope" > 
+        <el-button @click="getScore(scope.$index,vers)" size="mini" type='primary'>编辑</el-button>     
+        <el-button @click="delScore(scope.$index,vers)" size="mini">删除</el-button>        
+    </template>
+    </el-table-column>
+    <el-table-column fixed="right" label="操作" align="center" min-width="80" v-else>
+    <template slot-scope="scope">     
+        <el-button @click="getScore(scope.$index,vers)">查看</el-button>        
+    </template>
+    </el-table-column> -->
     <el-table-column fixed="right" label="操作" align="center" min-width="80" >
     <template slot-scope="scope">     
         <el-button @click="getScore(scope.$index,vers)">查看</el-button>        
     </template>
     </el-table-column>
-    
   </el-table>
   <br>
   <div class="exportToExcel">
@@ -181,6 +191,7 @@ export default {
   },
     data(){
         return {
+          user:''
         }
     },
     computed:{
@@ -193,6 +204,12 @@ export default {
         }
     },
     methods:{
+      delScore(a,b){
+        if(confirm("确定删除"+b[a].banbenhao+'的数据？')){
+           axios.post('/delScore',{"banbenhao":b[a].banbenhao}).then(this.$router.go(0))
+          // this.$router.go(0)
+        }
+      },
       updateVer(a){
         // console.log(a);
         this.$store.commit('setFinishVer',a)        
@@ -273,6 +290,7 @@ export default {
     },    
     } ,    
     created(){
+        this.user=this.$store.getters.getUser
         axios.get('/selectFinishedInfo')
         .then((res)=>{           
             this.$store.commit('setFinishVer',res.data)

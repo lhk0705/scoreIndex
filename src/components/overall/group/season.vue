@@ -173,9 +173,12 @@ export default {
       r =await this.request('/r_group_sea',newV)
       bbs===undefined?this.show=false:this.show=true
       this.extend.series.label.formatter= '总版本数：'+bbs
+      r===undefined?this.rounds="无已完成验收的版本":this.rounds="平均验收轮次："+ r.toFixed(1)
+      ywc===undefined?ywc=0:ywc=ywc
+      wwc===undefined?wwc=0:wwc=wwc
       this.mychart.rows[0]={ state: "已完成", total: ywc}
       this.mychart.rows[1]={ state: "未完成", total: wwc }
-      r===undefined?this.rounds="无已完成验收的版本":this.rounds="平均验收轮次："+ r.toFixed(1)
+      
     }
   }
 };

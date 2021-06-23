@@ -195,7 +195,7 @@ export default {
   },
     data(){
         return {
-          label:''
+          label:'',
         }
     },
     computed:{
@@ -344,12 +344,15 @@ export default {
       ]     
     },
     // 获取小组数据
-    getGroup(startDate,endDate,groupName){     
-        let groupData='';
-              axios.post('/monthReportGroup',{'startDate':startDate,'endDate':endDate,'groupName':groupName}).then(res=>{
-                  groupData=res.data[0]
+    getGroup(){        
+        return new Promise((resolve,reject)=>{
+          // axios.post('/monthReportGroup',{'startDate':startDate,'endDate':endDate,'groupName':groupName}).then(res=>{
+          axios.post('/monthReportGroupAll',{'startDate':'20210601','endDate':'20210631'}).then(res=>{
+                  resolve(res.data);
+              }).catch(err=>{
+                reject(err)
               })
-              return groupData
+        })               
             },
     // 获取月报数据
     getAll(startDate,endDate){      
@@ -362,8 +365,6 @@ export default {
       }).catch(err=>{
         reject(err)
       }) 
-
-
       })          
     },
     // 对月报数据进行过滤
@@ -395,17 +396,30 @@ export default {
         warnYlRate:'无紧急版本',
         warnBgRate:'无紧急版本',
         passRateWarn:'无紧急版本',
-        rdtResult:'无常规版本'
+        rdtResult:'无常规版本',
+        rules1:0,
+        rules2:0,
+        rules3:0,
+        rules4:0,
+        versionRuleB: 0,
+        versionRuleC: 0,
+        versionRuleTab:0,
+        versionWarnTab:0
       }      
-    for(let key in obj1){             
+    for(let key in obj1){                  
         // null情况转换
         if(obj1[key]===null||obj1[key]===0){
+          if(/\w*Rate\w*/.test(key)||/\w*Ver\w*/.test(key)){
+              obj1[key+'Tab']=0
+            }                      
           obj1[key]=noData[key];
-          obj2['_'+key]=''    
+          obj1['_'+key]=''
+          obj2['_'+key]=''              
         }else{
         // 百分率转换
-        if(/\w*Rate\w*/.test(key)||/\w*Rdt\w*/.test(key)){
-            obj1[key]=obj1[key]*100+'%'          
+        if(/\w*Rate\w*/.test(key)||/\w*Rdt\w*/.test(key)||/\w*Ver\w*/.test(key)){           
+            obj1[key]=obj1[key]*100+'%'
+            obj1[key+'Tab']=obj1[key]         
         }
         let hasData={
         versionSum:'提测版本共'+obj1.versionSum+'个',
@@ -431,7 +445,23 @@ export default {
         warnYlRate:'测试用例提交率'+obj1.warnYlRate,
         warnBgRate:'测试报告提交率'+obj1.warnBgRate,
         passRateWarn:'整体抽测通过率为'+obj1.passRateWarn,
-        rdtResult:'用例抽测情况整体'+obj1.rdtResult
+        rdtResult:'用例抽测情况整体'+obj1.rdtResult,
+        rules1:obj1.rules1,
+        rules2:obj1.rules2,
+        rules3:obj1.rules3,
+        rules4:obj1.rules4,
+        versionRuleB: obj1.versionRuleB,
+        versionRuleC: obj1.versionRuleC,
+        versionRuleTab:obj1.versionRule,
+        versionWarnTab:obj1.versionWarn,
+        // ruleDocRateTab:obj1.ruleDocRate,
+        // ruleYlRateTab:obj1.ruleYlRate,
+        // passVerATab:obj1.passVerA,
+        // passVerBTab:obj1.passVerB,
+        // passVerCTab:obj1.passVerC,
+        // warnDocRateTab:obj1.warnDocRate,
+        // warnYlRateTab:obj1.warnYlRate,
+        // warnBgRateTab:obj1.warnBgRate,
       } 
          obj1[key]=hasData[key] 
         }
@@ -458,23 +488,13 @@ export default {
         let allData=await that.getAll(date[0],date[1]), 
         lastData=await that.getAll(date[6],date[7]);
         allData.rdtFullScoreRate>0.75?allData['rdtResult']='良好':allData['rdtResult']='一般'
-      // console.log(allData,lastData);       
+        allData.versionRule===0?allData['versionRuleTab']=0:allData['versionRuleTab']=allData.versionRule
+        allData.versionWarn===0?allData['versionWarnTab']=0:allData['versionWarnTab']=allData.versionWarn      
         // 获取两次小组数据
-        // groupData=[];
-        // groupData.push(that.getGroup(date[0],date[1],'OA系统组'));
-        // groupData.push(that.getGroup(date[0],date[1],'规划管理组'))
-        // groupData.push(that.getGroup(date[0],date[1],'人力党建组'))
-        // groupData.push(that.getGroup(date[0],date[1],'技术研发组'))
-        // groupData.push(that.getGroup(date[0],date[1],'内部支撑组'))
-        // groupData.push(that.getGroup(date[0],date[1],'能力平台组'))
-        // let lastGroup=[];
-        // lastGroup.push(that.getGroup(date[6],date[7],'OA系统组'));
-        // lastGroup.push(that.getGroup(date[6],date[7],'规划管理组'))
-        // lastGroup.push(that.getGroup(date[6],date[7],'人力党建组'))
-        // lastGroup.push(that.getGroup(date[6],date[7],'技术研发组'))
-        // lastGroup.push(that.getGroup(date[6],date[7],'内部支撑组'))
-        // lastGroup.push(that.getGroup(date[6],date[7],'能力平台组'))
-        // 设置模板变量的值
+        let groupData=[],lastGroup=[];
+          groupData=await that.getGroup();
+        console.log(groupData,lastGroup);
+        // 月报环比变量的值
         let docxData = {
         year:year,
         thisMonth:thisMonth,
@@ -494,11 +514,30 @@ export default {
         _warnDocRate:'', 
         _warnYlRate:'',        
         _warnBgRate:'', 
-        // _avgRuleRdtGroup:'',    
-        // _warnGroupDocRate:'',
-        // _warnGroupYlRate:'',
-        // _warnGroupBgRate:'',
         };
+        let groupChange={
+          _avgRuleRdtGroup:'',
+          _warnDocRate:'',
+          _warnYlRate:'',
+          _warnBgRate:''
+        };
+        // 小组环比变量的值
+        // for(let i=0;i<groupData.length;i++){
+        //   for(let key in groupData[i]){
+        //     if(typeof(groupData[i][key])=='number'&&typeof(lastGroup[i][key])=='number'){
+        //   let change=groupData[i][key]-lastGroup[i][key]
+        //   if(change>0){
+        //     groupData[i]['_'+key]='，环比'+docxData.lastMonth+'月提高'+(change*100).toFixed(0)+'%'
+        //   }else if(change===0){
+        //     groupData[i]['_'+key]='，环比'+docxData.lastMonth+'月持平'
+        //   }else if(change<0){
+        //     groupData[i]['_'+key]='，环比'+docxData.lastMonth+'月下降'+(-change*100).toFixed(0)+'%'
+        //   }else{
+        //     groupData[i]['_'+key]='，无环比数据（'+docxData.lastMonth+'月无版本）'
+        //   }
+        //   }
+        //    }        
+        // }
         // 对环比数据进行过滤
         for(let key in docxData){
           if(/_\w*/.test(key)){
@@ -513,9 +552,11 @@ export default {
             docxData[key]='，无环比数据（'+docxData.lastMonth+'月无版本）'
           }
           }       
-        }       
+        }  
+        // console.log(that.exchangeData(allData,docxData));     
         doc.setData({
           ...that.exchangeData(allData,docxData),
+          groupData,
         });
        try {
             // 用模板变量的值替换所有模板变量
@@ -540,7 +581,6 @@ export default {
         // 将目标文件对象保存为目标类型的文件，并命名
         saveAs(out, "部门质量报告"+year+'年'+thisMonth+"月.docx");
        })
-      //  console.log(year,month);
     },    
     } ,      
     created(){
