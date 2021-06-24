@@ -37,14 +37,15 @@ export default {
   text-align: center;
   color: #2c3e50;
   /* margin-top: 60px; */
-  background-color: rgb(243, 243, 243);
+  /* background-color: rgb(243, 243, 243); */
 
 }
 .a{
   position: relative;
-  top:60px;
+  top:51px;
   /* width: 100%; */
-  
+  background-color: rgb(243, 243, 243);
+  padding-top: 10px;
 }
 .b{
   margin-left:-1%;  

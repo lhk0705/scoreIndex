@@ -5,7 +5,7 @@
       :settings="chartSettings"
       :legend="legend"
       width="100%"
-      height="300px"
+      height="280px"
         :title="title"
         :extend="extend"
      
@@ -21,7 +21,7 @@ export default {
  
   data() {
     (this.chartSettings = {
-      radius: ["50%", "65%"],
+      radius: ["45%", "55%"],
       label:{
               show:false
           },
@@ -33,7 +33,7 @@ export default {
       (this.legend = {
         // orient: "vertical",
         right: 'center',
-        top:70,
+        top:'30%',
         // width: 20,
         itemWidth: 10,
         itemHeight: 10,
@@ -47,11 +47,12 @@ export default {
     title:{
           text:'部门月度版本数',
             left:'center',
-            top:30
+            top:'15%'
       }  ,
     extend:{
 
           series:{
+            center:['50%','70%'],
             //   type:'pie',
             //   emphasis: {
                 label: {

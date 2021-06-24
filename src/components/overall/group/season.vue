@@ -6,7 +6,7 @@
       :settings="chartSettings"
       :legend="legend"
       width="100%"
-      height="300px"
+      height="280px"
         :title="title"
         :extend="extend"
    
@@ -33,7 +33,7 @@ export default {
         return {
           season:'',
       chartSettings : {
-      radius: ["50%", "65%"],
+      radius: ["45%", "55%"],
       label:{
               show:false
           },
@@ -42,7 +42,7 @@ export default {
       legend: {
         // orient: "vertical",
         right: 'center',
-        top:70,
+        top:'30%',
         // width: 20,
         itemWidth: 10,
         itemHeight: 10,
@@ -53,11 +53,12 @@ export default {
       title:{
             text:'季度版本数',
             left:'center',
-            top:30     
+            top:'15%'     
       },            
         rounds:'',
         extend:{
-          series:{           
+          series:{ 
+            center:['50%','70%'],           
                 label: {
                     show: true,
                     position:'center',

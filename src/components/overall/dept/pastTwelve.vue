@@ -44,8 +44,13 @@ export default {
             smooth:false
         },
         grid:{
-          width:'75%',
-          left:'center'
+          width:'80%',
+          height:'50%',
+          left:'center',
+          top:'8%'
+        },
+        legend:{
+          top:'-1%'
         }
     }     
     return {

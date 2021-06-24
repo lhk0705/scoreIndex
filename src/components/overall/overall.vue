@@ -52,10 +52,16 @@
     <br />
     <div class="row">
      <el-row class="row2">
-      <el-col >
-        <div class="line">
-        <pastTwelve></pastTwelve></div>
-      </el-col>
+      <!-- <el-col > -->
+        <!-- <div class="line"> -->
+        <pastTwelve class="line"></pastTwelve>
+        <!-- </div>         -->
+      <!-- </el-col>
+      <el-col> -->
+        <!-- <div class="top"> -->
+          <top  class="top"></top>
+        <!-- </div> -->
+      <!-- </el-col> -->
       </el-row>         
     </div>
     <!-- 方案二 -->
@@ -115,6 +121,7 @@ import groupmon from "./group/month";
 import groupall from "./group/all";
 import groupseason from "./group/season";
 import groupyear from "./group/year";
+import top from './top/top'
 let fstTest=()=>import ("./group/fstTest")
 let randomTest=()=>import ("./group/randomTest")
  
@@ -142,7 +149,7 @@ export default {
     groupyear,
     fstTest,
     randomTest,
-    group
+    group,top
   },
   methods:{
     // change(){
@@ -213,18 +220,28 @@ div {
   width: 24%;
   position: relative;
   /* bottom:30px; */
-  height: 330px;
+  height: 300px;
   
 }
 .line{
 background-color: white;
 position: relative;
-bottom:50px;
-right:0.5%;
+bottom:40px;
+/* right:1%; */
+width: 74%;
+height:350px;
+float: left;
 }
 /* .tab{
   width: 85%;
   margin: auto;
 } */
-
+.top{
+  position: relative;
+  bottom:40px;
+  width: 24%;
+  height: 350px;
+  background-color: white;
+  float: right;
+}
 </style>

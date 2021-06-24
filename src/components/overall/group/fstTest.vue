@@ -13,15 +13,18 @@ import axios from 'axios'
       return {
       extend:{
         grid:{
-          top:"130px"
+          top:"28%",
+          width:'80%',
+          left:'center',
+          height:'50%'
         },
         title:{
           text:"",
           left:"center",
-          top:30
+          top:'10%'
         },
         legend:{
-          top:65
+          top:'16%'
         }
       },
         chartData: {
