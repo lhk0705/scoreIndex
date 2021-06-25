@@ -139,7 +139,7 @@ data(){
     return{
         label:'系统专项分析',
         systemName:'',
-        systemData:'',
+        systemData:[],
         time:''
     }
 },
@@ -158,8 +158,16 @@ computed:{
 watch:{
   systemName(newV,oldV){
     this.label=newV+'专项分析'
+    // console.log(this.label);
     axios.post('/getSystem',{'systemName':newV}).then(res=>{
-        this.systemData=res.data
+      this.systemData=[]
+      // console.log(res.data);
+        this.systemData.push(res.data)
+        for(let key in this.systemData[0]){
+          this.systemData[0][key]===undefined?this.systemData[0][key]='无':this.systemData[0][key]=this.systemData[0][key]
+        }
+        // console.log(this.systemData);
+
     })
   }  
 },

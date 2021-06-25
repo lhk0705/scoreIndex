@@ -14,7 +14,7 @@ export default {
       extend:{
         grid:{
           top:"20%",
-          width:'100%',
+          width:'110%',
           left:'-18%',
           height:'60%'
         },

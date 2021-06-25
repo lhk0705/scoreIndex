@@ -78,7 +78,8 @@ export default {
    request(url,data){
      return new Promise((resolve,reject)=>{
        axios.post(url,data).then(res=>{
-         resolve(res.data.total)
+        //  console.log(res.data.total);
+         resolve(res.data)
        }).catch(err=>{
          reject(err)
        })
@@ -95,25 +96,25 @@ export default {
           month=12+new Date().getMonth()-i
           time=String((new Date().getFullYear()-1)*10000+(12+new Date().getMonth()-i)*100+1);
         }
-        passrate=await this.request("/p_avg_mon",{'time':time})        
+        passrate=await this.request("/p_avg_mon",{'time':time})       
         rounds=await this.request("/r_avg_mon",{'time':time})
         // passrate===undefined?passrate='无':passrate=passrate
         // rounds===undefined?rounds='无':rounds=passrate
-        // console.log(passrate,rounds);
+        // console.log(passrate)
         this.mychart.rows.unshift({
-          月份: month+"月", 首轮通过率: passrate,平均验收轮次:rounds
+          月份: month+"月", 首轮通过率: passrate.total,平均验收轮次:rounds.total
           })   
    }
    },
   //  获取系统数据
-   async getSystem(systemName){
-        sysDate=await this.request("/sysDate",{'systemName':systemName})
-        rounds=await this.request("/sys_rounds",{'systemName':systemName})        
-        passrate=await this.request("/sys_pass",{'systemName':systemName})
-        // score=await this.request("/sys_score",{'systemName':systemName})
-        this.sysChart.rows.unshift({
-          提测日期: sysDate, 首轮通过率: passrate,验收轮次:rounds
-          })   
+    async getSystem(systemName){
+        let sysData=await this.request("/getSysLine",{'systemName':'督办系统'})
+        for(let item of sysData){
+         this.sysChart.rows.unshift({
+        提测日期: item.ticeshijian, 首轮通过率: item.atgl,验收轮次:item.rounds
+        })  
+        }
+        
    },
   // 切换图表
   dep(){
