@@ -4,16 +4,14 @@
       :data="mychart"
       :settings="chartSettings"
       :legend="legend"
-      width="120%"
-      height="260px"
+      width="100%"
+      height="280px"
         :title="title"
         :extend="extend"
-     class="r"
+     
     ></ve-ring>
-     <p class="p">{{rounds}}</p>
+    <p>{{rounds}}</p>
   </div>
- 
-
 </template>
 
 <script>
@@ -23,7 +21,7 @@ export default {
  
   data() {
     (this.chartSettings = {
-      radius: ["55%", "70%"],
+      radius: ["45%", "55%"],
       label:{
               show:false
           },
@@ -34,8 +32,8 @@ export default {
     }),
       (this.legend = {
         // orient: "vertical",
-        // right: 'right',
-        top:'25%',
+        right: 'center',
+        top:'30%',
         // width: 20,
         itemWidth: 10,
         itemHeight: 10,
@@ -49,12 +47,12 @@ export default {
     title:{
           text:'部门月度版本数',
             left:'center',
-            top:'10%'
+            top:'15%'
       }  ,
     extend:{
 
           series:{
-            center:['50%','60%'],
+            center:['50%','70%'],
             //   type:'pie',
             //   emphasis: {
                 label: {
@@ -153,22 +151,8 @@ export default {
 </script>
 
 <style scoped>
-.r{
-  position: relative;
-  left:10%;
-  /* border: 1px solid black; */
-  /* margin: auto 1%; */
-
-}
 .ring{
-  display: grid;
-  grid:80% 20%/50%;
-  /* border: 1px solid black; */
-}
-p{
   position: relative;
-  bottom:5%;
-  left:14%;
-  width:140%
+  bottom:30px
 }
 </style>

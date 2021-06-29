@@ -1,114 +1,49 @@
 <template>
-  <div >
-    
-    <!-- 方案一 -->
-    <div class="row">
+<div>
+  <div class="overallHead">
+    <div>年度共质控<br>100</div>
+    <div>年度平均抽测通过率<br>99%</div>
+    <div>年度平均验收通过率<br>99%</div>
+  </div>
+  <div class="overallBody">
+    <div class="abb">
+      <!-- <div class="dep">
+        <groupmon :prop="groupName"></groupmon>
+      </div> -->
       <div class="button">
-      <el-button :style="depS" @click="dep" size="mini">部门</el-button>
-      <el-button :style="grpS" @click="grp" size="mini">小组</el-button>
-      <group @groupChange='groupChange' v-show="show=='group'"></group>
-      <!-- <el-select size="mini" v-show="this.show==='sys'" v-model="systemName">
-        <el-option
-            v-for="item in sysoptions"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          ></el-option>
-      </el-select> -->
-    </div>
-      <el-row >
-        <!-- <label>组别:</label> -->
-       <!-- <el-button @click="change" size="mini">{{value}}</el-button>       -->
-      </el-row>
-      <el-row class="row1">
-        <el-col :span="5" v-if="show=='group'">
-          <groupmon :prop="groupName"></groupmon>
-        </el-col>
-        <el-col :span="5" v-else>
-        <randomTest></randomTest>
-      </el-col>
-      
-        <el-col :span="5" v-if="show=='group'"> 
-          <groupseason :prop="groupName"></groupseason>
-        </el-col >
-        <el-col :span="5" v-else>
-        <fstTest></fstTest>
-      </el-col>
-        <el-col  :span="5" v-if="show=='group'">
-          <groupyear :prop="groupName"></groupyear>
-        </el-col>
-        <el-col :span="5" v-else>
-          <deptmon ref="deptmon"></deptmon>
-        </el-col>
-        <el-col :span="5"  v-if="show=='group'">
-          <groupall :prop="groupName"></groupall>         
-        </el-col>
-        <el-col :span="5" v-else>
-          <deptseason></deptseason>
-        </el-col>
+          <el-button :style="depS" @click="dep" size="mini">部门</el-button>
+          <el-button :style="grpS" @click="grp" size="mini">小组</el-button>
+          <group @groupChange='groupChange' v-show="show=='group'"></group>
+        </div>
+      <div class="rings">        
+        <deptmon ref="deptmon" v-if="show=='group'"></deptmon>
+        <fstTest v-else></fstTest>
+        <deptmon ref="deptmon" v-if="show=='group'"></deptmon>
+        <fstTest v-else></fstTest>
         
-      </el-row>
-    </div>
-    <br />
-    <div class="row">
-     <el-row class="row2">
-      <!-- <el-col > -->
-        <!-- <div class="line"> -->
-        <pastTwelve class="line"></pastTwelve>
-        <!-- </div>         -->
-      <!-- </el-col>
-      <el-col> -->
-        <!-- <div class="top"> -->
-          <top  class="top"></top>
-        <!-- </div> -->
-      <!-- </el-col> -->
-      </el-row>         
-    </div>
-    <!-- 方案二 -->
-    <!-- <el-tabs  class="tab" v-model="activeName" type="card" >
-      <el-tab-pane label="部门" name="first">
-        <el-row class="row1">
-          <el-col >
-          <groupmon :prop="groupName"></groupmon>
-        </el-col>
-        <el-col > 
-          <groupseason :prop="groupName"></groupseason>
-        </el-col >
-        <el-col  >
-          <groupyear :prop="groupName"></groupyear>
-        </el-col>
-        <el-col   >
-          <groupall :prop="groupName"></groupall>         
-        </el-col>
-          </el-row>
-        
-        <el-row class="row">
-          <el-col :span="20">
-        <pastTwelve></pastTwelve>
-      </el-col>
-        </el-row>
-      </el-tab-pane>
-      <el-tab-pane label="小组" name="second">
-          <group @groupChange='groupChange'></group>
-          <el-row class="row1">
-          <el-col :span="4" >
-          <deptmon ref="deptmon"></deptmon>
-        </el-col>
-        <el-col :span="4">
-          <deptseason></deptseason>
-        </el-col>
-         <el-col :span="4">
-        <randomTest></randomTest>
-      </el-col>
-      <el-col :span="4">
-        <fstTest></fstTest>
-      </el-col> 
-        </el-row>
-      </el-tab-pane>
-      <el-tab-pane label="系统" name="third">
+      <!-- </div>
+      <div class="rings"> -->
+        <deptmon ref="deptmon"></deptmon>
+        <deptmon ref="deptmon"></deptmon>
+      </div>
+      </div>   
+    <div class="lines">
+      <pastTwelve class="line"></pastTwelve>
+    </div>   
+    <div class="abb">
+      <div class="button">
+          <el-button :style="depS" @click="dep" size="mini">部门</el-button>
+          <el-button :style="grpS" @click="grp" size="mini">小组</el-button>
+        </div>
+      <div class="dep"><top  class="top"></top></div>
+      <div class="dep"><top  class="top"></top></div>
+      </div>
 
-      </el-tab-pane>
-    </el-tabs> -->
+  </div>
+  <div class="overallFoot">
+    <hr>
+    联系方式：lihangke@chinamobile.com
+  </div>
   </div>
 </template>
 
@@ -124,10 +59,8 @@ import groupyear from "./group/year";
 import top from './top/top'
 let fstTest=()=>import ("./group/fstTest")
 let randomTest=()=>import ("./group/randomTest")
- 
 export default {
- 
-  data() {
+ data() {
     return {
       // zb: "OA办公组",
       groupName:'OA办公组',
@@ -152,17 +85,6 @@ export default {
     group,top
   },
   methods:{
-    // change(){
-    //   if(this.value=='切换成部门质量情况'){
-    //   this.show='nogroup'
-    //   this.value='切换成小组情况'
-    //   }
-    //   else{
-    //     this.show='group'
-    //   this.value='切换成部门质量情况'
-    //   }
-    // },
-    // 切换图表
   dep(){
     this.show='dep';
     this.depS.background='white';
@@ -178,70 +100,66 @@ export default {
     }
   },
   
-  
 };
 </script>
 
 <style scoped>
-div {
-  margin: 10px 0.5%;
+/* div{
+  border:1px solid black
+} */
+.abb{
+  display: grid;
+  grid:30px 270px 300px/none; 
 }
-.button{
-  width:98%;
-  /* border: 1px solid rgb(197, 197, 197); */
-  border-radius: 4px;
-  background-color: white;
-  margin:auto;
+.lines>div{
   position: relative;
-  top:20px;
-  height: 50px;
+  
+}
+.rings{
+   display: grid;
+    grid: 285px 285px/50%  50%;
+    /* border: 1px solid black;  */
+}
+/* .abb>div,.ring>div{
+  margin: 1%;
+  border: 1px solid black;
+} */
+.overallBody{
+  display: grid;  
+    grid: 600px /30% 40% 30%;
+    width: 100%;
+    justify-content: center;  
+}
+.overallBody>div{
+   border-radius: 8px;
+   margin: 2%;
+   /* border: 1px solid black; */
+   background-color: white;
+}
+.overallHead{
+  width: 99%;
+  margin: auto;
+  height:80px;
+  /* border:1px solid black; */
+  background-color: white;
+  display: grid;
+  grid:70px/33% 33% 33%
+}
+.overallHead>div{
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.row{
-  width: 90%;
-  /* border: 1px solid rgb(197, 197, 197); */
-  border-radius: 8px;
-  margin: auto;
-  /* background-color: white; */
-  height: 100%;
-  /* text-align: left; */
+.overallFoot{
   position: relative;
-  bottom:20px
-}
-*{
-  font-size: 12px; 
-}
-.row1>div{
-  /* border: 1px solid rgb(197, 197, 197); */
-  border-radius: 4px;
-  background-color: white;
-  width: 24%;
-  position: relative;
-  /* bottom:30px; */
-  height: 300px;
+  top:30px;
   
 }
-.line{
-background-color: white;
-position: relative;
-bottom:40px;
-/* right:1%; */
-width: 74%;
-height:350px;
-float: left;
-}
-/* .tab{
-  width: 85%;
-  margin: auto;
-} */
-.top{
+.button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  bottom:40px;
-  width: 24%;
-  height: 350px;
-  background-color: white;
-  float: right;
+  top:10px;
 }
 </style>

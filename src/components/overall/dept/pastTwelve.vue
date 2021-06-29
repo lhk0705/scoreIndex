@@ -45,9 +45,9 @@ export default {
         },
         grid:{
           width:'80%',
-          height:'50%',
+          height:'60%',
           left:'center',
-          top:'8%'
+          top:'15%'
         },
         legend:{
           top:'-1%'

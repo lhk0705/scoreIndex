@@ -1,13 +1,9 @@
 <template>
-<div class="histogram">
   <ve-histogram 
   class="his"
   :data="chartData"
   :extend="extend"
-  height='100%'
-  width='100%'
   ></ve-histogram>
-  </div>
 </template>
 
 <script>
@@ -17,42 +13,38 @@ import axios from 'axios'
       return {
       extend:{
         grid:{
-          top:"40%",
+          top:"28%",
           width:'80%',
           left:'center',
-          height:'60%'
+          height:'50%'
         },
         title:{
           text:"",
           left:"center",
-          top:'5%'
+          top:'10%'
         },
         legend:{
-          top:'20%',
-          type:'scroll',
-          textStyle: {
-          fontSize: 10,
-        },
+          top:'16%'
         }
       },
         chartData: {
-          columns: [ 'group','OA办公组','人力党建组','规划管理组','技术研发组','能力平台组','内部支撑组'],
+          columns: [ 'group'],
           rows: [
-            {'group': '' ,
-            'OA办公组': 0.5, 
-            '人力党建组':2 ,
-            '规划管理组':1 ,
-            '技术研发组':2 ,
-            '能力平台组':1 ,
-            '内部支撑组':2,},  
-            // { 'group': '' ,
-            // },
+            // {
+            // 'OA办公组': oa, 
+            // '人力党建组':hr ,
+            // '规划管理组':pp ,
+            // '技术研发组':dev ,
+            // '能力平台组':ss ,
+            // '内部支撑组':is,},  
+            { 'group': '' ,
+            },
           ]
         }
       }
     },
     created(){
-      // this.FST_TEST()
+      this.FST_TEST()
       this.extend.title.text=new Date().getMonth()+'月首轮验收通过率'
     },
     methods:{
@@ -89,13 +81,6 @@ import axios from 'axios'
 <style scoped>
 .his{
   position: relative;
-  top:5%;
-  /* border: 1px solid black ; */
-  
-}
-.histogram{
-  display: grid;
-  grid: 90% /90%;
-  /* border: 1px solid black ; */
+  bottom:30px
 }
 </style>

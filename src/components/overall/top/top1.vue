@@ -1,9 +1,7 @@
-<template>
-<div class="histogram">
+<template><div>
   <ve-histogram 
   :data="chartData"
   :extend="extend"
-  class="his"
   ></ve-histogram></div>
 </template>
 
@@ -15,10 +13,10 @@ export default {
           group:['规划管理组','OA办公组','人力党建组','能力平台组','技术研发组'],
       extend:{
         grid:{
-          // top:"20%",
-          // width:'100%',
-          // left:'-10%',
-          // height:'40%'
+          top:"20%",
+          width:'110%',
+          left:'-18%',
+          height:'60%'
         },
         title:{
           text:"2021年一季度TOP5系统",
@@ -54,13 +52,5 @@ export default {
 </script>
 
 <style scoped>
-.histogram{
-display: grid;
-  grid: 90% /90%;
-}
-.his{
-  height:'200%';
-  width:200%;
-  border: 1px solid black;
-}
+
 </style>
