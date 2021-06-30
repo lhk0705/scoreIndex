@@ -1,8 +1,10 @@
 <template>
 <div>
   <div class="overallHead">
-    <div>年度共质控<br>
-    
+    <div>
+      <span>年度共质控</span>
+      
+    <total></total>
     </div>
     <div>年度平均抽测通过率<br>99%</div>
     <div>年度平均验收通过率<br>99%</div>
@@ -41,7 +43,7 @@
         </div>
       <pastTwelve class="line" v-if="unit2=='dept'"></pastTwelve>
       <system-past :prop="sysName" v-else></system-past>
-      <total></total>
+      
     </div>   
     <div class="abb">
       <div class="button">
@@ -159,26 +161,31 @@ export default {
 .overallHead{
   width: 99%;
   margin: auto;
-  height:80px;
+  height:150px;
   /* border:1px solid black; */
   background-color: white;
   display: grid;
-  grid:100px/33% 33% 33%
+  grid:150px/33% 33% 33%
 }
 .overallHead>div{
+  /* border: 1px solid black; */
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  bottom: 10%;
+  /* bottom: 10%; */
   font-size: 20px;
   font-weight: 900;
   color: rgb(15, 86, 134);
 }
+.overallHead span{
+  position: relative;
+  left: 33%;
+  bottom:33%
+}
 .overallFoot{
   position: relative;
-  top:30px;
-  
+  top:30px;  
 }
 .button{
   width:98%;
