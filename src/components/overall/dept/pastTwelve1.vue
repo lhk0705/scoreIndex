@@ -1,11 +1,32 @@
 <template>
   <div>
     <br>
-  <div >      
+  <div>
+      <el-button :style="depS" @click="dep" size="mini">部门</el-button>
+      <el-button :style="sysS" @click="sys" size="mini">系统</el-button>
+      <el-select size="mini" v-show="this.show==='sys'" v-model="systemName">
+        <el-option
+            v-for="item in sysoptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          ></el-option>
+      </el-select>
+    </div>
+  <div v-if="this.show==='dep'">   
     <strong>
     <h3>部门整体质量趋势</h3></strong>
     <ve-line
     :data="mychart"
+    :extend="extend"
+    :title='title'
+    ></ve-line>
+  </div>
+  <div v-else>
+    <strong>
+    <h3>系统版本质量趋势</h3></strong>
+    <ve-line
+    :data="sysChart"
     :extend="extend"
     :title='title'
     ></ve-line>
@@ -16,9 +37,6 @@
 <script>
 import axios from 'axios'
 export default {
-  props:{
-    prop:String
-  },
   data() {
     this.extend={
         'xAxis.0.axisLabel.rotate': 45,
@@ -36,6 +54,10 @@ export default {
         }
     }     
     return {
+      depS:{background:'white'},
+      sysS:{background:'rgb(224, 223, 223)'}, 
+      show:'dep',
+      systemName:'ERP集中门户',
       rounds:'',
       passrate:'',
       mychart: {
@@ -44,7 +66,12 @@ export default {
         ],
         
       },
-
+      sysChart: {
+        columns: ["提测日期", "首轮通过率","验收轮次"],
+        rows: [
+        ],
+        
+      },
     };
   },
   methods:{
@@ -79,17 +106,46 @@ export default {
           })   
    }
    },
+  //  获取系统数据
+    async getSystem(systemName){
+      this.sysChart.rows=[]
+        let sysData=await this.request("/getSysLine",{'systemName':'督办系统'})
+        for(let item of sysData){
+         this.sysChart.rows.unshift({
+        提测日期: item.ticeshijian, 首轮通过率: item.atgl,验收轮次:item.rounds
+        })  
+        }
+        
+   },
+  // 切换图表
+  dep(){
+    this.show='dep';
+    this.depS.background='white';
+    this.sysS.background='rgb(224, 223, 223)'
+  },
+  sys(){
+    this.show='sys';
+    this.depS.background='rgb(224, 223, 223)'
+    this.sysS.background='white';
+  }, 
   },
   created(){
     this.getPastTwelve();
+    this.getSystem(this.systemName)
   },
   beforeDestroy(){
     this.mychart.rows=[];
+    this.sysChart.rows=[]
   },
   computed: {
     sysoptions() {
       return this.$store.getters.getSys;
     },
+  },
+  watch:{
+    systemName(newV,oldV){
+      this.getSystem(newV)
+    }
   },
   
 };

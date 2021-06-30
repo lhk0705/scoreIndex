@@ -1,10 +1,12 @@
 <template>
 <div class="histogram">
   <ve-histogram 
-  :data="chartData"
+
   :extend="extend"
   class="his"
-  ></ve-histogram></div>
+  
+  ></ve-histogram>
+  <div></div></div>
 </template>
 
 <script>
@@ -15,15 +17,15 @@ export default {
           group:['规划管理组','OA办公组','人力党建组','能力平台组','技术研发组'],
       extend:{
         grid:{
-          // top:"20%",
+          top:"20%",
           // width:'100%',
-          // left:'-10%',
-          // height:'40%'
+          left:'-10%',
+          height:'55%'
         },
         title:{
           text:"2021年一季度TOP5系统",
           left:"center",
-          top:'5%'
+          top:'10%'
         },
          xAxis: {
         type: 'value',
@@ -56,11 +58,12 @@ export default {
 <style scoped>
 .histogram{
 display: grid;
-  grid: 90% /90%;
+  grid: 100% /90% 10%;
+  /* border: 1px solid black; */
 }
-.his{
-  height:'200%';
-  width:200%;
-  border: 1px solid black;
-}
+/* .his{ */
+  /* height:'200%'; */
+  /* width:90%; */
+  /* border: 1px solid black; */
+/* } */
 </style>

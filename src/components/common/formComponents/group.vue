@@ -1,7 +1,7 @@
 <template>
 
-      
-      <el-select v-model="groupName" placeholder="请选择" size="mini" style="width:200px">
+
+      <el-select v-model="groupName" placeholder="请选择" size="mini" style="width:190px">
           <el-option
             v-for="item in group"
             :key="item.value"
@@ -33,6 +33,6 @@ export default {
 }
 </script>
 
-<style >
+<style scoped>
 
 </style>
