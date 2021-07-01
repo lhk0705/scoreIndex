@@ -1,10 +1,10 @@
 <template>
 
-      <ve-line 
+      <ve-gauge 
       :extend="settings"
        width=70%
         height=100% 
-      class="gauge"></ve-line>
+      class="gauge"></ve-gauge>
 
 </template>
 
@@ -17,19 +17,33 @@ data() {
         formatter: '{a} <br/>{b} : {c}%'
     },
     series: [{
-      center:['50%','90%'],
-      radius:'120%',
+      center:['50%','80%'],
+      radius:'90%',
        axisLine: {
             lineStyle: {
-                width: 6,
+                width: 16,
                 }
                 },
             axisTick: {
-            length: 10,
+                // show:false,
+            length: 8,
             },
             pointer:{
-              length:'40%',
-              offsetCenter:[0,'-30%']
+              length:'30%',
+              offsetCenter:[0,'-30%'],
+            },
+            axisLabel:{
+                show:false,
+                fontSize:8
+            },
+            progress:{
+                show:true,
+                itemStyle:{
+                    color:'rgb(42, 142, 230)'
+                }
+            },
+            splitLine:{
+                // show:false
             },
       startAngle: 180,
         endAngle: 0,
@@ -44,20 +58,24 @@ data() {
             fontSize:14
         },
         data: [{
-            value: 0.5,
+            value: '',
             
         }]
     }]
       },
 
   }
+},
+created(){
+    // 获取数据
+    this.settings.series[0].data[0].value=0.48
 }
 
 }
 </script>
 
 <style scoped>
-.gauge{
-    /* border:1px solid black */
-}
+/* .gauge{
+    border:1px solid black
+} */
 </style>

@@ -1,12 +1,18 @@
 <template>
   <div>
     <br>
-  <div >      
+  <div class="line1">      
     <strong>
     <h3>部门整体质量趋势</h3></strong>
     <ve-line
     :data="mychart"
     :extend="extend"
+    :title='title'
+    ></ve-line></div>
+    <div class="line2">
+    <ve-line
+    :data="mychart1"
+    :extend="extend1"
     :title='title'
     ></ve-line>
   </div>
@@ -27,12 +33,17 @@ export default {
         },
         grid:{
           width:'90%',
-          height:'60%',
+          height:'50%',
           left:'center',
-          top:'15%'
+          top:'15%',
+          
         },
+        // xAxis:{
+        //     nameGap:120
+        // },
         legend:{
-          top:'-1%'
+          top:'-1%',
+          zlevel:1
         }
     }     
     return {
@@ -44,6 +55,39 @@ export default {
         ],
         
       },
+      mychart1: {
+        columns: ["月份", "首轮通过率","平均验收轮次"],
+        rows: [
+        ],
+        
+      },
+      extend1:{
+        'xAxis.0.axisLabel.rotate': 45,
+        series:{
+            smooth:false
+        },
+        grid:{
+          width:'90%',
+          height:'50%',
+          left:'center',
+          top:'-5%',
+          
+        },
+        xAxis:{
+            position:'top',
+            show:false
+            },
+        yAxis:{
+            inverse:true
+            },
+        legend:{
+          bottom:'-100%',
+          zlevel:2
+        },
+        areaStyle:{
+            color:'blue'
+        }
+    }  
 
     };
   },
@@ -77,6 +121,9 @@ export default {
         this.mychart.rows.unshift({
           月份: month+"月", 首轮通过率: passrate.total,平均验收轮次:rounds.total
           })   
+          this.mychart1.rows.unshift({
+          月份: month+"月", 首轮通过率: passrate.total,平均验收轮次:rounds.total
+          }) 
    }
    },
   },
@@ -85,6 +132,7 @@ export default {
   },
   beforeDestroy(){
     this.mychart.rows=[];
+    this.mychart1.rows=[]
   },
   computed: {
     sysoptions() {
@@ -107,4 +155,8 @@ h2{
 /* .btn:hover{
   cursor: pointer;
 } */
+.line1,.line2{
+    /* border:1px solid black; */
+    height: 45%;
+}
 </style>

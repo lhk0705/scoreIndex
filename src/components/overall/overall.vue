@@ -2,12 +2,16 @@
 <div>
   <div class="overallHead">
     <div>
-      <span>年度共质控</span>
-      
-    <total></total>
+      年度共质控<br>
+      100
+    
     </div>
-    <div>年度平均抽测通过率<br>99%</div>
-    <div>年度平均验收通过率<br>99%</div>
+    <div>
+      <span>年度平均抽测通过率</span>
+    <totalRt class='total'></totalRt>
+    </div>
+    <div><span>年度平均验收通过率</span>
+    <totalTest class='total'></totalTest></div>
   </div>
   <div class="overallBody">
     <div class="abb">
@@ -53,8 +57,8 @@
           <el-option label='系统' value="system">系统</el-option>    
           </el-select>                    
         </div>
-      <top  class="top"></top>
-      <top  class="top"></top>
+      <topRt  class="topRt"></topRt>
+      <topTest  class="topTest"></topTest>
       </div>
 
   </div>
@@ -66,18 +70,20 @@
 </template>
 
 <script>
-import total from "./overallHead/total.vue";
+import totalRt from "./overallHead/totalRt.vue";
 import systemPast from "./systems/systemPast.vue";
 import system from "../common/formComponents/system.vue";
 import group from "../common/formComponents/group";
 import deptmon from "./dept/month";
 import deptseason from "./dept/season";
-import pastTwelve from "./dept/pastTwelve";
+import pastTwelve from "./dept/pastTwelve2";
 import groupmon from "./group/month";
 import groupall from "./group/all";
 import groupseason from "./group/season";
 import groupyear from "./group/year";
-import top from './top/top'
+import topRt from './top/topRt'
+import topTest from './top/topTest'
+import totalTest from './overallHead/totalTest.vue';
 let fstTest=()=>import ("./group/fstTest")
 let randomTest=()=>import ("./group/randomTest")
 export default {
@@ -103,7 +109,7 @@ export default {
     groupyear,
     fstTest,
     randomTest,
-    group,top,system,systemPast,total
+    group,topRt,system,systemPast,totalRt,totalTest,topTest
   },
   methods:{
     groupChange(newV){
@@ -124,12 +130,18 @@ export default {
 </script>
 
 <style scoped>
-/* div{
-  border:1px solid black
-} */
-.abb,.lines{
+.total{
+  position: relative;
+  right:15%
+}
+.abb{
   display: grid;
   grid:5% 47.5% 47.5%/100%; 
+  /* border: 1px solid black; */
+}
+.lines{
+  display: grid;
+  grid:5% 95%/100%; 
   /* border: 1px solid black; */
 }
 .lines>div{
@@ -180,8 +192,9 @@ export default {
 }
 .overallHead span{
   position: relative;
-  left: 33%;
-  bottom:33%
+  left: 25%;
+  bottom:33%;
+  width:60%
 }
 .overallFoot{
   position: relative;

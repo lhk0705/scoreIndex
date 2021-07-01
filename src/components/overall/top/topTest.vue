@@ -13,7 +13,7 @@
 export default {
  data () {
       return {
-          value:[2,1,3,1,2],
+          value:[2,1,3,1,1],
           group:['规划管理组','OA办公组','人力党建组','能力平台组','技术研发组'],
       extend:{
         grid:{
@@ -23,7 +23,7 @@ export default {
           height:'55%'
         },
         title:{
-          text:"2021年一季度TOP5系统",
+          text:"2021年一季度验收通过率TOP5",
           left:"center",
           top:'10%'
         },
@@ -61,9 +61,5 @@ display: grid;
   grid: 100% /90% 10%;
   /* border: 1px solid black; */
 }
-/* .his{ */
-  /* height:'200%'; */
-  /* width:90%; */
-  /* border: 1px solid black; */
-/* } */
+
 </style>
