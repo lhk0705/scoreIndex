@@ -1,10 +1,9 @@
 <template>
 <div>
   <div class="overallHead">
-    <div>
-      年度共质控<br>
-      100
-    
+    <div class="totalBB">
+      <span>年度质控版本数</span>
+      <div class="total">375</div>   
     </div>
     <div>
       <span>年度平均抽测通过率</span>
@@ -27,7 +26,7 @@
         <deptmon ref="deptmon" v-if="unit1=='group'"></deptmon>
         <fstTest v-else></fstTest>
         <deptmon ref="deptmon" v-if="unit1=='group'"></deptmon>
-        <fstTest v-else></fstTest>
+        <randomTest v-else></randomTest>
         
       <!-- </div>
       <div class="rings"> -->
@@ -76,7 +75,7 @@ import system from "../common/formComponents/system.vue";
 import group from "../common/formComponents/group";
 import deptmon from "./dept/month";
 import deptseason from "./dept/season";
-import pastTwelve from "./dept/pastTwelve2";
+import pastTwelve from "./dept/pastTwelve";
 import groupmon from "./group/month";
 import groupall from "./group/all";
 import groupseason from "./group/season";
@@ -130,6 +129,19 @@ export default {
 </script>
 
 <style scoped>
+.totalBB{
+  /* width: 100%; */
+  /* border:1px solid black; */
+  position:relative;
+  padding-right:30%
+}
+.totalBB>.total{
+  position:relative;
+  top: 10%;
+  font-style: italic;
+  font-size: 30px;
+  color:rgb(115, 233, 18)
+}
 .total{
   position: relative;
   right:15%
@@ -144,10 +156,10 @@ export default {
   grid:5% 95%/100%; 
   /* border: 1px solid black; */
 }
-.lines>div{
+/* .lines>div{
   position: relative;
-   /* border: 1px solid black; */
-}
+   border: 1px solid black;
+} */
 .rings{
    display: grid;
     grid: 325px 325px/50%  50%;

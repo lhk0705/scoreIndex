@@ -1,13 +1,21 @@
 <template>
   <div>
     <br>
-  <div >      
     <strong>
     <h3>部门整体质量趋势</h3></strong>
+  <div class="line1">          
     <ve-line
     :data="mychart"
     :extend="extend"
     :title='title'
+    height=100%
+    ></ve-line></div>
+    <div class="line2">
+    <ve-line
+    :data="mychart1"
+    :extend="extend1"
+    :title='title'
+    height=100%
     ></ve-line>
   </div>
   </div>
@@ -27,23 +35,62 @@ export default {
         },
         grid:{
           width:'90%',
-          height:'60%',
+          height:'65%',
           left:'center',
-          top:'15%'
+          top:'20%',
+          
         },
+        // zlevel:1,
+        // xAxis:{
+        //     nameGap:120
+        // },
         legend:{
-          top:'-1%'
+          top:'-1%',
+          // zlevel:3
         }
     }     
     return {
       rounds:'',
       passrate:'',
       mychart: {
-        columns: ["月份", "首轮通过率","平均验收轮次"],
+        columns: ["月份", "平均首轮通过率","平均验收轮次"],
         rows: [
         ],
         
       },
+      mychart1: {
+        columns: ["月份", "平均抽测得分","平均验收得分"],
+        rows: [
+        ],
+        
+      },
+      extend1:{
+        'xAxis.0.axisLabel.rotate': 45,
+        series:{
+            smooth:false
+        },
+        grid:{
+          width:'90%',
+          height:'35%',
+          left:'center',
+          top:'47%',          
+        },
+        // zlevel:2,
+        xAxis:{
+            position:'top',
+            show:false
+            },
+        yAxis:{
+            inverse:true
+            },
+        legend:{
+          // bottom:'-100%',
+          // zlevel:2
+        },
+        areaStyle:{
+            color:'blue'
+        }
+    }  
 
     };
   },
@@ -75,8 +122,11 @@ export default {
         // rounds===undefined?rounds='无':rounds=passrate
         // console.log(passrate)
         this.mychart.rows.unshift({
-          月份: month+"月", 首轮通过率: passrate.total,平均验收轮次:rounds.total
+          月份: month+"月", 平均首轮通过率: passrate.total,平均验收轮次:rounds.total
           })   
+          this.mychart1.rows.unshift({
+          月份: month+"月", 平均抽测得分: passrate.total,平均验收得分:rounds.total
+          }) 
    }
    },
   },
@@ -85,6 +135,7 @@ export default {
   },
   beforeDestroy(){
     this.mychart.rows=[];
+    this.mychart1.rows=[]
   },
   computed: {
     sysoptions() {
@@ -96,15 +147,28 @@ export default {
 </script>
 
 <style scoped>
-h2{
-  text-align: center;
-  font-size: 28;
-}
+
 .btn{
   float: left;
   /* background-color: rgb(224, 223, 223); */
 }
-/* .btn:hover{
-  cursor: pointer;
-} */
+.line1{
+    /* border:1px solid black; */
+    /* background-color: black; */
+    height: 50%;
+    z-index: 900;
+    position: relative;
+    top:5%
+    /* padding-bottom: 50%; */
+}
+.line2{
+  /* border:1px solid black; */
+    height: 90%;
+    /* background-color: blue; */
+    z-index:111;
+    position: relative;
+    /* position: relative; */
+    top:-50%;
+    
+}
 </style>
