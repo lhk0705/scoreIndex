@@ -9,7 +9,7 @@
       <span>年度平均抽测通过率</span>
     <totalRt class='total'></totalRt>
     </div>
-    <div><span>年度平均验收通过率</span>
+    <div><span>年度平均首轮验收通过率</span>
     <totalTest class='total'></totalTest></div>
   </div>
   <div class="overallBody">
@@ -23,15 +23,16 @@
           <group @groupChange='groupChange' v-show="unit1=='group'" ></group>       
         </div>
       <div class="rings">        
-        <deptmon ref="deptmon" v-if="unit1=='group'"></deptmon>
+        <groupmon ref="groupmon" v-if="unit1=='group'" :prop='groupName'></groupmon>
         <fstTest v-else></fstTest>
-        <deptmon ref="deptmon" v-if="unit1=='group'"></deptmon>
+        <groupseason ref="groupseason" v-if="unit1=='group'" :prop='groupName'></groupseason>
         <randomTest v-else></randomTest>
+        <groupyear ref="groupyear" v-if="unit1=='group'" :prop='groupName'></groupyear>
+        <deptmon ref="deptmon" v-else></deptmon>        
+        <groupall ref="groupall" v-if="unit1=='group'" :prop='groupName'></groupall>
+        <deptseason ref="deptseason" v-else></deptseason>
         
-      <!-- </div>
-      <div class="rings"> -->
-        <deptmon ref="deptmon"></deptmon>
-        <deptmon ref="deptmon"></deptmon>
+        
       </div>
       </div>   
     <div class="lines">
@@ -41,7 +42,7 @@
           <el-option label='部门' value="dept">部门</el-option>
           <el-option label='系统' value="system">系统</el-option>
           </el-select>
-           <system @sysChange='sysChange' v-show="unit2=='system'" ></system>          
+           <system @sysChange='sysChange' v-show="unit2=='system'" ref='systemChose'></system>          
           <!-- <group @groupChange='groupChange' v-show="unit3=='group'" ></group>   -->
         </div>
       <pastTwelve class="line" v-if="unit2=='dept'"></pastTwelve>
@@ -56,8 +57,10 @@
           <el-option label='系统' value="system">系统</el-option>    
           </el-select>                    
         </div>
-      <topRt  class="topRt"></topRt>
-      <topTest  class="topTest"></topTest>
+      <topRtGroup  class="topRtGroup" v-if="unit3=='group'"></topRtGroup>
+      <topRtSys v-else></topRtSys>
+      <topTestGroup  class="topTestGroup" v-if="unit3=='group'"></topTestGroup>
+      <topTestSys v-else></topTestSys>
       </div>
 
   </div>
@@ -69,22 +72,24 @@
 </template>
 
 <script>
-import totalRt from "./overallHead/totalRt.vue";
-import systemPast from "./systems/systemPast.vue";
-import system from "../common/formComponents/system.vue";
-import group from "../common/formComponents/group";
-import deptmon from "./dept/month";
-import deptseason from "./dept/season";
-import pastTwelve from "./dept/pastTwelve";
-import groupmon from "./group/month";
-import groupall from "./group/all";
-import groupseason from "./group/season";
-import groupyear from "./group/year";
-import topRt from './top/topRt'
-import topTest from './top/topTest'
-import totalTest from './overallHead/totalTest.vue';
-let fstTest=()=>import ("./group/fstTest")
-let randomTest=()=>import ("./group/randomTest")
+let topRtSys=()=>import ("./top/topRtSys.vue");
+let topTestSys=()=>import ("./top/topTestSys.vue");
+let totalRt=()=>import ("./overallHead/totalRt.vue");
+let systemPast=()=>import ("./systems/systemPast.vue");
+let system=()=>import ("../common/formComponents/system.vue");
+let group=()=>import ("../common/formComponents/group");
+let deptmon=()=>import ("./dept/month");
+let deptseason=()=>import ("./dept/season");
+let pastTwelve=()=>import ("./dept/pastTwelve");
+let groupmon=()=>import ("./group/month");
+let groupall=()=>import ("./group/all");
+let groupseason=()=>import ("./group/season");
+let groupyear=()=>import ("./group/year");
+let topRtGroup=()=>import ("./top/topRtGroup");
+let topTestGroup=()=>import ("./top/topTestGroup");
+let totalTest=()=>import ("./overallHead/totalTest.vue");
+let fstTest=()=>import ("./dept/fstTest");
+let randomTest=()=>import ("./dept/randomTest")
 export default {
  data() {
     return {
@@ -108,7 +113,7 @@ export default {
     groupyear,
     fstTest,
     randomTest,
-    group,topRt,system,systemPast,totalRt,totalTest,topTest
+    group,topRtGroup,system,systemPast,totalRt,totalTest,topTestGroup,topRtSys,topTestSys
   },
   methods:{
     groupChange(newV){
@@ -119,10 +124,8 @@ export default {
       // console.log(this.sysName);
     }
   },
-  watch:{
-    // unit2(newV,oldV){
-    //   this.prop.unit=newV
-    // }
+  mounted(){
+    this.$refs.systemChose.systemName='ERP集中门户'
   }
   
 };
@@ -138,13 +141,14 @@ export default {
 .totalBB>.total{
   position:relative;
   top: 10%;
+  right:30%;
   font-style: italic;
-  font-size: 30px;
+  font-size: 40px;
   color:rgb(115, 233, 18)
 }
 .total{
   position: relative;
-  right:15%
+  right:20%
 }
 .abb{
   display: grid;
@@ -206,7 +210,7 @@ export default {
   position: relative;
   left: 25%;
   bottom:33%;
-  width:60%
+  width:80%
 }
 .overallFoot{
   position: relative;

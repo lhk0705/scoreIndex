@@ -7,8 +7,7 @@
       mode="horizontal"
       @select="handleSelect"
       background-color="rgb(42, 142, 230)"
-      text-color="white"
-      
+      text-color="white"      
       :router='true'
     >
     <el-menu-item  index="/">
@@ -24,7 +23,10 @@
           数据录入
         </el-menu-item> -->
         <el-menu-item index="/report">
-          质量报告
+          质控报告
+        </el-menu-item>
+        <el-menu-item index="/board">
+          质控模板
         </el-menu-item>
         <el-menu-item index="/data" v-show="user.role==='0'">
           数据管理

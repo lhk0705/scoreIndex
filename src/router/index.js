@@ -17,12 +17,22 @@ let monthReport=()=>import("../components/report/reports/monthReport.vue")
 let spReport=()=>import("../components/report/reports/spReport.vue")
 let testReport=()=>import("../components/report/reports/testReport.vue")
 let roundReport=()=>import("../components/report/reports/roundReport.vue")
+let board=()=>import("../components/board/board.vue")
+
 
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/board',
+      name: 'board',
+      component: board,
+      // meta:{
+      //   keepAlive:true
+      // }
+    },
     {
       path: '/report',
       name: 'report',

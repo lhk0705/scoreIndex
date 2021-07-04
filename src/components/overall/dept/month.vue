@@ -105,32 +105,7 @@ export default {
         reject(err)
       })
       })    
-    },
-    // SET_DEPT_MONTH(){
-    //   axios.get('/v_dept_mon')
-    //   .then((res)=>{         
-    //     this.$store.commit('setMon',res.data.total)
-    //     // console.log(this.$store.getters.getMon);
-    //     this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getMon
-    //     // console.log(1); 
-    //   })
-    // },
-    // SET_DEPT_fvMONTH(){
-    //   axios.get("/fv_dept_mon")
-    //   .then((res)=>{         
-    //     this.$store.commit('setFvMon',res.data.total)
-    //     this.mychart.rows[0]={ state: "已完成", total: this.$store.getters.getFvMon}
-    //     // console.log(2);
-    //   })
-    // },
-    // SET_DEPT_uvMONTH(){
-    //   axios.get("/uv_dept_mon")
-    //   .then((res)=>{         
-    //     this.$store.commit('setUvMon',res.data.total)
-    //     this.mychart.rows[1]={ state: "未完成", total: this.$store.getters.getUvMon }
-    //     // console.log(3);
-    //   })
-    // },    
+    },  
     async  getMon(){
       // await this.SET_DEPT_MONTH();
       // await this.SET_DEPT_fvMONTH();

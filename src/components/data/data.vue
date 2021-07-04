@@ -19,7 +19,7 @@
       </div>
     
             <div class="change">
-          <el-select v-model="change" size=mini>
+         <strong>操作：</strong> <el-select v-model="change" size=mini>
               <el-option
               v-for="item in changes"
                     :key="item.value"
@@ -27,7 +27,28 @@
                     :value="item.value"></el-option>
              
           </el-select>
-          <el-input size=mini class="input" v-model="changeData"></el-input>
+          <br><br>
+          <span v-show="dataItem=='组别'">组名：</span>
+          <span v-show="dataItem=='系统'">系统名：</span>
+          <span v-show="dataItem=='项目经理'">姓名：</span>
+          <span v-show="dataItem=='质控人员'">姓名：</span>
+          <span v-show="dataItem=='账号'">姓名：</span>
+          <el-input size=mini class="input" v-model="name"></el-input>
+          <br><br>
+          <span v-show="change=='新增'&&dataItem=='账号'">账号：</span>
+          <el-input size=mini class="input" v-model="userId" v-show="change=='新增'&&dataItem=='账号'"></el-input>
+          <br><br>
+          <span v-show="change=='新增'&&dataItem=='账号'">密码：</span>
+          <el-input size=mini class="input" v-model="password" v-show="change=='新增'&&dataItem=='账号'"></el-input>
+          
+          <br><br>
+          <span v-show="change=='新增'&&dataItem=='账号'">角色：</span>
+          <el-select size=mini class="input" v-model="role" v-show="change=='新增'&&dataItem=='账号'">
+              <el-option label='测试经理' value='1'></el-option>
+              <el-option label='测试人员' value='2'></el-option>
+              <el-option label='质量经理' value='3'></el-option>
+              <el-option label='项目经理' value='4'></el-option>
+          </el-select>
           <br>
           <el-button type="primary" class="button" size="mini" @click="submit">确定</el-button>
     </div>
@@ -38,13 +59,17 @@
 export default {
 data(){
     return{
+        role:'',
+        password:'',
+        userId:'',
+        name:'',
         newGroup:'',
         group:'',
         datas:[
             {value:'组别',label:'组别'},
             {value:'系统',label:'系统'},
-            {value:'项目负责人',label:'项目负责人'},
-            {value:'测试人员',label:'测试人员'},
+            {value:'项目经理',label:'项目经理'},
+            {value:'质控人员',label:'质控人员'},
             {value:'账号',label:'账号'},
         ],
         changes:[
@@ -52,7 +77,6 @@ data(){
             {value:'删除',label:'删除'}
         ],
         change:'',
-        changeData:'',
         dataItem:'组别',
         dataList:'',
         search:''
@@ -64,9 +88,9 @@ created(){
 },
 watch:{
     dataItem(newV,oldV){
-        if(newV==='项目负责人'){
+        if(newV==='项目经理'){
             this.dataList=this.$store.getters.getSysPerson    
-        }else if(newV==='测试人员'){
+        }else if(newV==='质控人员'){
             this.dataList=this.$store.getters.getTestPerson
         }else if(newV==='账号'){
             this.dataList=this.$store.getters.getAllUser
@@ -78,9 +102,9 @@ watch:{
     },
     search(newV,oldV){
         let list
-        if(this.dataItem==='项目负责人'){
+        if(this.dataItem==='项目经理'){
             list=this.$store.getters.getSysPerson    
-        }else if(this.dataItem==='测试人员'){
+        }else if(this.dataItem==='质控人员'){
              list=this.$store.getters.getTestPerson
         }else if(this.dataItem==='账号'){
            list=this.$store.getters.getAllUser
@@ -95,13 +119,13 @@ watch:{
 methods:{
     // 新增数据
     insert(data){
-        if(this.dataItem==='项目负责人'){
+        if(this.dataItem==='项目经理'){
             this.$store.commit('insertSysP',data)     
-        }else if(this.dataItem==='测试人员'){
+        }else if(this.dataItem==='质控人员'){
              this.$store.commit('insertTestP',data) 
         }else if(this.dataItem==='账号'){
            this.$store.commit('insertUser',data)   
-        }else if(newV==='组别'){
+        }else if(this.dataItem==='组别'){
              this.$store.commit('insertGroup',data) 
         }else{
              this.$store.commit('insertSys',data) 
@@ -110,29 +134,53 @@ methods:{
     },
     // 删除数据
     delete(data){
-        if(this.dataItem==='项目负责人'){
+        if(this.dataItem==='项目经理'){
             this.$store.commit('removeSysP',data)     
-        }else if(this.dataItem==='测试人员'){
+        }else if(this.dataItem==='质控人员'){
              this.$store.commit('removeTestP',data) 
         }else if(this.dataItem==='账号'){
            this.$store.commit('removeUser',data)   
-        }else if(newV==='组别'){
+        }else if(this.dataItem==='组别'){
              this.$store.commit('removeGroup',data) 
         }else{
              this.$store.commit('removeSys',data) 
         }
     },
     submit(){
-        if(this.change===''||this.changeData===''){
+        // 管理非账号的数据
+        if(this.dataItem!=='账号'||this.change=='删除'){
+        if(this.change===''||this.name===''){
             alert("请输入信息！")
         }else{        
         if(this.change==='新增'){
-            console.log(this.changeData);
-            this.insert(this.changeData)
+            console.log(this.name);
+            // this.insert(this.name)
         }else{
-            this.delete(this.changeData)
+            // this.delete(this.name)
         }
         }
+        // 管理账号的数据
+        }else{
+        if(this.change===''||this.name===''||this.userId==''||this.password==''||this.role==''){
+            alert("请输入信息！")
+        }else{        
+        if(this.change==='新增'){            
+            let insertData={
+                'name':this.name,
+                'userId':this.userId,
+                'password':this.password,
+                'role':this.role,
+                'value':this.name,
+            }
+            console.log(insertData);
+            // this.insert(insertData)
+        }else{
+            console.log(this.name);
+            // this.delete(this.name)
+        }
+        }
+        }
+
         // this.$router.go(0)
     }
 }

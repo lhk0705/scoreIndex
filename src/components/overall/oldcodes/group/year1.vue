@@ -1,92 +1,81 @@
 <template>
-  <div  v-if="show" class="ring">
+
+  <div v-if="show" class="ring">
     <ve-ring
       :data="mychart"
       :settings="chartSettings"
       :legend="legend"
-      width="120%"
-      height="260px"
+      width="100%"
+      height="280px"
         :title="title"
         :extend="extend"
-     class="r"
+        
     ></ve-ring>
-    <p class="p">{{rounds}}</p>
+    <p>{{rounds}}</p>
   </div>
-  <div v-else >
+  <div  v-else>
     <div class="noData1">
-    <strong>
+    <strong >
       {{title.text}}</strong></div>
     <br>
     <div class="noData">
     <strong>无提测版本</strong></div>    
   </div>
+
 </template>
 
 <script>
 import axios from "axios";
-
 export default {
- props:{
+    props:{
         prop:String
     },
   data() {
-    (this.chartSettings = {
-      radius: ["55%", "70%"],
+    return {
+      chartSettings : {
+      radius: ["45%", "55%"],
       label:{
               show:false
           },
-        //   series:[{
-        //       type:'pie',
-        //       bottom:30
-        //   }]
-    }),
-      (this.legend = {
+        
+    },
+      legend: {
         // orient: "vertical",
-        // right: 'right',
-        top:'25%',
+        right: 'center',
+        top:'30%',
         // width: 20,
         itemWidth: 10,
         itemHeight: 10,
         textStyle: {
-          fontSize: 10,
+        fontSize: 10,
         },
-      });
-          
-    return {
-    rounds:'',
-    title:{
-          text:'年度版本数',
+      } ,
+      title:{
+            text:'年度版本数',
             left:'center',
-            top:'10%'
-      }  ,
-    extend:{
-
-          series:{
-            center:['50%','60%'],
-            //   type:'pie',
-            //   emphasis: {
+            top:'15%'     
+      },            
+        rounds:'',
+        extend:{
+          series:{ 
+            center:['50%','70%'],           
                 label: {
-                  
                     show: true,
                     position:'center',
+                    formatter:'',
                     fontSize: '12',
-                    fontWeight: 'bold',
-                    formatter:''
-            },
-            // },
-          },
-          
-          
-      }, 
-      mychart: {
+                    fontWeight: 'bold'
+                }, 
+          }         
+      } ,
+        mychart: {
           title:{
             text:''
           },
         columns: ["state", "total"],
         rows: [],
-      },  
-      show:true,
-      
+      }, 
+      show:true,     
     };
   },
   created(){
@@ -101,11 +90,10 @@ export default {
       }
     }
   },
-  
-  methods:{
-    request(url){
+  methods:{ 
+    request(url,groupName){
       return new Promise((resolve,reject)=>{
-      axios.get(url)
+      axios.post(url,{"groupName":groupName})
       .then((res)=>{  
         // if(res.data.total===undefined){
           // this.show=false
@@ -120,6 +108,56 @@ export default {
       })
       })    
     },  
+    // SET_GROUP_YEAR(newV){
+    //   this.$store.commit('setGYear','')
+    //   axios.post('/v_group_year',{"groupName":newV})
+    //   .then((res)=>{ 
+    //     // console.log(1);
+    //     // console.log(res.data.total);
+    //     if(res.data.total===undefined){
+    //       this.show=false
+    //       // console.log(2);
+    //     }  else{
+    //       this.show=true
+    //        this.$store.commit('setGYear',res.data.total)
+    //     // console.log(res.data);
+    //     // console.log(this.$store.getters.getMon);
+    //     this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getGYear
+    //     // console.log(1); 
+    //     }      
+       
+        
+    //   })
+    // },
+    // SET_GROUP_fvYEAR(newV){
+    //   this.$store.commit('setGFvYear','')
+    //   axios.post('/fv_group_year',{"groupName":newV})
+    //   .then((res)=>{         
+    //     this.$store.commit('setGFvYear',res.data.total)
+    //     this.mychart.rows[0]={ state: "已完成", total: this.$store.getters.getGFvYear}
+    //     // console.log(2);
+    //   })
+    // },
+    // SET_GROUP_uvYEAR(newV){
+    //   this.$store.commit('setGUvYear','')
+    //   axios.post('/uv_group_year',{"groupName":newV})
+    //   .then((res)=>{         
+    //     this.$store.commit('setGUvYear',res.data.total)
+    //     this.mychart.rows[1]={ state: "未完成", total: this.$store.getters.getGUvYear }
+    //     // console.log(3);
+    //   })
+    // },
+    // SET_GROUP_ROUNDS(newV){
+    //   axios.post("/r_group_year",{'groupName':newV}).then((res)=>{
+    //   if(res.data.total===undefined){
+    //       this.rounds="无已完成验收的版本"
+    //     }else{
+    //   // console.log("验收轮次："+res.data.total);
+    //   this.rounds="平均验收轮次："+res.data.total.toFixed(1)
+    //     }
+
+    // })
+    // },    
     async  getGYear(newV){
       // await this.SET_GROUP_YEAR(newV);
       // await this.SET_GROUP_fvYEAR(newV);
@@ -139,8 +177,8 @@ export default {
       this.mychart.rows[1]={ state: "未完成", total: wwc }
       
       
-    }    
-  }  
+    }
+  }
 };
 </script>
 
@@ -161,22 +199,11 @@ export default {
   position: relative;
   top:32px
 }
-.r{
-  position: relative;
-  left:10%;
-  /* border: 1px solid black; */
-  /* margin: auto 1%; */
-
+p{
+  text-align: center;
 }
 .ring{
-  display: grid;
-  grid:80% 20%/50%;
-  /* border: 1px solid black; */
-}
-p{
   position: relative;
-  bottom:5%;
-  left:14%;
-  width:140%
+  bottom:30px
 }
 </style>

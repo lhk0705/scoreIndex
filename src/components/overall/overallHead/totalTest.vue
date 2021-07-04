@@ -50,7 +50,7 @@ data() {
         min: 0,
         max: 1,
         splitNumber: 4,
-        name: 'Pressure',
+        name: '首轮验收通过率',
         type: 'gauge',
         detail: {
             formatter: '{value}',

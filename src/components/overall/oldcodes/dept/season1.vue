@@ -1,29 +1,25 @@
 <template>
-  <div class="ring">
+  <div  class="ring">
     <ve-ring
       :data="mychart"
       :settings="chartSettings"
       :legend="legend"
-      width="120%"
-      height="260px"
+      width="100%"
+      height="280px"
         :title="title"
         :extend="extend"
-     class="r"
+     
     ></ve-ring>
-     <p class="p">{{rounds}}</p>
+    <p>{{rounds}}</p>
   </div>
- 
-
 </template>
 
 <script>
 import axios from "axios";
-
 export default {
- 
   data() {
     (this.chartSettings = {
-      radius: ["55%", "70%"],
+      radius: ["45%", "55%"],
       label:{
               show:false
           },
@@ -34,57 +30,51 @@ export default {
     }),
       (this.legend = {
         // orient: "vertical",
-        // right: 'right',
-        top:'25%',
+        right: 'center',
+        top:'30%',
         // width: 20,
         itemWidth: 10,
         itemHeight: 10,
         textStyle: {
           fontSize: 10,
         },
-      });
-          
+      });      
     return {
+    season:'',
     rounds:'',
     title:{
           text:'部门季度版本数',
             left:'center',
-            top:'10%',
-            textStyle:{
-              width:130,
-              overflow:'break'
-            }
-      }  ,
+            top:'15%'
+    },
     extend:{
-
           series:{
-            center:['50%','60%'],
+            center:['50%','70%'], 
             //   type:'pie',
+              // right:10,
             //   emphasis: {
                 label: {
-                  
                     show: true,
                     position:'center',
+                    formatter:'',
                     fontSize: '12',
-                    fontWeight: 'bold',
-                    formatter:''
-            },
+                    fontWeight: 'bold'
+                }
             // },
-          },
+          }
           
-          
-      }, 
+      },
       mychart: {
         columns: ["state", "total"],
         rows: [
-          
+        
         ],
       },
       
     };
   },
-  created(){      
-      if(new Date().getMonth()/3<1){
+  created(){
+    if(new Date().getMonth()/3<1){
         this.season=new Date().getFullYear()-1+'年4季度'      
       }else{
         this.season=new Date().getFullYear()+'年'+(Math.ceil((new Date().getMonth()+1)/3)-1)+'季度'
@@ -93,7 +83,6 @@ export default {
       this.title.text='部门'+this.season+'版本数' 
     
   },
-  
   methods:{
     request(url){
       return new Promise((resolve,reject)=>{
@@ -111,8 +100,45 @@ export default {
         reject(err)
       })
       })    
-    }, 
+    },
+    // SET_DEPT_SEA(){
+    //   axios.get('/v_dept_sea')
+    //   .then((res)=>{         
+    //     this.$store.commit('setSea',res.data.total)
+    //     // console.log(this.$store.getters.getMon);
+    //     this.extend.series.label.formatter= '总版本数：'+this.$store.getters.getSea
+    //     // console.log(1); 
+    //   })
+    // },
+    // SET_DEPT_fvSEA(){
+    //   axios.get("/fv_dept_sea")
+    //   .then((res)=>{         
+    //     this.$store.commit('setFvSea',res.data.total)        
+    //     this.mychart.rows[0]={ state: "已完成", total: this.$store.getters.getFvSea}
+    //     // console.log(2);
+    //   })
+    // },
+    // SET_DEPT_uvSEA(){
+    //   axios.get("/uv_dept_sea")
+    //   .then((res)=>{         
+    //     this.$store.commit('setUvSea',res.data.total)
+    //     this.mychart.rows[1]={ state: "未完成", total: this.$store.getters.getUvSea }
+        
+    //     // console.log(3);
+    //   })
+    // },    
+    // SET_DEPT_ROUNDS(){
+    //   axios.get("/r_dept_sea").then((res)=>{
+    //   this.rounds=res.data.total.toFixed(1)
+    //   // console.log(res.data);
+
+    // })
+    // }, 
     async  getSea(){
+      // await this.SET_DEPT_SEA();
+      // await this.SET_DEPT_fvSEA();
+      // await this.SET_DEPT_uvSEA();
+      // this.SET_DEPT_ROUNDS()
       let bbs,ywc,wwc,r
       bbs=await this.request('/v_dept_sea')
       ywc=await this.request('/fv_dept_sea')
@@ -123,28 +149,15 @@ export default {
       this.mychart.rows[0]={ state: "已完成", total: ywc}
       this.mychart.rows[1]={ state: "未完成", total: wwc }
       r===undefined?this.rounds="无已完成验收的版本":this.rounds="平均验收轮次："+ r
-    }     
+    }
   }
-  
+
 };
 </script>
 
 <style scoped>
-.r{
-  position: relative;
-  left:10%;
-  /* border: 1px solid black; */
-  /* margin: auto 1%; */
-}
 .ring{
-  display: grid;
-  grid:80% 20%/50%;
-  /* border: 1px solid black; */
-}
-p{
   position: relative;
-  bottom:5%;
-  left:14%;
-  width:140%
+  bottom:30px
 }
 </style>
