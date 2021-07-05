@@ -1,5 +1,5 @@
 <template>
-  <div class="ring">
+  <div class="ring" v-if="show">
     <ve-ring
       :data="mychart"
       :settings="chartSettings"
@@ -12,7 +12,14 @@
     ></ve-ring>
      <p class="p">{{rounds}}</p>
   </div>
- 
+ <div v-else >
+    <div class="noData1">
+    <strong>
+      {{title.text}}</strong></div>
+    <br>
+    <div class="noData">
+    <strong>无提测版本</strong></div>    
+  </div>
 
 </template>
 
@@ -45,6 +52,7 @@ export default {
       });
           
     return {
+      show:true,
     rounds:'',
     title:{
           text:'部门月度版本数',
@@ -128,6 +136,22 @@ export default {
 </script>
 
 <style scoped>
+.noData{
+  /* border:1px solid black; */
+  font-size:18px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  /* color:rgb(222, 236, 26) */
+}
+.noData1{
+  font-size:18px; 
+  text-align: center;
+  position: relative;
+  top:32px
+}
 .r{
   position: relative;
   left:10%;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if='show'>
     <br>
     <strong>
     <h3>系统版本质量趋势</h3></strong>
@@ -18,6 +18,15 @@
     height=100%
     ></ve-line>
   </div>
+  </div>
+  <div v-else>
+    <div class="noData1">
+    <!-- <strong>
+      {{title.text}}</strong> -->
+      </div>
+    <br>
+    <div class="noData">
+    <strong>无提测版本</strong></div>  
   </div>
 </template>
 
@@ -50,13 +59,13 @@ export default {
         }
     }     
     return {
+      show:false,
       systemName:'ERP集中门户',
       rounds:'',
       passrate:'',
       sysChart: {
         columns: ["提测日期", "首轮通过率","验收轮次"],
-        rows: [
-        ],
+        rows:'',
         
       },
       sysChart1: {
@@ -84,10 +93,10 @@ export default {
         yAxis:{
             inverse:true
             },
-        legend:{
+        // legend:{
           // bottom:'-100%',
           // zlevel:2
-        },
+        // },
         areaStyle:{
             color:'blue'
         }
@@ -109,15 +118,20 @@ export default {
   //  获取部门数据
    async getSystem(systemName){
       this.sysChart.rows=[]
-        let sysData=await this.request("/getSysLine",{'systemName':'督办系统'})
+      this.sysChart1.rows=[]
+        let sysData=await this.request("/getSysLine",{'systemName':systemName})
         for(let item of sysData){
         this.sysChart.rows.unshift({
         提测日期: item.ticeshijian, 首轮通过率: item.atgl,验收轮次:item.rounds
         })
         this.sysChart1.rows.unshift({
         提测日期: item.ticeshijian, 抽测得分: item.atgl,验收得分:item.rounds
-        })   
-        }        
+        })           
+        } 
+        let length=this.sysChart.rows.length
+        console.log(this.sysChart.rows.length);
+        length===0?this.show=false:this.show=true;     
+             
    },
   },
   created(){
@@ -143,7 +157,22 @@ export default {
 </script>
 
 <style scoped>
-
+.noData{
+  /* border:1px solid black; */
+  font-size:18px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  
+}
+.noData1{
+  font-size:18px; 
+  text-align: center;
+  position: relative;
+  top:32px
+}
 .btn{
   float: left;
   /* background-color: rgb(224, 223, 223); */

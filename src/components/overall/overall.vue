@@ -125,7 +125,7 @@ export default {
     }
   },
   mounted(){
-    this.$refs.systemChose.systemName='ERP集中门户'
+    // this.$refs.systemChose.systemName='ERP集中门户'
   }
   
 };
@@ -144,7 +144,7 @@ export default {
   right:30%;
   font-style: italic;
   font-size: 40px;
-  color:rgb(115, 233, 18)
+  color:rgb(117, 236, 133)
 }
 .total{
   position: relative;
@@ -210,7 +210,7 @@ export default {
   position: relative;
   left: 25%;
   bottom:33%;
-  width:80%
+  width:90%
 }
 .overallFoot{
   position: relative;

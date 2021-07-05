@@ -40,16 +40,31 @@ export default {
           top:'20%',
           
         },
+        // itemStyle:{
+          // lineStyle:{
+          //   width:1000
+          // }
+        //   color:'red'
+        // },
+
         // zlevel:1,
         // xAxis:{
         //     nameGap:120
         // },
+        // lineStyle:{
+            // width:1000,
+            // color:red
+        // },
+        // itemStyle:{
+        //     color:red
+        // },
+        color:['rgb(96, 163, 202)','rgb(166, 241, 104)'],
         legend:{
           top:'-1%',
           // zlevel:3
         }
     }     
-    return {
+    return { 
       rounds:'',
       passrate:'',
       mychart: {

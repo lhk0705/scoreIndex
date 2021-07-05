@@ -1,5 +1,5 @@
 <template>
-<div class="histogram">
+<div class="histogram" v-if="show">
   <ve-histogram 
   class="his"
   :data="chartData"
@@ -7,6 +7,14 @@
   height='100%'
   width='100%'
   ></ve-histogram>
+  </div>
+  <div v-else >
+    <div class="noData1">
+    <strong>
+      {{title.text}}</strong></div>
+    <br>
+    <div class="noData">
+    <strong>无提测版本</strong></div>    
   </div>
 </template>
 
@@ -35,6 +43,7 @@ import axios from 'axios'
         },
         }
       },
+      show:true,
         chartData: {
           // columns: [ 'group','OA办公组','人力党建组','规划管理组','技术研发组','能力平台组','内部支撑组'],
           // rows: [
@@ -59,7 +68,7 @@ import axios from 'axios'
       }
     },
     created(){
-      // this.FST_TEST()
+      this.FST_TEST()
       this.extend.title.text=new Date().getMonth()+'月首轮验收通过率'
     },
     methods:{
@@ -87,7 +96,7 @@ import axios from 'axios'
         for(let item of group){
           this.getGroup(time,item.value);
         }
-
+        // this.chartData.rows.length==1?this.show=false:this.show=true
       }
     }
   }
@@ -104,5 +113,21 @@ import axios from 'axios'
   display: grid;
   grid: 90% /90%;
   /* border: 1px solid black ; */
+}
+.noData{
+  /* border:1px solid black; */
+  font-size:18px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+  
+}
+.noData1{
+  font-size:18px; 
+  text-align: center;
+  position: relative;
+  top:32px
 }
 </style>

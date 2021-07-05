@@ -4,7 +4,6 @@
 
   :extend="extend"
   class="his"
-  
   ></ve-histogram>
   <div></div></div>
 </template>
@@ -13,9 +12,13 @@
 export default {
  data () {
       return {
+        // settings:{color: '#3bcec6',},
           value:[1,3,2,1,2],
           group:['规划管理组','OA办公组','人力党建组','能力平台组','技术研发组'],
       extend:{
+        itemStyle:{
+          color:'red'
+        },
         grid:{
           top:"20%",
           // width:'100%',
@@ -38,13 +41,16 @@ export default {
         axisLabel: {
             show:true,
             fontSize :8,
-        }
+        } 
         },
+        
         series:[{
         name:'抽测通过率',
         data:[],
-        type: 'bar'
+        type: 'bar',
+        
         }]
+
       }, 
       }
     },

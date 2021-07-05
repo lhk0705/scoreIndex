@@ -103,9 +103,9 @@ export default {
   },
   
   methods:{
-    request(url){
+    request(url,groupName){
       return new Promise((resolve,reject)=>{
-      axios.get(url)
+      axios.post(url,{"groupName":groupName})
       .then((res)=>{  
         // if(res.data.total===undefined){
           // this.show=false
@@ -119,7 +119,7 @@ export default {
         reject(err)
       })
       })    
-    },  
+    }, 
     async  getGAll(newV){
       // await this.SET_GROUP_ALL(newV);
       // await this.SET_GROUP_fvALL(newV);

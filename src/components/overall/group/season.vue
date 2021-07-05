@@ -115,9 +115,9 @@ export default {
   },
   
   methods:{
-    request(url){
+    request(url,groupName){
       return new Promise((resolve,reject)=>{
-      axios.get(url)
+      axios.post(url,{"groupName":groupName})
       .then((res)=>{  
         // if(res.data.total===undefined){
           // this.show=false
@@ -131,7 +131,7 @@ export default {
         reject(err)
       })
       })    
-    },  
+    }, 
     async  getGSea(newV){
       // await this.SET_GROUP_SEA(newV);
       // await this.SET_GROUP_fvSEA(newV);
@@ -163,8 +163,8 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 300px;
-  
+  height: 200px;
+  /* color:rgb(89, 214, 31) */
 }
 .noData1{
   font-size:18px; 

@@ -103,9 +103,9 @@ export default {
   },
   
   methods:{
-    request(url){
+    request(url,groupName){
       return new Promise((resolve,reject)=>{
-      axios.get(url)
+      axios.post(url,{"groupName":groupName})
       .then((res)=>{  
         // if(res.data.total===undefined){
           // this.show=false
@@ -119,7 +119,7 @@ export default {
         reject(err)
       })
       })    
-    },  
+    },
     async  getGYear(newV){
       // await this.SET_GROUP_YEAR(newV);
       // await this.SET_GROUP_fvYEAR(newV);
