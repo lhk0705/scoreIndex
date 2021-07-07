@@ -8,7 +8,7 @@
       :router="true"
       >
       <el-submenu index="/finish" class="nav">
-      <template slot="title" >
+      <template slot="title" class="navFather">
         <i class="el-icon-menu"></i>
         <span slot="title" >  
             已完成验收的版本 
@@ -59,7 +59,7 @@
             </span>            
       </el-menu-item >
       <el-submenu index="/newTask" class="nav" v-show="user.role==='0'" >
-      <template slot="title" >
+      <template slot="title" class="navFather">
         <i class="el-icon-menu"></i>
         <span slot="title" >  
             测试任务 
@@ -91,12 +91,12 @@
 <script>
 export default {
 methods: {
-      handleOpen(key, keyPath) {
-        // console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        // console.log(key, keyPath);
-      }
+      // handleOpen(key, keyPath) {
+      //   // console.log(key, keyPath);
+      // },
+      // handleClose(key, keyPath) {
+      //   // console.log(key, keyPath);
+      // }
     },
     computed:{
       user(){
@@ -122,5 +122,7 @@ span{
 .nav:hover{
   background-color: rgba(9, 9, 22, 0.712); 
 }
-
+/* .navFather:hover{
+  background-color: black; 
+} */
 </style>

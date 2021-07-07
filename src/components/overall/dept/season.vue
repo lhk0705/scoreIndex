@@ -42,7 +42,7 @@ export default {
       (this.legend = {
         // orient: "vertical",
         // right: 'right',
-        top:'25%',
+        top:'30%',
         // width: 20,
         itemWidth: 10,
         itemHeight: 10,
@@ -65,7 +65,7 @@ export default {
       }  ,
     extend:{
           series:{
-            center:['50%','60%'],
+            center:['50%','65%'],
             //   type:'pie',
             //   emphasis: {
                 label: {

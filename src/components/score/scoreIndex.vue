@@ -371,7 +371,16 @@ export default {
                 // console.log(data);                  
             axios.post('/addSorce',data)
             .then((res)=>{console.log('传输成功');})
-            alert("提交成功！")
+            if(confirm('提交成功！是否生成验收报告？')){
+              this.report()
+            }else{
+                if(confirm('是否生成得分表？')){
+                this.score()
+                }else{
+                this.$router.push('/showin')
+                }
+            }
+            
           }}               
           else{
             //先传第一轮数据
@@ -471,7 +480,12 @@ export default {
                 // console.log(data);
               axios.post('/addSorce',data)
             .then((res)=>{console.log('传输成功');})
-            alert("提交成功！")
+            if(confirm('提交成功！是否生成阶段报告？')){
+              this.period()
+            }else{
+              this.$router.push('/showin')
+            }
+            // this.$router.push('/showin')
                 // this.$router.go(0)
           // console.log(data);  
             }
@@ -500,8 +514,11 @@ export default {
                     // console.log(data);
                   axios.post('/updateSorce',data)
                   .then((res)=>{console.log('传输成功');})  
-                    // this.$router.go(0)
-                    alert("提交成功！")
+                    if(confirm('提交成功！是否生成阶段报告？')){
+                          this.period()
+                    }else{
+                        this.$router.push('/showin')
+                    }
                   
                 }
                 //三轮数据提交
@@ -529,7 +546,11 @@ export default {
                     axios.post('/updateCSorce',data)
                     .then((res)=>{console.log('传输成功');})        
                   alert("提交成功！")
-                  // this.$router.go(0)
+                  if(confirm('提交成功！是否生成验收报告？')){
+                      this.report()
+                  }else{
+                  this.$router.push('/showin')
+            }
                   }
                  
               }             

@@ -32,7 +32,7 @@ export default {
     },
   data() {
     (this.chartSettings = {
-      radius: ["55%", "70%"],
+      radius: ["60%", "75%"],
       label:{
               show:false
           },
@@ -44,7 +44,7 @@ export default {
       (this.legend = {
         // orient: "vertical",
         // right: 'right',
-        top:'25%',
+        top:'30%',
         // width: 20,
         itemWidth: 10,
         itemHeight: 10,
@@ -64,7 +64,7 @@ export default {
     extend:{
 
           series:{
-            center:['50%','60%'],
+            center:['50%','70%'],
             //   type:'pie',
             //   emphasis: {
                 label: {

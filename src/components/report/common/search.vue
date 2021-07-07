@@ -1,88 +1,78 @@
 <template>
 <div class="header">
-    <el-row>
-      <el-col :span="8" >
-        <label>系统名：</label>
-        <el-select
-          v-model="xtm"
-          filterable
-          placeholder="请选择"
-          size="mini">
-          <el-option
-            v-for="item in sysoptions"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          ></el-option>
-        </el-select>
-      </el-col>
-      <el-col :span="10">
-        <label>版本号：</label>
-        <el-input v-model="bbh" size="mini" style="width:200px"></el-input>
-      </el-col>
-      <el-col :span="6">
-        <el-button size="mini" type="primary" @click="search(prop)">搜索</el-button>
-        
-      </el-col>
-    </el-row>
-    <br />
-    <br />
-    <el-row>
-      <el-col :span="8">
-        <label>组别：</label><group ref='groupName'></group>
-        
-      </el-col>
-      <el-col :span="10"><div class="time">          
-          <label>提测时间：</label>
-          <el-date-picker
+    <div class="ipt">
+        <label v-if="timeShow==='month'">月份：</label>
+        <el-date-picker v-if="timeShow==='month'" size="mini" value-format="yyyy-MM-dd" v-model="month" type="month" placeholder="请选择月份" ></el-date-picker>
+        <label v-if="timeShow==='date'">日期：</label>
+        <el-date-picker
+        v-if="timeShow==='date'"
                   value-format="yyyy-MM-dd"
                   size="mini"
                   v-model="min_time"
                   type="date"
                   placeholder="请选择日期"
-                  style="width:150px"
+                  style="width:40%"
                 ></el-date-picker>
-          <label>~</label>
+          <label v-if="timeShow==='date'">~</label>
           <el-date-picker
+          v-if="timeShow==='date'"
                   value-format="yyyy-MM-dd"
                   size="mini"
                   v-model="max_time"
                   type="date"
                   placeholder="请选择日期"
-                  style="width:150px"
+                  style="width:40%"
                 ></el-date-picker>
+                </div>
+     <div class="btn">
+         <label>标题：</label>
+        <el-input v-model="title" size="mini" style="width:50%"></el-input>
         </div>
-      </el-col>
-      <el-col :span="6">        
-        <el-button size="mini"  @click="cancel">重置</el-button>
-      </el-col>
-    </el-row>
+      <div class="btn">
+          <el-button size="mini" type="primary" @click="search">搜索</el-button><el-button size="mini"  @click="cancel">重置</el-button>
+          </div>
+      <div  class="ipt">
+          <label v-show='systemShow'>系统：</label>
+        <system  v-show='systemShow' v-model="systemName" style="width:50%" ></system>
+        </div>
+      <div class="btn">
+          <div class="time"  v-show='periodShow'>          
+          <label >阶段：</label>
+          <el-select v-model="round" size="mini" style="width:70%">
+              <el-option label="一轮" value="1"></el-option>
+              <el-option label="二轮" value="2"></el-option>
+              <el-option label="三轮" value="3"></el-option>
+          </el-select></div></div>
+      <div class="btn"></div>
   </div>
 </template>
 
 <script>
-import group from '@/components/common/formComponents/group.vue'
+import system from '@/components/common/formComponents/system.vue'
 export default {
   props:{prop:{
     type:Array,
     // required:true
   }},
   components:{
-    group
+    system
   },
   data() {
     return {
-      // show:[{'xitongming':'a'},{'xitongming':'b'}]
-      xtm: "",
-      bbh: "",
-      zb: "",
+        systemShow:true,
+        periodShow:false,
+        timeShow:'month',
+        systemName:'',
+        round:'',
+        month:'',
+        title:'',
       min_time: "",
       max_time: "",
       
     }
   },
   mounted(){
-    this.$refs.groupName.groupName=''
+    // this.$refs.groupName.groupName=''
   },
   computed: {
     sysoptions() {
@@ -93,7 +83,7 @@ export default {
     },
   },
   methods:{
-      search(vers){
+      search(){
         // console.log(this.$refs.groupName.groupName);
           let sdata={
               "xitongming":this.xtm,
@@ -102,7 +92,6 @@ export default {
               "min_time":this.min_time,
               "max_time":this.max_time,
           }
-          console.log(sdata);
         // let vers=this.$store.getters.getFinishVer
         let result=[]
         let a=[]        
@@ -129,27 +118,35 @@ export default {
       },
       cancel(){
         this.$router.go(0)
-        // this.xtm='';
-        // this.bbh='';
-        // this.$refs.groupName.groupName='';
-        // this.min_time='';
-        // this.max_time='';
-        
       }
   }
 };
 </script>
 
-<style>
+<style scoped>
 .header {
   border: 1px solid rgb(240, 237, 237);
   padding: 15px;
   background-color: white;
   border-radius: 8px;
   font-size: 10px;
+  height: 70px;
+  display: grid;
+  grid:37px 40px/33% 33% 33%
 }
-.time {
+/* .time {
   position: relative;
   left: 12%;
+} */
+.ipt{
+    padding-left: 5%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

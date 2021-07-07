@@ -1,38 +1,38 @@
 <template>
-
-
-      <el-select v-model="groupName" placeholder="请选择" size="mini" style="width:190px">
-          <el-option
-            v-for="item in group"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          ></el-option>
-        </el-select>
-
+  <el-select
+    v-model="groupName"
+    placeholder="请选择"
+    size="mini"
+    style="width: 190px"
+  >
+    <el-option
+      v-for="item in group"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
+    ></el-option>
+  </el-select>
 </template>
 
 <script>
-import bus from '../bus'
+import bus from "../bus";
 export default {
-    data(){
-        return{
-            groupName:'OA办公组',
-            group:[]
-        }
+  data() {
+    return {
+      groupName: "OA办公组",
+      group: [],
+    };
+  },
+  mounted() {
+    this.group = this.$store.getters.getGroup;
+  },
+  watch: {
+    groupName(newV, oldV) {
+      this.$emit("groupChange", newV);
     },
-    mounted(){
-      this.group = this.$store.getters.getGroup;
-    },
-    watch:{
-      groupName(newV,oldV){
-        this.$emit('groupChange',newV);       
-      }
-    }
-    
-}
+  },
+};
 </script>
 
 <style scoped>
-
 </style>
