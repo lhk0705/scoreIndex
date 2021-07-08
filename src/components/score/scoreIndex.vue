@@ -237,7 +237,7 @@ export default {
       return allData
 
     },
-    submit(){
+    async submit(){
       let headdata=this.$refs.visionhead
       let docdata=this.$refs.doc
       let randomtestdata=this.$refs.randomtest
@@ -371,15 +371,16 @@ export default {
                 // console.log(data);                  
             axios.post('/addSorce',data)
             .then((res)=>{console.log('传输成功');})
-            if(confirm('提交成功！是否生成验收报告？')){
-              this.report()
-            }else{
-                if(confirm('是否生成得分表？')){
-                this.score()
-                }else{
-                this.$router.push('/showin')
-                }
-            }
+            // if(confirm('提交成功！是否生成验收报告？')){
+            //   this.report()
+            // }else{
+            //     if(confirm('是否生成得分表？')){
+            //     this.score()
+            //     this.$router.push('/warn')
+            //     }else{
+            //     this.$router.push('/warn')
+            //     }
+            // }
             
           }}               
           else{
@@ -480,11 +481,12 @@ export default {
                 // console.log(data);
               axios.post('/addSorce',data)
             .then((res)=>{console.log('传输成功');})
-            if(confirm('提交成功！是否生成阶段报告？')){
-              this.period()
-            }else{
-              this.$router.push('/showin')
-            }
+            // if(confirm('提交成功！是否生成阶段报告？')){
+            //   this.period()
+            //   this.$router.push('/ing')
+            // }else{
+            //   this.$router.push('/ing')
+            // }
             // this.$router.push('/showin')
                 // this.$router.go(0)
           // console.log(data);  
@@ -514,11 +516,11 @@ export default {
                     // console.log(data);
                   axios.post('/updateSorce',data)
                   .then((res)=>{console.log('传输成功');})  
-                    if(confirm('提交成功！是否生成阶段报告？')){
-                          this.period()
-                    }else{
-                        this.$router.push('/showin')
-                    }
+                    // if(confirm('提交成功！是否生成阶段报告？')){
+                    //       this.period()
+                    // }else{
+                    //     this.$router.push('/showin')
+                    // }
                   
                 }
                 //三轮数据提交
@@ -546,16 +548,30 @@ export default {
                     axios.post('/updateCSorce',data)
                     .then((res)=>{console.log('传输成功');})        
                   alert("提交成功！")
-                  if(confirm('提交成功！是否生成验收报告？')){
-                      this.report()
-                  }else{
-                  this.$router.push('/showin')
-            }
+                  // if(confirm('提交成功！是否生成验收报告？')){
+                  //     this.report()
+                  // }else{
+                  // if(confirm('是否生成得分表？')){
+                  //     this.score()
+                  //   } else{
+                  //  this.$router.push('/showin')
+                  //  }
+            // }
                   }
                  
               }             
           }
-      }},
+      }
+      // 生成报告
+        if(this.status===1){
+          if(confirm('提交成功！是否生成验收报告？')){await this.report()}
+          // if(confirm('是否生成得分表？')){await this.score()} 
+          this.$router.push('/finish')            
+        }else{
+          if(confirm('提交成功！是否生成阶段报告？')){await this.period()}
+          this.$router.push('/ing') 
+        }
+    },
     cancel(){  
           let a=confirm("确定清空？");
           if(a){  
@@ -663,7 +679,7 @@ export default {
               testdata.state_c_csr=""
           }
           else{}
-      },
+    },
     goback(){
       this.$router.go(-1)
     },
@@ -751,6 +767,7 @@ export default {
     },
     // 导出为验收报告
     report(){
+      console.log(1);
       let data=this.getAllData()
       let randomtestdata=this.$refs.randomtest
       let testdata=this.$refs.test

@@ -83,39 +83,40 @@ export default {
     },
   },
   methods:{
-      search(){
-        // console.log(this.$refs.groupName.groupName);
-          let sdata={
-              "xitongming":this.xtm,
-              "banbenhao":this.bbh,
-              "group":this.$refs.groupName.groupName,
-              "min_time":this.min_time,
-              "max_time":this.max_time,
-          }
-        // let vers=this.$store.getters.getFinishVer
-        let result=[]
-        let a=[]        
-        for(let ver of vers){
-          sdata.xitongming!==''?a.push(ver.xitongming===sdata.xitongming):''
-          sdata.banbenhao!==''?a.push(ver.banbenhao===sdata.banbenhao):''
-          sdata.group!==''?a.push(ver.groupname===sdata.group):''
-          sdata.min_time!==''?a.push(ver.ticeshijian>=sdata.min_time):''
-          sdata.max_time!==''?a.push(sdata.max_time>=ver.ticeshijian):''
-          // console.log(a);
-          let b=a.every((item)=>{
-            return item===true
-          })
-          // console.log(b);
-          if (b){
-            result.push(ver)
-          }
-          a.length=0
-        }
-          console.log(result);
-          //  this.$store.commit('setFinishVer',result)
-          this.$emit("changeVer",result);
-            // this.$store.commit('filterIngVer',sdata)
-      },
+      // search(){
+      //   // console.log(this.$refs.groupName.groupName);
+      //     let sdata={
+      //         "xitongming":this.xtm,
+      //         "banbenhao":this.bbh,
+      //         "system":this.systemName,
+      //         "min_time":this.min_time,
+      //         "max_time":this.max_time,
+      //     }
+      //     console.log(sdata);
+      //   // let vers=this.$store.getters.getFinishVer
+      //   let result=[]
+      //   let a=[]        
+      //   for(let ver of vers){
+      //     sdata.xitongming!==''?a.push(ver.xitongming===sdata.xitongming):''
+      //     sdata.banbenhao!==''?a.push(ver.banbenhao===sdata.banbenhao):''
+      //     sdata.group!==''?a.push(ver.groupname===sdata.group):''
+      //     sdata.min_time!==''?a.push(ver.ticeshijian>=sdata.min_time):''
+      //     sdata.max_time!==''?a.push(sdata.max_time>=ver.ticeshijian):''
+      //     // console.log(a);
+      //     let b=a.every((item)=>{
+      //       return item===true
+      //     })
+      //     // console.log(b);
+      //     if (b){
+      //       result.push(ver)
+      //     }
+      //     a.length=0
+      //   }
+      //     console.log(result);
+      //     //  this.$store.commit('setFinishVer',result)
+      //     this.$emit("changeVer",result);
+      //       // this.$store.commit('filterIngVer',sdata)
+      // },
       cancel(){
         this.$router.go(0)
       }

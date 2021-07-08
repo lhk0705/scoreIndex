@@ -18,13 +18,21 @@ let spReport=()=>import("../components/report/reports/spReport.vue")
 let testReport=()=>import("../components/report/reports/testReport.vue")
 let roundReport=()=>import("../components/report/reports/roundReport.vue")
 let board=()=>import("../components/board/board.vue")
-
+let commonTest=()=>import("../components/common/commonTest.vue")
 
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/commonTest',
+      name: 'commonTest',
+      component: commonTest,
+      // meta:{
+      //   keepAlive:true
+      // }
+    },
     {
       path: '/board',
       name: 'board',

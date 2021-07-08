@@ -3,18 +3,7 @@
     <el-row>
       <el-col :span="8" >
         <label>系统名：</label>
-        <el-select
-          v-model="xtm"
-          filterable
-          placeholder="请选择"
-          size="mini">
-          <el-option
-            v-for="item in sysoptions"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          ></el-option>
-        </el-select>
+        <selecter ref="sysSelecter" :prop="sysoptions"></selecter>
       </el-col>
       <el-col :span="10">
         <label>版本号：</label>
@@ -29,28 +18,15 @@
     <br />
     <el-row>
       <el-col :span="8">
-        <label>组别：</label><group ref='groupName'></group>
-        
+        <label>组别：</label>
+        <selecter ref="groupSelecter" :prop="groupOptions"></selecter>
       </el-col>
-      <el-col :span="10"><div class="time">          
+      <el-col :span="10">
+        <div class="time">          
           <label>提测时间：</label>
-          <el-date-picker
-                  value-format="yyyy-MM-dd"
-                  size="mini"
-                  v-model="min_time"
-                  type="date"
-                  placeholder="请选择日期"
-                  style="width:150px"
-                ></el-date-picker>
+                <date-picker ref="minTime"></date-picker>
           <label>~</label>
-          <el-date-picker
-                  value-format="yyyy-MM-dd"
-                  size="mini"
-                  v-model="max_time"
-                  type="date"
-                  placeholder="请选择日期"
-                  style="width:150px"
-                ></el-date-picker>
+                <date-picker ref="maxTime"></date-picker>
         </div>
       </el-col>
       <el-col :span="6">        
@@ -62,45 +38,38 @@
 
 <script>
 import group from '@/components/common/formComponents/group.vue'
+import selecter from "@/components/common/formComponents/selecter.vue";
+import datePicker from "@/components/common/formComponents/datePicker.vue";
 export default {
   props:{prop:{
     type:Array,
     // required:true
   }},
   components:{
-    group
+    group,selecter,datePicker
+    
   },
   data() {
     return {
-      // show:[{'xitongming':'a'},{'xitongming':'b'}]
-      xtm: "",
       bbh: "",
-      zb: "",
-      min_time: "",
-      max_time: "",
-      
+      sysoptions:[],
+      groupOptions:[]
     }
   },
   mounted(){
-    this.$refs.groupName.groupName=''
-  },
-  computed: {
-    sysoptions() {
-      return this.$store.getters.getSys;
-    },
-    group(){
-      return this.$store.getters.getGroup
-    },
+    // this.$refs.groupSelevc.groupName=''
+    this.sysoptions=this.$store.getters.getSys;
+    this.groupOptions=this.$store.getters.getGroup;
   },
   methods:{
       search(vers){
         // console.log(this.$refs.groupName.groupName);
           let sdata={
-              "xitongming":this.xtm,
+              "xitongming":this.$refs.sysSelecter.selectData,
               "banbenhao":this.bbh,
-              "group":this.$refs.groupName.groupName,
-              "min_time":this.min_time,
-              "max_time":this.max_time,
+              "group":this.$refs.groupSelecter.selectData,
+              "min_time":this.$refs.minTime.date,
+              "max_time":this.$refs.maxTime.date,
           }
           console.log(sdata);
         // let vers=this.$store.getters.getFinishVer
@@ -112,7 +81,6 @@ export default {
           sdata.group!==''?a.push(ver.groupname===sdata.group):''
           sdata.min_time!==''?a.push(ver.ticeshijian>=sdata.min_time):''
           sdata.max_time!==''?a.push(sdata.max_time>=ver.ticeshijian):''
-          // console.log(a);
           let b=a.every((item)=>{
             return item===true
           })
@@ -123,17 +91,11 @@ export default {
           a.length=0
         }
           console.log(result);
-          //  this.$store.commit('setFinishVer',result)
           this.$emit("changeVer",result);
-            // this.$store.commit('filterIngVer',sdata)
       },
       cancel(){
         this.$router.go(0)
-        // this.xtm='';
-        // this.bbh='';
-        // this.$refs.groupName.groupName='';
-        // this.min_time='';
-        // this.max_time='';
+
         
       }
   }

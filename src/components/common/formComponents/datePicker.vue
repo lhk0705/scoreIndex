@@ -1,6 +1,6 @@
 <template>
 
-      <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="date" type="date" placeholder="请选择日期" >
+      <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="date" type="date" placeholder="请选择日期" style="width:150px">
       </el-date-picker>
   
 </template>

@@ -1,0 +1,166 @@
+Date : 2021-07-08 17:36:41
+Directory : c:\Users\lhk960705\scoreIndex
+Total : 102 files,  22443 codes, 1351 comments, 631 blanks, all 24425 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          2 |     11,967 |          0 |          2 |     11,969 |
+| Vue        |         67 |      8,609 |        992 |        435 |     10,036 |
+| JavaScript |         30 |      1,391 |        327 |        155 |      1,873 |
+| CSS        |          1 |        443 |         25 |         30 |        498 |
+| HTML       |          1 |         19 |          7 |          1 |         27 |
+| Markdown   |          1 |         14 |          0 |          8 |         22 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                 | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                    |        102 |     22,443 |      1,351 |        631 |     24,425 |
+| build                                                                                |          7 |        451 |         52 |         56 |        559 |
+| config                                                                               |          3 |         48 |        102 |         38 |        188 |
+| src                                                                                  |         87 |      9,937 |      1,188 |        524 |     11,649 |
+| src\components                                                                       |         68 |      9,010 |      1,012 |        459 |     10,481 |
+| src\components\board                                                                 |          1 |          9 |          0 |          4 |         13 |
+| src\components\common                                                                |         14 |        265 |         14 |         38 |        317 |
+| src\components\common\charts                                                         |          4 |          0 |          0 |          4 |          4 |
+| src\components\common\formComponents                                                 |          7 |        150 |          6 |         21 |        177 |
+| src\components\data                                                                  |          1 |        258 |         19 |          6 |        283 |
+| src\components\overall                                                               |         28 |      3,129 |        644 |        243 |      4,016 |
+| src\components\overall\dept                                                          |          5 |        611 |        114 |         51 |        776 |
+| src\components\overall\group                                                         |          4 |        583 |        103 |         54 |        740 |
+| src\components\overall\oldcodes                                                      |         11 |      1,187 |        362 |         84 |      1,633 |
+| src\components\overall\oldcodes\dept                                                 |          5 |        498 |        118 |         38 |        654 |
+| src\components\overall\oldcodes\group                                                |          4 |        552 |        241 |         38 |        831 |
+| src\components\overall\oldcodes\system                                               |          1 |         85 |          2 |          5 |         92 |
+| src\components\overall\oldcodes\top                                                  |          1 |         52 |          1 |          3 |         56 |
+| src\components\overall\overallHead                                                   |          2 |        136 |         12 |         14 |        162 |
+| src\components\overall\systems                                                       |          1 |        168 |         21 |         10 |        199 |
+| src\components\overall\top                                                           |          4 |        231 |         13 |         22 |        266 |
+| src\components\report                                                                |          7 |        341 |         58 |         26 |        425 |
+| src\components\report\common                                                         |          2 |        171 |         48 |          8 |        227 |
+| src\components\report\reports                                                        |          4 |        128 |          4 |         15 |        147 |
+| src\components\score                                                                 |          6 |      3,001 |        154 |         73 |      3,228 |
+| src\components\show                                                                  |         10 |      1,943 |        118 |         63 |      2,124 |
+| src\components\show\finished                                                         |          2 |        466 |         11 |         12 |        489 |
+| src\components\show\showCommon                                                       |          2 |        220 |         16 |         10 |        246 |
+| src\components\show\task                                                             |          2 |        342 |          8 |         11 |        361 |
+| src\excel                                                                            |          2 |        106 |         12 |         26 |        144 |
+| src\router                                                                           |          1 |        133 |          6 |          6 |        145 |
+| src\store                                                                            |         14 |        630 |        147 |         25 |        802 |
+| src\store\module                                                                     |          6 |        372 |         23 |          5 |        400 |
+| src\store\overall                                                                    |          2 |        114 |          0 |          2 |        116 |
+| src\store\score                                                                      |          1 |         14 |          0 |          0 |         14 |
+| src\store\showin                                                                     |          4 |        109 |        124 |         16 |        249 |
++--------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                             | language   | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\lhk960705\scoreIndex\.postcssrc.js                                          | JavaScript |          7 |          2 |          2 |         11 |
+| c:\Users\lhk960705\scoreIndex\README.md                                              | Markdown   |         14 |          0 |          8 |         22 |
+| c:\Users\lhk960705\scoreIndex\build\build.js                                         | JavaScript |         35 |          0 |          7 |         42 |
+| c:\Users\lhk960705\scoreIndex\build\check-versions.js                                | JavaScript |         45 |          0 |         10 |         55 |
+| c:\Users\lhk960705\scoreIndex\build\utils.js                                         | JavaScript |         80 |          5 |         17 |        102 |
+| c:\Users\lhk960705\scoreIndex\build\vue-loader.conf.js                               | JavaScript |         21 |          0 |          2 |         23 |
+| c:\Users\lhk960705\scoreIndex\build\webpack.base.conf.js                             | JavaScript |         78 |         10 |          5 |         93 |
+| c:\Users\lhk960705\scoreIndex\build\webpack.dev.conf.js                              | JavaScript |         78 |         12 |          7 |         97 |
+| c:\Users\lhk960705\scoreIndex\build\webpack.prod.conf.js                             | JavaScript |        114 |         25 |          8 |        147 |
+| c:\Users\lhk960705\scoreIndex\config\dev.env.js                                      | JavaScript |          6 |          0 |          2 |          8 |
+| c:\Users\lhk960705\scoreIndex\config\index.js                                        | JavaScript |         38 |        102 |         35 |        175 |
+| c:\Users\lhk960705\scoreIndex\config\prod.env.js                                     | JavaScript |          4 |          0 |          1 |          5 |
+| c:\Users\lhk960705\scoreIndex\index.html                                             | HTML       |         19 |          7 |          1 |         27 |
+| c:\Users\lhk960705\scoreIndex\package-lock.json                                      | JSON       |     11,888 |          0 |          1 |     11,889 |
+| c:\Users\lhk960705\scoreIndex\package.json                                           | JSON       |         79 |          0 |          1 |         80 |
+| c:\Users\lhk960705\scoreIndex\src\App.vue                                            | Vue        |         44 |          5 |          6 |         55 |
+| c:\Users\lhk960705\scoreIndex\src\components\board\board.vue                         | Vue        |          9 |          0 |          4 |         13 |
+| c:\Users\lhk960705\scoreIndex\src\components\common\bus.js                           | JavaScript |          2 |          0 |          0 |          2 |
+| c:\Users\lhk960705\scoreIndex\src\components\common\charts\colHistogram.vue          | Vue        |          0 |          0 |          1 |          1 |
+| c:\Users\lhk960705\scoreIndex\src\components\common\charts\line.vue                  | Vue        |          0 |          0 |          1 |          1 |
+| c:\Users\lhk960705\scoreIndex\src\components\common\charts\ring.vue                  | Vue        |          0 |          0 |          1 |          1 |
+| c:\Users\lhk960705\scoreIndex\src\components\common\charts\rowHistogram.vue          | Vue        |          0 |          0 |          1 |          1 |
+| c:\Users\lhk960705\scoreIndex\src\components\common\commonTest.vue                   | Vue        |         27 |          5 |          4 |         36 |
+| c:\Users\lhk960705\scoreIndex\src\components\common\formComponents\button.vue        | Vue        |          0 |          0 |          1 |          1 |
+| c:\Users\lhk960705\scoreIndex\src\components\common\formComponents\datePicker.vue    | Vue        |         25 |          0 |          7 |         32 |
+| c:\Users\lhk960705\scoreIndex\src\components\common\formComponents\form.vue          | Vue        |          0 |          0 |          1 |          1 |
+| c:\Users\lhk960705\scoreIndex\src\components\common\formComponents\group.vue         | Vue        |         36 |          0 |          2 |         38 |
+| c:\Users\lhk960705\scoreIndex\src\components\common\formComponents\selecter.vue      | Vue        |         33 |          6 |          3 |         42 |
+| c:\Users\lhk960705\scoreIndex\src\components\common\formComponents\sysPerson.vue     | Vue        |         25 |          0 |          3 |         28 |
+| c:\Users\lhk960705\scoreIndex\src\components\common\formComponents\system.vue        | Vue        |         31 |          0 |          4 |         35 |
+| c:\Users\lhk960705\scoreIndex\src\components\common\head.vue                         | Vue        |         86 |          3 |          9 |         98 |
+| c:\Users\lhk960705\scoreIndex\src\components\data\data.vue                           | Vue        |        258 |         19 |          6 |        283 |
+| c:\Users\lhk960705\scoreIndex\src\components\login.vue                               | Vue        |         64 |          5 |          6 |         75 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\dept\fstTest.vue                | Vue        |        110 |         18 |          5 |        133 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\dept\month.vue                  | Vue        |        131 |         26 |         16 |        173 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\dept\pastTwelve.vue             | Vue        |        146 |         33 |         10 |        189 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\dept\randomTest.vue             | Vue        |         87 |         16 |          5 |        108 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\dept\season.vue                 | Vue        |        137 |         21 |         15 |        173 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\group\all.vue                   | Vue        |        143 |         25 |         14 |        182 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\group\month.vue                 | Vue        |        144 |         26 |         13 |        183 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\group\season.vue                | Vue        |        153 |         27 |         13 |        193 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\group\year.vue                  | Vue        |        143 |         25 |         14 |        182 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\oldcodes\dept\fstTest1.vue      | Vue        |         75 |          8 |          3 |         86 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\oldcodes\dept\month1.vue        | Vue        |         98 |         45 |         15 |        158 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\oldcodes\dept\pastTwelve1.vue   | Vue        |        149 |         11 |          6 |        166 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\oldcodes\dept\randomTest1.vue   | Vue        |         75 |          2 |          4 |         81 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\oldcodes\dept\season1.vue       | Vue        |        101 |         52 |         10 |        163 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\oldcodes\group\all1.vue         | Vue        |        136 |         59 |          6 |        201 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\oldcodes\group\month1.vue       | Vue        |        138 |         61 |         10 |        209 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\oldcodes\group\season1.vue      | Vue        |        142 |         60 |         10 |        212 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\oldcodes\group\year1.vue        | Vue        |        136 |         61 |         12 |        209 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\oldcodes\system\systemPast1.vue | Vue        |         85 |          2 |          5 |         92 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\oldcodes\top\top1.vue           | Vue        |         52 |          1 |          3 |         56 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\overall.vue                     | Vue        |        213 |         19 |          8 |        240 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\overallHead\totalRt.vue         | Vue        |         68 |          6 |          7 |         81 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\overallHead\totalTest.vue       | Vue        |         68 |          6 |          7 |         81 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\systems\systemPast.vue          | Vue        |        168 |         21 |         10 |        199 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\top\topRtGroup.vue              | Vue        |         60 |          4 |          7 |         71 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\top\topRtSys.vue                | Vue        |         57 |          3 |          5 |         65 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\top\topTestGroup.vue            | Vue        |         57 |          3 |          5 |         65 |
+| c:\Users\lhk960705\scoreIndex\src\components\overall\top\topTestSys.vue              | Vue        |         57 |          3 |          5 |         65 |
+| c:\Users\lhk960705\scoreIndex\src\components\report\common\leftnav.vue               | Vue        |         61 |          8 |          5 |         74 |
+| c:\Users\lhk960705\scoreIndex\src\components\report\common\search.vue                | Vue        |        110 |         40 |          3 |        153 |
+| c:\Users\lhk960705\scoreIndex\src\components\report\report.vue                       | Vue        |         42 |          6 |          3 |         51 |
+| c:\Users\lhk960705\scoreIndex\src\components\report\reports\monthReport.vue          | Vue        |         71 |          0 |          6 |         77 |
+| c:\Users\lhk960705\scoreIndex\src\components\report\reports\roundReport.vue          | Vue        |         20 |          1 |          3 |         24 |
+| c:\Users\lhk960705\scoreIndex\src\components\report\reports\spReport.vue             | Vue        |         18 |          2 |          3 |         23 |
+| c:\Users\lhk960705\scoreIndex\src\components\report\reports\testReport.vue           | Vue        |         19 |          1 |          3 |         23 |
+| c:\Users\lhk960705\scoreIndex\src\components\score\doc.vue                           | Vue        |        671 |         15 |          8 |        694 |
+| c:\Users\lhk960705\scoreIndex\src\components\score\random_test.vue                   | Vue        |        229 |         15 |          9 |        253 |
+| c:\Users\lhk960705\scoreIndex\src\components\score\scoreIndex.css                    | CSS        |        443 |         25 |         30 |        498 |
+| c:\Users\lhk960705\scoreIndex\src\components\score\scoreIndex.vue                    | Vue        |        832 |         85 |         18 |        935 |
+| c:\Users\lhk960705\scoreIndex\src\components\score\test.vue                          | Vue        |        583 |         14 |          5 |        602 |
+| c:\Users\lhk960705\scoreIndex\src\components\score\vision_head.vue                   | Vue        |        243 |          0 |          3 |        246 |
+| c:\Users\lhk960705\scoreIndex\src\components\show\finished\finish.vue                | Vue        |        296 |          6 |          5 |        307 |
+| c:\Users\lhk960705\scoreIndex\src\components\show\finished\warn.vue                  | Vue        |        170 |          5 |          7 |        182 |
+| c:\Users\lhk960705\scoreIndex\src\components\show\ing.vue                            | Vue        |        184 |          7 |         10 |        201 |
+| c:\Users\lhk960705\scoreIndex\src\components\show\lastPeriod.vue                     | Vue        |        522 |         67 |          8 |        597 |
+| c:\Users\lhk960705\scoreIndex\src\components\show\showCommon\left-nav.vue            | Vue        |        114 |         10 |          4 |        128 |
+| c:\Users\lhk960705\scoreIndex\src\components\show\showCommon\serach.vue              | Vue        |        106 |          6 |          6 |        118 |
+| c:\Users\lhk960705\scoreIndex\src\components\show\showin.vue                         | Vue        |         42 |          6 |          3 |         51 |
+| c:\Users\lhk960705\scoreIndex\src\components\show\systemTable.vue                    | Vue        |        167 |          3 |          9 |        179 |
+| c:\Users\lhk960705\scoreIndex\src\components\show\task\myTask.vue                    | Vue        |         90 |          6 |          5 |        101 |
+| c:\Users\lhk960705\scoreIndex\src\components\show\task\newTask.vue                   | Vue        |        252 |          2 |          6 |        260 |
+| c:\Users\lhk960705\scoreIndex\src\excel\Blob.js                                      | JavaScript |          1 |          1 |          1 |          3 |
+| c:\Users\lhk960705\scoreIndex\src\excel\Export2Excel.js                              | JavaScript |        105 |         11 |         25 |        141 |
+| c:\Users\lhk960705\scoreIndex\src\main.js                                            | JavaScript |         14 |          6 |          2 |         22 |
+| c:\Users\lhk960705\scoreIndex\src\router\index.js                                    | JavaScript |        133 |          6 |          6 |        145 |
+| c:\Users\lhk960705\scoreIndex\src\store\module\group.js                              | JavaScript |         72 |          0 |          1 |         73 |
+| c:\Users\lhk960705\scoreIndex\src\store\module\sysperson.js                          | JavaScript |         59 |          2 |          0 |         61 |
+| c:\Users\lhk960705\scoreIndex\src\store\module\system.js                             | JavaScript |         58 |          6 |          0 |         64 |
+| c:\Users\lhk960705\scoreIndex\src\store\module\testperson.js                         | JavaScript |         35 |          1 |          0 |         36 |
+| c:\Users\lhk960705\scoreIndex\src\store\module\total.js                              | JavaScript |         27 |          1 |          1 |         29 |
+| c:\Users\lhk960705\scoreIndex\src\store\module\user.js                               | JavaScript |        121 |         13 |          3 |        137 |
+| c:\Users\lhk960705\scoreIndex\src\store\overall\dept.js                              | JavaScript |         69 |          0 |          1 |         70 |
+| c:\Users\lhk960705\scoreIndex\src\store\overall\group.js                             | JavaScript |         45 |          0 |          1 |         46 |
+| c:\Users\lhk960705\scoreIndex\src\store\score\date.js                                | JavaScript |         14 |          0 |          0 |         14 |
+| c:\Users\lhk960705\scoreIndex\src\store\showin\finishVer.js                          | JavaScript |         33 |         89 |          5 |        127 |
+| c:\Users\lhk960705\scoreIndex\src\store\showin\ingVer.js                             | JavaScript |         15 |         35 |          1 |         51 |
+| c:\Users\lhk960705\scoreIndex\src\store\showin\lastPeriod.js                         | JavaScript |         46 |          0 |          6 |         52 |
+| c:\Users\lhk960705\scoreIndex\src\store\showin\warnvers.js                           | JavaScript |         15 |          0 |          4 |         19 |
+| c:\Users\lhk960705\scoreIndex\src\store\store.js                                     | JavaScript |         21 |          0 |          2 |         23 |
+| Total                                                                                |            |     22,443 |      1,351 |        631 |     24,425 |
++--------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

@@ -31,6 +31,9 @@
         <el-menu-item index="/data" v-show="user.role==='0'">
           数据管理
         </el-menu-item>
+        <el-menu-item index="/commonTest" v-show="user.role==='0'">
+          测试页
+        </el-menu-item>
         <el-menu-item class="user">{{user.name}}
           <!-- <router-link to="/" @click="logOut">【退出】</router-link> -->
           <span @click="logOut">【退出】</span>
