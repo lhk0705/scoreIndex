@@ -1,6 +1,6 @@
 <template>
 
-      <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="date" type="date" placeholder="请选择日期" style="width:150px">
+      <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="date" type="date" placeholder="请选择日期" style="width:160px">
       </el-date-picker>
   
 </template>
@@ -20,7 +20,7 @@ data(){
 },
   watch:{
     date(newV,oldV){
-      this.$store.commit('setXqTime',newV)
+      this.$emit('dateChange',newV)
     }
   }
 

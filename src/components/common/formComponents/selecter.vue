@@ -3,7 +3,7 @@
     v-model="selectData"
     placeholder="请选择"
     size="mini"
-    style="width: 190px"
+    style="width: 160px"
   >
     <el-option
       v-for="item in prop"
@@ -23,17 +23,16 @@ export default {
   data() {
     return {
       selectData: "",
-      selectOption: [],
     };
   },
   mounted() {
     // this.selectOption = this.$store.getters.getGroup;
   },
-//   watch: {
-//     groupName(newV, oldV) {
-//       this.$emit("groupChange", newV);
-//     },
-//   },
+  watch: {
+    selectData(newV, oldV) {
+      this.$emit("selectChange", newV);
+    },
+  },
 };
 </script>
 

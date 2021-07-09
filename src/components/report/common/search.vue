@@ -33,7 +33,8 @@
           </div>
       <div  class="ipt">
           <label v-show='systemShow'>系统：</label>
-        <system  v-show='systemShow' v-model="systemName" style="width:50%" ></system>
+        <!-- <system  v-show='systemShow' v-model="systemName" style="width:50%" ></system> -->
+        <selecter v-show='systemShow' :prop='systems' ref='systemSelecter' ></selecter>
         </div>
       <div class="btn">
           <div class="time"  v-show='periodShow'>          
@@ -48,21 +49,21 @@
 </template>
 
 <script>
-import system from '@/components/common/formComponents/system.vue'
+import selecter from "@/components/common/formComponents/selecter.vue";
 export default {
   props:{prop:{
     type:Array,
     // required:true
   }},
   components:{
-    system
+    selecter
   },
   data() {
     return {
         systemShow:true,
         periodShow:false,
         timeShow:'month',
-        systemName:'',
+        systems:[],
         round:'',
         month:'',
         title:'',
@@ -72,26 +73,24 @@ export default {
     }
   },
   mounted(){
-    // this.$refs.groupName.groupName=''
+    this.systems=this.$store.getters.getSys;
   },
   computed: {
-    sysoptions() {
-      return this.$store.getters.getSys;
-    },
+
     group(){
       return this.$store.getters.getGroup
     },
   },
   methods:{
-      // search(){
+      search(){
       //   // console.log(this.$refs.groupName.groupName);
-      //     let sdata={
-      //         "xitongming":this.xtm,
-      //         "banbenhao":this.bbh,
-      //         "system":this.systemName,
-      //         "min_time":this.min_time,
-      //         "max_time":this.max_time,
-      //     }
+          let sdata={
+              "xitongming":this.xtm,
+              "banbenhao":this.bbh,
+              "system":this.systemName,
+              "min_time":this.min_time,
+              "max_time":this.max_time,
+          }
       //     console.log(sdata);
       //   // let vers=this.$store.getters.getFinishVer
       //   let result=[]
@@ -116,7 +115,7 @@ export default {
       //     //  this.$store.commit('setFinishVer',result)
       //     this.$emit("changeVer",result);
       //       // this.$store.commit('filterIngVer',sdata)
-      // },
+      },
       cancel(){
         this.$router.go(0)
       }

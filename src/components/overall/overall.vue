@@ -20,7 +20,8 @@
           <el-option label='部门' value="dept">部门</el-option>
           <el-option label='小组' value="group">小组</el-option>
           </el-select>          
-          <group @groupChange='groupChange' v-show="unit1=='group'" ></group>       
+          <!-- <group @groupChange='groupChange' v-show="unit1=='group'" ></group>        -->
+          <selecter :prop='group' ref='groupSelecter' @selectChange='groupChange' v-show="unit1=='group'"></selecter>
         </div>
       <div class="rings">        
         <groupmon ref="groupmon" v-if="unit1=='group'" :prop='groupName'></groupmon>
@@ -42,7 +43,8 @@
           <el-option label='部门' value="dept">部门</el-option>
           <el-option label='系统' value="system">系统</el-option>
           </el-select>
-           <system @sysChange='sysChange' v-show="unit2=='system'" ref='systemChose'></system>          
+           <!-- <system @sysChange='sysChange' v-show="unit2=='system'" ref='systemChose'></system>  -->
+           <selecter :prop='system' ref='systemSelecter' @selectChange='systemChange' v-show="unit2=='system'"></selecter>         
           <!-- <group @groupChange='groupChange' v-show="unit3=='group'" ></group>   -->
         </div>
       <pastTwelve class="line" v-if="unit2=='dept'"></pastTwelve>
@@ -76,8 +78,6 @@ let topRtSys=()=>import ("./top/topRtSys.vue");
 let topTestSys=()=>import ("./top/topTestSys.vue");
 let totalRt=()=>import ("./overallHead/totalRt.vue");
 let systemPast=()=>import ("./systems/systemPast.vue");
-let system=()=>import ("../common/formComponents/system.vue");
-let group=()=>import ("../common/formComponents/group");
 let deptmon=()=>import ("./dept/month");
 let deptseason=()=>import ("./dept/season");
 let pastTwelve=()=>import ("./dept/pastTwelve");
@@ -90,6 +90,7 @@ let topTestGroup=()=>import ("./top/topTestGroup");
 let totalTest=()=>import ("./overallHead/totalTest.vue");
 let fstTest=()=>import ("./dept/fstTest");
 let randomTest=()=>import ("./dept/randomTest")
+import selecter from "@/components/common/formComponents/selecter.vue";
 export default {
  data() {
     return {
@@ -104,6 +105,7 @@ export default {
     };
   },
   components: {
+    selecter,
     deptmon,
     deptseason,
     pastTwelve,
@@ -113,19 +115,22 @@ export default {
     groupyear,
     fstTest,
     randomTest,
-    group,topRtGroup,system,systemPast,totalRt,totalTest,topTestGroup,topRtSys,topTestSys
+    topRtGroup,systemPast,totalRt,totalTest,topTestGroup,topRtSys,topTestSys
   },
   methods:{
     groupChange(newV){
+      // console.log(newV);
       this.groupName=newV
     },
-    sysChange(newV){
+    systemChange(newV){
       this.sysName=newV;
       // console.log(this.sysName);
     }
   },
   mounted(){
-    // this.$refs.systemChose.systemName='ERP集中门户'
+    this.group=this.$store.getters.getGroup;
+    this.$refs.groupSelecter.selectData='OA办公组';
+    this.system=this.$store.getters.getSys;
   }
   
 };

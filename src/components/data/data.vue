@@ -1,40 +1,31 @@
 <template>
   <div class="dataManage">
     <div class="list">
-      <el-select size="mini" class="select" v-model="dataItem">
-        <el-option
-          v-for="item in datas"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        ></el-option>
-      </el-select>
+      <selecter
+        :prop="datas"
+        class="select"
+        ref="dataItemSelecter"
+        @selectChange="dataItemChange"
+      ></selecter>
       <el-input placeholder="查询" size="mini" class="input" v-model="search">
       </el-input>
-
       <hr />
       <ul v-for="item in dataList" :key="item.value">
         <li>{{ item.value }}</li>
       </ul>
     </div>
-
     <div class="change">
       <strong>操作：</strong>
-      <el-select v-model="change" size="mini">
-        <el-option
-          v-for="item in changes"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        ></el-option>
-      </el-select>
+      <selecter
+        :prop="changes"
+        @selectChange="changeItemChange"
+        ref="changeItemSelecter"
+      ></selecter>
       <br /><br />
       <div v-show="change == '新增'">
-        <span v-show="dataItem == '组别'">组名：</span>
-        <span v-show="dataItem == '系统'">系统名：</span>
-        <span v-show="dataItem == '项目经理'">姓名：</span>
-        <span v-show="dataItem == '质控人员'">姓名：</span>
-        <span v-show="dataItem == '账号'">姓名：</span>
+        <span v-if="dataItem == '组别'">组名：</span>
+        <span v-else-if="dataItem == '系统'">系统名：</span>
+        <span v-else>姓名：</span>
         <el-input size="mini" class="input" v-model="name"></el-input>
         <br /><br />
         <span v-show="change == '新增' && dataItem == '账号'">账号：</span>
@@ -52,7 +43,6 @@
           v-model="password"
           v-show="change == '新增' && dataItem == '账号'"
         ></el-input>
-
         <br /><br />
         <span v-show="change == '新增' && dataItem == '账号'">角色：</span>
         <el-select
@@ -70,11 +60,10 @@
       <div v-show="change == '删除'">
         <el-checkbox-group class="box" v-model="delData">
           <el-checkbox
-            v-for="item in dataBox"
+            v-for="item in dataList"
             :key="item.value"
             :label="item.value"
-            ></el-checkbox
-          >
+          ></el-checkbox>
         </el-checkbox-group>
       </div>
       <br />
@@ -86,7 +75,11 @@
 </template>
 
 <script>
+import selecter from "@/components/common/formComponents/selecter.vue";
 export default {
+  components: {
+    selecter,
+  },
   data() {
     return {
       delData: [],
@@ -107,7 +100,7 @@ export default {
         { value: "新增", label: "新增" },
         { value: "删除", label: "删除" },
       ],
-      change: "",
+      change: "新增",
       dataItem: "组别",
       dataList: "",
       search: "",
@@ -115,27 +108,24 @@ export default {
   },
   created() {
     this.dataList = this.$store.getters.getGroup;
-    this.dataBox = this.$store.getters.getGroup;
-    // console.log(this.dataList);
+  },
+  mounted() {
+    this.$refs.dataItemSelecter.selectData = "组别";
+    this.$refs.changeItemSelecter.selectData = "新增";
   },
   watch: {
     // 更新列表和删除
     dataItem(newV, oldV) {
       if (newV === "项目经理") {
         this.dataList = this.$store.getters.getSysPerson;
-        this.dataBox = this.$store.getters.getSysPerson;
       } else if (newV === "质控人员") {
         this.dataList = this.$store.getters.getTestPerson;
-        this.dataBox = this.$store.getters.getTestPerson;
       } else if (newV === "账号") {
         this.dataList = this.$store.getters.getAllUser;
-        this.dataBox = this.$store.getters.getAllUser;
       } else if (newV === "组别") {
         this.dataList = this.$store.getters.getGroup;
-        this.dataBox = this.$store.getters.getGroup;
       } else {
         this.dataList = this.$store.getters.getSys;
-        this.dataBox = this.$store.getters.getSys;
       }
     },
     // 自动查询
@@ -158,6 +148,12 @@ export default {
     },
   },
   methods: {
+    dataItemChange(newV) {
+      this.dataItem = newV;
+    },
+    changeItemChange(newV) {
+      this.change = newV;
+    },
     // 新增数据
     insert(data) {
       if (this.dataItem === "项目经理") {
@@ -187,54 +183,63 @@ export default {
       }
     },
     submit() {
-        // 判空：1、无操作；2、新增账号，无输入；3、新增非账号数据，无输入；4、删除账号，无输入
-        // 无操作
-        if(this.change === ""){alert("请输入信息！");}
-        // 新增
-        else if(this.change==='新增'){
-            // 新增账号
-            if(this.dataItem === "账号"){
-               // 新增账号,无输入
-                if(this.change === "" ||
-                    this.name === "" ||
-                    this.userId === "" ||
-                    this.password ==="" ||
-                    this.role === ""){alert("请输入信息！");}
-                // 新增账号，有输入
-                    else{
-                        let insertData = {
-                        name: this.name,
-                        userId: this.userId,
-                        password: this.password,
-                        role: this.role,
-                        value: this.name,
-                    };
-                        console.log(insertData);
-                            }
-                    }            
-                // 新增非账号
-                else{
-                // 新增非账号，无输入
-                    if(this.name==''){
-                        alert("请输入信息！");
-                    }
-                // 新增非账号，有输入
-                    else{
-                        console.log(this.name);
-                        // this.insert(this.name)
-                    }
-                }                
-        // 删除
-        }else{
-            // 无输入
-          if (this.delData.length===0) {
+      // 判空：1、无操作；2、新增账号，无输入；3、新增非账号数据，无输入；4、删除账号，无输入
+      // 无操作
+      if (this.change === "") {
+        alert("请输入信息！");
+      }
+      // 新增
+      else if (this.change === "新增") {
+        // 新增账号
+        if (this.dataItem === "账号") {
+          // 新增账号,无输入
+          if (
+            this.change === "" ||
+            this.name === "" ||
+            this.userId === "" ||
+            this.password === "" ||
+            this.role === ""
+          ) {
             alert("请输入信息！");
-            
-          } else {// 有输入
-            console.log(this.delData);
-            // this.delete(this.name)
+          }
+          // 新增账号，有输入
+          else {
+            let insertData = {
+              name: this.name,
+              userId: this.userId,
+              password: this.password,
+              role: this.role,
+              value: this.name,
+            };
+            console.log(insertData);
           }
         }
+        // 新增非账号
+        else {
+          // 新增非账号，无输入
+          if (this.name == "") {
+            alert("请输入信息！");
+          }
+          // 新增非账号，有输入
+          else {
+            console.log(this.name);
+            // this.insert(this.name)
+          }
+        }
+        // 删除
+      } else {
+        // 无输入
+        if (this.delData.length === 0) {
+          alert("请输入信息！");
+        } else {
+          // 有输入
+          if(confirm('确定删除'+this.delData+'？')){
+             console.log(this.delData); 
+          }
+          this.delData=[]          
+          // this.delete(this.name)
+        }
+      }
     },
   },
 };

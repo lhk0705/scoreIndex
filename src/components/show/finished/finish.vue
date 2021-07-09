@@ -158,17 +158,6 @@
       align="center"
       >
     </el-table-column>
-    <!-- <el-table-column fixed="right" label="操作" align="center" min-width="150" v-if="user.role==='1'||user.role==='0'">
-    <template slot-scope="scope" > 
-        <el-button @click="getScore(scope.$index,vers)" size="mini" type='primary'>编辑</el-button>     
-        <el-button @click="delScore(scope.$index,vers)" size="mini">删除</el-button>        
-    </template>
-    </el-table-column>
-    <el-table-column fixed="right" label="操作" align="center" min-width="80" v-else>
-    <template slot-scope="scope">     
-        <el-button @click="getScore(scope.$index,vers)">查看</el-button>        
-    </template>
-    </el-table-column> -->
     <el-table-column fixed="right" label="操作" align="center" min-width="80" >
     <template slot-scope="scope">     
         <el-button @click="getScore(scope.$index,vers)">查看</el-button>        

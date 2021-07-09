@@ -19,9 +19,9 @@
     <el-menu-item index="/showin">
           质量看板
         </el-menu-item>
-      <!-- <el-menu-item index="/scoreIndex">
+      <el-menu-item index="/scoreIndex">
           数据录入
-        </el-menu-item> -->
+        </el-menu-item>
         <el-menu-item index="/report">
           质控报告
         </el-menu-item>

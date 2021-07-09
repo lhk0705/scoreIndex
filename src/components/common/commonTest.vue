@@ -1,16 +1,16 @@
 <template>
 <div>
-  <selecter ref="selecter" ></selecter> 
+  <compon ref="compon" ></compon> 
   <el-button @click='submit'>提交</el-button>
   
   </div>
 </template>
 
 <script>
-import selecter from "./formComponents/datePicker.vue";
+import compon from "./formComponents/popOver.vue";
 export default {
     components:{
-        selecter
+        compon
     },
     data(){
         return{
@@ -25,7 +25,7 @@ export default {
     },
     methods:{
         submit(){
-            console.log(this.$refs.selecter.date);
+            console.log(this.$refs.compon.date);
         }
     }
 }

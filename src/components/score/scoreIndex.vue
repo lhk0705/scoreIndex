@@ -563,14 +563,14 @@ export default {
           }
       }
       // 生成报告
-        if(this.status===1){
-          if(confirm('提交成功！是否生成验收报告？')){await this.report()}
-          // if(confirm('是否生成得分表？')){await this.score()} 
-          this.$router.push('/finish')            
-        }else{
-          if(confirm('提交成功！是否生成阶段报告？')){await this.period()}
-          this.$router.push('/ing') 
-        }
+        // if(this.status===1){
+        //   if(confirm('提交成功！是否生成验收报告？')){await this.report()}
+        //   // if(confirm('是否生成得分表？')){await this.score()} 
+        //   this.$router.push('/finish')            
+        // }else{
+        //   if(confirm('提交成功！是否生成阶段报告？')){await this.period()}
+        //   this.$router.push('/ing') 
+        // }
     },
     cancel(){  
           let a=confirm("确定清空？");

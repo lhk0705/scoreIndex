@@ -1,6 +1,5 @@
 <template>
-  <div class="father">
-      
+  <div class="father">      
     <el-container class="main">
         <el-header class="main" height="30px">
         <strong>创建测试任务</strong>
@@ -9,7 +8,8 @@
         <el-col :span="10">
           <el-row>
             <div class="zubie">
-              <label>组别：</label><group ref='groupName'></group>
+              <label>组别：</label>
+              <selecter :prop='group' ref="groupSelecter"></selecter>
             </div>
           </el-row>
           <el-row>
@@ -17,14 +17,7 @@
               <label for>
                 <span>*</span>系统负责人：
               </label>
-              <el-select v-model="stateperson" filterable size="mini" :disabled="fstDis">
-                <el-option
-                  v-for="item in sysperson"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                ></el-option>
-              </el-select>
+              <selecter :prop='sysPerson' ref="sysPerSelecter"></selecter>
             </div>
           </el-row>
           <el-row>
@@ -32,8 +25,8 @@
               <label for>
                 <span>*</span>版本类型：
               </label>
-              <el-radio v-model="type" label="常规版本" :disabled="fstDis">常规版本</el-radio>
-              <el-radio v-model="type" label="紧急版本" :disabled="fstDis">紧急版本</el-radio>
+              <el-radio v-model="type" label="常规版本">常规版本</el-radio>
+              <el-radio v-model="type" label="紧急版本" >紧急版本</el-radio>
             </div>
           </el-row>
           <el-row>
@@ -70,15 +63,7 @@
               <label for>
                 <span>*</span>提测时间：
               </label>
-              <el-date-picker
-                value-format="yyyy-MM-dd"
-                size="mini"
-                v-model="ticeshijian"
-                type="date"
-                placeholder="请选择日期"
-                @change="bbh_change"
-                :disabled="fstDis"
-              ></el-date-picker>
+              <datePicker  class="ticeshijianCSS" ref="ticeshijian"></datePicker>
             </div>
           </el-row>
           <el-row>
@@ -86,21 +71,7 @@
               <label for>
                 <span>*</span>系统名称：
               </label>
-              <el-select
-                v-model="xitongming"
-                filterable
-                placeholder="请选择"
-                size="mini"
-                :disabled="fstDis"
-                @change="bbh_change"
-              >
-                <el-option
-                  v-for="item in sysoptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                ></el-option>
-              </el-select>
+              <selecter :prop='systems' ref='systemSelecter'></selecter>
             </div>
           </el-row>
           <el-row>
@@ -108,8 +79,8 @@
               <label for>
                 <span>*</span>是否计划内：
               </label>
-              <el-radio v-model="plan" label="是" :disabled="fstDis">是</el-radio>
-              <el-radio v-model="plan" label="否" :disabled="fstDis">否</el-radio>
+              <el-radio v-model="plan" label="是" >是</el-radio>
+              <el-radio v-model="plan" label="否" >否</el-radio>
             </div>
           </el-row>
           <el-row>
@@ -117,15 +88,7 @@
                 <label for>
                   <span>*</span>负责人员：
                 </label>                
-                <el-select v-model="state_cc_r" filterable  size="mini" :disabled="fstDis">
-                  <el-option
-                    v-for="item in testPerson"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"                    
-                    >
-                  </el-option>
-                </el-select>
+                <selecter :prop='testPerson' ref='testPerSelecter'></selecter>
               </div>
         </el-row>
         </el-col>
@@ -139,45 +102,29 @@
 
 <script>
 import axios from 'axios';
-import group from '@/components/common/formComponents/group.vue'
+import selecter from "@/components/common/formComponents/selecter.vue";
+import datePicker from "@/components/common/formComponents/datePicker.vue";
 export default {
   components:{
-    group
+    selecter,datePicker
   },
-  data() {
+  data(){
     return {
-        state_cc_r:'',
-      pickerOptions: {
-    disabledDate(time) {
-          return time.getTime() > Date.now();
-        },
-      },
-      ticeshijian: "",
+      state_cc_r:'',
       type: "常规版本",
       plan: "是",
-      banbenguimo: 0,
-      xitongming: "",
-      groupName: "",
-      stateperson: "",
-      fstDis:false,
+      banbenguimo: 1,
+      group:[],
+      sysPerson:[],
+      systems:[],
+      testPerson:[]
     };
   },
   mounted(){
-    this.$refs.groupName.groupName=''
-  },
-  computed:{
-    sysperson(){
-      return this.$store.getters.getSysPerson
-    },
-    sysoptions(){
-      return this.$store.getters.getSys
-    },
-    group(){
-      return this.$store.getters.getGroup
-    },
-    testPerson(){
-        return this.$store.getters.getTestPerson
-    }
+    this.group=this.$store.getters.getGroup
+    this.sysPerson=this.$store.getters.getSysPerson
+    this.systems=this.$store.getters.getSys
+    this.testPerson=this.$store.getters.getTestPerson
   },
   methods:{
       handleChange(){
@@ -186,18 +133,19 @@ export default {
       },
       create(){
           let data={
-            groupName:this.$refs.groupName.groupName,
-            ticeshijian:this.ticeshijian,
+            groupName:this.$refs.groupSelecter.selectData,
+            ticeshijian:this.$refs.ticeshijian.date,
             // sysPperson:this.stateperson,
-            person:this.stateperson,
-            xitongming:this.xitongming,
+            person:this.$refs.sysPerSelecter.selectData,
+            xitongming:this.$refs.systemSelecter.selectData,
             type:this.type,
             plan:this.plan,
             banbenguimo:this.banbenguimo,
-            testPerson:this.state_cc_r,
-            banbenhao:this.ticeshijian+this.xitongming,
+            testPerson:this.$refs.testPerSelecter.selectData,
+            banbenhao:this.$refs.ticeshijian.date+this.$refs.systemSelecter.selectData,
             status:0
           }
+          // console.log(data);
           if(data.groupName===''||
           data.ticeshijian===''||
           data.person===''||
@@ -225,7 +173,11 @@ export default {
               if(result.length>0) {alert(bbh+'已存在！请勿重复添加')}else{
                 console.log(data);
                 axios.post('/addTask',data)
-                .then(res=>alert('新建任务成功！')) 
+                .then(res=>{
+                  alert('新建任务成功！')
+                  this.$router.push('/ing')
+                }
+                ) 
               }
               })
               })
