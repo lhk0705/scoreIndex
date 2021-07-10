@@ -1,5 +1,6 @@
 <template>
 <div >
+  <navBar class="navBar"></navBar>
   <div class="scoreIndex">
     <div class="head">      
       <div class="bbhao"><label >{{banbenhao}}</label></div>      
@@ -11,17 +12,17 @@
     </div>
     <!-- TAB页-->
     <div >
-    <el-tabs  v-model="activeName" type="card" @tab-click="handleClick">   
-      <el-tab-pane  label="交付物" name="first">
+    <!-- <el-tabs  v-model="activeName" type="card" @tab-click="handleClick">    -->
+      <!-- <el-tab-pane  label="交付物" name="first"> -->
         <doc ref="doc" ></doc>
-      </el-tab-pane>     
-      <el-tab-pane label="抽测"  name="second">
+      <!-- </el-tab-pane>      -->
+      <!-- <el-tab-pane label="抽测"  name="second"> -->
       <randomtest ref="randomtest" ></randomtest>
-      </el-tab-pane>
-      <el-tab-pane label="质控验收测试"   name="third">
+      <!-- </el-tab-pane> -->
+      <!-- <el-tab-pane label="质控验收测试"   name="third"> -->
        <test ref="test"></test>
-      </el-tab-pane>
-    </el-tabs>
+      <!-- </el-tab-pane> -->
+    <!-- </el-tabs> -->
     <br /><br /><br /><br />
     </div>    
   </div>
@@ -44,6 +45,7 @@
     </div>
 </template>
 <script>
+import navBar from "./navBar.vue";
 import axios from "axios";
 import visionhead from './vision_head';
 import doc from './doc';
@@ -204,7 +206,8 @@ export default {
     "vision-head":visionhead,
     "doc":doc,
     "randomtest":randomtest,
-    "test":test
+    "test":test,
+    navBar
   },
   name: "scoreIndex",
   data() {
@@ -929,6 +932,12 @@ export default {
 <style scoped>
 @import "../score/scoreIndex.css";
 </style>
-
+<style scoped>
+.navBar{
+  position: fixed;
+  left:10%;
+  top:30%
+}
+</style>
 
 
