@@ -1,6 +1,6 @@
 <template>
 <div >
-  <navBar class="navBar"></navBar>
+  <navBar :prop='scrollNumber' class="navBar" @turn='turn'></navBar>
   <div class="scoreIndex">
     <div class="head">      
       <div class="bbhao"><label >{{banbenhao}}</label></div>      
@@ -212,6 +212,7 @@ export default {
   name: "scoreIndex",
   data() {
     return {
+      scrollNumber:0,
       banbenhao:'',
       status:0,
       rounds:0,
@@ -226,7 +227,11 @@ export default {
          
     };
   },
-  methods: {          
+  methods: {
+    turn(a){
+      // console.log(1);
+      window.scroll(0,a)
+    } ,         
     // 获取所有字段
     getAllData(){
       let headdata=this.$refs.visionhead
@@ -918,7 +923,10 @@ export default {
       return jsonData.map(v => filterVal.map(j => v[j]));
     }, 
   },
-  computed: {    
+  computed: {  
+    // scrollNumber(){
+    //   return 
+    // },  
     banbendefen:{
       get(){
         return this.$store.getters.banbendefen

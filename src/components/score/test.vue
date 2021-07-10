@@ -1,345 +1,296 @@
 <template>
-    <div>
-       <div class="ys_fst">
-          <strong>
-            质控验收测试得分
+  <div class="testAll"> 
+    <div class="title"><strong>
+            质控验收测试
             <input type="text" class="yanshoudefen" v-model="yanshoudefen" :disabled="scoreDis"/>
           </strong>
-          <el-popover
-            placement="right-start"
-            width="500"
-            trigger="hover"
-            content="
-                    "
-          >
-          <div>1、一次通过率达到85%以上的，不扣分；低于85%的，每低于1个百分点，扣1分，扣完30分为止；</div>
-          <div>2、二次通过率达到95%以上的，不扣分；低于95%的，每低于1个百分点，扣1分，扣完30分为止；</div>
-          <div>3、三次通过率达到100%，不扣分；低于100%的，每低于1个百分点，扣1分，扣完30分为止；</div>
-          <div>4、验收测试超过三次，扣30分。</div>
-            <el-button slot="reference" size="mini" class="bt">
-              <i class="icon iconfont icon-wenhao"></i>
-            </el-button>
-          </el-popover>
-        </div>
-        <br />
-        <!-- 一轮验收-->
-        <el-container>
-          <el-header class="a_head" height="33px">
-            <strong>一轮验收</strong>
+          <popOver :prop='testPop'></popOver></div>
+    <!-- 一轮验收 -->
+    <div class="left">
+                  <strong>一轮验收</strong>
             <el-button size="mini" type="primary" class="a_new" round @click="anew" :disabled="fstnew">新增</el-button>
             <el-button size="mini" class="a_delete" round @click="adel" :disabled="fstnew">删除</el-button>
-          </el-header>
-          <el-main class="a_main">
-            <el-col :span=10>
-              <el-row>
-                <div class="a11">
-                  <label for>
-                    <span>*</span>测试开始时间：
-                  </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="a_begin" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a12">
-                  <label for>
-                    <span>*</span>测试人：
-                  </label>
-                  <el-select v-model="state_a_csr" filterable  size="mini" :disabled="fstDis">
-                  <el-option
-                    v-for="item in testPerson"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"                    
-                    >
-                  </el-option>
-                </el-select>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a13">
-                  <label for>
-                    <span>*</span>通过数：
-                  </label>
-                  <el-input type="number" size="mini" class="a_tgs" v-model="a_tgs" :disabled="fstDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a14">
-                  <label for>
-                    <span>*</span>阻塞数：
-                  </label>
-                  <el-input type="number" size="mini" class="a_zss" v-model="a_zss" :disabled="scoreDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a15">
-                  <label for>
-                    <span>*</span>第一轮版本通过率：
-                  </label>
-                  <el-input size="mini" class="a_tgl" v-model="a_tgl" :disabled="scoreDis"></el-input>
-                </div>
-              </el-row>
-            </el-col>
-            <el-col :span=10>
-              <el-row>
-                <div class="a21">
-                  <label for>
-                    <span>*</span>测试结束时间：
-                  </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="a_end" type="date" placeholder="请选择日期" :disabled="fstDis"></el-date-picker>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a22">
-                  <label for>
-                    <span>*</span>用例执行个数：
-                  </label>
-                  <el-input type="number" size="mini" class="a_ylzxgs" v-model="a_ylzxgs" :disabled="fstDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a23">
-                  <label for>
-                    <span>*</span>不通过数：
-                  </label>
-                  <el-input type="number" size="mini" class="a_btgs" v-model="a_btgs" :disabled="fstDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a24">
-                  <label for>
-                    <span>*</span>缺陷数：
-                  </label>
-                  <el-input type="number" size="mini" class="a_qxs" v-model="a_qxs" :disabled="fstDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a25">
-                  <label for>
-                    <span>*</span>第一轮验收结果：
-                  </label>
-                  <el-radio v-model="a_jieguo" label="通过" :disabled="fstDis">通过</el-radio>
-                  <el-radio v-model="a_jieguo" label="不通过" :disabled="fstDis">不通过</el-radio>
-                </div>
-              </el-row>
-            </el-col>
-          </el-main>
-        </el-container>
-        <br />
-        <!-- 二轮验收-->
-        <el-container v-show="b_show">
-          <el-header class="b_head" height="33px">
-            <strong>二轮验收</strong>
-            <el-button size="mini" type="primary" class="b_new" round @click="bnew" :disabled="secnew">新增</el-button>
-            <el-button size="mini" class="b_delete" round @click="bdel" :disabled="secnew">删除</el-button>
-          </el-header>
-          <el-main class="b_main">
-            <el-col :span=10>
-              <el-row>
-                <div class="a11">
-                  <label for>
-                    <span>*</span>测试开始时间：
-                  </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="b_begin" type="date" placeholder="请选择日期" :disabled="secDis"></el-date-picker>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a12">
-                  <label for>
-                    <span>*</span>测试人：
-                  </label>
-                <el-select v-model="state_b_csr" filterable  size="mini" :disabled="secDis">
-                  <el-option
-                    v-for="item in testPerson"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"                    
-                    >
-                  </el-option>
-                </el-select>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a13">
-                  <label for>
-                    <span>*</span>通过数：
-                  </label>
-                  <el-input type="number" size="mini" class="b_tgs" v-model="b_tgs" :disabled="secDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a14">
-                  <label for>
-                    <span>*</span>阻塞数：
-                  </label>
-                  <el-input type="number" size="mini" class="b_zss" v-model="b_zss" :disabled="scoreDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a15">
-                  <label for>
-                    <span>*</span>第二轮版本通过率：
-                  </label>
-                  <el-input size="mini" class="b_tgl" v-model="b_tgl" :disabled="scoreDis"></el-input>
-                </div>
-              </el-row>
-            </el-col>
-            <el-col :span=10>
-              <el-row>
-                <div class="a21">
-                  <label for>
-                    <span>*</span>测试结束时间：
-                  </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="b_end" type="date" placeholder="请选择日期" :disabled="secDis"></el-date-picker>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a22">
-                  <label for>
-                    <span>*</span>用例执行个数：
-                  </label>
-                  <el-input type="number" size="mini" class="b_ylzxgs" v-model="b_ylzxgs" :disabled="secDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a23">
-                  <label for>
-                    <span>*</span>不通过数：
-                  </label>
-                  <el-input type="number" size="mini" class="b_btgs" v-model="b_btgs" :disabled="secDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a24">
-                  <label for>
-                    <span>*</span>缺陷数：
-                  </label>
-                  <el-input type="number" size="mini" class="b_qxs" v-model="b_qxs" :disabled="secDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a25">
-                  <label for>
-                    <span>*</span>第二轮验收结果：
-                  </label>
-                  <el-radio v-model="b_jieguo" label="通过" :disabled="secDis">通过</el-radio>
-                  <el-radio v-model="b_jieguo" label="不通过" :disabled="secDis">不通过</el-radio>
-                </div>
-              </el-row>
-            </el-col>
-          </el-main>
-        </el-container>
-        <br />
-        <!-- 三轮验收-->
-        <el-container v-show="c_show">
-          <el-header class="c_head" height="33px">
-            <strong>三轮验收</strong>
-
-            <el-button size="mini" class="c_delete" round @click="cdel" :disabled="trdnew">删除</el-button>
-          </el-header>
-          <el-main class="c_main">
-            <el-col :span=10>
-              <el-row>
-                <div class="a11">
-                  <label for>
-                    <span>*</span>测试开始时间：
-                  </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="c_begin" type="date" placeholder="请选择日期" :disabled="trdDis"></el-date-picker>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a12">
-                  <label for>
-                    <span>*</span>测试人：
-                  </label>
-                  <el-select v-model="state_c_csr" filterable  size="mini" :disabled="trdDis">
-                  <el-option
-                    v-for="item in testPerson"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"                    
-                    >
-                  </el-option>
-                </el-select>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a13">
-                  <label for>
-                    <span>*</span>通过数：
-                  </label>
-                  <el-input type="number" size="mini" class="c_tgs" v-model="c_tgs" :disabled="trdDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a14">
-                  <label for>
-                    <span>*</span>阻塞数：
-                  </label>
-                  <el-input type="number" size="mini" class="c_zss" v-model="c_zss" :disabled="scoreDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a15">
-                  <label for>
-                    <span>*</span>第三轮版本通过率：
-                  </label>
-                  <el-input size="mini" class="c_tgl" v-model="c_tgl" :disabled="scoreDis"></el-input>
-                </div>
-              </el-row>
-            </el-col>
-            <el-col :span=10>
-              <el-row>
-                <div class="a21">
-                  <label for>
-                    <span>*</span>测试结束时间：
-                  </label>
-                  <el-date-picker size="mini" value-format="yyyy-MM-dd" v-model="c_end" type="date" placeholder="请选择日期" :disabled="trdDis"></el-date-picker>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a22">
-                  <label for>
-                    <span>*</span>用例执行个数：
-                  </label>
-                  <el-input type="number" size="mini" class="c_ylzxgs" v-model="c_ylzxgs" :disabled="trdDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a23">
-                  <label for>
-                    <span>*</span>不通过数：
-                  </label>
-                  <el-input type="number" size="mini" class="c_btgs" v-model="c_btgs" :disabled="trdDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a24">
-                  <label for>
-                    <span>*</span>缺陷数：
-                  </label>
-                  <el-input size="mini" type="number" class="c_qxs" v-model="c_qxs" :disabled="trdDis"></el-input>
-                </div>
-              </el-row>
-              <el-row>
-                <div class="a25">
-                  <label for>
-                    <span>*</span>第三轮验收结果：
-                  </label>
-                  <el-radio v-model="c_jieguo" label="通过" :disabled="trdDis">通过</el-radio>
-                  <el-radio v-model="c_jieguo" label="不通过" :disabled="trdDis">不通过</el-radio>
-                </div>
-              </el-row>
-            </el-col>
-          </el-main>
-        </el-container> 
     </div>
-</template>
+    <div class="testMain">
+         <div>
+        <label class="right"> <span>*</span>测试开始时间： </label>
+      </div>
+      <div class="left">
+        <datePicker
+            ref="abeginPicker"
+          :disbled="fstDis"
+          @dateChange="dateChange"
+        ></datePicker>
+      </div>
+      <div>
+        <label class="right"> <span>*</span>测试结束时间： </label>
+      </div>
+      <div class="left">
+        <datePicker
+            ref="aendPicker"
+          :disbled="fstDis"
+          @dateChange="dateChange"
+        ></datePicker>  
+      </div>
+      <div>
+        <label class="right"> <span>*</span>测试人： </label>
+      </div>
+      <div class="left">
+        <selecter
+          ref="aSelecter"
+          :prop="testPerson"
+          :disabled="fstDis"
+          @selectChange="selectChange"
+        ></selecter>
+      </div>
+      <div>
+        <label class="right"> <span>*</span>用例执行个数： </label>
+      </div>
+      <div class="left">
+                          <el-input type="number" size="mini" class="a_ylzxgs" v-model="a_ylzxgs" :disabled="fstDis"></el-input>
 
+      </div>
+      <div>
+        <label class="right"> <span>*</span>通过数： </label>
+      </div>
+      <div class="left">
+                          <el-input type="number" size="mini" class="a_tgs" v-model="a_tgs" :disabled="fstDis"></el-input>
+
+      </div>
+      <div>
+        <label class="right"> <span>*</span>不通过数： </label>
+      </div>
+      <div class="left">
+                          <el-input type="number" size="mini" class="a_btgs" v-model="a_btgs" :disabled="fstDis"></el-input>
+
+      </div>
+      <div>
+        <label class="right"> <span>*</span>阻塞数： </label>
+      </div>
+      <div class="left">
+                          <el-input type="number" size="mini" class="a_zss" v-model="a_zss" :disabled="scoreDis"></el-input>
+
+      </div>
+      <div>
+        <label class="right"> <span>*</span>缺陷数： </label>
+      </div>
+      <div class="left">
+                          <el-input type="number" size="mini" class="a_qxs" v-model="a_qxs" :disabled="fstDis"></el-input>
+
+      </div>
+      <div>
+        <label class="right"> <span>*</span>第一轮版本通过率： </label>
+      </div>
+      <div class="left">
+                         <el-input size="mini" class="a_tgl" v-model="a_tgl" :disabled="scoreDis"></el-input>
+
+      </div>
+      <div>
+        <label class="right"> <span>*</span>第一轮验收结果： </label>
+      </div>
+      <div class="left">
+                          <el-radio v-model="a_jieguo" label="通过" :disabled="fstDis">通过</el-radio>
+                  <el-radio v-model="a_jieguo" label="不通过" :disabled="fstDis">不通过</el-radio>
+
+      </div>
+      
+    </div>
+    <!-- 二轮验收 -->
+    <div class="left" v-show="b_show">
+                  <strong>二轮验收</strong>
+            <el-button size="mini" type="primary" class="b_new" round @click="bnew" :disabled="secnew">新增</el-button>
+            <el-button size="mini" class="b_delete" round @click="bdel" :disabled="secnew">删除</el-button>    </div>
+    <div class="testMain" v-show="b_show">
+         <div>
+        <label class="right"> <span>*</span>测试开始时间： </label>
+      </div>
+      <div class="left">
+        <datePicker
+            ref="bbeginPicker"
+          :disbled="secDis"
+          @dateChange="dateChange"
+        ></datePicker>
+      </div>
+      <div>
+        <label class="right"> <span>*</span>测试结束时间： </label>
+      </div>
+      <div class="left">
+        <datePicker
+            ref="bendPicker"
+          :disbled="secDis"
+          @dateChange="dateChange"
+        ></datePicker>  
+      </div>
+      <div>
+        <label class="right"> <span>*</span>测试人： </label>
+      </div>
+      <div class="left">
+        <selecter
+          ref="bSelecter"
+          :prop="testPerson"
+          :disabled="secDis"
+          @selectChange="selectChange"
+        ></selecter>
+      </div>
+      <div>
+        <label class="right"> <span>*</span>用例执行个数： </label>
+      </div>
+      <div class="left">
+                          <el-input type="number" size="mini" class="b_ylzxgs" v-model="b_ylzxgs" :disabled="secDis"></el-input>
+
+      </div>
+      <div>
+        <label class="right"> <span>*</span>通过数： </label>
+      </div>
+      <div class="left">
+                          <el-input type="number" size="mini" class="b_tgs" v-model="b_tgs" :disabled="secDis"></el-input>
+
+      </div>
+      <div>
+        <label class="right"> <span>*</span>不通过数： </label>
+      </div>
+      <div class="left">
+                          <el-input type="number" size="mini" class="b_btgs" v-model="b_btgs" :disabled="secDis"></el-input>
+
+      </div>
+      <div>
+        <label class="right"> <span>*</span>阻塞数： </label>
+      </div>
+      <div class="left">
+                          <el-input type="number" size="mini" class="b_zss" v-model="b_zss" :disabled="scoreDis"></el-input>
+
+      </div>
+      <div>
+        <label class="right"> <span>*</span>缺陷数： </label>
+      </div>
+      <div class="left">
+                         <el-input type="number" size="mini" class="b_qxs" v-model="b_qxs" :disabled="secDis"></el-input>
+
+      </div>
+      <div>
+        <label class="right"> <span>*</span>第二轮版本通过率： </label>
+      </div>
+      <div class="left">
+                          <el-input size="mini" class="b_tgl" v-model="b_tgl" :disabled="scoreDis"></el-input>
+
+      </div>
+      <div>
+        <label class="right"> <span>*</span>第二轮验收结果： </label>
+      </div>
+      <div class="left">
+                          <el-radio v-model="b_jieguo" label="通过" :disabled="secDis">通过</el-radio>
+                  <el-radio v-model="b_jieguo" label="不通过" :disabled="secDis">不通过</el-radio>
+
+      </div>
+    </div>
+    <!-- 三轮验收 -->
+    <div class="left" v-show="c_show">
+                  <strong>三轮验收</strong>
+            <el-button size="mini" class="c_delete" round @click="cdel" :disabled="trdnew">删除</el-button>
+    </div>
+    <div class="testMain" v-show="c_show">
+         <div>
+        <label class="right"> <span>*</span>测试开始时间： </label>
+      </div>
+      <div class="left">
+        <datePicker
+            ref="cbeginPicker"
+          :disbled="trdDis"
+          @dateChange="dateChange"
+        ></datePicker> 
+      </div>
+       <div>
+        <label class="right"> <span>*</span>测试结束时间： </label>
+      </div>
+      <div class="left">
+        <datePicker
+          ref="cendPicker"
+          :disabled="trdDis"
+          @dateChange="dateChange"
+        ></datePicker>
+      </div>
+       <div>
+        <label class="right"> <span>*</span>测试人： </label>
+      </div>
+      <div class="left">
+        <selecter
+          ref="cSelecter"
+          :prop="testPerson"
+          :disabled="trdDis"
+          @selectChange="selectChange"
+        ></selecter>
+      </div>
+       <div>
+        <label class="right"> <span>*</span>用例执行个数： </label>
+      </div>
+      <div class="left">
+                          <el-input type="number" size="mini" class="c_ylzxgs" v-model="c_ylzxgs" :disabled="trdDis"></el-input>
+
+      </div>
+       <div>
+        <label class="right"> <span>*</span>通过数： </label>
+      </div>
+      <div class="left">
+                          <el-input type="number" size="mini" class="c_tgs" v-model="c_tgs" :disabled="trdDis"></el-input>
+
+      </div>
+       <div>
+        <label class="right"> <span>*</span>不通过数： </label>
+      </div>
+      <div class="left">
+                          <el-input type="number" size="mini" class="c_btgs" v-model="c_btgs" :disabled="trdDis"></el-input>
+
+      </div>
+       <div>
+        <label class="right"> <span>*</span>阻塞数： </label>
+      </div>
+      <div class="left">
+                          <el-input type="number" size="mini" class="c_zss" v-model="c_zss" :disabled="scoreDis"></el-input>
+
+      </div>
+       <div>
+        <label class="right"> <span>*</span>缺陷数： </label>
+      </div>
+      <div class="left">
+                          <el-input size="mini" type="number" class="c_qxs" v-model="c_qxs" :disabled="trdDis"></el-input>
+
+      </div>
+       <div>
+        <label class="right"> <span>*</span>第三轮版本通过率： </label>
+      </div>
+      <div class="left">
+                          <el-input size="mini" class="c_tgl" v-model="c_tgl" :disabled="scoreDis"></el-input>
+
+      </div>
+       <div>
+        <label class="right"> <span>*</span>第三轮验收结果： </label>
+      </div>
+      <div class="left">
+                         <el-radio v-model="c_jieguo" label="通过" :disabled="trdDis">通过</el-radio>
+                  <el-radio v-model="c_jieguo" label="不通过" :disabled="trdDis">不通过</el-radio>
+      </div>
+       
+    </div>
+  </div>
+</template>
 <script>
+import datePicker from "@/components/common/formComponents/datePicker.vue";
+import selecter from "@/components/common/formComponents/selecter.vue";
+import popOver from "@/components/common/formComponents/popOver.vue";
 export default {
+  components: {
+    datePicker,
+    selecter,
+    popOver,
+  },
     data(){
         return{
+          testPop:[          
+        '1、一次通过率达到85%以上的，不扣分；低于85%的，每低于1个百分点，扣1分，扣完30分为止',
+          '2、二次通过率达到95%以上的，不扣分；低于95%的，每低于1个百分点，扣1分，扣完30分为止',
+          '3、三次通过率达到100%，不扣分；低于100%的，每低于1个百分点，扣1分，扣完30分为止',
+         '4、验收测试超过三次，扣30分。',
+          ],
     fstnew:false,
     secnew:false,
     trdnew:false,
@@ -381,9 +332,35 @@ export default {
       c_qxs: "",
         }
     },
+    mounted(){
+      this.testPerson=this.$store.getters.getTestPerson
+      this.$refs.cSelecter.disabled=this.trdDis
+      this.$refs.aSelecter.disabled=this.fstDis
+      this.$refs.bSelecter.disabled=this.secDis
+      this.$refs.cendPicker.disabled=this.trdDis
+      this.$refs.cbeginPicker.disabled=this.trdDis
+      this.$refs.bendPicker.disabled=this.secDis
+      this.$refs.bbeginPicker.disabled=this.secDis
+      this.$refs.aendPicker.disabled=this.fstDis
+      this.$refs.abeginPicker.disabled=this.fstDis
+    },
+    // watch:{
+    //   trdDis()
+    // },
     methods:{
-    handleChange(){
-      },
+    dateChange(){
+      this.a_begin=this.$refs.abeginPicker.date
+      this.a_end=this.$refs.aendPicker.date
+      this.b_begin=this.$refs.bbeginPicker.date
+      this.b_end=this.$refs.bendPicker.date
+      this.c_begin=this.$refs.cbeginPicker.date
+      this.c_end=this.$refs.cendPicker.date
+    },
+    selectChange(){
+      this.state_a_csr=this.$refs.aSelecter.selectData
+      this.state_b_csr=this.$refs.bSelecter.selectData
+      this.state_c_csr=this.$refs.cSelecter.selectData
+    },
     adel() {
       let a = confirm("确定删除？");
       if (a) {
@@ -599,4 +576,41 @@ export default {
 
 <style scoped>
 @import "../score/scoreIndex.css";
+</style>
+<style scoped>
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+.testAll {
+  display: grid;
+  grid: 50px  35px 260px/100%;
+}
+.testAll > div {
+  border: 1px solid rgb(214, 213, 213);
+  margin: 0.2%;
+  background-color: white;
+  border-radius: 4px;
+}
+.left {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  /* float: left; */
+}
+.right {
+  float: right;
+  margin-top: 16px;
+  /* float:right */
+}
+.testMain {
+  display: grid;
+  grid: 50px 50px 50px 50px 50px 50px/25% 15% 25% 15%;
+}
+.testMain > div {
+  /* border: 1px solid black; */
+  font-size: 12px;
+}
 </style>

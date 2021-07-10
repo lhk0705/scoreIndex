@@ -19,21 +19,27 @@
     <el-menu-item index="/showin">
           质量看板
         </el-menu-item>
-      <el-menu-item index="/scoreIndex">
+        
+      <!-- <el-menu-item index="/scoreIndex">
           数据录入
-        </el-menu-item>
-        <el-menu-item index="/report">
+        </el-menu-item> -->
+        <el-menu-item index="/report" v-show="user.role==='0'">
           质控报告
         </el-menu-item>
-        <el-menu-item index="/board">
+        
+        <el-menu-item index="/board" v-show="user.role==='0'">
           质控模板
+        </el-menu-item>
+        <el-menu-item index="/communicate" v-show="user.role==='0'">
+          质控Q&A
         </el-menu-item>
         <el-menu-item index="/data" v-show="user.role==='0'">
           数据管理
         </el-menu-item>
-        <el-menu-item index="/commonTest" v-show="user.role==='0'">
+        
+        <!-- <el-menu-item index="/commonTest" v-show="user.role==='0'">
           测试页
-        </el-menu-item>
+        </el-menu-item> -->
         <el-menu-item class="user">{{user.name}}
           <!-- <router-link to="/" @click="logOut">【退出】</router-link> -->
           <span @click="logOut">【退出】</span>

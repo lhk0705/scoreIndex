@@ -4,6 +4,7 @@
     placeholder="请选择"
     size="mini"
     style="width: 160px"
+    :disabled='disabled'
   >
     <el-option
       v-for="item in prop"
@@ -23,6 +24,7 @@ export default {
   data() {
     return {
       selectData: "",
+      disabled:false
     };
   },
   mounted() {

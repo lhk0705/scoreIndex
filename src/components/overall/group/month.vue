@@ -24,8 +24,7 @@
 </template>
 
 <script>
-import axios from "axios";
-
+import  {request}  from "@/components/common/methods/request.js";
 export default {
  props:{
         prop:String
@@ -94,7 +93,7 @@ export default {
   created(){
     this.getGMon(this.prop) 
     this.title.text=this.month+'月版本数'   
-      
+     
   },
   watch:{
     prop:{
@@ -106,34 +105,35 @@ export default {
   },
   
   methods:{
-    request(url,groupName){
-      return new Promise((resolve,reject)=>{
-      axios.post(url,{"groupName":groupName})
-      .then((res)=>{  
-        // if(res.data.total===undefined){
-          // this.show=false
-          // console.log(2);
-        // }  else{
-          // this.show=true       
-        resolve(res.data.total)
-        // console.log(1); 
-        // }
-      }).catch(err=>{
-        reject(err)
-      })
-      })    
-    },
+    // request(url,groupName){
+    //   return new Promise((resolve,reject)=>{
+    //   axios.post(url,{"groupName":groupName})
+    //   .then((res)=>{  
+    //     // if(res.data.total===undefined){
+    //       // this.show=false
+    //       // console.log(2);
+    //     // }  else{
+    //       // this.show=true       
+    //     resolve(res.data.total)
+    //     // console.log(1); 
+    //     // }
+    //   }).catch(err=>{
+    //     reject(err)
+    //   })
+    //   })    
+    // },
     async  getGMon(newV){
       // await this.SET_GROUP_MONTH(newV);
       // await this.SET_GROUP_fvMON(newV);
       // await this.SET_GROUP_uvMONTH(newV);
       // this.SET_GROUP_ROUNDS(newV)
       // console.log(this.request('/v_group_mon',newV),this.request('/fv_group_mon',newV),this.request('/uv_group_mon',newV));
+      
       let bbs,ywc,wwc,r
-      bbs=await this.request('/v_group_mon',newV)
-      ywc=await this.request('/fv_group_mon',newV)
-      wwc=await this.request('/uv_group_mon',newV)
-      r =await this.request('/r_group_mon',newV)
+      bbs=await request('/v_group_mon',newV)
+      ywc=await trequest('/fv_group_mon',newV)
+      wwc=await request('/uv_group_mon',newV)
+      r =await request('/r_group_mon',newV)
       bbs===undefined?this.show=false:this.show=true
       r===undefined?this.rounds="无已完成验收的版本":this.rounds="平均验收轮次："+ r.toFixed(1)
       ywc===undefined?ywc=0:ywc=ywc

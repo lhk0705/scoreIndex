@@ -1,5 +1,5 @@
 <template>
-  <div class="father">      
+  <!-- <div class="father">      
     <el-container class="main">
         <el-header class="main" height="30px">
         <strong>创建测试任务</strong>
@@ -97,19 +97,22 @@
     <el-row><el-button type="primary" class="btn" @click="create">创建</el-button></el-row>
     <br>
    
-  </div>
+  </div> -->
+<div><visionhead ref="visionhead"></visionhead>
+<el-button type="primary" class="btn" @click="create">创建</el-button></div>
 </template>
 
 <script>
 import axios from 'axios';
 import selecter from "@/components/common/formComponents/selecter.vue";
 import datePicker from "@/components/common/formComponents/datePicker.vue";
+import visionhead from "@/components/score/vision_head.vue";
 export default {
   components:{
-    selecter,datePicker
+    selecter,datePicker,visionhead
   },
   data(){
-    return {
+return {
       state_cc_r:'',
       type: "常规版本",
       plan: "是",
@@ -125,6 +128,9 @@ export default {
     this.sysPerson=this.$store.getters.getSysPerson
     this.systems=this.$store.getters.getSys
     this.testPerson=this.$store.getters.getTestPerson
+    this.$refs.visionhead.tpShow=true
+    this.$refs.visionhead.fstDis=false
+    this.$refs.visionhead.visionTitle='新建版本信息'
   },
   methods:{
       handleChange(){
@@ -133,19 +139,19 @@ export default {
       },
       create(){
           let data={
-            groupName:this.$refs.groupSelecter.selectData,
-            ticeshijian:this.$refs.ticeshijian.date,
+            groupName:this.$refs.visionhead.groupName,
+            ticeshijian:this.$refs.visionhead.ticeshijian,
             // sysPperson:this.stateperson,
-            person:this.$refs.sysPerSelecter.selectData,
-            xitongming:this.$refs.systemSelecter.selectData,
-            type:this.type,
-            plan:this.plan,
-            banbenguimo:this.banbenguimo,
-            testPerson:this.$refs.testPerSelecter.selectData,
-            banbenhao:this.$refs.ticeshijian.date+this.$refs.systemSelecter.selectData,
+            person:this.$refs.visionhead.stateperson,
+            xitongming:this.$refs.visionhead.xitongming,
+            type:this.$refs.visionhead.type,
+            plan:this.$refs.visionhead.plan,
+            banbenguimo:this.$refs.visionhead.banbenguimo,
+            testPerson:this.$refs.visionhead.fuzeren,
+            banbenhao:this.$refs.visionhead.ticeshijian+this.$refs.visionhead.xitongming,
             status:0
           }
-          // console.log(data);
+          console.log(data);
           if(data.groupName===''||
           data.ticeshijian===''||
           data.person===''||
@@ -159,7 +165,7 @@ export default {
           {alert("请输入必填项！")}
           else{
             let bbh=data.ticeshijian+data.xitongming;
-            let allscore=[];
+            let allscore=[]; 
             axios.get('/selectFinishedInfo').then(res=>{
               allscore=allscore.concat(res.data)
               // console.log(allBbh);

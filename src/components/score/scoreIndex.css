@@ -1,5 +1,5 @@
 .scoreIndex{
-  margin:0 15% 0 16% ;
+  margin:0 13% 0 15% ;
   
 }
 .bt{
@@ -441,12 +441,12 @@ span {
 .a_new,.b_new,.c_new{
     position: relative;
     left: 75%;
-    bottom:13%;
+    bottom:3%;
 }
-.a_delete{
+.a_delete,.b_delete,.c_delete{
     position: relative;
     left: 77%;
-    bottom:13%;
+    bottom:3%;
 }
 .b_head{
     text-align: left;
@@ -460,11 +460,7 @@ span {
     font-size: 12px;
     margin: 4px;
 }
-.b_delete{
-    position: relative;
-    left: 77%;
-    bottom:13%;
-}
+
 .b_tgs,.b_btgs,.b_ylzxgs,.b_zss,.b_tgl,.b_qxs{
     width: 200px;
 }
@@ -479,11 +475,6 @@ span {
     /* font-size: 0.8em; */
     font-size: 12px;
     margin: 4px;
-}
-.c_delete{
-    position: relative;
-    left: 77%;
-    bottom:13%;
 }
 .c_tgs,.c_btgs,.c_ylzxgs,.c_zss,.c_tgl,.c_qxs{
     width: 200px;

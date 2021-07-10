@@ -1,8 +1,8 @@
 <template>
   <div class="docAll">
-    <div class="left">
+    <div class="title">
       <strong>
-        交付物得分
+        交付物检查
         <input
           type="text"
           class="jiaofuwudefen"
@@ -44,7 +44,7 @@
         <selecter
           ref="xqSelecter"
           :prop="sysPerson"
-          disabled="fstDis"
+          :disabled="fstDis"
           @selectChange="selectChange"
         ></selecter>
       </div>
@@ -146,7 +146,7 @@
         <selecter
           ref="ylSelecter"
           :prop="sysPerson"
-          disabled="fstDis"
+          :disabled="fstDis"
           @selectChange="selectChange"
         ></selecter>
       </div>
@@ -290,7 +290,7 @@
         <selecter
           ref="bgSelecter"
           :prop="sysPerson"
-          disabled="fstDis"
+          :disabled="fstDis"
           @selectChange="selectChange"
         ></selecter>
       </div>
@@ -574,9 +574,15 @@ export default {
 @import "../score/scoreIndex.css";
 </style>
 <style scoped>
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
 .docAll {
   display: grid;
-  grid: 50px 50px 230px 50px 320px 50px 320px/100%;
+  grid: 50px 40px 230px 40px 320px 40px 320px/100%;
 }
 .docAll > div {
   border: 1px solid rgb(214, 213, 213);
@@ -592,7 +598,7 @@ export default {
 }
 .right {
   float: right;
-  margin-top: 15px;
+  margin-top: 16px;
   /* float:right */
 }
 .xq {
@@ -610,6 +616,6 @@ export default {
 .yl > div,
 .bg > div {
   /* border: 1px solid black; */
-  font-size: 14px;
+  font-size: 12px;
 }
 </style>
