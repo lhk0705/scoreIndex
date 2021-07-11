@@ -20,9 +20,9 @@
           质量看板
         </el-menu-item>
         
-      <!-- <el-menu-item index="/scoreIndex">
+      <el-menu-item index="/scoreIndex">
           数据录入
-        </el-menu-item> -->
+        </el-menu-item>
         <el-menu-item index="/report" v-show="user.role==='0'">
           质控报告
         </el-menu-item>

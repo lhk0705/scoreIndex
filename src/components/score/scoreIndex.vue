@@ -10,26 +10,15 @@
       <vision-head ref="visionhead" ></vision-head>
       <br />
     </div>
-    <!-- TAB页-->
     <div >
-    <!-- <el-tabs  v-model="activeName" type="card" @tab-click="handleClick">    -->
-      <!-- <el-tab-pane  label="交付物" name="first"> -->
         <doc ref="doc" ></doc>
-      <!-- </el-tab-pane>      -->
-      <!-- <el-tab-pane label="抽测"  name="second"> -->
       <randomtest ref="randomtest" ></randomtest>
-      <!-- </el-tab-pane> -->
-      <!-- <el-tab-pane label="质控验收测试"   name="third"> -->
        <test ref="test"></test>
-      <!-- </el-tab-pane> -->
-    <!-- </el-tabs> -->
     <br /><br /><br /><br />
     </div>    
   </div>
   <div class="foot">
-       
        <div class="button">
-         <!--<strong class="head_font">  -->
          <strong >
         版本总得分
         <input type="text" v-model="banbendefen" :disabled="scoreDis"/>       

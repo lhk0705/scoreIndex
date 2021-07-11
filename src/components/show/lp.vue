@@ -1,11 +1,188 @@
 <template>
 <div>
-<list :dataItem="dataItem" :listData="listData" :listTitle="title"></list>
-</div>
+  <search :prop="vers" v-on:changeVer="updateVer"></search>
+  <br>
+  <el-table border
+    width=100%
+    height="40">
+    <el-table-column  :label="label" align="center">
+     </el-table-column></el-table>
+  <el-table
+    :data="vers"
+    border
+    style="width: 100%" 
+    height="40em"   
+    >
+     <el-table-column
+      prop="type"
+      label="版本类型"
+      min-width="120"
+      align="center"
+        fixed    
+      >
+    </el-table-column>   
+    <el-table-column
+      prop="xitongming"
+      label="系统名"
+      min-width="110"
+      align="center"
+      fixed
+    >
+    </el-table-column>
+    <el-table-column
+      prop="banbenhao"
+      label="版本号"
+      min-width="150"
+      align="center"
+      fixed
+      >
+    </el-table-column>
+    <el-table-column
+      prop="ticeshijian"
+      label="提测时间"
+      min-width="120"
+      align="center"      
+      >
+    </el-table-column>
+   
+    <el-table-column
+      prop="groupname"
+      label="组别"
+      min-width="100"
+      align="center"      
+      >
+    </el-table-column>
+    <el-table-column
+      prop="banbenguimo"
+      label="版本规模"
+      min-width="80"
+      align="center"      
+      >
+    </el-table-column>
+    <el-table-column
+      prop="person"
+      label="负责人"
+      min-width="74"
+      align="center"
+      >
+    </el-table-column>
+    <el-table-column
+      prop="jiaofuwudefen"
+      label="交付物得分"
+      min-width="100"
+      align="center">
+    </el-table-column>
+    <el-table-column
+      prop="ccyls"
+      label="抽测用例数"
+      min-width="100"
+      align="center"      
+      >
+    </el-table-column>
+    <el-table-column
+      prop="cctgl"
+      label="抽测通过率"
+      min-width="100"
+      align="center">
+    </el-table-column>
+    <el-table-column
+      prop="ccdf"
+      label="抽测得分"
+      min-width="80"
+      align="center">
+    </el-table-column>
+    <el-table-column
+      prop="aylzxgs"
+      label="质控用例数"
+      min-width="100"
+      align="center"      
+      >
+    </el-table-column>
+    <el-table-column
+      prop="rounds"
+      label="验收轮次"
+      min-width="100"
+      align="center"
+      >
+    </el-table-column>
+    <el-table-column
+      prop="atgs"
+      label="首轮通过数"
+      min-width="100"
+      align="center"      
+      >
+    </el-table-column>
+    <el-table-column
+      prop="atgl"
+      label="首轮通过率"
+      min-width="100"
+      align="center"
+      >
+    </el-table-column>
+    <el-table-column
+      prop="aqxs"
+      label="首轮缺陷数"
+      min-width="100"
+      align="center"
+      >
+    </el-table-column>
+    <el-table-column
+      prop="btgs"
+      label="二轮通过数"
+      min-width="100"
+      align="center"      
+      >
+    </el-table-column>
+    <el-table-column
+      prop="btgl"
+      label="二轮通过率"
+      min-width="100"
+      align="center"
+      >
+    </el-table-column>
+    <el-table-column
+      prop="ctgs"
+      label="三轮通过数"
+      min-width="100"
+      align="center"      
+      >
+    </el-table-column>
+    <el-table-column
+      prop="ctgl"
+      label="三轮通过率"
+      min-width="100"
+      align="center"
+      >
+    </el-table-column>
+    <el-table-column
+      prop="yanshoudefen"
+      label="验收得分"
+      min-width="100"
+      align="center">
+    </el-table-column>
+    <el-table-column
+      prop="zongfen"
+      label="总分"
+      min-width="60"
+      align="center"
+      >
+    </el-table-column>
+    <el-table-column fixed="right" label="操作" align="center" min-width="80" >
+    <template slot-scope="scope">     
+        <el-button @click="getScore(scope.$index,vers)">查看</el-button>        
+    </template>
+    </el-table-column>
+    
+  </el-table>
+  <br>
+  <div class="exportToExcel">
+    <el-button  @click="exportToReport">导出为月报</el-button>
+    <el-button  @click="exportToExcel">导出为EXCEL</el-button>
+  </div>
+  </div>
 </template>
 
 <script>
-import list from "@/components/common/list/list.vue";
 import search from "./showCommon/serach";
 import axios from "axios";
 import docxtemplater from 'docxtemplater';
@@ -14,24 +191,21 @@ import JSZipUtils from 'jszip-utils';
 import {saveAs} from 'file-saver';
 export default {
   components:{
-    // "search":search,
-    list
+    "search":search
   },
     data(){
         return {
-          dataItem:[],
-          listData:[],
-          title:''
+          label:'',
         }
     },
     computed:{
-        // vers:{
-        //   get(){
-        //     return this.$store.getters.getLastPeriod            
-        //     },
-        //     set(){              
-        //     }             
-        // }
+        vers:{
+          get(){
+            return this.$store.getters.getLastPeriod            
+            },
+            set(){              
+            }             
+        }
     },
     methods:{
       updateVer(a){
@@ -409,50 +583,8 @@ export default {
        })
     },    
     } ,      
-    mounted(){
-      let beginTime=this.getDate()[0],endTime=this.getDate()[1];
-      // if(new Date().getDate()>15){ 
-      //   this.label=new Date().getUTCFullYear()+'年'+new Date().getUTCMonth()+'月16日'+'~'+new Date().getFullYear()+'年'+(new Date().getMonth()+1)+'月15日'+'版本数据'      
-      //    beginTime=new Date().getUTCFullYear()+'0'+new Date().getMonth()+'16',
-      //   endTime=new Date().getFullYear()+'0'+(new Date().getMonth()+1)+'15';
-      // }else{
-      //   this.label=new Date().getUTCFullYear()+'年'+(new Date().getMonth()-1)+'月16日'+'~'+new Date().getFullYear()+'年'+new Date().getMonth()+'月15日'+'版本数据'
-      //    beginTime=new Date().getFullYear()+'0'+(new Date().getMonth()-1)+'16',
-      //   endTime=new Date().getFullYear()+'0'+new Date().getMonth()+'15';       
-      // }
-      this.title=beginTime.toString().substring(0,4)+'年'+(+beginTime.toString().substring(4,6))+'月1日'+
-      '~'+endTime.toString().substring(0,4)+'年'+(+endTime.toString().substring(4,6))+'月1日'+'版本数据'
+    created(){
       this.setData()
-      this.dataItem=[
-        {value:'tyle',label:'版本类型',fixed:true},
-        {value:'xitongming',label:'系统名',fixed:true},
-        {value:'banbenhao',label:'版本号',fixed:true},
-        {value:'ticeshijian',label:'提测时间',fixed:false},
-        {value:'groupname',label:'组别',fixed:false},
-        {value:'banbenguimo',label:'版本规模',fixed:false},
-        {value:'person',label:'负责人',fixed:false},
-        {value:'jiaofuwudefen',label:'交付物得分',fixed:false},
-        {value:'ccyls',label:'抽测用例数',fixed:false},
-        {value:'cctgl',label:'抽测通过率',fixed:false},
-        {value:'ccdf',label:'抽测得分',fixed:false},
-        {value:'aylzxgs',label:'质控用例数',fixed:false}, 
-        {value:'rounds',label:'验收轮次',fixed:false},
-        {value:'atgs',label:'首轮通过数',fixed:false},
-        {value:'atgl',label:'首轮通过率',fixed:false},
-        {value:'aqxs',label:'首轮缺陷数',fixed:false},
-        {value:'btgs',label:'二轮通过数',fixed:false},
-        {value:'btgl',label:'二轮通过率',fixed:false},
-        {value:'ctgs',label:'三轮通过数',fixed:false},
-        {value:'ctgl',label:'三轮通过率',fixed:false},
-        {value:'yanshoudefen',label:'验收得分',fixed:false}, 
-        {value:'zongfen',label:'总分',fixed:false},    
-        ];
-      axios.post('/lastPeriod',{'beginTime':beginTime,'endTime':endTime})
-        .then((res)=>{           
-            // this.$store.commit('setLastPeriod',res.data)
-            this.listData=res.data
-        })
-      //  console.log(this.lastPeriod);
     }
 }
 </script>
