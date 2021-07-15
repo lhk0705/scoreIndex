@@ -1,3 +1,4 @@
+
 <template>
   <div  v-if="show" class="ring">
     <ve-ring

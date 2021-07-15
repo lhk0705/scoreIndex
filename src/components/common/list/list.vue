@@ -23,9 +23,15 @@
       :fixed="item.fixed"    
       >
     </el-table-column>
-    <el-table-column fixed="right" label="操作" align="center" min-width="80" >
+    <el-table-column v-if='btnShow' fixed="right" label="操作" align="center" min-width="80" >
     <template slot-scope="scope">     
-        <el-button @click="getScore(scope.$index,listData)">查看</el-button>        
+        <el-button @click="getScore(scope.$index,listData)" >查看</el-button>       
+    </template>   
+    </el-table-column>
+    <el-table-column v-else label="操作" align="center" width="150" fixed="right">
+       <template slot-scope="scope" >       
+        <el-button @click="getScore(scope.$index,listData)" type="primary" size="mini">编辑</el-button>  
+        <el-button @click="delScore(scope.$index,listData)" size="mini">删除</el-button>          
     </template>
     </el-table-column>
      </el-table>
@@ -57,14 +63,20 @@ export default {
     data(){
         return {
           data:[],
+          btnShow:true
         }
     },
     methods:{
+      delScore(a,b){
+        // console.log(b[a]);
+        if(confirm("确定删除"+b[a].banbenhao+'的数据？')){
+           axios.post('/delScore',{"banbenhao":b[a].banbenhao}).then(this.$router.go(0))
+          // this.$router.go(0)
+        }
+       
+    },
       // 根据索引结果更新列表
-      updateVer(a){
-        // console.log(a);
-        // this.$store.commit('setLastPeriod',a)
-        // this.data=a    
+      updateVer(a){   
         this.listData=a    
       },
       // 跳转到详细页
@@ -396,14 +408,6 @@ export default {
        })
     },    
     } ,      
-    mounted(){
-      // console.log(prop);
-      // this.setData()
-    // this.data=this.listData     
-    },
-//     beforeDestroy(){
-//       this.data=this.listData  
-//     }
 }
 </script>
 
