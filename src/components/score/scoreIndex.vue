@@ -319,6 +319,7 @@ export default {
               alert('常规版本需输入验收情况！')
             }else{                 
             let data={
+              "submitDate":new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate(),
                 "banbenguimo":headdata.banbenguimo,
                 "groupName":headdata.groupName,
                 "person":headdata.stateperson,
@@ -408,7 +409,7 @@ export default {
                 "yanshoudefen":-999,
                 "zongfen":Number(this.banbendefen)
                 } 
-                // console.log(data);                  
+                console.log(data);                  
             axios.post('/addSorce',data)
             .then((res)=>{console.log('传输成功');})
             // if(confirm('提交成功！是否生成验收报告？')){
