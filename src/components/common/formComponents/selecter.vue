@@ -5,6 +5,7 @@
     size="mini"
     style="width: 160px"
     :disabled='disabled'
+    filterable
   >
     <el-option
       v-for="item in prop"

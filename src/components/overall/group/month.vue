@@ -131,7 +131,7 @@ export default {
       
       let bbs,ywc,wwc,r
       bbs=await request('/v_group_mon',newV)
-      ywc=await trequest('/fv_group_mon',newV)
+      ywc=await request('/fv_group_mon',newV)
       wwc=await request('/uv_group_mon',newV)
       r =await request('/r_group_mon',newV)
       bbs===undefined?this.show=false:this.show=true

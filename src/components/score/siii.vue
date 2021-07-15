@@ -7,16 +7,11 @@
     </div>
     <br>
     <div>      
-      <!-- <vision-head ref="visionhead" ></vision-head> -->
-            <vision-head ref="visionhead"  :prop='versionData'></vision-head>
-
+      <vision-head ref="visionhead"  :prop='versionData'></vision-head>
       <br />
     </div>
     <div >
-        <!-- <doc ref="doc" :prop='xq' :fstDis="fstDis"></doc>
-      <randomtest ref="randomtest" ></randomtest>
-       <test ref="test"></test> -->
-       <doc ref="doc" :prop='versionData' :fstDis="fstDis" @jfwChange='scoreChange'></doc>
+        <doc ref="doc" :prop='versionData' :fstDis="fstDis" @jfwChange='scoreChange'></doc>
       <randomtest ref="randomtest" :prop='versionData' :fstDis="fstDis" @ccChange='scoreChange'></randomtest>
        <test ref="test" :prop='versionData' :fstDis="fstDis" :secDis="secDis" @testChange='scoreChange'
        :trdDis="trdDis" ></test>
@@ -27,7 +22,7 @@
        <div class="button">
          <strong >
         版本总得分
-        <input type="text" v-model="banbendefen" :disabled="scoreDis"/>       
+        <input type="text" v-model="banbendefen" :disabled="!scoreDis"/>       
       </strong>
       <el-button size="mini" @click="submit" type="primary" plain>提交</el-button>
       <el-button size="mini" @click="cancel" plain>清空</el-button>
@@ -50,36 +45,19 @@ import docxtemplater from 'docxtemplater';
 import PizZip from 'pizzip';
 import JSZipUtils from 'jszip-utils';
 import {saveAs} from 'file-saver';
-export default {
-  
-  beforeRouteEnter:((to,from,next)=>{
-    // console.log(from.path);       
+export default { 
+  beforeRouteEnter:((to,from,next)=>{  
     next(vm=>{
       // console.log(vm.$route.params); 
       if(vm.$route.params.ticeshijian!==undefined&&vm.$route.params.xitongming!==undefined){
       let bbh={"banbenhao":vm.$route.params.ticeshijian+vm.$route.params.xitongming}
       // console.log(bbh);
-      // 获取版本信息并展示在页面
+      // 展示版本详情
        axios.post('/selectSorce',bbh)
           .then((res)=>{
-            let headdata=vm.$refs.visionhead
-            let docdata=vm.$refs.doc
-            let randomtestdata=vm.$refs.randomtest
-            let testdata=vm.$refs.test
+            vm.$refs.visionhead.verHeadShow=false
             let data=res.data
             // console.log(data);
-            // if(!data.xqTime){
-            //   vm.fstDis=true 
-            //   randomtestdata.fstDis=false;
-            //   testdata.fstDis=false;
-            //   testdata.secDis=true;
-            // }else{
-            //   vm.fstDis=false 
-            //   randomtestdata.fstDis=true;
-            //   testdata.fstDis=true;
-            //   testdata.secDis=false;
-            // }
-            vm.$refs.visionhead.verHeadShow=false
             if(!data.xqTime){
               vm.fstDis=true 
               vm.secDis=false;
@@ -93,136 +71,131 @@ export default {
               vm.$refs.test.btnShow=false
             }
               vm.banbenhao=data.banbenhao;
-              headdata.fstDis=true;              
-              // testdata.secDis=false;
-              headdata.type=data.type;
-              headdata.plan=data.plan;
-              headdata.ticeshijian=data.ticeshijian;
-              headdata.xitongming=data.xitongming;
-              headdata.groupName=data.groupname;
-              headdata.stateperson=data.person;
-              headdata.banbenguimo=data.banbenguimo;
-              docdata.jiaofuwudefen=data.jiaofuwudefen;
-              docdata.xq_tijiao=data.xqTijiao;
-              docdata.xq_geshi=data.xqGeshi;
-              docdata.state_xq_tijiaoren=data.xqTijiaoren;
-              // vm.xq.xqperson=data.xqTijiaoren;
-              docdata.xq_time=data.xqTime;
-              docdata.xq_yanchi=data.xqYanchi;
-              docdata.xq_laiyuan=data.xqLaiyuan;
-              docdata.xq_change=data.xqChange;
-              docdata.xuqiudefen=data.xuqiudefen;
-              docdata.xq_error=data.xqError;
-              docdata.yl_tijiao=data.ylTijiao;
-              docdata.yl_geshi=data.ylGeshi;
-              docdata.state_yl_tijiaoren=data.ylTijiaoren;
-              docdata.yl_time=data.ylTime;
-              docdata.yl_yanchi=data.ylYanchi;
-              docdata.yl_error=data.ylError;
-              docdata.yl_qz=data.ylQz;
-              docdata.yl_bt=data.ylBt;
-              docdata.yl_zxr=data.ylZxr;
-              docdata.yl_yq=data.ylYq;
-              docdata.yl_bz=data.ylBz;
-              docdata.yl_jg=data.ylJg;
-              docdata.csyldf=data.csyldf;
-              docdata.bg_tijiao=data.bgTijiao;
-              docdata.bg_geshi=data.bgGeshi;
-              docdata.state_bg_tijiaoren=data.bgTijiaoren;
-              docdata.bg_time=data.bgTime;
-              docdata.bg_yanchi=data.bgYanchi;
-              docdata.bg_error=data.bgError;
-              docdata.bg_qk=data.bgQk;
-              docdata.bg_hj=data.bgHj;
-              docdata.bg_fw=data.bgFw;
-              docdata.bg_qx=data.bgQx;
-              docdata.bg_jl=data.bgJl;
-              docdata.csbgdf=data.csbgdf;
-              if(data.ccBegin){
-              randomtestdata.cc_begin=data.ccBegin;
-              randomtestdata.cc_end=data.ccEnd;
-              randomtestdata.state_cc_r=data.ccR;
-              randomtestdata.ylzs=data.ylzs;
-              randomtestdata.ccyls=data.ccyls;
-              randomtestdata.tgs=data.tgs;
-              randomtestdata.cc_btgs=data.ccBtgs;
-              randomtestdata.zss=+data.zss;
-              randomtestdata.cctgl=data.cctgl*100+'%';
-              randomtestdata.ccdf=data.ccdf;
-              randomtestdata.ccbl=(data.ccbl)*100+'%';
-              // console.log(randomtestdata.ccbl);
+              vm.versionData['type']=data.type;
+              vm.versionData['plan']=data.plan
+              vm.versionData['ticeshijian']=data.ticeshijian
+              vm.versionData['xitongming']=data.xitongming
+              vm.versionData['groupName']=data.groupname
+              vm.versionData['stateperson']=data.person
+              vm.versionData['banbenguimo']=data.banbenguimo
+              vm.versionData['jiaofuwudefen']=data.jiaofuwudefen
+              vm.$refs.doc.jiaofuwudefen=data.jiaofuwudefen
+              vm.versionData['xq_tijiao']=data.xqTijiao
+              vm.versionData['xq_geshi']=data.xqGeshi
+              vm.versionData['xq_time']=data.xqTime
+              vm.versionData['xq_tijiao']=data.xqTijiao
+              vm.versionData['xq_yanchi']=data.xqYanchi
+              vm.versionData['xq_laiyuan']=data.xqLaiyuan
+              vm.versionData['xq_change']=data.xqChange
+              vm.versionData['xuqiudefen']=data.xuqiudefen
+              vm.versionData['xq_error']=data.xqError
+              vm.versionData['xqperson']=data.xqTijiaoren;
+              vm.versionData['yl_tijiao']=data.ylTijiao;
+              vm.versionData['yl_geshi']=data.ylGeshi;
+              vm.versionData['state_yl_tijiaoren']=data.ylTijiaoren;
+              vm.versionData['yl_time']=data.ylTime;
+              vm.versionData['yl_yanchi']=data.ylYanchi;
+              vm.versionData['yl_error']=data.ylError;
+              vm.versionData['yl_qz']=data.ylQz;
+              vm.versionData['yl_bt']=data.ylBt;
+              vm.versionData['yl_zxr']=data.ylZxr;
+              vm.versionData['yl_yq']=data.ylYq;
+              vm.versionData['yl_bz']=data.ylBz;
+              vm.versionData['yl_jg']=data.ylJg;
+              vm.versionData['csyldf']=data.csyldf;
+              vm.versionData['bg_tijiao']=data.bgTijiao;
+              vm.versionData['bg_geshi']=data.bgGeshi;
+              vm.versionData['state_bg_tijiaoren']=data.bgTijiaoren;
+              vm.versionData['bg_time']=data.bgTime;
+              vm.versionData['bg_yanchi']=data.bgYanchi;
+              vm.versionData['bg_error']=data.bgError;
+              vm.versionData['bg_qk']=data.bgQk;
+              vm.versionData['bg_hj']=data.bgHj;
+              vm.versionData['bg_fw']=data.bgFw;
+              vm.versionData['bg_qx']=data.bgQx;
+              vm.versionData['bg_jl']=data.bgJl;
+              vm.versionData['csbgdf']=data.csbgdf;
+              vm.versionData['cc_begin']=data.ccBegin;
+              vm.versionData['cc_end']=data.ccEnd;
+              vm.versionData['state_cc_r']=data.ccR;
+              vm.versionData['ylzs']=data.ylzs;
+              vm.versionData['ccyls']=data.ccyls;
+              vm.versionData['tgs']=data.tgs;
+              vm.versionData['cc_btgs']=data.ccBtgs;
+              vm.versionData['zss']=data.zss;
+              vm.versionData['cctgl']=data.cctgl*100+'%';
+              vm.versionData['ccbl']=data.ccbl;
+              vm.versionData['ccdf']=data.ccdf;
+              vm.$refs.randomtest.ccdf=data.ccdf;
+              console.log(vm.$refs.randomtest);
               vm.banbendefen=data.zongfen;
-              }             
+              // console.log(vm.banbendefen);
+              // console.log(data.zongfen); 
               // 紧急版本
               if(data.type==='紧急版本'){
                 vm.$refs.test.testShow=false
               }
+              // 常规版本
+              // 一轮数据已填写
               if(data.atgl!=-999&&data.xqTime){
-              testdata.a_begin=data.abegin;
-              testdata.a_end=data.aend;
-              testdata.state_a_csr=data.acsr;
-              testdata.a_ylzxgs=data.aylzxgs;
-              testdata.a_tgs=data.atgs;
-              testdata.a_btgs=data.abtgs;
-              testdata.a_zss=data.azss;
-              testdata.a_qxs=data.aqxs;
-              testdata.a_tgl=data.atgl*100+'%';
-              testdata.a_jieguo=data.ajieguo;
-              testdata.yanshoudefen=data.yanshoudefen;
+              vm.versionData['a_begin']=data.abegin;
+              vm.versionData['a_end']=data.aend;
+              vm.versionData['state_a_csr']=data.acsr;
+              vm.versionData['a_ylzxgs']=data.aylzxgs;
+              vm.versionData['a_tgs']=data.atgs;
+              vm.versionData['a_btgs']=data.abtgs;
+              vm.versionData['a_zss']=data.azss;
+              vm.versionData['a_qxs']=data.aqxs;
+              vm.versionData['a_tgl']=data.atgl*100+'%';
+              vm.versionData['a_jieguo']=data.ajieguo;
+              vm.versionData['yanshoudefen']=data.yanshoudefen;
+              // vm.$store.commit('ys',data.yanshoudefen);
               vm.banbendefen=data.zongfen;
+              // console.log(vm.banbendefen);
+              //   console.log(data.zongfen); 
               if(data.btgl!=-999&&data.xqTime){
-                // headdata.fstDis=true;
-                // vm.fstDis= false
-                // randomtestdata.fstDis=true;
-                // vm.fstDis=false;
-                // testdata.secDis=true;
-                // testdata.trdDis=false;
-                vm.fstDis= false
-                vm.secDis= false
-                vm.trdDis=true;
-                testdata.b_begin=data.bbegin;
-                testdata.b_end=data.bend;
-                testdata.state_b_csr=data.bcsr;
-                testdata.b_ylzxgs=data.bylzxgs;
-                testdata.b_tgs=data.btgs;
-                testdata.b_btgs=data.bbtgs;
-                testdata.b_zss=data.bzss;
-                testdata.b_qxs=data.bqxs;
-                testdata.b_tgl=data.btgl*100+'%';
-                testdata.b_jieguo=data.bjieguo;                
-                testdata.yanshoudefen=data.yanshoudefen;
+                vm.versionData['b_begin']=data.bbegin;
+              vm.versionData['b_end']=data.bend;
+              vm.versionData['state_b_csr']=data.bcsr;
+              vm.versionData['b_ylzxgs']=data.bylzxgs;
+              vm.versionData['b_tgs']=data.btgs;
+              vm.versionData['b_btgs']=data.bbtgs;
+              vm.versionData['b_zss']=data.bzss;
+              vm.versionData['b_qxs']=data.bqxs;
+              vm.versionData['b_tgl']=data.btgl*100+'%';
+              vm.versionData['b_jieguo']=data.bjieguo;
+              vm.versionData['yanshoudefen']=data.yanshoudefen;
+              // vm.$store.commit('ys',data.yanshoudefen);
                 vm.fstDis= false
                 vm.secDis= false
                 vm.trdDis=true;
                 vm.banbendefen=data.zongfen;
                 vm.$refs.test.b_show=true
+                // console.log(vm.banbendefen);
+                // console.log(data.zongfen); 
+                // 三轮数据已填写
                 if(data.ctgl!=-999&&data.xqTime){
-                    // headdata.fstDis=true;
-                    // vm.fstDis= false
-                    // // docdata.fstDis=true;
-                    // randomtestdata.fstDis=true;
-                    // testdata.fstDis=true;
-                    // testdata.secDis=true;
-                    // testdata.trdDis=true;
+                  vm.versionData['c_begin']=data.cbegin;
+              vm.versionData['c_end']=data.cend;
+              vm.versionData['state_c_csr']=data.ccsr;
+              vm.versionData['c_ylzxgs']=data.cylzxgs;
+              vm.versionData['c_tgs']=data.ctgs;
+              vm.versionData['c_btgs']=data.cbtgs;
+              vm.versionData['c_zss']=data.czss;
+              vm.versionData['c_qxs']=data.cqxs;
+              vm.versionData['c_tgl']=data.ctgl*100+'%';
+              vm.versionData['c_jieguo']=data.cjieguo;
+              vm.versionData['yanshoudefen']=data.yanshoudefen;
+              // vm.$store.commit('ys',data.yanshoudefen);
                     vm.fstDis=false;
                     vm.secDis= false
                     vm.trdDis= false
-                    testdata.c_begin=data.cbegin;
-                    testdata.c_end=data.cend;
-                    testdata.state_c_csr=data.ccsr;
-                    testdata.c_ylzxgs=data.cylzxgs;
-                    testdata.c_tgs=data.ctgs;
-                    testdata.c_btgs=data.cbtgs;
-                    testdata.c_zss=data.czss;
-                    testdata.c_qxs=data.cqxs;
-                    testdata.c_tgl=data.ctgl*100+'%';
-                    testdata.c_jieguo=data.cjieguo;
-                    testdata.yanshoudefen=data.yanshoudefen;
                     vm.banbendefen=data.zongfen;
-                    vm.$refs.test.c_show=true
-                }
-                // console.log(vm.banbendefen);
+                    // console.log(vm.banbendefen);
                 // console.log(data.zongfen); 
+                    vm.$refs.test.c_show=true                    
+                } 
+                            
             }
             }       
           })
@@ -239,7 +212,8 @@ export default {
   name: "scoreIndex",
   data() {
     return {
-      // xq:{xqperson:''},
+      versionData:{},
+      banbendefen:0 ,
       fstDis:true,
       secDis:true,
       trdDis:true,
@@ -247,18 +221,23 @@ export default {
       banbenhao:'',
       status:0,
       rounds:0,
-      scoreDis:true,
+      scoreDis:false,
       value:'',     
-      pickerOptions: {
-        disabledDate(time) {
-          return time.getTime() > Date.now();
-        },
-      },
-      activeName: "first",
          
     };
   },
+  mounted(){
+  // console.log(this.versionData['ccdf']);
+    // console.log(this.banbendefen);
+    
+  },
   methods: {
+    scoreChange(){
+      console.log(this.$refs.doc.jiaofuwudefen,this.$refs.randomtest.ccdf,this.$refs.test.yanshoudefen);
+      this.banbendefen=this.$refs.doc.jiaofuwudefen+this.$refs.randomtest.ccdf+this.$refs.test.yanshoudefen
+    
+    // console.log('score');
+    },
     turn(a){
       // console.log(1);
       window.scroll(0,a)
@@ -276,7 +255,7 @@ export default {
       return allData
 
     },
-    async submit(){
+     submit(){
       let headdata=this.$refs.visionhead
       let docdata=this.$refs.doc
       let randomtestdata=this.$refs.randomtest
@@ -284,27 +263,28 @@ export default {
       let submitDate='1900-01-01'
       // console.log(submitDate);
       //判空
-        if(
-          headdata.groupName==''||
-          headdata.stateperson==''||
-          headdata.ticeshijian==''||
-          headdata.xitongming==''||
-          docdata.state_xq_tijiaoren==''||
-          docdata.xq_time==''||
-          docdata.xq_error==''||
-          docdata.state_yl_tijiaoren==''||
-          docdata.yl_time==''||
-          docdata.yl_error==''||
-          docdata.state_bg_tijiaoren==''||
-          docdata.bg_time==''||
-          docdata.bg_error==''||
-          randomtestdata.cc_begin==''||
-          randomtestdata.cc_end==''||
-          randomtestdata.state_cc_r==''||
-          randomtestdata.ylzs===''||
-          randomtestdata.tgs===''||
-          randomtestdata.cc_btgs===''||
-          randomtestdata.ccyls===''
+      // console.log(randomtestdata,headdata);  
+        if(''
+          // headdata.groupName==''||
+          // headdata.stateperson==''||
+          // headdata.ticeshijian==''||
+          // headdata.xitongming==''||
+          // docdata.state_xq_tijiaoren==''||
+          // docdata.xq_time==''||
+          // docdata.xq_error==''||
+          // docdata.state_yl_tijiaoren==''||
+          // docdata.yl_time==''||
+          // docdata.yl_error==''||
+          // docdata.state_bg_tijiaoren==''||
+          // docdata.bg_time==''||
+          // docdata.bg_error==''||
+          // randomtestdata.cc_begin==''||
+          // randomtestdata.cc_end==''||
+          // randomtestdata.state_cc_r==''||
+          // randomtestdata.ylzs===''||
+          // randomtestdata.tgs===''||
+          // randomtestdata.cc_btgs===''||
+          // randomtestdata.ccyls===''
             ){
           this.$message({
             message: '请填写必填项',
@@ -315,9 +295,8 @@ export default {
           //紧急版本 
           if(testdata.a_ylzxgs==0){
             if (headdata.type=='常规版本') {
-              // if ('') {
-              alert('常规版本需输入验收情况！')
-            }else{                 
+            //   alert('常规版本需输入验收情况！')
+            // }else{                 
             let data={
                 "banbenguimo":headdata.banbenguimo,
                 "groupName":headdata.groupName,
@@ -408,19 +387,9 @@ export default {
                 "yanshoudefen":-999,
                 "zongfen":Number(this.banbendefen)
                 } 
-                // console.log(data);                  
-            axios.post('/addSorce',data)
-            .then((res)=>{console.log('传输成功');})
-            // if(confirm('提交成功！是否生成验收报告？')){
-            //   this.report()
-            // }else{
-            //     if(confirm('是否生成得分表？')){
-            //     this.score()
-            //     this.$router.push('/warn')
-            //     }else{
-            //     this.$router.push('/warn')
-            //     }
-            // }
+                console.log(data);                  
+            // axios.post('/addSorce',data)
+            // .then((res)=>{console.log('传输成功');})
             
           }}               
           else{
@@ -518,9 +487,9 @@ export default {
                   "yanshoudefen":testdata.yanshoudefen,
                   "zongfen":Number(this.banbendefen)
                 }
-                // console.log(data);
-              axios.post('/addSorce',data)
-            .then((res)=>{console.log('传输成功');})
+                console.log(data);
+            //   axios.post('/addSorce',data)
+            // .then((res)=>{console.log('传输成功');})
             // if(confirm('提交成功！是否生成阶段报告？')){
             //   this.period()
             //   this.$router.push('/ing')
@@ -554,8 +523,8 @@ export default {
                     "zongfen":Number(this.banbendefen)
                     }
                     console.log(data);
-                  axios.post('/updateSorce',data)
-                  .then((res)=>{console.log('传输成功');})  
+                  // axios.post('/updateSorce',data)
+                  // .then((res)=>{console.log('传输成功');})  
                     // if(confirm('提交成功！是否生成阶段报告？')){
                     //       this.period()
                     // }else{
@@ -584,10 +553,10 @@ export default {
                       "yanshoudefen":testdata.yanshoudefen,
                       "zongfen":Number(this.banbendefen)
                         }
-                        // console.log(data);
-                    axios.post('/updateCSorce',data)
-                    .then((res)=>{console.log('传输成功');})        
-                  alert("提交成功！")
+                        console.log(data);
+                    // axios.post('/updateCSorce',data)
+                    // .then((res)=>{console.log('传输成功');})        
+                  // alert("提交成功！")
                   // if(confirm('提交成功！是否生成验收报告？')){
                   //     this.report()
                   // }else{
@@ -956,13 +925,11 @@ export default {
     }, 
   },
   computed: {  
-    // scrollNumber(){
-    //   return 
-    // },  
     banbendefen:{
       get(){
-        // console.log(this.$store.getters.banbendefen);
+        // console.log('banbendefen',this.$store.getters.banbendefen);
         return this.$store.getters.banbendefen
+        // return this.$refs.doc.jiaofuwudefen+this.$refs.randomtest.ccdf+this.$refs.test.yanshoudefen
       }, 
       set(){}     
     }

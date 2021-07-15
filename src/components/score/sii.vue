@@ -7,19 +7,13 @@
     </div>
     <br>
     <div>      
-      <!-- <vision-head ref="visionhead" ></vision-head> -->
-            <vision-head ref="visionhead"  :prop='versionData'></vision-head>
-
+      <vision-head ref="visionhead" ></vision-head>
       <br />
     </div>
     <div >
-        <!-- <doc ref="doc" :prop='xq' :fstDis="fstDis"></doc>
+        <doc ref="doc" :prop='xq' :fstDis="fstDis"></doc>
       <randomtest ref="randomtest" ></randomtest>
-       <test ref="test"></test> -->
-       <doc ref="doc" :prop='versionData' :fstDis="fstDis" @jfwChange='scoreChange'></doc>
-      <randomtest ref="randomtest" :prop='versionData' :fstDis="fstDis" @ccChange='scoreChange'></randomtest>
-       <test ref="test" :prop='versionData' :fstDis="fstDis" :secDis="secDis" @testChange='scoreChange'
-       :trdDis="trdDis" ></test>
+       <test ref="test"></test>
     <br /><br /><br /><br />
     </div>    
   </div>
@@ -68,30 +62,22 @@ export default {
             let testdata=vm.$refs.test
             let data=res.data
             // console.log(data);
-            // if(!data.xqTime){
-            //   vm.fstDis=true 
-            //   randomtestdata.fstDis=false;
-            //   testdata.fstDis=false;
-            //   testdata.secDis=true;
-            // }else{
-            //   vm.fstDis=false 
-            //   randomtestdata.fstDis=true;
-            //   testdata.fstDis=true;
-            //   testdata.secDis=false;
-            // }
-            vm.$refs.visionhead.verHeadShow=false
             if(!data.xqTime){
               vm.fstDis=true 
-              vm.secDis=false;
+              // docdata.fstDis=false;
+              randomtestdata.fstDis=false;
+              testdata.fstDis=false;
+              testdata.secDis=true;
+              // console.log(1);
             }else{
               vm.fstDis=false 
-              vm.secDis=true;
+              // docdata.fstDis=true;
+              randomtestdata.fstDis=true;
+              testdata.fstDis=true;
+              testdata.secDis=false;
+              // console.log(2);
             }
-            if(from.path==='/ing'){             
-              vm.$refs.test.btnShow=true
-            }else{
-              vm.$refs.test.btnShow=false
-            }
+            
               vm.banbenhao=data.banbenhao;
               headdata.fstDis=true;              
               // testdata.secDis=false;
@@ -105,8 +91,8 @@ export default {
               docdata.jiaofuwudefen=data.jiaofuwudefen;
               docdata.xq_tijiao=data.xqTijiao;
               docdata.xq_geshi=data.xqGeshi;
-              docdata.state_xq_tijiaoren=data.xqTijiaoren;
-              // vm.xq.xqperson=data.xqTijiaoren;
+              // docdata.state_xq_tijiaoren=data.xqTijiaoren;
+              vm.xq.xqperson=data.xqTijiaoren;
               docdata.xq_time=data.xqTime;
               docdata.xq_yanchi=data.xqYanchi;
               docdata.xq_laiyuan=data.xqLaiyuan;
@@ -138,7 +124,6 @@ export default {
               docdata.bg_qx=data.bgQx;
               docdata.bg_jl=data.bgJl;
               docdata.csbgdf=data.csbgdf;
-              if(data.ccBegin){
               randomtestdata.cc_begin=data.ccBegin;
               randomtestdata.cc_end=data.ccEnd;
               randomtestdata.state_cc_r=data.ccR;
@@ -146,17 +131,12 @@ export default {
               randomtestdata.ccyls=data.ccyls;
               randomtestdata.tgs=data.tgs;
               randomtestdata.cc_btgs=data.ccBtgs;
-              randomtestdata.zss=+data.zss;
-              randomtestdata.cctgl=data.cctgl*100+'%';
+              randomtestdata.zss=data.zss;
+              randomtestdata.cctgl=data.cctgl;
               randomtestdata.ccdf=data.ccdf;
-              randomtestdata.ccbl=(data.ccbl)*100+'%';
-              // console.log(randomtestdata.ccbl);
+              randomtestdata.ccbl=data.ccbl;
+              console.log(randomtestdata.ccdf);
               vm.banbendefen=data.zongfen;
-              }             
-              // 紧急版本
-              if(data.type==='紧急版本'){
-                vm.$refs.test.testShow=false
-              }
               if(data.atgl!=-999&&data.xqTime){
               testdata.a_begin=data.abegin;
               testdata.a_end=data.aend;
@@ -166,20 +146,19 @@ export default {
               testdata.a_btgs=data.abtgs;
               testdata.a_zss=data.azss;
               testdata.a_qxs=data.aqxs;
-              testdata.a_tgl=data.atgl*100+'%';
+              testdata.a_tgl=data.atgl;
               testdata.a_jieguo=data.ajieguo;
               testdata.yanshoudefen=data.yanshoudefen;
               vm.banbendefen=data.zongfen;
               if(data.btgl!=-999&&data.xqTime){
-                // headdata.fstDis=true;
-                // vm.fstDis= false
-                // randomtestdata.fstDis=true;
-                // vm.fstDis=false;
-                // testdata.secDis=true;
-                // testdata.trdDis=false;
+                headdata.fstDis=true;
                 vm.fstDis= false
-                vm.secDis= false
-                vm.trdDis=true;
+                // docdata.fstDis=true;
+                randomtestdata.fstDis=true;
+                // testdata.fstDis=true;
+                vm.fstDis=false;
+                testdata.secDis=true;
+                testdata.trdDis=false;
                 testdata.b_begin=data.bbegin;
                 testdata.b_end=data.bend;
                 testdata.state_b_csr=data.bcsr;
@@ -188,25 +167,18 @@ export default {
                 testdata.b_btgs=data.bbtgs;
                 testdata.b_zss=data.bzss;
                 testdata.b_qxs=data.bqxs;
-                testdata.b_tgl=data.btgl*100+'%';
+                testdata.b_tgl=data.btgl;
                 testdata.b_jieguo=data.bjieguo;                
                 testdata.yanshoudefen=data.yanshoudefen;
-                vm.fstDis= false
-                vm.secDis= false
-                vm.trdDis=true;
                 vm.banbendefen=data.zongfen;
-                vm.$refs.test.b_show=true
                 if(data.ctgl!=-999&&data.xqTime){
-                    // headdata.fstDis=true;
-                    // vm.fstDis= false
-                    // // docdata.fstDis=true;
-                    // randomtestdata.fstDis=true;
-                    // testdata.fstDis=true;
-                    // testdata.secDis=true;
-                    // testdata.trdDis=true;
-                    vm.fstDis=false;
-                    vm.secDis= false
-                    vm.trdDis= false
+                    headdata.fstDis=true;
+                    vm.fstDis= false
+                    // docdata.fstDis=true;
+                    randomtestdata.fstDis=true;
+                    testdata.fstDis=true;
+                    testdata.secDis=true;
+                    testdata.trdDis=true;
                     testdata.c_begin=data.cbegin;
                     testdata.c_end=data.cend;
                     testdata.state_c_csr=data.ccsr;
@@ -215,14 +187,14 @@ export default {
                     testdata.c_btgs=data.cbtgs;
                     testdata.c_zss=data.czss;
                     testdata.c_qxs=data.cqxs;
-                    testdata.c_tgl=data.ctgl*100+'%';
+                    testdata.c_tgl=data.ctgl;
                     testdata.c_jieguo=data.cjieguo;
                     testdata.yanshoudefen=data.yanshoudefen;
                     vm.banbendefen=data.zongfen;
-                    vm.$refs.test.c_show=true
+                    
                 }
-                // console.log(vm.banbendefen);
-                // console.log(data.zongfen); 
+                console.log(vm.banbendefen);
+                console.log(data.zongfen); 
             }
             }       
           })
@@ -239,7 +211,7 @@ export default {
   name: "scoreIndex",
   data() {
     return {
-      // xq:{xqperson:''},
+      xq:{xqperson:''},
       fstDis:true,
       secDis:true,
       trdDis:true,
@@ -315,7 +287,6 @@ export default {
           //紧急版本 
           if(testdata.a_ylzxgs==0){
             if (headdata.type=='常规版本') {
-              // if ('') {
               alert('常规版本需输入验收情况！')
             }else{                 
             let data={
@@ -553,7 +524,7 @@ export default {
                     "yanshoudefen":testdata.yanshoudefen,
                     "zongfen":Number(this.banbendefen)
                     }
-                    console.log(data);
+                    // console.log(data);
                   axios.post('/updateSorce',data)
                   .then((res)=>{console.log('传输成功');})  
                     // if(confirm('提交成功！是否生成阶段报告？')){
@@ -961,7 +932,6 @@ export default {
     // },  
     banbendefen:{
       get(){
-        // console.log(this.$store.getters.banbendefen);
         return this.$store.getters.banbendefen
       }, 
       set(){}     

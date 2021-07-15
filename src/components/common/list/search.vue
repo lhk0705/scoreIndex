@@ -63,7 +63,7 @@ export default {
     this.groupOptions = this.$store.getters.getGroup;
   },
   methods: {
-    search(vers) {
+    search(data) {
       // console.log(this.$refs.groupName.groupName);
       let sdata = {
         xitongming: this.$refs.sysSelecter.selectData,
@@ -75,20 +75,20 @@ export default {
       // console.log(sdata);
       let result = [];
       let a = [];
-      for (let ver of vers) {
+      for (let item of data) {
         sdata.xitongming !== ""
-          ? a.push(ver.xitongming === sdata.xitongming)
+          ? a.push(item.xitongming === sdata.xitongming)
           : "";
-        sdata.banbenhao !== "" ? a.push(ver.banbenhao === sdata.banbenhao) : "";
-        sdata.group !== "" ? a.push(ver.groupname === sdata.group) : "";
-        sdata.min_time !== "" ? a.push(ver.ticeshijian >= sdata.min_time) : "";
-        sdata.max_time !== "" ? a.push(sdata.max_time >= ver.ticeshijian) : "";
+        sdata.banbenhao !== "" ? a.push(item.banbenhao === sdata.banbenhao) : "";
+        sdata.group !== "" ? a.push(item.groupname === sdata.group) : "";
+        sdata.min_time !== "" ? a.push(item.ticeshijian >= sdata.min_time) : "";
+        sdata.max_time !== "" ? a.push(sdata.max_time >= item.ticeshijian) : "";
         let b = a.every((item) => {
           return item === true;
         });
         // console.log(b);
         if (b) {
-          result.push(ver);
+          result.push(item);
         }
         a.length = 0;
       }

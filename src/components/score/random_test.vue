@@ -3,8 +3,10 @@
     <div class="title">
       <strong>
             抽测
-            <input type="text" class="ccdf" v-model="ccdf" :disabled="scoreDis" />
-          </strong>
+            <input type="text" class="ccdf" v-model="ccdf" v-if="fstDis" />
+         <p v-else>{{ccdf}}</p> 
+         </strong>
+          
           <popOver :prop='ccpop'></popOver></div>
     <div class="ccMain">
       <div>
@@ -13,9 +15,9 @@
       <div class="left">
         <datePicker
           ref="ccbeginPicker"
-          :disabled="fstDis"
+          v-if="fstDis"
           @dateChange="dateChange"
-        ></datePicker>
+        ></datePicker><p v-else>{{cc_begin}}</p>
       </div>
       <div>
         <label class="right"> <span>*</span>测试结束时间： </label>
@@ -23,9 +25,9 @@
       <div class="left">
         <datePicker
           ref="ccendPicker"
-          :disabled="fstDis"
+          v-if="fstDis"
           @dateChange="dateChange"
-        ></datePicker>
+        ></datePicker><p v-else>{{cc_end}}</p>
       </div>
       <div>
         <label class="right"> <span>*</span>抽测人： </label>
@@ -34,56 +36,56 @@
         <selecter
           ref="ccSelecter"
           :prop="testPerson"
-          :disabled="fstDis"
+          v-if="fstDis"
           @selectChange="selectChange"
-        ></selecter>
+        ></selecter><p v-else>{{state_cc_r}}</p>
       </div>
       <div>
         <label class="right"> <span>*</span>用例总数： </label>
       </div>
       <div class="left">
-        <el-input type="number" size="mini" class="ylzs" v-model="ylzs" placeholder :disabled="fstDis"></el-input>
-
+        <el-input type="number" size="mini" class="ylzs" v-model="ylzs" placeholder v-if="fstDis"></el-input>
+      <p v-else>{{ylzs}}</p>
       </div>
       <div>
         <label class="right"> <span>*</span>抽测用例数： </label>
       </div>
       <div class="left">
-      <el-input :min="0" type="number" size="mini" class="ccyls" v-model="ccyls" placeholder :disabled="fstDis"></el-input>
-
+      <el-input :min="0" type="number" size="mini" class="ccyls" v-model="ccyls" placeholder v-if="fstDis"></el-input>
+<p v-else>{{ccyls}}</p>
       </div>
       <div>
         <label class="right"> <span>*</span>通过数： </label>
       </div>
       <div class="left">
-        <el-input type="number" size="mini" class="tgs" v-model="tgs" placeholder :disabled="fstDis"></el-input>
-
+        <el-input type="number" size="mini" class="tgs" v-model="tgs" placeholder v-if="fstDis"></el-input>
+<p v-else>{{tgs}}</p>
       </div>
       <div>
         <label class="right"> <span>*</span>不通过数： </label>
       </div>
       <div class="left">
-        <el-input :min="0" type="number" size="mini" class="btgs" v-model="cc_btgs" placeholder :disabled="fstDis"></el-input>
-      </div>
+        <el-input :min="0" type="number" size="mini" class="btgs" v-model="cc_btgs" placeholder v-if="fstDis"></el-input>
+      <p v-else>{{cc_btgs}}</p></div>
       <div>
         <label class="right"> <span>*</span>阻塞数： </label>
       </div>
       <div class="left">
-                       <el-input type="number" size="mini" class="zss" v-model="zss" placeholder :disabled="scoreDis"></el-input>
- 
+      <el-input type="number" size="mini" class="zss" v-model="zss"  v-if="fstDis" :disabled="!fstDis"></el-input>
+ <p v-else>{{zss}}</p>
       </div>
       <div>
         <label class="right"> <span>*</span>抽测通过率： </label>
       </div>
       <div class="left">
-        <el-input  size="mini" class="cctgl" v-model.number="cctgl" placeholder :disabled="scoreDis"></el-input>        
-      </div>
+        <el-input  size="mini" class="cctgl" type="number" v-model="cctgl" placeholder v-if="fstDis" :disabled="!fstDis"></el-input>        
+     <p v-else>{{cctgl}}</p> </div>
       <div>
         <label class="right"> <span>*</span>抽测比例： </label>
       </div>
       <div class="left">
-                <el-input size="mini" class="ccbl" v-model="ccbl" placeholder :disabled="scoreDis"></el-input>
-      </div>
+                <el-input type="number" size="mini" class="ccbl" v-model="ccbl" placeholder v-if="fstDis" :disabled="!fstDis"></el-input>
+      <p v-else>{{ccbl}}</p></div>
     </div>
 
   </div>
@@ -99,6 +101,10 @@ export default {
     selecter,
     popOver,
   },
+  props:{
+    prop:Object,
+    fstDis:Boolean,
+  },
     data(){
         return{
       ccpop:['抽测通过率达到90%，不扣分；低于90%的，每降低1个百分点，扣0.5分。'],
@@ -108,13 +114,17 @@ export default {
       cc_btgs: "",
       ylzs: "",
       tgs: "",
-      fstDis:false,
-      scoreDis:true,
+      // scoreDis:true,
+      // zss:'',
+      // cctgl:'',
+
+      // ccbl:'',
       state_cc_r: "",
       pickerOptions: {
         disabledDate(time) {
           return time.getTime() > Date.now();
         },
+        // ccdf:'',
       },
         }
     },
@@ -134,20 +144,20 @@ export default {
     computed:{
     zss: {
       get(){
-        if(this.ylzs==='0'){
-          return 0
-        }else{
+        // if(this.ylzs==='0'){
+        //   return 0
+        // }else{
       if (this.tgs !== '' && this.ccyls !== '' && this.cc_btgs !== '') {
         // if (this.tgs !== null && this.ccyls !== null && this.cc_btgs !== null) {
         let result=this.ccyls - this.tgs - this.cc_btgs
         if(result<0){
           alert("阻塞数不能小于0！")
         }else{return result}
-        ;
       } else {
         return "";
       }
-      }},
+      // }
+      },
       set(){}
     },
     cctgl: {
@@ -207,6 +217,7 @@ export default {
         //   return ccdf;
         }
       }
+      // 
     //   this.$store.commit('cc',ccdf)
           return ccdf;
          }} ,
@@ -226,10 +237,14 @@ export default {
     }
     },
     mounted(){
+      // console.log(this.zss);
       this.testPerson=this.$store.getters.getTestPerson
     },
-  beforeUpdate(){
+  updated(){
+    // console.log('cc',this.ccdf);
     this.$store.commit('cc',this.ccdf)
+    
+    // this.$emit('ccChange')
   }
 }
 </script>
@@ -238,6 +253,10 @@ export default {
 @import "../score/scoreIndex.css";
 </style>
 <style scoped>
+p{
+  display: inline-block;
+  font-weight: 900;
+}
 .title{
   display: flex;
   align-items: center;

@@ -6,15 +6,18 @@
         <label class="right"> <span>*</span>组别： </label>
       </div>
       <div class="left">
-        <el-select v-model="groupName" placeholder="请选择" size="mini" :disabled="fstDis">
+        <el-select v-model="groupName" placeholder="请选择" size="mini" v-if="verHeadShow">
                 <el-option
                   class="groupName"
                   v-for="item in group"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
+                  
                 ></el-option>
               </el-select>
+              <p v-else>{{groupName}}</p>
+              
       </div>
       <div>
         <label class="right"> <span>*</span>提测时间： </label>
@@ -27,14 +30,15 @@
                 type="date"
                 placeholder="请选择日期"
                 @change="bbh_change"
-                :disabled="fstDis"
+                v-if="verHeadShow"
               ></el-date-picker>
+              <p v-else>{{ticeshijian}}</p>
       </div>
       <div>
         <label class="right"> <span>*</span>系统负责人： </label>
       </div>
       <div class="left">
-        <el-select v-model="stateperson" filterable size="mini" :disabled="fstDis">
+        <el-select v-model="stateperson" filterable size="mini" v-if="verHeadShow">
                 <el-option
                   v-for="item in sysperson"
                   :key="item.value"
@@ -42,6 +46,7 @@
                   :value="item.value"
                 ></el-option>
               </el-select>
+              <p v-else>{{stateperson}}</p>
       </div>
       <div>
         <label class="right"> <span>*</span>系统名称： </label>
@@ -52,7 +57,7 @@
                 filterable
                 placeholder="请选择"
                 size="mini"
-                :disabled="fstDis"
+                v-if="verHeadShow"
                 @change="bbh_change"
               >
                 <el-option
@@ -62,22 +67,23 @@
                   :value="item.value"
                 ></el-option>
               </el-select>
+              <p v-else>{{xitongming}}</p>
       </div>
       <div>
         <label class="right"> <span>*</span>版本类型： </label>
       </div>
       <div class="left">
-                      <el-radio v-model="type" label="常规版本" :disabled="fstDis">常规版本</el-radio>
-              <el-radio v-model="type" label="紧急版本" :disabled="fstDis">紧急版本</el-radio>
-
+                      <el-radio v-model="type" label="常规版本" v-if="verHeadShow">常规版本</el-radio>
+              <el-radio v-model="type" label="紧急版本" v-if="verHeadShow">紧急版本</el-radio>
+            <p v-else>{{type}}</p>
       </div>
       <div>
         <label class="right"> <span>*</span>是否计划内： </label>
       </div>
       <div class="left">
-                      <el-radio v-model="plan" label="是" :disabled="fstDis">是</el-radio>
-              <el-radio v-model="plan" label="否" :disabled="fstDis">否</el-radio>
-
+                      <el-radio v-model="plan" label="是" v-if="verHeadShow">是</el-radio>
+              <el-radio v-model="plan" label="否" v-if="verHeadShow">否</el-radio>
+<p v-else>{{plan}}</p>
       </div>
       <div>
         <label class="right"> <span>*</span>版本规模： </label>
@@ -90,8 +96,9 @@
                 controls-position="right"
                 @change="handleChange"
                 :min="1"
-                :disabled="fstDis"
+                v-if="verHeadShow"
               ></el-input-number>
+              <p v-else>{{banbenguimo}}</p>
               <el-popover
                 placement="right-start"
                 width="200"
@@ -120,7 +127,9 @@ export default {
   components:
   {selecter
   },
- 
+ props:{
+   prop:Object
+ },
   data() {
     return {
       visionTitle:'版本信息',
@@ -136,7 +145,7 @@ export default {
       xitongming: "",
       groupName: "",
       stateperson: "",
-      fstDis:true,
+      verHeadShow:true,
       tpShow:false,
       fuzeren:''
     };
@@ -179,6 +188,9 @@ export default {
   align-items: center;
   justify-content: center;
   font-size: 20px;
+}
+p{
+  font-weight: 900;
 }
 .visionheadAll {
   display: grid;
