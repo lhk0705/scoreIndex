@@ -29,9 +29,9 @@ export default new Router({
       path: '/communicate',
       name: 'communicate',
       component: communicate,
-      // meta:{
-      //   keepAlive:true
-      // }
+      meta:{
+        keepAlive:true
+      }
     },
     {
       path: '/commonTest',
@@ -45,9 +45,9 @@ export default new Router({
       path: '/board',
       name: 'board',
       component: board,
-      // meta:{
-      //   keepAlive:true
-      // }
+      meta:{
+        keepAlive:true
+      }
     },
     {
       path: '/report',
