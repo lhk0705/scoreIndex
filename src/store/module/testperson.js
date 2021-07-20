@@ -13,6 +13,8 @@ const state={
         { value: "周耀辉" },
         { value: "李细丽" },
         { value: "阮必清" },
+        { value: "陈柏满" },
+        { value: "江旭" },
         // { value: "test" },
       ]
 };

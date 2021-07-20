@@ -25,14 +25,6 @@
     border
     style="padding:auto"  
     >
-    <!-- <el-table-column
-      prop="xitongming"
-      label="系统名"
-      min-width="55"
-      align="center"
-      fixed
-      >
-    </el-table-column> -->
     <el-table-column
       prop="aPassVers"
       label="近12月的首轮通过版本数"
@@ -161,12 +153,15 @@ watch:{
     // console.log(this.label);
     axios.post('/getSystem',{'systemName':newV}).then(res=>{
       this.systemData=[]
+      this.$store.commit('setData',res.data)
       // console.log(res.data);
-        this.systemData.push(res.data)
-        for(let key in this.systemData[0]){
-          this.systemData[0][key]===undefined?this.systemData[0][key]='无':this.systemData[0][key]=this.systemData[0][key]
-        }
+        // this.systemData.push(res.data)
+        // for(let key in this.systemData[0]){
+        //   this.systemData[0][key]===undefined?this.systemData[0][key]='无':this.systemData[0][key]=this.systemData[0][key]
+        // }
         // console.log(this.systemData);
+        // console.log(this.$store.getters.getData);
+        this.systemData.push(this.$store.getters.getData)
 
     })
   }  

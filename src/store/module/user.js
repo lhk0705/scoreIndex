@@ -13,6 +13,20 @@ const state={
     // }
     users:[
         {
+            userId:'chenboman',
+            password:'chenboman123',
+            role:'2',
+            name:'陈柏满',
+            value:'陈柏满'
+        },
+        {
+            userId:'jiangxu',
+            password:'jiangxu123',
+            role:'2',
+            name:'江旭',
+            value:'江旭'
+        },
+        {
             userId:'admin',
             password:'admin123',
             role:'0',

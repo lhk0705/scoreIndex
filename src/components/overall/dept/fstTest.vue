@@ -11,10 +11,10 @@
   <div v-else >
     <div class="noData1">
     <strong>
-      {{title.text}}</strong></div>
+      {{extend.title.text}}</strong></div>
     <br>
     <div class="noData">
-    <strong>无提测版本</strong></div>    
+    <strong>无提测常规版本</strong></div>    
   </div>
 </template>
 
@@ -96,13 +96,29 @@ import axios from 'axios'
         for(let item of group){
           this.getGroup(time,item.value);
         }
-        // this.chartData.rows.length==1?this.show=false:this.show=true
+        console.log(this.chartData.rows);
+        this.chartData.rows.length===0?this.show=false:this.show=true
       }
     }
   }
 </script>
 
 <style scoped>
+.noData{
+  /* border:1px solid black; */
+  font-size:18px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;  
+}
+.noData1{
+  font-size:18px; 
+  text-align: center;
+  position: relative;
+  top:32px
+}
 .his{
   position: relative;
   top:5%;

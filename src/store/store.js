@@ -14,10 +14,11 @@ import groupv from "./overall/group";
 import user from "./module/user";
 import lastPeriod from "./showin/lastPeriod";
 import date from "./score/date";
+import dataFilter from "./showin/systemData";
 
 export const store=new Vuex.Store({
 
     modules:{
-        finishVer,ingVer,system,group,sysperson,testPerson,total,warnvers,dept,groupv,user,lastPeriod,date
+        dataFilter, finishVer,ingVer,system,group,sysperson,testPerson,total,warnvers,dept,groupv,user,lastPeriod,date
     }
 })

@@ -378,7 +378,7 @@ export default {
           }
           }       
         }  
-        // console.log(that.exchangeData(allData,docxData));     
+        console.log(that.exchangeData(allData,docxData));     
         doc.setData({
           ...that.exchangeData(allData,docxData),
           groupData,

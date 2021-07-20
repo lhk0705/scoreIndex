@@ -1,5 +1,5 @@
 <template>
-<div class="histogram">
+<div class="histogram" v-if="show">
   <ve-histogram 
   class="his"
   :data="chartData"
@@ -8,6 +8,14 @@
   width='100%'
   ></ve-histogram>
   </div>
+  <div v-else >
+    <div class="noData1">
+    <strong>
+      {{extend.title.text}}</strong></div>
+    <br>
+    <div class="noData">
+    <strong>无提测版本</strong></div>    
+  </div>
 </template>
 
 <script>
@@ -15,6 +23,7 @@ import axios from 'axios'
   export default {
     data () {
       return {
+        show:true,
       extend:{
         grid:{
           top:"40%",
@@ -87,6 +96,8 @@ import axios from 'axios'
         for(let item of group){
           this.getGroup(time,item.value);
         }
+         console.log(this.chartData.rows);
+        this.chartData.rows.length===0?this.show=false:this.show=true
 
       }
     }
@@ -94,6 +105,21 @@ import axios from 'axios'
 </script>
 
 <style scoped>
+.noData{
+  /* border:1px solid black; */
+  font-size:18px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;  
+}
+.noData1{
+  font-size:18px; 
+  text-align: center;
+  position: relative;
+  top:32px
+}
 .his{
   position: relative;
   top:5%;
