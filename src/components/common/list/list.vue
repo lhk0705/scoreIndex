@@ -113,26 +113,6 @@ export default {
     formatJson(filterVal, jsonData) {
       return jsonData.map(v => filterVal.map(j => v[j]));
     }, 
-    // 获取上一周期数据
-    // setData(){
-    //   let beginTime=this.getDate()[0],endTime=this.getDate()[1];
-    //   // if(new Date().getDate()>15){ 
-    //   //   this.label=new Date().getUTCFullYear()+'年'+new Date().getUTCMonth()+'月16日'+'~'+new Date().getFullYear()+'年'+(new Date().getMonth()+1)+'月15日'+'版本数据'      
-    //   //    beginTime=new Date().getUTCFullYear()+'0'+new Date().getMonth()+'16',
-    //   //   endTime=new Date().getFullYear()+'0'+(new Date().getMonth()+1)+'15';
-    //   // }else{
-    //   //   this.label=new Date().getUTCFullYear()+'年'+(new Date().getMonth()-1)+'月16日'+'~'+new Date().getFullYear()+'年'+new Date().getMonth()+'月15日'+'版本数据'
-    //   //    beginTime=new Date().getFullYear()+'0'+(new Date().getMonth()-1)+'16',
-    //   //   endTime=new Date().getFullYear()+'0'+new Date().getMonth()+'15';       
-    //   // }
-    //   this.label=beginTime.toString().substring(0,4)+'年'+(+beginTime.toString().substring(4,6))+'月1日'+
-    //   '~'+endTime.toString().substring(0,4)+'年'+(+endTime.toString().substring(4,6))+'月1日'+'版本数据'
-    //   // console.log(beginTime,endTime);
-    //     axios.post('/lastPeriod',{'beginTime':beginTime,'endTime':endTime})
-    //     .then((res)=>{           
-    //         this.$store.commit('setLastPeriod',res.data)
-    //     })
-    // } ,
     // 获取月报涉及的时间
     getDate(){
       let beforeStart,beforeEnd,startDate,endDate,
@@ -169,10 +149,10 @@ export default {
       ]     
     },
     // 获取小组数据
-    getGroup(){        
+    getGroup(startDate,endDate){        
         return new Promise((resolve,reject)=>{
           // axios.post('/monthReportGroup',{'startDate':startDate,'endDate':endDate,'groupName':groupName}).then(res=>{
-          axios.post('/monthReportGroupAll',{'startDate':'20210601','endDate':'20210631'}).then(res=>{
+          axios.post('/monthReportGroupAll',{'startDate':startDate,'endDate':endDate}).then(res=>{
                   resolve(res.data);
               }).catch(err=>{
                 reject(err)
@@ -183,7 +163,7 @@ export default {
     getAll(startDate,endDate){      
       return new Promise((resolve,reject)=>{
         // console.log(date);
-      axios.post('/monthReportAll',{'startDate':startDate}).then(res=>{
+      axios.post('/monthReportAll',{'startDate':startDate,'endDate':endDate}).then(res=>{
       //  axios.post('/monthReportAll',{'startDate':'20210301'}).then(res=>{
         //  console.log(1);
         resolve(res.data)
@@ -314,11 +294,13 @@ export default {
         lastData=await that.getAll(date[6],date[7]);
         allData.rdtFullScoreRate>0.75?allData['rdtResult']='良好':allData['rdtResult']='一般'
         allData.versionRule===0?allData['versionRuleTab']=0:allData['versionRuleTab']=allData.versionRule
-        allData.versionWarn===0?allData['versionWarnTab']=0:allData['versionWarnTab']=allData.versionWarn      
+        allData.versionWarn===0?allData['versionWarnTab']=0:allData['versionWarnTab']=allData.versionWarn
+        // console.log(allData);      
         // 获取两次小组数据
         let groupData=[],lastGroup=[];
-          groupData=await that.getGroup();
-        console.log(groupData,lastGroup);
+          groupData=await that.getGroup(date[0],date[1]);
+          lastGroup=await that.getGroup(date[6],date[7]);
+        // console.log(groupData,lastGroup);
         // 月报环比变量的值
         let docxData = {
         year:year,
@@ -340,48 +322,51 @@ export default {
         _warnYlRate:'',        
         _warnBgRate:'', 
         };
-        let groupChange={
-          _avgRuleRdtGroup:'',
-          _warnDocRate:'',
-          _warnYlRate:'',
-          _warnBgRate:''
-        };
         // 小组环比变量的值
-        // for(let i=0;i<groupData.length;i++){
-        //   for(let key in groupData[i]){
-        //     if(typeof(groupData[i][key])=='number'&&typeof(lastGroup[i][key])=='number'){
-        //   let change=groupData[i][key]-lastGroup[i][key]
-        //   if(change>0){
-        //     groupData[i]['_'+key]='，环比'+docxData.lastMonth+'月提高'+(change*100).toFixed(0)+'%'
-        //   }else if(change===0){
-        //     groupData[i]['_'+key]='，环比'+docxData.lastMonth+'月持平'
-        //   }else if(change<0){
-        //     groupData[i]['_'+key]='，环比'+docxData.lastMonth+'月下降'+(-change*100).toFixed(0)+'%'
-        //   }else{
-        //     groupData[i]['_'+key]='，无环比数据（'+docxData.lastMonth+'月无版本）'
-        //   }
-        //   }
-        //    }        
-        // }
+        let groupChange={
+        lastMonth:date[4],
+          _avgRuleRdtGroup:'',
+          _warnGroupDocRate:'',
+          _warnGroupYlRate:'',
+          _warnGroupBgRate:''
+        };
         // 对环比数据进行过滤
-        for(let key in docxData){
+        function filterTool(obj1,obj2,obj3){
+          let obj=obj1
+          for(let key in obj){
           if(/_\w*/.test(key)){
-            docxData[key]=allData[key.substring(1,)]-lastData[key.substring(1,)]
-            if(docxData[key]>0){
-            docxData[key]='，环比'+docxData.lastMonth+'月提高'+(docxData[key]*100).toFixed(0)+'%'
-          }else if(docxData[key]===0){
-            docxData[key]='，环比'+docxData.lastMonth+'月持平'
-          }else if(docxData[key]<0){
-            docxData[key]='，环比'+docxData.lastMonth+'月下降'+(-docxData[key]*100).toFixed(0)+'%'
+            obj[key]=obj2[key.substring(1,)]-obj3[key.substring(1,)]
+            if(obj[key]>0){
+            obj[key]='，环比'+obj.lastMonth+'月提高'+(obj[key]*100).toFixed(0)+'%'
+          }else if(obj[key]===0){
+            obj[key]='，环比'+obj.lastMonth+'月持平'
+          }else if(obj[key]<0){
+            obj[key]='，环比'+obj.lastMonth+'月下降'+(-obj[key]*100).toFixed(0)+'%'
           }else{
-            docxData[key]='，无环比数据（'+docxData.lastMonth+'月无版本）'
+            obj[key]='，无环比数据（'+obj.lastMonth+'月无版本）'
           }
           }       
-        }  
-        console.log(that.exchangeData(allData,docxData));     
+        } return obj
+        }
+        // 小组环比数据
+        let groupMom=[]
+        for(let value of groupData){
+          // 过滤出该组上月数据
+          let result=lastGroup.filter(item=>
+          {return item.groupName===value.groupName}
+          )
+          if(result.length===0){
+            value={...value,...groupChange}
+          }else{
+            let mom=filterTool(groupChange,value,result)
+            value={...value,...mom}
+          }
+          groupMom.push(value)       
+        }
+        // console.log(allData,groupData);
         doc.setData({
-          ...that.exchangeData(allData,docxData),
-          groupData,
+          ...that.exchangeData(allData,filterTool(docxData,allData,lastData)),
+          groupMom
         });
        try {
             // 用模板变量的值替换所有模板变量

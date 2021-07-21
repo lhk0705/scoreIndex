@@ -96,7 +96,7 @@ import axios from 'axios'
         for(let item of group){
           this.getGroup(time,item.value);
         }
-         console.log(this.chartData.rows);
+        //  console.log(this.chartData.rows);
         this.chartData.rows.length===0?this.show=false:this.show=true
 
       }
