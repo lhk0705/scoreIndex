@@ -64,7 +64,7 @@ export default {
       rounds:'',
       passrate:'',
       sysChart: {
-        columns: ["提测日期", "首轮通过率","验收轮次"],
+        columns: ["提测日期", "首轮通过率","验收轮次","抽测通过率"],
         rows:'',
         
       },
@@ -122,10 +122,10 @@ export default {
         let sysData=await this.request("/getSysLine",{'systemName':systemName})
         for(let item of sysData){
         this.sysChart.rows.unshift({
-        提测日期: item.ticeshijian, 首轮通过率: item.atgl,验收轮次:item.rounds
+        提测日期: item.ticeshijian, 首轮通过率: item.atgl,验收轮次:item.rounds,抽测通过率:item.cctgl
         })
         this.sysChart1.rows.unshift({
-        提测日期: item.ticeshijian, 抽测得分: item.atgl,验收得分:item.rounds
+        提测日期: item.ticeshijian, 抽测得分: item.ccdf,验收得分:item.yanshoudefen
         })           
         } 
         let length=this.sysChart.rows.length

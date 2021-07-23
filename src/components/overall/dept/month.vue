@@ -144,7 +144,7 @@ export default {
   align-items: center;
   width: 100%;
   height: 200px;
-  /* color:rgb(222, 236, 26) */
+  /* color:rgb(230, 209, 119) */
 }
 .noData1{
   font-size:18px; 

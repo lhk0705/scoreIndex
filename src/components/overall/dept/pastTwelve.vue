@@ -58,9 +58,9 @@ export default {
         // itemStyle:{
         //     color:red
         // },
-        color:['rgb(96, 163, 202)','rgb(166, 241, 104)'],
+        color:['rgb(96, 163, 202)','rgb(166, 241, 104)','rgb(230, 209, 119)'],
         legend:{
-          top:'-1%',
+          // top:'-1%',
           // zlevel:3
         }
     }     
@@ -68,7 +68,7 @@ export default {
       rounds:'',
       passrate:'',
       mychart: {
-        columns: ["月份", "平均首轮通过率","平均验收轮次"],
+        columns: ["月份", "平均首轮通过率","平均验收轮次","平均抽测通过率"],
         rows: [
         ],
         
@@ -123,7 +123,7 @@ export default {
   //  获取部门数据
    async getPastTwelve(){
        for(let i=0;i<12;i++){
-        let month,time,passrate,rounds;
+        let month,time,passrate,rounds,rtp_avg_mon,tscore_avg_mon,rtscore_avg_mon;
         if(new Date().getMonth()-i>0){
         month=new Date().getMonth()-i
         time=String(new Date().getFullYear()*10000+(new Date().getMonth()-i)*100+1);
@@ -133,14 +133,17 @@ export default {
         }
         passrate=await this.request("/p_avg_mon",{'time':time})       
         rounds=await this.request("/r_avg_mon",{'time':time})
+        rtp_avg_mon=await this.request("/rtp_avg_mon",{'time':time})
+        tscore_avg_mon=await this.request("/tscore_avg_mon",{'time':time})
+        rtscore_avg_mon=await this.request("/rtscore_avg_mon",{'time':time})
         // passrate===undefined?passrate='无':passrate=passrate
         // rounds===undefined?rounds='无':rounds=passrate
         // console.log(passrate)
         this.mychart.rows.unshift({
-          月份: month+"月", 平均首轮通过率: passrate.total,平均验收轮次:rounds.total
+          月份: month+"月", 平均首轮通过率: passrate.total,平均验收轮次:rounds.total,平均抽测通过率:rtp_avg_mon.total
           })   
           this.mychart1.rows.unshift({
-          月份: month+"月", 平均抽测得分: passrate.total,平均验收得分:rounds.total
+          月份: month+"月", 平均抽测得分: rtscore_avg_mon.total,平均验收得分:tscore_avg_mon.total
           }) 
    }
    },

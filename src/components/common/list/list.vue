@@ -174,7 +174,14 @@ export default {
     },
     // 对月报数据进行过滤
     exchangeData(obj1,obj2){
-      const noData={
+           
+    for(let key in obj1){                  
+        // null情况转换
+        if(obj1[key]===null||obj1[key]===0){
+          if(/\w*Rate\w*/.test(key)||/\w*Ver\w*/.test(key)){
+              obj1[key+'Tab']=0
+            }
+            const noData={
         versionSum:'无提测版本',
         versionRule:'无常规版本',
         versionWarnTc:'无紧急版本',
@@ -209,20 +216,29 @@ export default {
         versionRuleB: 0,
         versionRuleC: 0,
         versionRuleTab:0,
-        versionWarnTab:0
-      }      
-    for(let key in obj1){                  
-        // null情况转换
-        if(obj1[key]===null||obj1[key]===0){
-          if(/\w*Rate\w*/.test(key)||/\w*Ver\w*/.test(key)){
-              obj1[key+'Tab']=0
-            }                      
+        versionWarnTab:0,
+        ruleDocTab:0,
+        ruleYlTab:0,
+        ruleBgTab:0,
+        warnDocTab:0,
+        warnYlTab:0,
+        warnBgTab:0,
+        warn1:0,
+        warn2:0,
+        warn3:0,
+        warn4:0,
+        passVerATab:0,
+        passVerBTab:0,
+        passVerCTab:0,
+        passVer2:obj1.passVer2,
+        passVer3:obj1.passVer3,
+      }                       
           obj1[key]=noData[key];
           obj1['_'+key]=''
           obj2['_'+key]=''              
         }else{
         // 百分率转换
-        if(/\w*Rate\w*/.test(key)||/\w*Rdt\w*/.test(key)||/\w*Ver\w*/.test(key)){           
+        if(/\w*Rate\w*/.test(key)||/\w*Rdt\w*/.test(key)){           
             obj1[key]=obj1[key]*100+'%'
             obj1[key+'Tab']=obj1[key]         
         }
@@ -232,8 +248,8 @@ export default {
         versionWarnTc:obj1.versionWarnTc+'个紧急版本',
         avgRuleRdt:'整体抽测通过率为'+obj1.avgRuleRdt,
         passRateA:'首轮验收通过率为'+obj1.passRateA,
-        passRateB:'二轮验收通过率为'+obj1.passRateB,
-        passRateC:'三轮验收通过率为'+obj1.passRateC,
+        passRateB:'前两轮验收通过率为'+obj1.passRateB,
+        passRateC:'前三轮验收通过率为'+obj1.passRateC,
         versionWarn:'进行了'+obj1.versionWarn+'个',
         passRateWarn:'整体抽测通过率为'+obj1.passRateWarn,
         inPlan:obj1.inPlan+'个计划内',
@@ -244,8 +260,8 @@ export default {
         rdtFullScore:'抽测满分的版本有'+obj1.rdtFullScore+'个',
         rdtFullScoreRate:'占总版本数量的'+obj1.rdtFullScoreRate,
         passVerA:'第一轮验收通过'+obj1.passVerA+'个版本',
-        passVerB:'第二轮验收通过'+obj1.passVerB+'个版本',
-        passVerC:'第三轮验收通过'+obj1.passVerC+'个版本',
+        passVerB:'前两轮验收通过'+obj1.passVerB+'个版本',
+        passVerC:'前三轮验收通过'+obj1.passVerC+'个版本',
         warnDocRate:'需求文档提交率'+obj1.warnDocRate,
         warnYlRate:'测试用例提交率'+obj1.warnYlRate,
         warnBgRate:'测试报告提交率'+obj1.warnBgRate,
@@ -257,18 +273,25 @@ export default {
         rules4:obj1.rules4,
         versionRuleB: obj1.versionRuleB,
         versionRuleC: obj1.versionRuleC,
-        versionRuleTab:obj1.versionRule,
-        versionWarnTab:obj1.versionWarn,
-        // ruleDocRateTab:obj1.ruleDocRate,
-        // ruleYlRateTab:obj1.ruleYlRate,
-        // passVerATab:obj1.passVerA,
-        // passVerBTab:obj1.passVerB,
-        // passVerCTab:obj1.passVerC,
-        // warnDocRateTab:obj1.warnDocRate,
-        // warnYlRateTab:obj1.warnYlRate,
-        // warnBgRateTab:obj1.warnBgRate,
+        versionRuleTab:obj1.versionRuleTab,
+        versionWarnTab:obj1.versionWarnTab,
+        ruleDocTab:obj1.ruleDocTab,
+        ruleYlTab:obj1.ruleYlTab,
+        ruleBgTab:obj1.ruleBgTab,
+        warnDocTab:obj1.warnDocTab,
+        warnYlTab:obj1.warnYlTab,
+        warnBgTab:obj1.warnBgTab,
+        warn1:obj1.warn1,
+        warn2:obj1.warn2,
+        warn3:obj1.warn3,
+        warn4:obj1.warn4,
+        passVerATab:obj1.passVerATab,
+        passVerBTab:obj1.passVerBTab,
+        passVerCTab:obj1.passVerCTab,
+        passVer2:obj1.passVer2,
+        passVer3:obj1.passVer3,
       } 
-         obj1[key]=hasData[key] 
+        obj1[key]=hasData[key] 
         }
       }
       return {...obj1,...obj2}
@@ -295,12 +318,15 @@ export default {
         allData.rdtFullScoreRate>0.75?allData['rdtResult']='良好':allData['rdtResult']='一般'
         allData.versionRule===0?allData['versionRuleTab']=0:allData['versionRuleTab']=allData.versionRule
         allData.versionWarn===0?allData['versionWarnTab']=0:allData['versionWarnTab']=allData.versionWarn
-        // console.log(allData);      
+        allData.passVerA===0?allData['passVerATab']=0:allData['passVerATab']=allData.passVerA
+        allData.passVerB===0?allData['passVerBTab']=0:allData['passVerBTab']=allData.passVerB
+        allData.passVerC===0?allData['passVerCTab']=0:allData['passVerCTab']=allData.passVerC
+        // console.log(allData.passVerC);      
         // 获取两次小组数据
         let groupData=[],lastGroup=[];
           groupData=await that.getGroup(date[0],date[1]);
           lastGroup=await that.getGroup(date[6],date[7]);
-        // console.log(groupData,lastGroup);
+        // console.log(date[0],date[1]);
         // 月报环比变量的值
         let docxData = {
         year:year,
@@ -330,9 +356,9 @@ export default {
           _warnGroupYlRate:'',
           _warnGroupBgRate:''
         };
-        // 对环比数据进行过滤
+        // 环比数据过滤方法
         function filterTool(obj1,obj2,obj3){
-          let obj=obj1
+          let obj=JSON.parse(JSON.stringify(obj1))
           for(let key in obj){
           if(/_\w*/.test(key)){
             obj[key]=obj2[key.substring(1,)]-obj3[key.substring(1,)]
@@ -348,22 +374,44 @@ export default {
           }       
         } return obj
         }
-        // 小组环比数据
+        // 过滤小组数据
         let groupMom=[]
         for(let value of groupData){
-          // 过滤出该组上月数据
           let result=lastGroup.filter(item=>
           {return item.groupName===value.groupName}
           )
+          // 无环比数据
           if(result.length===0){
+            for(let key in value){            
+            // 转换百分率
+            if(/\w*avg\w*/.test(key)||/\w*Rate\w*/.test(key)||/\w*Rdt\w*/.test(key)){           
+            value[key]=value[key]*100+'%'
+            value[key+'Tab']=value[key]         
+        }}
             value={...value,...groupChange}
           }else{
-            let mom=filterTool(groupChange,value,result)
+            // 比较过滤环比数据
+            let mom=filterTool(groupChange,value,result[0]) 
+            for(let key in value){ 
+            //   if(value[key]===0||value[key]===null){
+            //     value[key]=null
+            //   }          
+            // 转换百分率
+            if(/\w*avg\w*/.test(key)||/\w*Rate\w*/.test(key)||/\w*Rdt\w*/.test(key)){           
+            value[key]=value[key]*100+'%'
+            value[key+'Tab']=value[key]         
+        }}      
+            // console.log(mom); 
             value={...value,...mom}
-          }
+          }    
+               
           groupMom.push(value)       
         }
-        // console.log(allData,groupData);
+        // console.log(
+        //   '本月整体：',allData,
+        //   '本月小组：',groupData,
+        //   '上月小组：',lastGroup,
+        //   '上月整体：',lastData);
         doc.setData({
           ...that.exchangeData(allData,filterTool(docxData,allData,lastData)),
           groupMom
